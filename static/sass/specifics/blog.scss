@@ -1,0 +1,20 @@
+/* BLOG */
+
+#treten {
+  .blog-pagination .ant-pagination-item-active {
+    font-weight: 500;
+    background: #222829;
+    border-color: #222829;
+    color: white;
+  }
+
+  .related-link {
+   border-bottom: 1px solid #E12828;
+  }
+
+  .blog-item {
+    box-shadow: 0px 3px 25px rgba(35, 39, 53, 0.02);
+  }
+}
+
+/* BLOG END */

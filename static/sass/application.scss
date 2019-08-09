@@ -1,0 +1,26 @@
+
+// BASE
+@import './base/overrides.scss';
+@import './base/typography.scss';
+@import './base/helpers.scss';
+
+
+// ELEMENTS
+@import './elements/navbar.scss';
+@import './elements/footer.scss';
+
+
+// SPECIFICS
+@import './specifics/home.scss';
+@import './specifics/about.scss';
+@import './specifics/whyus.scss';
+@import './specifics/blog.scss';
+@import './specifics/courses.scss';
+@import './specifics/interview.scss';
+@import './specifics/instructorcertification.scss';
+@import './specifics/enroll.scss';
+@import './specifics/policies.scss';
+@import './specifics/auth.scss';
+@import './specifics/contactus.scss';
+@import './specifics/student/courses.scss';
+@import './specifics/student/emptystate.scss';

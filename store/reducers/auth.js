@@ -1,21 +1,16 @@
 import { SET_LOGIN_STATE } from '../actions/types';
 
 const INITIAL_STATE = {
-  login: {
-    isLoggedIn: false
-  }
+  isLoggedIn: null,
 }
 
 export default function (state = INITIAL_STATE, { type, payload }) {
 
   switch (type) {
-    case SET_LOGIN_STATE: {
+    case 'SET_AUTH': {
       return {
         ...state,
-        login: {
-          ...state.login,
-          ...payload
-        }
+        isLoggedIn: payload.isLoggedIn
       }
     }
     default:

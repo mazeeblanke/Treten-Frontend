@@ -1,11 +1,11 @@
 
 const withCSS = require('@zeit/next-css')
-const withLess = require('@zeit/next-less')
+const withSass = require('@zeit/next-sass')
 const webpack = require('webpack');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 
 const withFonts = require('next-fonts');
-module.exports = withFonts(withLess(withCSS(
+module.exports = withFonts(withSass(withCSS(
   {
     webpack: function (config) {
       config.module.rules.push({
