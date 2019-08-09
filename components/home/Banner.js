@@ -53,6 +53,6 @@ class Banner extends Component {
   }
 }
 
-Banner.PropTypes = {}
+Banner.propTypes = {}
 
 export default Banner;

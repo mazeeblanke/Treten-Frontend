@@ -9,6 +9,6 @@ it ('renders component', () => {
 
   const wrapper = shallow(<Banner />);
 
-  expect(wrapper.find('h1').text()).toEqual('1');
+  expect(wrapper.find('h2').text()).toEqual('Accelerate your career with industry-leading certifications');
 
 })
