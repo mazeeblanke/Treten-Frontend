@@ -4,6 +4,7 @@ import reduxPromise from 'redux-promise';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
 import axios from 'axios';
+import { PROXYURL } from '../lib/helpers';
 
 // INITAL STATE OF STORE
 const INITIAL_STATE = {
@@ -14,7 +15,7 @@ export function initStore (initialState = INITIAL_STATE, isServer = false, req) 
   let api;
   let cookie;
   if (isServer) {
-    console.log('iserver', isServer);
+    console.log('is the iserver', isServer);
     if (req) {
       console.log('whejwhewe ehjw ehj ', req.headers);
       console.log('cookie', req.headers.cookie)
@@ -22,12 +23,13 @@ export function initStore (initialState = INITIAL_STATE, isServer = false, req) 
     }
 
     api = axios.create({
-      baseURL: 'http://127.0.0.1:80',
+      baseURL: PROXYURL,
       headers: { cookie: cookie || '' }
     })
   }
 
   if (!isServer) {
+    console.log('not server');
     api = axios.create({
       baseURL: '/api'
     })

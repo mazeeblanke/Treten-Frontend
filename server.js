@@ -7,26 +7,15 @@ const app = next({
   dev: dev
 });
 const handler = app.getRequestHandler();
+const { PROXYURL } = require('./lib/helpers');
 var proxy = require("express-http-proxy");
 
-const proxyUrl = "https://treten-ng-backend.herokuapp.com/";
-// const proxyUrl = "http://127.0.0.1:80";
 app
   .prepare()
   .then(() => {
-    server.use("/api", proxy(proxyUrl, {
-      proxyReqOptDecorator(opts) {
-        opts.headers['x-forwarded-host'] = 'https://treten-ng.herokuapp.com';
-        return opts;
-      }
-    }));
+    server.use("/api", proxy(PROXYURL));
 
-    server.use("/t", proxy(proxyUrl,{
-      proxyReqOptDecorator(opts) {
-        opts.headers['x-forwarded-host'] = 'https://treten-ng.herokuapp.com';
-        return opts;
-      }
-    }));
+    server.use("/t", proxy(PROXYURL));
 
     server.get("/", (req, res) => {
       app.render(req, res, "/home", {});

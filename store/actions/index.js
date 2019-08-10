@@ -26,7 +26,7 @@ export const FETCH_USER = (payload) => {
         })
       })
       .catch((err) => {
-        // console.log('api err response',err)
+        console.log('api err response',err)
         dispatch({
           type: 'SET_AUTH',
           payload: {
