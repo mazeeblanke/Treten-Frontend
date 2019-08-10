@@ -7,15 +7,15 @@ const app = next({
   dev: dev
 });
 const handler = app.getRequestHandler();
-const { PROXYURL } = require('./lib/helpers');
+process.env.PROXYURL = 'https://treten-ng-backend.herokuapp.com/';
 var proxy = require("express-http-proxy");
 
 app
   .prepare()
   .then(() => {
-    server.use("/api", proxy(PROXYURL));
+    server.use("/api", proxy(process.env.PROXYURL));
 
-    server.use("/t", proxy(PROXYURL));
+    server.use("/t", proxy(process.env.PROXYURL));
 
     server.get("/", (req, res) => {
       app.render(req, res, "/home", {});

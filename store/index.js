@@ -23,7 +23,7 @@ export function initStore (initialState = INITIAL_STATE, isServer = false, req) 
     }
 
     api = axios.create({
-      baseURL: PROXYURL,
+      baseURL: process.env.PROXYURL,
       headers: { cookie: cookie || '' }
     })
   }
