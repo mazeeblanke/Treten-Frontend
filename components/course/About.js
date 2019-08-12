@@ -35,7 +35,7 @@ const About = props => {
           </div>
         </div>
         <div className="col-sm-12 col-md-6">
-          <CourseVideo video={} />
+          <CourseVideo video={{}} />
         </div>
       </div>
     </div>
