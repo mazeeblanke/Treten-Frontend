@@ -18,6 +18,16 @@ body, html {
     color: #232735;
   }
 
+  .video-js {
+    width: 100%;
+  }
+
+  .ant-tabs-ink-bar {
+    height: 3px;
+    background-color: #e12828;
+    border-top-left-radius: 35%;
+    border-top-right-radius: 35%;
+  }
 
   .ant-layout {
     display: -webkit-box;
@@ -35,6 +45,18 @@ body, html {
     height: 100vh;
   }
 
+  .ant-layout-header {
+    border-bottom: 1px solid #F0F1F3;
+  }
+
+  .main-header {
+    font-size: 1.72rem;
+  }
+
+  .sidenav-top {
+    height: 5rem;
+  }
+
   .ant-menu-dark, .ant-menu-dark .ant-menu-sub {
     color: rgba(255, 255, 255, 0.65);
     background: #222829;
@@ -46,6 +68,9 @@ body, html {
 
   .ant-layout-content {
     min-width: 200px;
+    height: 100vh;
+    overflow-y: scroll;
+    min-width: 305px;
   }
 
   li.ant-menu-item.ant-menu-item-selected,
@@ -270,6 +295,6 @@ body, html {
 
 @media (max-width: 567px) {
   html, body {
-    font-size: 13px;
+    font-size: 12px;
   }
 }

@@ -8,7 +8,7 @@ let sliderSettings = {
   infinite: false,
   speed: 500,
   arrows: false,
-  slidesToShow: 3.2,
+  slidesToShow: 3.1,
   slidesToScroll: 3,
   // centerPadding: '100px'
   responsive: [

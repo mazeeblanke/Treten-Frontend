@@ -7,7 +7,11 @@ const app = next({
   dev: dev
 });
 const handler = app.getRequestHandler();
-process.env.PROXYURL = 'https://treten-ng-backend.herokuapp.com/';
+// process.env.PROXYURL = 'http://localhost:80';
+process.env.PROXYURL = process.env.NODE_ENV === 'production'
+  ? 'https://treten-ng-backend.herokuapp.com/'
+  : 'http://localhost:80';
+
 var proxy = require("express-http-proxy");
 
 app

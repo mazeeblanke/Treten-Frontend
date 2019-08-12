@@ -77,13 +77,13 @@ class CourseVideo extends Component {
 
   render() {
     return (
-      <div>
+      // <div>
         <VideoPlayer
             controls={true}
             src={this.state.video.src}
-            poster={this.state.video.poster}
+            poster={this.props.video.poster || this.state.video.poster}
             width="550"
-            height="400"
+            height={this.props.height || '400px' }
             onReady={this.onPlayerReady.bind(this)}
             onPlay={this.onVideoPlay.bind(this)}
             onPause={this.onVideoPause.bind(this)}
@@ -92,7 +92,7 @@ class CourseVideo extends Component {
             onSeeked={this.onVideoSeeked.bind(this)}
             onEnd={this.onVideoEnd.bind(this)}
         />
-      </div>
+      // </div>
     );
   }
 }

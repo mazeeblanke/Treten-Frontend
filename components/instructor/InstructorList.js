@@ -9,7 +9,7 @@ const InstructorList = props => {
         <div className="row">
           {
             props.instructors.map((instructor) => (
-              <div className="col-sm-12 col-md-3">
+              <div key={instructor.title} className="col-sm-12 col-md-6 col-lg-3">
                 <Instructor { ...instructor } />
               </div>
             ))

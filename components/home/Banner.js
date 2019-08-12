@@ -22,7 +22,7 @@ class Banner extends Component {
             <div className="banner__overlay">
               <div className="container has-full-height">
                 <div className="row has-full-height">
-                  <div className="col-sm-12 col-md-7 col-lg-5">
+                  <div className="col-sm-12 col-md-7 col-lg-5 pt-8 pb-8">
                     <div className="banner__content ">
                       <h2 className="is-white banner__main-text">
                         Accelerate your career with industry-leading certifications

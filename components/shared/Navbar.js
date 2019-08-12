@@ -44,7 +44,7 @@ class Navigation extends React.Component {
   render () {
     return (
 
-      <Navbar className="fixed-top" fixed style={this.props.noBoxShadow ? { boxShadow: 'none', border: '1px solid #F0F1F3' } : {} } color="faded" light expand="md">
+      <Navbar className="fixed-top"  style={this.props.noBoxShadow ? { boxShadow: 'none', border: '1px solid #F0F1F3' } : {} } color="faded" light expand="md">
         <div className="container">
           <NavbarBrand href="/">
             {/* <img className="brand__logo" src="/static/images/logo.png" />
@@ -60,7 +60,7 @@ class Navigation extends React.Component {
                   size="large"
                   placeholder="What do you want to learn?"
                   onSearch={value => console.log(value)}
-                  style={{ width: 250 }}
+                  style={{ width: 230, marginLeft: '2rem' }}
                 />
               </div>
             </Nav>
@@ -121,7 +121,7 @@ class Navigation extends React.Component {
                 <NavItem>
                   <Link href="/d/student/courses">
                     <a>
-                      <Button className="ml-3" size="large" type="danger">Dashboard</Button>
+                      <Button className="mr-2" size="large" type="danger">Dashboard</Button>
                     </a>
                   </Link>
                 </NavItem>

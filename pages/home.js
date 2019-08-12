@@ -137,6 +137,7 @@ class Home extends Component {
         title: "Course title goes here",
         rating: 3,
         reviews_count: 56,
+        type: 'remote',
         banner_image: "/static/images/courses/course1.png"
       },
       {
@@ -147,6 +148,7 @@ class Home extends Component {
         title: "Course title goes here",
         rating: 3,
         reviews_count: 56,
+        type: 'on-demand',
         banner_image: "/static/images/courses/course2.png"
       },
       {
@@ -157,6 +159,7 @@ class Home extends Component {
         title: "Course title goes here",
         rating: 3,
         reviews_count: 56,
+        type: 'remote',
         banner_image: "/static/images/courses/course3.png"
       },
       {
@@ -167,6 +170,7 @@ class Home extends Component {
         title: "Course title goes here",
         rating: 3,
         reviews_count: 56,
+        type: 'on-demand',
         banner_image: "/static/images/courses/course4.png"
       },
       {
@@ -177,6 +181,7 @@ class Home extends Component {
         title: "Course title goes here",
         rating: 3,
         reviews_count: 56,
+        type: 'remote',
         banner_image: "/static/images/courses/course5.png"
       },
       {
@@ -187,6 +192,7 @@ class Home extends Component {
         title: "Course title goes here",
         rating: 3,
         reviews_count: 56,
+        type: 'on-demand',
         banner_image: "/static/images/courses/course3.png"
       },
       {
@@ -197,6 +203,7 @@ class Home extends Component {
         title: "Course title goes here",
         rating: 3,
         reviews_count: 56,
+        type: 'on-site',
         banner_image: "/static/images/courses/course4.png"
       },
       {
@@ -207,6 +214,7 @@ class Home extends Component {
         title: "Course title goes here",
         rating: 3,
         reviews_count: 56,
+        type: 'on-site',
         banner_image: "/static/images/courses/course5.png"
       },
     ],
@@ -219,6 +227,7 @@ class Home extends Component {
         title: "Course title goes here",
         rating: 3,
         reviews_count: 56,
+        type: 'remote',
         banner_image: "/static/images/courses/course1.png"
       },
       {
@@ -229,6 +238,7 @@ class Home extends Component {
         title: "Course title goes here",
         rating: 3,
         reviews_count: 56,
+        type: 'on-demand',
         banner_image: "/static/images/courses/course2.png"
       },
       {
@@ -239,6 +249,7 @@ class Home extends Component {
         title: "Course title goes here",
         rating: 3,
         reviews_count: 56,
+        type: 'remote',
         banner_image: "/static/images/courses/course3.png"
       },
       {
@@ -249,6 +260,7 @@ class Home extends Component {
         title: "Course title goes here",
         rating: 3,
         reviews_count: 56,
+        type: 'on-demand',
         banner_image: "/static/images/courses/course4.png"
       },
       {
@@ -259,6 +271,7 @@ class Home extends Component {
         title: "Course title goes here",
         rating: 3,
         reviews_count: 56,
+        type: 'remote',
         banner_image: "/static/images/courses/course5.png"
       },
       {
@@ -269,6 +282,7 @@ class Home extends Component {
         title: "Course title goes here",
         rating: 3,
         reviews_count: 56,
+        type: 'on-demand',
         banner_image: "/static/images/courses/course3.png"
       },
       {
@@ -279,6 +293,7 @@ class Home extends Component {
         title: "Course title goes here",
         rating: 3,
         reviews_count: 56,
+        type: 'on-site',
         banner_image: "/static/images/courses/course4.png"
       },
       {
@@ -289,6 +304,7 @@ class Home extends Component {
         title: "Course title goes here",
         rating: 3,
         reviews_count: 56,
+        type: 'on-site',
         banner_image: "/static/images/courses/course5.png"
       },
     ]

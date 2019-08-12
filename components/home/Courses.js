@@ -82,10 +82,10 @@ class Courses extends Component {
             {
               this.props.courses.map((course) => (
                 <div key={course.title}>
-                  <div class="card border-0" style={{ width: this.props.cardWidth }}>
-                    <img src={course.banner_image} class="card-img-top" alt={course.title} />
-                    <div class="card-body">
-                      <h5 class="card-title">{course.title}</h5>
+                  <div className="card border-0" style={{ width: this.props.cardWidth }}>
+                    <img src={course.banner_image} className="card-img-top" alt={course.title} />
+                    <div className="card-body">
+                      <h5 className="card-title">{course.title}</h5>
                       <StarRatings
                         starDimension="15px"
                         starSpacing="3px"

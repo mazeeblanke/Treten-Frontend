@@ -4,7 +4,7 @@
   /* BANNER */
   .banner {
     min-height: 300px;
-    /* background: black; */
+     background: black;
   }
 
   .banner img {
@@ -59,9 +59,9 @@
   }
 
   .banner__sub-text {
-    margin-bottom: 20px;
-    font-size: 18px;
-    line-height: 30px;
+    margin-bottom: 1.43rem;
+    font-size: 1.286rem;
+    line-height: 2.143rem;
     font-weight: 400;
   }
 
@@ -208,18 +208,30 @@
 
   /* TESTIMONIAL  */
 
-  .testimonials__main-text{
+  .testimonials__main-text {
     font-size: 2.29rem;
   }
 
   .testimonial .card {
-  background: #FAFAFA;
+    background: #FAFAFA;
+  }
+
+  .testimonial .card-body {
+    padding: 2.5rem 1.7rem;
   }
 
   .testimonial .testimonial__text {
-  font-weight: normal;
-  font-size: 1rem;
-  line-height: 30px;
+    font-weight: normal;
+    font-size: 1rem;
+    line-height: 30px;
+  }
+
+  .testimonial__title {
+    font-size: 1.142rem
+  }
+
+  .testimonial p {
+    font-size: 1rem;
   }
 
   /* TESTIMONIAL END */
@@ -303,6 +315,24 @@
 @media (min-width: 1600px) {
   .banner img {
     margin-top: -100px;
+  }
+}
+
+
+@media (max-width: 992px) {
+  #treten {
+    .slick-track {
+      height: 420px;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  #treten {
+    .banner__main-text {
+      font-size: 2rem;
+      line-height: 3rem;
+    }
   }
 }
 

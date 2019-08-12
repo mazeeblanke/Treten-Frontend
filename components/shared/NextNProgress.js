@@ -8,7 +8,7 @@ class NextNProgress extends React.Component {
   static defaultProps = {
     color: '#E12828',
     startPosition: 1.3,
-    stopDelayMs: 200,
+    stopDelayMs: 500,
     height: 10,
   };
 

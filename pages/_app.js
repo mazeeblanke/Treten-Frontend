@@ -18,6 +18,12 @@ class Treten extends App {
     return (
       <Container>
         <Head>
+          {/* <!-- Chrome, Firefox OS and Opera --> */}
+          <meta name="theme-color" content="#E12828" />
+          {/* <!-- Windows Phone --> */}
+          <meta name="msapplication-navbutton-color" content="#E12828" />
+          {/* <!-- iOS Safari --> */}
+          <meta name="apple-mobile-web-app-status-bar-style" content="#E12828" />
           <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet"></link>
         </Head>
 
@@ -30,11 +36,11 @@ class Treten extends App {
           buttonText="Accept"
           cookieName="treten"
           style={{ background: "#2B373B" }}
-          buttonStyle={{ color: "#4e503b", fontSize: "12px" }}
+          buttonStyle={{ color: "#4e503b", fontSize: "12px", padding: '15px 35px' }}
           expires={150}
         >
-          <p className="text-center">
-            By using our site, you acknowledge that you have read and understand our <a href="">Cookie Policy</a>, <a href="">Privacy Policy</a>, and our <a href="">Terms of Service</a>
+          <p className="text-center m-0 p-0">
+            By using our site, you acknowledge that you have read and understand our <a href=""> Cookie Policy </a>,  <a href=""> Privacy Policy </a>,  and our <a href=""> Terms of Service </a>
           </p>
         </CookieConsent>
         <NextNProgress

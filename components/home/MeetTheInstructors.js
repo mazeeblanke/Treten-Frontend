@@ -79,7 +79,7 @@ class MeetTheInstructors extends Component {
           <Slider { ...sliderSettings }>
             {
               this.props.instructors.map((instructor) => (
-                <Instructor width="100%" { ...instructor } />
+                <Instructor key={instructor.title} width="100%" { ...instructor } />
               ))
             }
           </Slider>

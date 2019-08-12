@@ -10,7 +10,7 @@ const Instructor = props => {
 
   return (
     <div className="instructor" key={props.fullname}>
-      <div className={classes.join(' ')} style={{ width: props.width || '17rem' }}>
+      <div className={classes.join(' ')}>
         <img src={props.profile_pic} className="rounded-circle mt-4" alt={props.fullname} />
         <div className="card-body">
           <h5 className="card-title instructor__fullname mb-0 pb-0">{props.fullname}</h5>

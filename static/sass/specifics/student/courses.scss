@@ -12,7 +12,7 @@
 
 #components-layout-demo-custom-trigger .logo {
   height: 32px;
-  background: rgba(255,255,255,.2);
+  background: rgba(255, 255, 255, .2);
   margin: 16px;
 }
 
@@ -28,4 +28,324 @@
 
 .sidenav-top .logo img {
   height: 40px;
+}
+
+// NOTIFICATIONS
+
+.notifications {
+  .ant-list-split .ant-list-item {
+    padding: 22px 22px;
+  }
+
+  .notifications-wrapper {
+    height: 535px;
+    background: #ffffff;
+    border: 1px solid #f0f1f3;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+}
+
+// COURSE
+#treten {
+  .course-header__main-text {
+    font-size: 1.714rem;
+  }
+
+  .course-materials {
+    h5 {
+      font-size: 1.43rem;
+      line-height: 2.29rem;
+      font-weight: 500;
+    }
+
+    h6 {
+      font-size: 1.29rem;
+    }
+
+    .video-js {
+      max-width: 550px;
+    }
+
+    hr {
+      border-top: 1px solid #f0f1f3;
+    }
+
+    .course-content p {
+      font-size: 1rem;
+      line-height: 32px;
+    }
+
+    .slick-slide {
+      padding: 0px;
+      padding-right: 1.29rem;
+    }
+
+    .slick-dots {
+      bottom: 30%;
+    }
+
+    .card {
+      border: 1px solid #f0f1f3 !important;
+      box-sizing: border-box;
+      border-radius: 4px;
+      border-top: 3px solid #e12828 !important;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+    }
+  }
+
+  .schedule-header__main-text {
+    font-size: 1.142rem;
+    line-height: 2.142rem;
+  }
+
+  .student-course-dashboard {
+    .ant-tabs-tab-active.ant-tabs-tab {
+      background: #ffffff;
+      border-color: #fafafa;
+    }
+
+    .ant-tabs-bar {
+      border: none;
+    }
+
+    .instructor,
+    .instructor-certifications,
+    .instructor-education,
+    .instructor-experience {
+      border: 1px solid #f0f1f3 !important;
+      box-sizing: border-box;
+      border-radius: 4px;
+      height: 100% !important;
+
+      p {
+        font-size: 1rem;
+      }
+    }
+
+    table {
+      td,
+      th {
+        border: 1px solid #e8e8e8;
+        padding: 1.79rem;
+
+        span {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+
+// PROFILE
+
+#treten  .profile {
+  label {
+    font-weight: 900;
+  }
+
+  .edit {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+  }
+
+  .card-body {
+    height: 85px !important;
+    flex: none;
+  }
+
+  .card {
+    background: #ffffff;
+    border: 1px solid #f0f1f3 !important;
+    box-sizing: border-box;
+    border-radius: 4px;
+    height: 100%;
+    width: 21.43rem;
+    margin-right: 1.43rem;
+    // min-width: 295px;
+    position: relative;
+
+    p {
+      font-weight: normal;
+      font-size: 1rem;
+      line-height: 0.78rem;
+      color: #8b90a0;
+    }
+  }
+
+  .form-wrapper {
+    background: #ffffff;
+    border: 1px solid #f0f1f3;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 30px;
+    // min-width: 295px;
+    flex-grow: 1;
+    max-width: 100%;
+
+    h5 {
+      font-weight: 500;
+      font-size: 1.29rem;
+      line-height: 1.6423rem;
+      color: #222829;
+    }
+  }
+
+  .list-group-item {
+    border: none;
+    height: 4.57rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .list-group-item.active {
+    z-index: 2;
+    color: #fff;
+    background-color: #000000;
+    border-color: #000000;
+    border-radius: 0px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  #treten  .student-course-dashboard,
+  #treten  .student-course-header {
+    .pl-6,
+    .pr-6 {
+      padding: 0.5rem !important;
+    }
+  }
+
+  #treten .student-course-dashboard {
+    table {
+      td,
+      th {
+        padding: 1rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .ant-layout-header .pl-6,
+  .ant-layout-header .pr-6 {
+    padding: 0px 10px !important;
+  }
+
+  #treten  .profile {
+    .pl-6,
+    .pr-6 {
+      padding: 0px !important;
+    }
+
+    .col-sm-12.mr-3,
+    .col-sm-12.mx-3 {
+      margin: 0px !important;
+    }
+
+    .form-wrapper {
+      border: none;
+      padding: 0px 1.1rem;
+      min-width: 400px;
+    }
+    .card-wrapper {
+      width: 100%;
+    }
+    .card,
+    .card-wrapper {
+      border: none !important;
+      width: 100% !important;
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  #treten {
+    .card,
+    .card-wrapper {
+      width: 100% !important;
+    }
+
+    .course-materials {
+      .slick-dots {
+        bottom: 50%;
+      }
+    }
+  }
+}
+
+// @media screen and (min-width: 1212px) {
+//   #treten {
+//     .form-wrapper {
+//       min-width: 64% !important;
+//     }
+//   }
+// }
+
+// messages
+
+#treten .messages {
+  .row.message-wrapper {
+    border: 1px solid #f0f1f3;
+    box-sizing: border-box;
+    border-radius: 4px;
+    height: 700px;
+  }
+
+  .message__content {
+    a {
+      font-weight: 900;
+      color: #000;
+    }
+  }
+
+  .sidebar {
+    border-right: 1px solid #f0f1f3;
+    padding: 0px;
+  }
+
+  .ant-list-item-meta {
+    align-items: center;
+  }
+
+  .ant-list-item-meta-title {
+    margin: 0px;
+    span {
+      width: 60px;
+    }
+  }
+
+  .message__top-bar {
+    height: 64px;
+    border-bottom: 1px solid #f0f1f3;
+  }
+
+  .ant-avatar {
+    height: 34px;
+    width: 34px;
+  }
+  .ant-list-item-meta-avatar {
+    margin-right: 7px;
+  }
+  .ant-list-items {
+    // border-right: 1px solid #F0F1F3;
+  }
+  .ant-list-item {
+    display: block;
+    padding: 25px 30px 10px 30px;
+    // padding: 18px 18px 5px 18px;
+    h5 {
+      font-size: 1.143rem;
+    }
+    p {
+      font-size: 1rem;
+      color: #505565;
+    }
+    span {
+      font-size: 0.86rem;
+      color: #8b90a0;
+    }
+  }
 }

@@ -79,7 +79,7 @@ class MeetTheInstructor extends Component {
               </div>
             </div>
           </div>
-        </section>>
+        </section>
         <InstructorList instructors={this.state.instructors} />
         <Footer />
       </>
