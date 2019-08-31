@@ -4,6 +4,7 @@ import React from 'react';
 import CookieConsent from "react-cookie-consent";
 import NextNProgress from '../components/shared/NextNProgress';
 // import withNProgress from "next-nprogress";
+// import NextNProgress from "next-nprogress/component";
 import withReduxStore from '../lib/with-redux-store';
 import { Provider } from 'react-redux';
 import 'antd/dist/antd.css';
@@ -11,6 +12,8 @@ import "../static/slick-carousel/slick/slick.css";
 import "../static/slick-carousel/slick/slick-theme.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../static/sass/application.scss';
+
+
 
 class Treten extends App {
   render () {

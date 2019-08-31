@@ -10,6 +10,7 @@ import Reviews from '../components/shared/Testimonials';
 import Instructor from '../components/course/Instructor';
 import HowItWorks from '../components/course/HowItWorks';
 import Link from 'next/link';
+import ExpandableBlock from '../components/shared/ExpandableBlock';
 const { TabPane } = Tabs;
 const { Option } = Select;
 
@@ -97,6 +98,48 @@ class Course extends Component {
         },
       ]
     },
+    faqs: [
+      {
+        question: 'This is where the question being asked goes? ',
+        answer: `What do they got in there? King Kong?
+        God creates dinosaurs. God destroys dinosaurs.
+        God creates Man. Man destroys God. Man creates Dinosaurs.
+        Must go faster. What do they got in there? King Kong?
+        You know what? It is beets. I've crashed into a beet truck.`
+      },
+      {
+        question: 'This is where the question being asked goes? ',
+        answer: `What do they got in there? King Kong?
+        God creates dinosaurs. God destroys dinosaurs.
+        God creates Man. Man destroys God. Man creates Dinosaurs.
+        Must go faster. What do they got in there? King Kong?
+        You know what? It is beets. I've crashed into a beet truck.`
+      },
+      {
+        question: 'This is where the question being asked goes? ',
+        answer: `What do they got in there? King Kong?
+        God creates dinosaurs. God destroys dinosaurs.
+        God creates Man. Man destroys God. Man creates Dinosaurs.
+        Must go faster. What do they got in there? King Kong?
+        You know what? It is beets. I've crashed into a beet truck.`
+      },
+      {
+        question: 'This is where the question being asked goes? ',
+        answer: `What do they got in there? King Kong?
+        God creates dinosaurs. God destroys dinosaurs.
+        God creates Man. Man destroys God. Man creates Dinosaurs.
+        Must go faster. What do they got in there? King Kong?
+        You know what? It is beets. I've crashed into a beet truck.`
+      },
+      {
+        question: 'This is where the question being asked goes? ',
+        answer: `What do they got in there? King Kong?
+        God creates dinosaurs. God destroys dinosaurs.
+        God creates Man. Man destroys God. Man creates Dinosaurs.
+        Must go faster. What do they got in there? King Kong?
+        You know what? It is beets. I've crashed into a beet truck.`
+      },
+    ],
     courses: [
       {
         instructor: {
@@ -244,7 +287,36 @@ class Course extends Component {
                  />
               </TabPane>
               <TabPane tab="FAQs" key="bootcamps">
-                Content of tab 3
+                <div className="container mb-4">
+                  <h5 className="mb-6 mt-6">
+                    <b>FAQs</b>
+                  </h5>
+                  <div className="row">
+                    <div className="col-md-6">
+                      {
+                        this.state.faqs.map((faq, index) => (
+                          <ExpandableBlock
+                            key={index}
+                            expanded={index === 0 ? true : false}
+                            left={faq.question}
+                            content={<p>{faq.answer}</p>}
+                          />
+                        ))
+                      }
+                    </div>
+                    <div className="col-md-6">
+                      {
+                        this.state.faqs.slice(3).map((faq, index) => (
+                          <ExpandableBlock
+                            key={index}
+                            left={faq.question}
+                            content={<p>{faq.answer}</p>}
+                          />
+                        ))
+                      }
+                    </div>
+                  </div>
+                </div>
               </TabPane>
             </Tabs>
             <h5 className="fw-600 mt-4">You might also be interested in</h5>

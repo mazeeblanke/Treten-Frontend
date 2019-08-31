@@ -11,6 +11,12 @@ body, html {
   color: #959595 !important;
 }
 
+// .ant-modal-centered .ant-modal {
+//   top: 0;
+//   display: inline-block;
+//   text-align: left;
+//   vertical-align: text-bottom;
+// }
 
 #treten {
   margin-top: 5.6rem;
@@ -22,11 +28,35 @@ body, html {
     width: 100%;
   }
 
+  .dropdown-menu {
+    border-radius: .40rem !important;
+  }
+
   .ant-tabs-ink-bar {
     height: 3px;
     background-color: #e12828;
     border-top-left-radius: 35%;
     border-top-right-radius: 35%;
+  }
+
+  .ant-radio-group {
+    display: flex;
+  }
+
+  .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled),
+  .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):active {
+    color: #fff;
+    background: #222829;
+    border-color: #222829;
+  }
+
+  .ant-btn-background-ghost.ant-btn-primary {
+    color: #222829;
+    border-color: #222829;
+  }
+
+  label {
+    font-size: 1.1rem;
   }
 
   .ant-layout {
@@ -42,7 +72,7 @@ body, html {
     flex-direction: column;
     min-height: 0;
     background: #fff;
-    height: 100vh;
+    // height: 100vh;
   }
 
   .ant-layout-header {
@@ -67,10 +97,11 @@ body, html {
   }
 
   .ant-layout-content {
-    min-width: 200px;
+    // min-width: 200px;
     height: 100vh;
     overflow-y: scroll;
-    min-width: 305px;
+    min-width: 295px;
+    background: #FDFDFD !important;
   }
 
   li.ant-menu-item.ant-menu-item-selected,
@@ -169,10 +200,48 @@ body, html {
   } */
 
 
+  .ant-pagination-prev, .ant-pagination-next {
+    width: 45px;
+  }
 
+  .ant-pagination-item-active {
+    font-weight: 500;
+    background: #222829;
+    border-color: #222829;
+    color: white;
+    width: 45px;
+
+    a {
+      color: white;
+    }
+  }
+
+
+
+  .tag {
+    border-radius: 50px;
+    text-align: center;
+    height: 32px;
+    min-width: 65%;
+    max-width: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .tag.is-success {
+    background: #F1FFFB;
+    color: #00C48C;
+  }
+
+  .tag.is-grey {
+    background: #F0F1F3;
+    color: #505565;
+  }
 
   label {
-    margin-bottom: 0px !important
+    margin-bottom: 0px !important;
+    display: block;
   }
 
   input, textarea {
@@ -249,11 +318,92 @@ body, html {
   }
   /* SEARCH END */
 
+  .ql-toolbar.ql-snow {
+    border: 1px solid #f1f1f3;
+  }
+
+  .ql-container.ql-snow {
+    border: 1px solid #f1f1f3;
+  }
+
+  .ql-toolbar.ql-snow + .ql-container.ql-snow {
+    border-top: 0px;
+  }
+
+  .ql-container.ql-snow {
+    height: 200px;
+  }
+
+  .ant-steps-item-finish > .ant-steps-item-tail::after {
+    background-color: #e12828;
+  }
+
+  .ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon .ant-steps-icon-dot {
+    background: #e12828;
+  }
+
+  .ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon .ant-steps-icon-dot {
+    background: #e12828;
+  }
+
+  .ant-btn:active, .ant-btn.active, .ant-btn:hover, .ant-btn:focus {
+    color: #ffffff;
+    background-color: #fff;
+    border-color: transparent;
+  }
+
+  .ant-table-scroll table .ant-table-fixed-columns-in-body {
+    visibility: initial;
+  }
+
+  .expandable-block {
+
+    .expandable-block__left {
+      margin-bottom: 0px;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    hr {
+      position: initial;
+    }
+
+    span {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    p {
+      font-size: 1.143rem;
+    }
+  }
+
+
+
+
 
   /* COMPONENTS END */
 
 
 
+}
+
+.dropzone {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // padding: 20px;
+  height: 100px;
+  border-width: 2px;
+  border-radius: 4px;
+  border-color: #8B90A0;
+  border-style: dashed;
+  background-color: #fff;
+  color: #8B90A0;
+  outline: none;
+  justify-content: center;
+  transition: border .24s ease-in-out;
 }
 
 @media (min-width: 1200px) {
@@ -294,6 +444,17 @@ body, html {
 }
 
 @media (max-width: 567px) {
+  #treten .pl-6{
+    padding-left: .5rem !important;
+  }
+
+  .flex-xs-column {
+    flex-direction: column;
+  }
+
+  #treten .pr-6{
+    padding-right: .5rem !important;
+  }
   html, body {
     font-size: 12px;
   }

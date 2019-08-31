@@ -18,16 +18,10 @@ const Instructor = props => {
           <p>{props.qualifications}</p>
           <Display if={props.social_links}>
             <div className="container social-links">
-              <div className="row justify-content-center">
-                <div className="col-sm-2">
-                  <img src="/static/images/social/linkedin inverted.png" />
-                </div>
-                <div className="col-sm-2">
-                  <img src="/static/images/social/facebook inverted.png" />
-                </div>
-                <div className="col-sm-2">
-                  <img src="/static/images/social/twitter inverted.png" />
-                </div>
+              <div className="d-flex justify-content-center">
+                <img src="/static/images/social/linkedin inverted.png" />
+                <img className="" src="/static/images/social/facebook inverted.png" />
+                <img className="" src="/static/images/social/twitter inverted.png" />
               </div>
             </div>
           </Display>

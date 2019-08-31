@@ -14,6 +14,7 @@ import Blog from '../components/home/Blog';
 import { connect } from 'react-redux';
 import { getUser } from '../store';
 import { Button } from 'antd';
+import Link from 'next/link';
 
 class Home extends Component {
 
@@ -336,9 +337,11 @@ class Home extends Component {
           courses={this.state.popularCourses}
         />
         <div className="d-flex justify-content-center pt-4 pb-5 mb-5">
-          <Button size="large" type="danger">
-            View all
-          </Button>
+          <Link href="/courses">
+            <Button size="large" type="danger">
+              View all
+            </Button>
+          </Link>
         </div>
         <MeetTheInstructors
           instructors={this.state.instructors}
@@ -351,9 +354,11 @@ class Home extends Component {
           testimonials={this.state.testimonials}
         />
         <div className="d-flex justify-content-center pt-5 pb-5 mb-5">
-          <Button size="large" type="danger">
-            View all testimonials
-          </Button>
+          <Link href="/testimonials">
+            <Button size="large" type="danger">
+              View all testimonials
+            </Button>
+          </Link>
         </div>
         <Blog />
         <NewsLetterSubscription />

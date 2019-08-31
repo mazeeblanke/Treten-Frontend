@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import withProfileLayout from '../../../layouts/withProfileLayout';
-import PersonalDetailsForm from '../../../../components/student/PersonalDetailsForm';
+import PersonalDetailsForm from '../../../components/shared/PersonalDetailsForm';
+import withProfileLayout from '../../layouts/withProfileLayout';
+
 
 class Details extends Component {
   constructor(props) {

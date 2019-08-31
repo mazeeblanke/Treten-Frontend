@@ -13,7 +13,7 @@ const Experience = props => {
                   <h6 className="fw-600">
                     {_experience.company}
                   </h6>
-                  <small>
+                  <small className="ml-3">
                     {_experience.datePeriod}
                   </small>
                 </div>

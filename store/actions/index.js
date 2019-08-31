@@ -21,12 +21,17 @@ export const FETCH_USER = (payload) => {
           type: 'SET_AUTH',
           payload: {
             isLoggedIn: true,
-            user: res.data
+            user: {
+              // role: 'instructor',
+              role: 'admin',
+              // role: 'student',
+              ...res.data
+            }
           }
         })
       })
       .catch((err) => {
-        console.log('api err response',err)
+        // console.log('api err response',err)
         dispatch({
           type: 'SET_AUTH',
           payload: {

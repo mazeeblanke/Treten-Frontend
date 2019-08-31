@@ -52,6 +52,22 @@
   height: 45px;
 }
 
+.h09{
+  height: 0.9rem;
+}
+
+.h1{
+  height: 1rem;
+}
+
+.is-grey {
+  color: #999999 !important;
+}
+
+.is-transparent-bg, .is-transparent-bg input, .is-transparent-bg .ant-select-selection {
+  background: transparent;
+}
+
 .is-flex.is-vcentered, .is-vcentered {
   align-items: center  !important;
 }
@@ -68,6 +84,10 @@
   height: 100vh;
 }
 
+.has-border-bottom {
+  border-bottom: 1px solid #F0F1F3;
+}
+
 .has-min-full-vh {
   min-height: 100vh;
 }
@@ -79,6 +99,10 @@
 
 .has-height-85 {
   height: 85%;
+}
+
+.has-height-80 {
+  height: 80%;
 }
 
 .has-full-width {
@@ -202,7 +226,11 @@
 }
 
 .mt-15 {
-  margin-top: 17rem!important;
+  margin-top: 6rem!important;
+}
+
+.mt-5-neg {
+  margin-top: -3rem !important;
 }
 
 .fs-16 {
@@ -286,4 +314,20 @@
   right: 20px;
   color: #8b90a0;
   cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+  .mt-15 {
+    margin-top: 2rem !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .mt-15 {
+    margin-top: 0.5rem !important;
+  }
+  // .is-sm-12 {
+  //   font-size:
+  // }
 }

@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Link from "next/link";
 
 class Resources extends Component {
   render() {
@@ -13,18 +14,26 @@ class Resources extends Component {
                   src="/static/images/free practice question.png"
                   className="rounded-circle mt-4"
                   alt="practice questions icon"
-                  />
+                />
                 <div className="card-body">
                   <h5 className="card-title mb-0 pb-0">
                     Free Practice Questions
                   </h5>
                   <p>
-                    Get free practice questions to aid exam preparation.
-                    Little or no prior knowledge is required to understand their context.
+                    Get free practice questions to aid exam preparation. Little
+                    or no prior knowledge is required to understand their
+                    context.
                   </p>
-                  <p>
-                    <b>Get now</b>
-                  </p>
+                  <Link href="/resources/interview-questions">
+                    <p className="has-pointer-cursor">
+                      <b>Get now</b>
+                      <img
+                        style={{ height: "15px", width: "28px" }}
+                        className="pl-3"
+                        src="/static/images/arrow-right.png"
+                      />
+                    </p>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -34,18 +43,25 @@ class Resources extends Component {
                   src="/static/images/free interview questions.png"
                   className="rounded-circle mt-4"
                   alt="free interview questions"
-                  />
+                />
                 <div className="card-body">
                   <h5 className="card-title mb-0 pb-0">
                     Free Interview Questions
                   </h5>
                   <p>
-                    Get interview questions put together by subject matter experts.
-                    Gain 100% confidence at interviews.
+                    Get interview questions put together by subject matter
+                    experts. Gain 100% confidence at interviews.
                   </p>
-                  <p>
-                    <b>Get now</b>
-                  </p>
+                  <Link href="/resources/interview-questions">
+                    <p className="has-pointer-cursor">
+                      <b>Get now</b>
+                      <img
+                        style={{ height: "15px", width: "28px" }}
+                        className="pl-3"
+                        src="/static/images/arrow-right.png"
+                      />
+                    </p>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -56,8 +72,6 @@ class Resources extends Component {
   }
 }
 
-Resources.propTypes = {
-
-};
+Resources.propTypes = {};
 
 export default Resources;

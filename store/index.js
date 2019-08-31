@@ -17,8 +17,8 @@ export function initStore (initialState = INITIAL_STATE, isServer = false, req) 
   if (isServer) {
     console.log('is the iserver', isServer);
     if (req) {
-      console.log('whejwhewe ehjw ehj ', req.headers);
-      console.log('cookie', req.headers.cookie)
+      // console.log('whejwhewe ehjw ehj ', req.headers);
+      // console.log('cookie', req.headers.cookie)
       cookie = req.headers.cookie;
     }
 

@@ -1,0 +1,244 @@
+
+#treten {
+
+
+
+  .admin-home {
+
+    td {
+      padding: 23px 16px;
+    }
+
+    td,
+    .ant-table-thead  th {
+      background: white;
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    .newstudents {
+      img.profile_pic {
+        height: 45px;
+        width: 45px;
+        border-radius: 100%;
+      }
+    }
+
+
+  }
+}
+
+@media (max-width: 1440px) {
+  .col-md-6 {
+    border: none !important
+  }
+}
+
+
+
+// TRANSACTIONS
+
+.transactions {
+
+  .menu-bar {
+    min-height: 160px;
+    background: white;
+    margin-top: -42px !important;
+    padding-bottom: 75px;
+  }
+
+  .ant-table-fixed-left table, .ant-table-fixed-right table {
+    width: auto;
+    background: #fdfdfd;
+  }
+
+  .menu-bar-container {
+    background: white;
+  }
+
+  .ant-table {
+    margin-top: -55px;
+  }
+
+  .ant-table-thead  th{
+    background: white;
+  }
+
+  td {
+    padding: 26px 16px !important;
+  }
+
+  .ant-table-pagination.ant-pagination {
+    float: left !important
+  }
+
+}
+
+// REVIEWS
+
+.reviews {
+
+  // .menu-bar {
+  //   background: white;
+  //   margin-top: -3rem !important;
+  // }
+
+  .menu-bar {
+    min-height: 160px;
+    background: white;
+    margin-top: -42px !important;
+    padding-bottom: 75px;
+  }
+
+  .ant-table-fixed-left table, .ant-table-fixed-right table {
+    width: auto;
+    background: #fdfdfd;
+  }
+
+  .menu-bar-container {
+    background: white;
+  }
+
+  .ant-table {
+    margin-top: -55px;
+  }
+
+  .ant-table-thead  th{
+    background: white;
+  }
+
+  td {
+    padding: 26px 16px !important;
+  }
+
+  .ant-table-pagination.ant-pagination {
+    float: left !important
+  }
+
+}
+
+
+
+// MANGE WEBSITES
+
+.manage-website {
+
+  .menu-bar {
+    background: white;
+    margin-top: -3rem !important;
+  }
+
+
+  .ant-table-fixed-left table, .ant-table-fixed-right table {
+    width: auto;
+    background: #fdfdfd;
+  }
+
+  .menu-bar-container {
+    background: white;
+  }
+
+  .ant-table {
+    margin-top: -55px;
+  }
+
+  .ant-table-thead  th{
+    background: white;
+  }
+
+  td {
+    padding: 26px 16px !important;
+  }
+
+  .ant-table-pagination.ant-pagination {
+    float: left !important
+  }
+
+}
+
+
+// MANGE USERS
+
+.manage-users {
+
+  .menu-bar {
+    background: #fdfdfd;
+    margin-top: -3rem !important;
+  }
+
+  .ant-tabs-bar.ant-tabs-top-bar {
+    display: none;
+  }
+
+
+  .ant-table-fixed-left table, .ant-table-fixed-right table {
+    width: auto;
+    background: #fff;
+  }
+
+  .menu-bar-container {
+    background: #fdfdfd;
+  }
+
+  .ant-table {
+    // margin-top: -60px;
+    z-index: 1000
+  }
+
+  .ant-table-thead  th{
+    background: white;
+  }
+
+  td {
+    padding: 26px 16px !important;
+  }
+
+  .ant-table-pagination.ant-pagination {
+    float: left !important
+  }
+
+}
+
+
+// ADMIN COURSE
+
+#treten {
+  .faqs {
+    .quill {
+      width: 100%;
+    }
+
+    .ql-container {
+      height: 100px;
+    }
+
+  }
+
+
+  .batch-schedule-tab .student-course-dashboard {
+    width: 95%;
+  }
+
+  .course__admin {
+    .ant-tabs-bar {
+      border-bottom: none;
+    }
+    .ant-tabs-tab-active.ant-tabs-tab {
+      background: transparent
+    }
+  }
+
+
+  @media (min-width: 567px) {
+    .settings {
+      margin: 0px -44px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .settings {
+      margin: 0px -50px;
+    }
+  }
+
+}

@@ -70,17 +70,98 @@ class Navigation extends React.Component {
                   Courses
                   <Icon type="down" />
                 </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    Option 1
-                  </DropdownItem>
-                  <DropdownItem>
-                    Option 2
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    Reset
-                  </DropdownItem>
+                <DropdownMenu className="courses" right>
+                  <div className="row">
+                    <div className="col-sm-6 mb-5">
+                      <NavLink className="is-blue" disabled href="#">
+                        <b>Associate level</b>
+                      </NavLink>
+                      <DropdownItem>
+                        <Link href="/resources/interview-questions">
+                          <span>CCNA R&S</span>
+                        </Link>
+                      </DropdownItem>
+                      <DropdownItem>
+                        <Link href="/resources/interview-questions">
+                          <span>CCNA Security</span>
+                        </Link>
+                      </DropdownItem>
+                      <DropdownItem>
+                        <Link href="/resources/interview-questions">
+                          <span>CCNA Service Provider</span>
+                        </Link>
+                      </DropdownItem>
+                      <DropdownItem>
+                        <Link href="/resources/interview-questions">
+                          <span>CCNA Cyber Ops</span>
+                        </Link>
+                      </DropdownItem>
+                    </div>
+                    <div className="col-sm-6 mb-5">
+                      <NavLink className="is-blue" disabled href="#">
+                        <b>Professional level</b>
+                      </NavLink>
+                      <DropdownItem>
+                        <Link href="/resources/interview-questions">
+                          <span>CCNP R&S</span>
+                        </Link>
+                      </DropdownItem>
+                      <DropdownItem>
+                        <Link href="/resources/interview-questions">
+                          <span>CCNP Security</span>
+                        </Link>
+                      </DropdownItem>
+                      <DropdownItem>
+                        <Link href="/resources/interview-questions">
+                          <span>CCNP Service Provider</span>
+                        </Link>
+                      </DropdownItem>
+                    </div>
+                    <div className="col-sm-6 mb-5">
+                      <NavLink className="is-blue" disabled href="#">
+                        <b>Expert level</b>
+                      </NavLink>
+                      <DropdownItem>
+                        <Link href="/resources/interview-questions">
+                          <span>CCNP R&S</span>
+                        </Link>
+                      </DropdownItem>
+                      <DropdownItem>
+                        <Link href="/resources/interview-questions">
+                          <span>CCNP Security</span>
+                        </Link>
+                      </DropdownItem>
+                      <DropdownItem>
+                        <Link href="/resources/interview-questions">
+                          <span>CCNP Service Provider</span>
+                        </Link>
+                      </DropdownItem>
+                    </div>
+                    <div className="col-sm-6 mb-5">
+                      <NavLink className="is-blue" disabled href="#">
+                        <b>Bootcamp</b>
+                      </NavLink>
+                      <DropdownItem>
+                        <Link href="/resources/interview-questions">
+                          <span>Zero to Hero Cisco R&S</span>
+                        </Link>
+                      </DropdownItem>
+                      <DropdownItem>
+                        <Link href="/resources/interview-questions">
+                          <span>Zero to Hero Cisco Security</span>
+                        </Link>
+                      </DropdownItem>
+                      <DropdownItem>
+                        <Link href="/resources/interview-questions">
+                          <span>Zero to Hero Firewall Expert</span>
+                        </Link>
+                      </DropdownItem>
+                    </div>
+                  </div>
+
+                    <NavLink className="is-blue" disabled href="#">
+                      <b>View course catalog</b>
+                    </NavLink>
                 </DropdownMenu>
               </UncontrolledDropdown>
               <NavItem>
@@ -95,15 +176,15 @@ class Navigation extends React.Component {
                   <Icon type="down" />
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>
-                    Option 1
+                  <DropdownItem className="mb-4 mt-3">
+                    <Link href="/resources/interview-questions">
+                      <span>Interview questions</span>
+                    </Link>
                   </DropdownItem>
-                  <DropdownItem>
-                    Option 2
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    Reset
+                  <DropdownItem className="mb-4">
+                    <Link href="/resources/practice-questions">
+                      <span>Practice questions</span>
+                    </Link>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
@@ -119,7 +200,13 @@ class Navigation extends React.Component {
               </NavItem>
               <Display if={this.props.isLoggedIn} >
                 <NavItem>
-                  <Link href="/d/student/courses">
+                  <Link href={
+                    this.props.user.role === "student"
+                      ? "/d/student/courses"
+                      : (this.props.user.role === "admin"
+                        ? "/d/admin/home"
+                        : "/d/instructor/home")
+                  }>
                     <a>
                       <Button className="mr-2" size="large" type="danger">Dashboard</Button>
                     </a>

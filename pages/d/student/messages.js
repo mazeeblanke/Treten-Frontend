@@ -1,25 +1,168 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { List, Avatar } from 'antd';
-import Display from '../../../components/shared/Display';
-import withAdminLayout from '../../layouts/withAdminLayout';
-import ReactHtmlParser from 'react-html-parser';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { List, Avatar, Button, Tabs, Radio, Input, Modal } from "antd";
+import Display from "../../../components/shared/Display";
+import withAdminLayout from "../../layouts/withAdminLayout";
+import Chat from "../../../components/shared/Chat";
+import BroadcastMessages from "../../../components/shared/BroadcastMessages";
+import EmailForm from '../../../components/admin/EmailForm';
+import BroadcastMessageForm from "../../../components/instructor/BroadcastMessageForm";
 
+const TabPane = Tabs.TabPane;
+let prev;
 class Messages extends Component {
   constructor(props) {
     super(props);
-
   }
 
   state = {
+    emailForm: {
+      toGroup: '',
+      title: '',
+      message: ''
+    },
+    broadcastMessageForm: {
+      toGroup: '',
+      title: '',
+      message: ''
+    },
+    activeTab: "chats",
+    isShowingEmailForm: false,
+    isShowingBroadcastMessageForm: false,
+    windowWidth: 0,
+    isViewingSelectedMessage: false,
+    isViewingSelectedChat: false,
     selectedMessage: {},
+    selectedChat: {},
+    chatThread: [
+      {
+        origin: "from",
+        msg: `You really think you can fly that thing? Life finds a way.
+        They're using our own satellites against us. And the clock is ticking.
+        Jaguar shark! So tell me - does it really exist?`,
+        time: "08:30am"
+      },
+      {
+        origin: "to",
+        msg: `Yeah, but your scientists were so preoccupied with whether or not they could,
+        they didn't stop to think if they should.
+        Hey, you know how I'm, like, always trying to save the planet?`,
+        time: "09:30am"
+      },
+      {
+        origin: "from",
+        msg: `let me be honest, i love you`,
+        time: "08:30am"
+      },
+      {
+        origin: "from",
+        msg: `please say something`,
+        time: "08:30am"
+      },
+      {
+        origin: "from",
+        msg: `anything`,
+        time: "08:30am"
+      },
+      {
+        origin: "to",
+        msg: `sorry i don't know what to say `,
+        time: "08:30am"
+      },
+      {
+        origin: "to",
+        msg: `please say something`,
+        time: "08:30am"
+      },
+      {
+        origin: "to",
+        msg: `trying to save the planet`,
+        time: "08:30am"
+      },
+      {
+        origin: "from",
+        msg: `you know how I'm`,
+        time: "08:30am"
+      },
+      {
+        origin: "to",
+        msg: `your scientists were so preoccupied`,
+        time: "08:30am"
+      }
+    ],
+    chats: [
+      {
+        sender: {
+          profile_pic: "/static/images/instructors/instructor1.png",
+          fullname: "Azibanayam Micheal"
+        },
+        formattedDate: "5 mins",
+        id: 1,
+        lastMessage: `New updates about the additional materials`
+      },
+      {
+        sender: {
+          profile_pic: "/static/images/instructors/instructor2.png",
+          fullname: "Azibanayam Micheal"
+        },
+        formattedDate: "10 mins",
+        lastMessage: `How to go about your final project`,
+        id: 2
+      },
+      {
+        sender: {
+          profile_pic: "/static/images/instructors/instructor3.png",
+          fullname: "Azibanayam Micheal"
+        },
+        formattedDate: "2 hrs",
+        lastMessage: `What to do when you run into any issues`,
+        id: 3
+      },
+      {
+        sender: {
+          profile_pic: "/static/images/instructors/instructor1.png",
+          fullname: "Azibanayam Micheal"
+        },
+        formattedDate: "19 hrs",
+        lastMessage: `Information about exams and certificates`,
+        id: 4
+      },
+      {
+        sender: {
+          profile_pic: "/static/images/instructors/instructor4.png",
+          fullname: "Azibanayam Micheal"
+        },
+        formattedDate: "Yesterday",
+        lastMessage: `Updates about additional course content`,
+        id: 5
+      },
+      {
+        sender: {
+          profile_pic: "/static/images/instructors/instructor2.png",
+          fullname: "Azibanayam Micheal"
+        },
+        formattedDate: "2 days",
+        lastMessage: `Where to find more study resources online`,
+        id: 6
+      },
+      {
+        sender: {
+          profile_pic: "/static/images/instructors/instructor1.png",
+          fullname: "Azibanayam Micheal"
+        },
+        formattedDate: "19 hrs",
+        id: 7,
+        lastMessage: `Information about exams and certificates`
+      }
+    ],
     messages: [
       {
         sender: {
-          profile_pic: '/static/images/instructors/instructor1.png',
-          fullname: 'Azibanayam Micheal'
+          profile_pic: "/static/images/instructors/instructor1.png",
+          fullname: "Azibanayam Micheal"
         },
-        formattedDate: '5 mins',
+        formattedDate: "5 mins",
+        id: 1,
         title: `New updates about the additional materials`,
         content: `
           <h4>New updates about the additional materials</h4>
@@ -49,11 +192,12 @@ class Messages extends Component {
       },
       {
         sender: {
-          profile_pic: '/static/images/instructors/instructor2.png',
-          fullname: 'Azibanayam Micheal'
+          profile_pic: "/static/images/instructors/instructor2.png",
+          fullname: "Azibanayam Micheal"
         },
-        formattedDate: '10 mins',
+        formattedDate: "10 mins",
         title: `How to go about your final project`,
+        id: 2,
         content: `
           <h5>How to go about your final project</h5>
           <p>
@@ -70,11 +214,12 @@ class Messages extends Component {
       },
       {
         sender: {
-          profile_pic: '/static/images/instructors/instructor3.png',
-          fullname: 'Azibanayam Micheal'
+          profile_pic: "/static/images/instructors/instructor3.png",
+          fullname: "Azibanayam Micheal"
         },
-        formattedDate: '2 hrs',
+        formattedDate: "2 hrs",
         title: `What to do when you run into any issues`,
+        id: 3,
         content: `
           <h5>What to do when you run into any issues</h5>
           <p>
@@ -91,10 +236,77 @@ class Messages extends Component {
       },
       {
         sender: {
-          profile_pic: '/static/images/instructors/instructor1.png',
-          fullname: 'Azibanayam Micheal'
+          profile_pic: "/static/images/instructors/instructor1.png",
+          fullname: "Azibanayam Micheal"
         },
-        formattedDate: '19 hrs',
+        formattedDate: "19 hrs",
+        title: `Information about exams and certificates`,
+        id: 4,
+        content: `
+          <h5>Information about exams and certificates</h5>
+          <p>
+             Science rich in heavy atoms cosmic fugue extraplanetary
+             stirred by starlight rogue? Emerged into consciousness
+          </p>
+          <p>
+            Find the resources here.
+          </p>
+          <p>
+            Cheers and all the best!
+          </p>
+        `
+      },
+      {
+        sender: {
+          profile_pic: "/static/images/instructors/instructor4.png",
+          fullname: "Azibanayam Micheal"
+        },
+        formattedDate: "Yesterday",
+        title: `Updates about additional course content`,
+        id: 5,
+        content: `
+          <h5>Updates about additional course content</h5>
+          <p>
+             Science rich in heavy atoms cosmic fugue extraplanetary
+             stirred by starlight rogue? Emerged into consciousness
+          </p>
+          <p>
+            Find the resources here.
+          </p>
+          <p>
+            Cheers and all the best!
+          </p>
+        `
+      },
+      {
+        sender: {
+          profile_pic: "/static/images/instructors/instructor2.png",
+          fullname: "Azibanayam Micheal"
+        },
+        formattedDate: "2 days",
+        title: `Where to find more study resources online`,
+        id: 6,
+        content: `
+          <h5>Where to find more study resources online</h5>
+          <p>
+             Science rich in heavy atoms cosmic fugue extraplanetary
+             stirred by starlight rogue? Emerged into consciousness
+          </p>
+          <p>
+            Find the resources here.
+          </p>
+          <p>
+            Cheers and all the best!
+          </p>
+        `
+      },
+      {
+        sender: {
+          profile_pic: "/static/images/instructors/instructor1.png",
+          fullname: "Azibanayam Micheal"
+        },
+        formattedDate: "19 hrs",
+        id: 7,
         title: `Information about exams and certificates`,
         content: `
           <h5>Information about exams and certificates</h5>
@@ -112,11 +324,12 @@ class Messages extends Component {
       },
       {
         sender: {
-          profile_pic: '/static/images/instructors/instructor4.png',
-          fullname: 'Azibanayam Micheal'
+          profile_pic: "/static/images/instructors/instructor4.png",
+          fullname: "Azibanayam Micheal"
         },
-        formattedDate: 'Yesterday',
+        formattedDate: "Yesterday",
         title: `Updates about additional course content`,
+        id: 8,
         content: `
           <h5>Updates about additional course content</h5>
           <p>
@@ -133,11 +346,12 @@ class Messages extends Component {
       },
       {
         sender: {
-          profile_pic: '/static/images/instructors/instructor2.png',
-          fullname: 'Azibanayam Micheal'
+          profile_pic: "/static/images/instructors/instructor2.png",
+          fullname: "Azibanayam Micheal"
         },
-        formattedDate: '2 days',
+        formattedDate: "2 days",
         title: `Where to find more study resources online`,
+        id: 9,
         content: `
           <h5>Where to find more study resources online</h5>
           <p>
@@ -151,98 +365,196 @@ class Messages extends Component {
             Cheers and all the best!
           </p>
         `
-      },
-    ],
-    // messages: []
-  }
+      }
+    ]
+  };
 
-  componentWillMount() {
-
-  }
+  componentWillMount() {}
 
   componentDidMount() {
-
+    this.handleResize();
+    window.addEventListener("resize", this.handleResize);
   }
-
-
-  // componentWillReceiveProps(nextProps) {
-
-  // }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-
-  // }
-
-  // componentWillUpdate(nextProps, nextState) {
-
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-
-  // }
 
   componentWillUnmount() {
-
+    window.removeEventListener("resize", this.handleResize);
   }
 
-  selectMessage = (message) => {
-    console.log(message)
+  handleResize = () => {
     this.setState({
+      windowWidth: window.innerWidth
+    });
+  };
+
+  clearSelectedMessage = () => {
+    this.setState({
+      isViewingSelectedMessage: false,
+      selectedMessage: {}
+    });
+  };
+
+  selectMessage = message => {
+    console.log(message);
+    this.setState({
+      isViewingSelectedMessage: true,
       selectedMessage: message
+    });
+  };
+
+  selectChat = chat => {
+    // console.log(message)
+    this.setState({
+      isViewingSelectedChat: true,
+      selectedChat: chat
+    });
+  };
+
+  handleTabChange = e => {
+    this.setState({
+      activeTab: e.target.value
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      isShowingEmailForm: false,
+      isShowingBroadcastMessageForm: false,
     })
   }
 
+  setEmailForm = () => {
+
+  }
+
+  setBroadcastMessageForm = () => {
+
+  }
+
+  handleSubmit = () => {
+
+  }
+
+  showEmailForm = () => {
+    this.setState({
+      isShowingEmailForm: true
+    })
+  }
+
+  showBroadcastForm = () => {
+    this.setState({
+      isShowingBroadcastMessageForm: true
+    })
+  }
+
+  determineChatStyle = (chat, index, chats) => {
+    let computedStyle = {
+      marginTop: prev != chat.origin ? "40px" : null,
+      padding: chat.msg.length >= 120 ? "30px 20px" : null,
+      maxWidth: "80%",
+      display:
+        index < chats.length - 1 && chat.origin == chats[index + 1].origin
+          ? "none"
+          : null
+    };
+    prev = chat.origin;
+    return computedStyle;
+  };
+
   render() {
     return (
-      <section className="messages">
-        <div className="container">
+      <section className="messages mt-5-neg pt-4">
+        <div className="container pt-7">
           <div className="row pl-6 pr-6">
-            <div className="col-md-12 ">
-              <div className="row mt-5 message-wrapper d-none d-lg-block d-xl-block">
-                <div className="col-md-4 pl-0 sidebar">
-                  <div className="">
-                    <Display if={this.state.messages.length}>
-                        <List
-                          messageLayout="horizontal"
-                          dataSource={this.state.messages}
-                          renderItem={message => (
-                            <List.Item
-                              key={message.title}
-                              onClick={() => this.selectMessage(message)}
-                              style={{ background: this.state.selectedMessage.title == message.title ? '#FAFAFA' : '', cursor: 'pointer' }}
-                        >
-                              <List.Item.Meta
-                                title={
-                                  <div className="d-flex align-items-center justify-content-sm-between">
-                                    <h5 className="m-0">{message.sender.fullname}</h5>
-                                    <span>{message.formattedDate}</span>
-                                  </div>
-                                }
-                                avatar={<Avatar src={message.sender.profile_pic} />}
-                              />
-                                <p>{message.title}</p>
-                            </List.Item>
-                          )}
-                        />
-                      </Display>
-                  </div>
+            <div className="col-md-8 mb-3 col-lg-8 col-xl-9 col-sm-12">
+              <Radio.Group
+                onChange={this.handleTabChange}
+                value={this.state.activeTab}
+                size="large"
+                buttonStyle="solid"
+              >
+                <Radio.Button value="chats">Chats</Radio.Button>
+                <Radio.Button value="bMessages">
+                  {
+                    this.props.user.role === 'admin'
+                    ? 'Emails'
+                    : 'Broadcast messages'
+                  }
 
-
-                </div>
-                <div className="col-md-8 p-0">
-                  <Display if={this.state.selectedMessage.title}>
-                    {/* <div className=""> */}
-                      <div className="message__top-bar d-flex align-items-center mt-3 pl-5 pr-5">
-                        <Avatar className="mr-2" size="large" src={(this.state.selectedMessage.sender || {}).profile_pic} />
-                        <h5 className="m-0">{(this.state.selectedMessage.sender || {}).fullname}</h5>
-                      </div>
-                      <div className="pl-5 pr-5 mt-5 message__content">
-                        { ReactHtmlParser(this.state.selectedMessage.content) }
-                      </div>
-                    {/* </div> */}
-                  </Display>
-                </div>
-              </div>
+                </Radio.Button>
+              </Radio.Group>
+            </div>
+            <div className="col-md-4 mb-3 col-lg-4 col-xl-3 col-sm-12 d-flex justify-content-md-end">
+              <Display if={this.state.activeTab === 'bMessages' && this.props.user.role === 'instructor'}>
+                <Button onClick={this.showBroadcastForm} type="danger" style={{ width: '205px', height: '42px' }}>New broadcast message</Button>
+              </Display>
+              <Display if={this.state.activeTab === 'bMessages' && this.props.user.role === 'admin'}>
+                <Button onClick={this.showEmailForm} type="danger" style={{ width: '205px', height: '42px' }}>New email</Button>
+              </Display>
+            </div>
+          </div>
+          <div className="row pl-6 pr-6">
+            <div className="col-md-12 pt-3">
+              <Tabs activeKey={this.state.activeTab}>
+                <TabPane tab="chats" key="chats">
+                  <Chat
+                    determineChatStyle={this.determineChatStyle}
+                    selectChat={this.selectChat}
+                    clearSelectedChat={this.clearSelectedChat}
+                    {...this.state}
+                  />
+                </TabPane>
+                <TabPane tab="bMessages" key="bMessages">
+                  <BroadcastMessages
+                    selectMessage={this.selectMessage}
+                    clearSelectedMessage={this.clearSelectedMessage}
+                    {...this.state}
+                  />
+                  { this.state.isShowingEmailForm && (
+                    <Modal
+                      footer={null}
+                      wrapClassName="email-form-modal"
+                      width="464px"
+                      height="514px"
+                      centered
+                      onCancel={this.closeModal}
+                      visible={this.state.isShowingEmailForm}
+                      title={
+                        <div className="d-flex align-items-center justify-content-between">
+                          <h5>New Email</h5>
+                        </div>
+                      }
+                    >
+                      <EmailForm
+                        emailForm={this.state.emailForm}
+                        setEmailForm={this.setEmailForm}
+                        handleSubmit={this.handleSubmit}
+                      />
+                    </Modal>
+                  )}
+                  { this.state.isShowingBroadcastMessageForm && (
+                    <Modal
+                      footer={null}
+                      wrapClassName="broadcast-message-form-modal"
+                      width="464px"
+                      height="514px"
+                      centered
+                      onCancel={this.closeModal}
+                      visible={this.state.isShowingBroadcastMessageForm}
+                      title={
+                        <div className="d-flex align-items-center justify-content-between">
+                          <h5>New broadcast message</h5>
+                        </div>
+                      }
+                    >
+                      <BroadcastMessageForm
+                        broadcastMessageForm={this.state.broadcastMessageForm}
+                        setBroadcastMessageForm={this.setBroadcastMessageForm}
+                        handleSubmit={this.handleSubmit}
+                      />
+                    </Modal>
+                  )}
+                </TabPane>
+              </Tabs>
             </div>
           </div>
         </div>
@@ -251,10 +563,8 @@ class Messages extends Component {
   }
 }
 
-Messages.propTypes = {
+Messages.propTypes = {};
 
-};
-
-Messages.headerName = "Messages"
+Messages.headerName = "Messages";
 
 export default withAdminLayout(Messages);

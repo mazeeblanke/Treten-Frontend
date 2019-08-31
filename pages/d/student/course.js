@@ -9,6 +9,7 @@ import CourseSchedule from '../../../components/student/CourseSchedule';
 import CourseHeader from '../../../components/student/CourseHeader';
 import CourseMaterials from '../../../components/student/CourseMaterials';
 import CourseInstructor from '../../../components/student/CourseInstructor';
+import CourseReviewForm from '../../../components/student/CourseReviewForm';
 const TabPane = Tabs.TabPane;
 
 const courseTypes = [ 'remote', 'on-demand', 'onsite' ];
@@ -200,8 +201,8 @@ class Course extends Component {
   render() {
     return (
       <>
-        <CourseHeader course={this.state.course} />
-        <section className="student-course-dashboard">
+        <CourseHeader {...this.props} course={this.state.course} />
+        <section className="student-course-dashboard mt-5">
           <div className="container">
             <div className="row">
               <div className="col-md-12 pl-6 pr-6">
@@ -215,7 +216,9 @@ class Course extends Component {
                   <TabPane tab="Instructor" key="Instructor">
                     <CourseInstructor instructor={this.state.course.instructor} />
                   </TabPane>
-                  <TabPane tab="Review course" key="Review course">Content of Tab Pane 3</TabPane>
+                  <TabPane tab="Review course" key="Review course">
+                    <CourseReviewForm />
+                  </TabPane>
                 </Tabs>
               </div>
             </div>

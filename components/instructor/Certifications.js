@@ -18,7 +18,7 @@ const Certifications = props => {
                   </small>
                 </div>
                 <div>
-                  <img src={certification.logo} />
+                  <img className="ml-4" src={certification.logo} />
                 </div>
               </div>
             ))

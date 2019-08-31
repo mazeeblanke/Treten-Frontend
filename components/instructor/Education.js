@@ -13,7 +13,7 @@ const Education = props => {
                   <h6 className="fw-600">
                     {_education.institutionName}
                   </h6>
-                  <small>
+                  <small className="ml-3">
                     {_education.datePeriod}
                   </small>
                 </div>

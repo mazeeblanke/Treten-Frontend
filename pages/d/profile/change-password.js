@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import withProfileLayout from '../../../layouts/withProfileLayout';
-import ChangePasswordForm from '../../../../components/student/ChangePasswordForm';
+import withProfileLayout from '../../layouts/withProfileLayout';
+import ChangePasswordForm from '../../../components/student/ChangePasswordForm';
 
 class ChangePassword extends Component {
   constructor(props) {

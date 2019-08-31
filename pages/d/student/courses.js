@@ -151,7 +151,7 @@ class Courses extends Component {
                 <div className="row">
                   {
                     this.state.courses.map((course) => (
-                      <Link href="/d/student/course">
+                      <Link href={"/d/student/course"}>
                         <div className="col-sm-12 col-md-6 col-lg-3 mb-5">
                           <div key={course.title}>
                             <div className="card border-0">

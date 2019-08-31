@@ -29,6 +29,22 @@ app
       app.render(req, res, "/instructor", {});
     });
 
+    server.get("/d/instructor/resources", (req, res) => {
+      app.render(req, res, "/d/student/resources", {});
+    });
+
+    server.get("/d/instructor/notifications", (req, res) => {
+      app.render(req, res, "/d/student/notifications", {});
+    });
+
+    server.get("/d/admin/course", (req, res) => {
+      app.render(req, res, "/d/instructor/course", {});
+    });
+
+    server.get("/d/admin/resources", (req, res) => {
+      app.render(req, res, "/d/student/resources", {});
+    });
+
     server.get("/blog/:blogslug", (req, res) => {
       app.render(req, res, "/blog-post", {});
     });

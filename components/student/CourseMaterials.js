@@ -59,7 +59,7 @@ const CourseMaterials = (props) => {
 
     return (
       <>
-        <section className="course-materials has-white-bg pt-4 mb-8">
+        <section className="course-materials pt-4 mb-8">
           <h5>General course resources</h5>
           <div className="mt-4">
             <Slider { ...settings }>

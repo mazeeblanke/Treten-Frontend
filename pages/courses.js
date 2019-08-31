@@ -181,10 +181,10 @@ class Courses extends Component {
               <TabPane tab="Professional level" key="3">
                 Content of tab 3
               </TabPane>
-              <TabPane tab="Expert level" key="3">
+              <TabPane tab="Expert level" key="4">
                 Content of tab 3
               </TabPane>
-              <TabPane tab="Bootcamps" key="3">
+              <TabPane tab="Bootcamps" key="5">
                 Content of tab 3
               </TabPane>
             </Tabs>
