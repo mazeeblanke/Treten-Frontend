@@ -18,7 +18,7 @@ class NewsLetterSubscription extends Component {
                 <Search
                   className="search"
                   placeholder="What's your email address ?"
-                  enterButton="Search"
+                  enterButton="Subscribe"
                   size="large"
                   onSearch={value => console.log(value)}
                 />

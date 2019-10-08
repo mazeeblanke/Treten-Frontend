@@ -23,7 +23,7 @@ class Auth extends Component {
             <div className="col-md-4 pl-5 pr-5 auth__wrapper">
               <div className="auth__container">
                 <Display if={true}>
-                  <h6 className="text-center fw-600 mb-4 mt-4">Complete the form below</h6>
+                  <h5 className="text-center fw-600 mb-5 mt-5">Complete the form below</h5>
                   <InstructorForm />
                 </Display>
                 <Display if={false}>

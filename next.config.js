@@ -7,6 +7,14 @@ const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const withFonts = require('next-fonts');
 module.exports = withFonts(withSass(withCSS(
   {
+    webpackDevMiddleware: (config) => {
+      // Solve compiling problem via vagrant
+      config.watchOptions = {
+        poll: 1000,   // Check for changes every second
+        aggregateTimeout: 300,   // delay before rebuilding
+      };
+      return config;
+    },
     webpack: function (config) {
       config.module.rules.push({
         test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,

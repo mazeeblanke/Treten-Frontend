@@ -4,7 +4,7 @@ import reduxPromise from 'redux-promise';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
 import axios from 'axios';
-import { PROXYURL } from '../lib/helpers';
+// import { PROXYURL } from '../lib/helpers';
 
 // INITAL STATE OF STORE
 const INITIAL_STATE = {

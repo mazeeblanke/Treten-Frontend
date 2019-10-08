@@ -14,24 +14,24 @@ export const setLoginState = (payload) => {
 
 export const FETCH_USER = (payload) => {
   return (dispatch, setState, api) => {
-    return api.get('/current_user')
+    return api.get('/api/current_user')
       .then((res) => {
-        // console.log('api response',res)
+        console.log('api response',res)
         dispatch({
           type: 'SET_AUTH',
           payload: {
             isLoggedIn: true,
             user: {
               // role: 'instructor',
-              role: 'admin',
-              // role: 'student',
+              // role: 'admin',
+              role: 'student',
               ...res.data
             }
           }
         })
       })
       .catch((err) => {
-        // console.log('api err response',err)
+        console.log('api err response',err)
         dispatch({
           type: 'SET_AUTH',
           payload: {
