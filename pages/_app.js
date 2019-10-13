@@ -3,8 +3,6 @@ import Head from 'next/head';
 import React from 'react';
 import CookieConsent from "react-cookie-consent";
 import NextNProgress from '../components/shared/NextNProgress';
-// import withNProgress from "next-nprogress";
-// import NextNProgress from "next-nprogress/component";
 import withReduxStore from '../lib/with-redux-store';
 import { Provider } from 'react-redux';
 import 'antd/dist/antd.css';

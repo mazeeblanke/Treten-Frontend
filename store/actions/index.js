@@ -12,6 +12,13 @@ export const setLoginState = (payload) => {
   }
 }
 
+export const setInstructorRegistrationRequest = (payload) => {
+  return {
+    type: 'REGISTRATION_REQUEST',
+    payload
+  }
+}
+
 export const FETCH_USER = (payload) => {
   return (dispatch, setState, api) => {
     return api.get('/api/current_user')

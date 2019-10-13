@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
-import { Segment, Container } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
-const Auth = ({ children }) => {
-  return (
-    <Segment className="auth" vertical>
-      <Container textAlign='center'>
-        {children}
-      </Container>
-    </Segment>
-   );
+const Auth = (props) => {
+  if (!props.isLoggedIn) {
+     // show
+    return (
+      <>
+        {props.children}
+      </>
+    );
+  }
+
+  if (props.isLoggedIn) {
+    // dont show
+    return <p>not allowed</p>
+  }
 }
 
-export default Auth;
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.auth.isLoggedIn,
+  user: state.user
+})
+
+export default connect(mapStateToProps, null)(Auth);

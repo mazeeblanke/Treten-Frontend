@@ -1,6 +1,6 @@
-FROM node:8-slim
+FROM node:8
 
-WORKDIR treten
+WORKDIR /treten
 
 COPY ./package.json /treten/package.json
 

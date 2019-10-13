@@ -1,9 +1,52 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Input } from 'antd';
+import { Input, Form, message } from 'antd';
+import axios from "axios";
+
 const { Search } = Input;
 
 class NewsLetterSubscription extends Component {
+
+  state = {
+    email: '',
+    isLoading: false,
+    errors: {}
+  }
+
+  mounted() {
+    message.config({
+      maxCount: 1,
+    });
+  }
+
+  setEmail = e => {
+    this.setState({
+      email: e.target.value
+    })
+  }
+
+  subscribe = (e) => {
+    // e.preventDefault();
+    
+    axios.post('t/api/newsletter/subscribe', { email: this.state.email }).then((res) => {
+      console.log(res.data)
+      message.success(res.data.message, 21);
+      this.setState({
+        isLoading: false,
+        email: '',
+        errors: {}
+      });
+    }).catch((err) => {
+      message.error(err.response.data.message, 21);
+
+      this.setState({
+        isLoading: false,
+        errors: err.response.data.errors
+      });
+
+    })
+  }
+
   render() {
     return (
       <section className="newsletter has-dark-bg mb-5 ">
@@ -16,12 +59,18 @@ class NewsLetterSubscription extends Component {
             <div className="col-sm-12 col-md-4">
               <div>
                 <Search
+                  value={this.state.email}
+                  onChange={this.setEmail}
                   className="search"
                   placeholder="What's your email address ?"
                   enterButton="Subscribe"
                   size="large"
-                  onSearch={value => console.log(value)}
+                  onSearch={this.subscribe}
                 />
+                { this.state.errors.email && <div className="has-error">
+                    <div className="ant-form-explain">{this.state.errors.email}</div>
+                  </div>
+                }
               </div>
             </div>
           </div>
