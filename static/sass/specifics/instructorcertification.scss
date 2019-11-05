@@ -7,6 +7,20 @@
   height: 350px !important;
   overflow-y: scroll
 }
+#treten {
+  .instructor-certifications,
+  .instructor-education,
+  .instructor-experience {
+    border: 1px solid #f0f1f3 !important;
+    box-sizing: border-box;
+    border-radius: 4px;
+    // height: 100% !important;
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}
 
 .instructor-certifications::-webkit-scrollbar,
 .instructor-education::-webkit-scrollbar,

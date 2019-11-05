@@ -32,6 +32,8 @@
 
 // NOTIFICATIONS
 
+
+
 .notifications {
   .ant-list-split .ant-list-item {
     padding: 22px 22px;
@@ -114,7 +116,6 @@
       border: none;
     }
 
-    .instructor,
     .instructor-certifications,
     .instructor-education,
     .instructor-experience {
@@ -479,6 +480,10 @@
   }
 
   .extra {
+    .chatboxfield {
+      width: 90% !important;
+      height: 50px;
+    }
     border-top: 1px solid #f2f2f2;
     // padding-top: 3%;
     // padding-bottom: 10px;
@@ -497,6 +502,20 @@
       margin: 0.3rem;;
       position: relative
     }
+
+   div.to {
+    float: right;
+    // border-bottom-right-radius: 6px;
+    clear: both;
+    padding: 10px 20px;
+   }
+
+   div.from {
+    float: left;
+    // border-bottom-right-radius: 6px;
+    clear: both;
+    padding: 10px 20px;
+   }
 
     p.to {
       float: right;
@@ -575,7 +594,7 @@
 
 
       input {
-        height: 0px !important;
+        // height: 0px !important;
       }
     }
 

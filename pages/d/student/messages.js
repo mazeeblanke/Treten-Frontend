@@ -1,30 +1,48 @@
-import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { List, Avatar, Button, Tabs, Radio, Input, Modal } from "antd";
+import { connect } from "react-redux";
+import Echo from "laravel-echo";
+import React, { Component } from "react";
+import { Button, Tabs, Radio, Modal } from "antd";
+import * as actions from "../../../store/actions";
+import Chat from "../../../components/shared/Chat";
 import Display from "../../../components/shared/Display";
 import withAdminLayout from "../../layouts/withAdminLayout";
-import Chat from "../../../components/shared/Chat";
+import EmailForm from "../../../components/admin/EmailForm";
 import BroadcastMessages from "../../../components/shared/BroadcastMessages";
-import EmailForm from '../../../components/admin/EmailForm';
 import BroadcastMessageForm from "../../../components/instructor/BroadcastMessageForm";
+import {
+  getChatUsers,
+  getAllChats,
+  getAllBroadcasts,
+	getSelectedChatThread
+} from "../../../store/reducers/chat";
 
 const TabPane = Tabs.TabPane;
 let prev;
+
 class Messages extends Component {
+  static async getInitialProps({ reduxStore }) {
+    await Promise.all([
+      reduxStore.dispatch(actions.fetchChats()),
+      reduxStore.dispatch(actions.fetchBroadcasts())
+    ]);
+    return {};
+  }
+
   constructor(props) {
     super(props);
   }
 
   state = {
     emailForm: {
-      toGroup: '',
-      title: '',
-      message: ''
+      toGroup: "",
+      title: "",
+      message: ""
     },
     broadcastMessageForm: {
-      toGroup: '',
-      title: '',
-      message: ''
+      toGroup: "",
+      title: "",
+      message: ""
     },
     activeTab: "chats",
     isShowingEmailForm: false,
@@ -90,71 +108,7 @@ class Messages extends Component {
         time: "08:30am"
       }
     ],
-    chats: [
-      {
-        sender: {
-          profile_pic: "/static/images/instructors/instructor1.png",
-          fullname: "Azibanayam Micheal"
-        },
-        formattedDate: "5 mins",
-        id: 1,
-        lastMessage: `New updates about the additional materials`
-      },
-      {
-        sender: {
-          profile_pic: "/static/images/instructors/instructor2.png",
-          fullname: "Azibanayam Micheal"
-        },
-        formattedDate: "10 mins",
-        lastMessage: `How to go about your final project`,
-        id: 2
-      },
-      {
-        sender: {
-          profile_pic: "/static/images/instructors/instructor3.png",
-          fullname: "Azibanayam Micheal"
-        },
-        formattedDate: "2 hrs",
-        lastMessage: `What to do when you run into any issues`,
-        id: 3
-      },
-      {
-        sender: {
-          profile_pic: "/static/images/instructors/instructor1.png",
-          fullname: "Azibanayam Micheal"
-        },
-        formattedDate: "19 hrs",
-        lastMessage: `Information about exams and certificates`,
-        id: 4
-      },
-      {
-        sender: {
-          profile_pic: "/static/images/instructors/instructor4.png",
-          fullname: "Azibanayam Micheal"
-        },
-        formattedDate: "Yesterday",
-        lastMessage: `Updates about additional course content`,
-        id: 5
-      },
-      {
-        sender: {
-          profile_pic: "/static/images/instructors/instructor2.png",
-          fullname: "Azibanayam Micheal"
-        },
-        formattedDate: "2 days",
-        lastMessage: `Where to find more study resources online`,
-        id: 6
-      },
-      {
-        sender: {
-          profile_pic: "/static/images/instructors/instructor1.png",
-          fullname: "Azibanayam Micheal"
-        },
-        formattedDate: "19 hrs",
-        id: 7,
-        lastMessage: `Information about exams and certificates`
-      }
-    ],
+    chats: [],
     messages: [
       {
         sender: {
@@ -373,7 +327,24 @@ class Messages extends Component {
 
   componentDidMount() {
     this.handleResize();
-    window.addEventListener("resize", this.handleResize);
+		window.addEventListener("resize", this.handleResize);
+		
+		window.tretenEcho = new Echo({
+      broadcaster: 'socket.io',
+      host: window.location.hostname + ":6001",
+      // encrypted: true
+    });
+
+    // var socketId = Echo.socketId();
+    window.currentUserChannel = window.tretenEcho.channel(`treten_database_private-user.${this.props.user.id}`);
+    window.currentUserChannel
+      // .listenForWhisper('typing', (e) => {
+      //   console.log(e);
+      //   // e.typing ? $('.typing').show() : $('.typing').hide()
+      // })
+      .listen('MessageReceived', (e) => {
+          this.props.updateSentChat(e.message)
+      });
   }
 
   componentWillUnmount() {
@@ -391,23 +362,35 @@ class Messages extends Component {
       isViewingSelectedMessage: false,
       selectedMessage: {}
     });
+	};
+	
+  clearSelectedChat = () => {
+		this.props.clearSelectedChat()
   };
 
   selectMessage = message => {
-    console.log(message);
     this.setState({
       isViewingSelectedMessage: true,
       selectedMessage: message
     });
   };
 
+  startNewChat = () => {
+    props.startNewChat();
+  }
+
   selectChat = chat => {
-    // console.log(message)
-    this.setState({
-      isViewingSelectedChat: true,
-      selectedChat: chat
-    });
-  };
+    // console.log('sdsjdsjd', chat);
+    if (chat.message_uuid) {
+      this.props.fetchChat({
+        message_uuid: chat.message_uuid
+      });
+    }
+	};
+	
+	sendChat = receiver => {
+		props.sendChat(receiver);
+	}
 
   handleTabChange = e => {
     this.setState({
@@ -418,33 +401,27 @@ class Messages extends Component {
   closeModal = () => {
     this.setState({
       isShowingEmailForm: false,
-      isShowingBroadcastMessageForm: false,
-    })
-  }
+      isShowingBroadcastMessageForm: false
+    });
+  };
 
-  setEmailForm = () => {
+  setEmailForm = () => {};
 
-  }
+  setBroadcastMessageForm = () => {};
 
-  setBroadcastMessageForm = () => {
-
-  }
-
-  handleSubmit = () => {
-
-  }
+  handleSubmit = () => {};
 
   showEmailForm = () => {
     this.setState({
       isShowingEmailForm: true
-    })
-  }
+    });
+  };
 
   showBroadcastForm = () => {
     this.setState({
       isShowingBroadcastMessageForm: true
-    })
-  }
+    });
+  };
 
   determineChatStyle = (chat, index, chats) => {
     let computedStyle = {
@@ -474,21 +451,40 @@ class Messages extends Component {
               >
                 <Radio.Button value="chats">Chats</Radio.Button>
                 <Radio.Button value="bMessages">
-                  {
-                    this.props.user.role === 'admin'
-                    ? 'Emails'
-                    : 'Broadcast messages'
-                  }
-
+                  {this.props.user.role === "admin"
+                    ? "Emails"
+                    : "Broadcast messages"}
                 </Radio.Button>
               </Radio.Group>
             </div>
             <div className="col-md-4 mb-3 col-lg-4 col-xl-3 col-sm-12 d-flex justify-content-md-end">
-              <Display if={this.state.activeTab === 'bMessages' && this.props.user.role === 'instructor'}>
-                <Button onClick={this.showBroadcastForm} type="danger" style={{ width: '205px', height: '42px' }}>New broadcast message</Button>
+              <Display
+                if={
+                  this.state.activeTab === "bMessages" &&
+                  this.props.user.role === "instructor"
+                }
+              >
+                <Button
+                  onClick={this.showBroadcastForm}
+                  type="danger"
+                  style={{ width: "205px", height: "42px" }}
+                >
+                  New broadcast message
+                </Button>
               </Display>
-              <Display if={this.state.activeTab === 'bMessages' && this.props.user.role === 'admin'}>
-                <Button onClick={this.showEmailForm} type="danger" style={{ width: '205px', height: '42px' }}>New email</Button>
+              <Display
+                if={
+                  this.state.activeTab === "bMessages" &&
+                  this.props.user.role === "admin"
+                }
+              >
+                <Button
+                  onClick={this.showEmailForm}
+                  type="danger"
+                  style={{ width: "205px", height: "42px" }}
+                >
+                  New email
+                </Button>
               </Display>
             </div>
           </div>
@@ -498,18 +494,21 @@ class Messages extends Component {
                 <TabPane tab="chats" key="chats">
                   <Chat
                     determineChatStyle={this.determineChatStyle}
-                    selectChat={this.selectChat}
+										selectChat={this.selectChat}
+										sendChat={this.sendChat}
                     clearSelectedChat={this.clearSelectedChat}
                     {...this.state}
+                    {...this.props}
                   />
                 </TabPane>
                 <TabPane tab="bMessages" key="bMessages">
                   <BroadcastMessages
                     selectMessage={this.selectMessage}
-                    clearSelectedMessage={this.clearSelectedMessage}
+										clearSelectedMessage={this.clearSelectedMessage}
+										{...this.props}
                     {...this.state}
                   />
-                  { this.state.isShowingEmailForm && (
+                  {this.state.isShowingEmailForm && (
                     <Modal
                       footer={null}
                       wrapClassName="email-form-modal"
@@ -531,7 +530,7 @@ class Messages extends Component {
                       />
                     </Modal>
                   )}
-                  { this.state.isShowingBroadcastMessageForm && (
+                  {this.state.isShowingBroadcastMessageForm && (
                     <Modal
                       footer={null}
                       wrapClassName="broadcast-message-form-modal"
@@ -567,4 +566,28 @@ Messages.propTypes = {};
 
 Messages.headerName = "Messages";
 
-export default withAdminLayout(Messages);
+const mapStateToProps = state => {
+  return {
+    chats: {
+      ...state.chat.chats,
+      all: getAllChats(state)
+    },
+    broadcasts: {
+      ...state.chat.broadcasts,
+      all: getAllBroadcasts(state)
+    },
+    chat: {
+			...state.chat,
+			selectedChat: {
+				...state.chat.selectedChat,
+				all: getSelectedChatThread(state)
+			}
+		},
+    chatUsers: getChatUsers(state)
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { ...actions }
+)(withAdminLayout(Messages));

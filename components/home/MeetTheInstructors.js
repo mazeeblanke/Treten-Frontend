@@ -7,7 +7,7 @@ let sliderSettings = {
   dots: true,
   infinite: false,
   speed: 500,
-  arrows: false,
+  // arrows: true,
   slidesToShow: 4.2,
   slidesToScroll: 3,
   // centerPadding: '100px',
@@ -79,7 +79,7 @@ class MeetTheInstructors extends Component {
           <Slider { ...sliderSettings }>
             {
               this.props.instructors.map((instructor) => (
-                <Instructor key={instructor.title} width="100%" { ...instructor } />
+                <Instructor key={instructor.id} isLoading={this.props.isLoading} width="100%" { ...instructor } />
               ))
             }
           </Slider>

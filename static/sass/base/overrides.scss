@@ -24,12 +24,27 @@ body, html {
     color: #232735;
   }
 
+  [contenteditable]:focus {
+    outline: 0px solid transparent;
+  }
+
   .video-js {
     width: 100%;
   }
 
   .dropdown-menu {
     border-radius: .40rem !important;
+  }
+
+  .alert-danger {
+    color: #721c24 !important;
+    background-color: #f8d7da !important;
+    border-color: #f5c6cb !important;
+  }
+
+  .ant-btn-danger:disabled {
+    color: #ff9898 !important;
+    border: none !important;
   }
 
   .ant-tabs-ink-bar {

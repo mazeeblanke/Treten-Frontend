@@ -5,60 +5,16 @@ import * as actions from '../store/actions';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { getInstructors } from '../store/reducers/instructor';
 
 class MeetTheInstructor extends Component {
 
+  static async getInitialProps ({ reduxStore }) {
+    await reduxStore.dispatch(actions.fetchInstructors({ pageSize: 8 }));
+    return {}
+  }
+
   state = {
-    instructors: [
-      {
-        fullname: 'Mohammed Hassan',
-        profile_pic: '/static/images/instructors/instructor1lg.png',
-        title: 'Title of instructor goes here',
-        qualifications: "Instructor qualifications go here. Hey, you know how I'm, like, always trying to save the planet?"
-      },
-      {
-        fullname: 'Timothy Holloway',
-        profile_pic: '/static/images/instructors/instructor2lg.png',
-        title: 'Title of instructor goes here',
-        qualifications: "Instructor qualifications go here. Hey, you know how I'm, like, always trying to save the planet?"
-      },
-      {
-        fullname: 'Cynthia Oluwabusola',
-        profile_pic: '/static/images/instructors/instructor3lg.png',
-        title: 'Title of instructor goes here',
-        qualifications: "Instructor qualifications go here. Hey, you know how I'm, like, always trying to save the planet?"
-      },
-      {
-        fullname: 'Beverly Onunyere',
-        profile_pic: '/static/images/instructors/instructor4lg.png',
-        title: 'Title of instructor goes here',
-        qualifications: "Instructor qualifications go here. Hey, you know how I'm, like, always trying to save the planet?"
-      },
-      {
-        fullname: 'Mohammed Hassan',
-        profile_pic: '/static/images/instructors/instructor1lg.png',
-        title: 'Title of instructor goes here',
-        qualifications: "Instructor qualifications go here. Hey, you know how I'm, like, always trying to save the planet?"
-      },
-      {
-        fullname: 'Timothy Holloway',
-        profile_pic: '/static/images/instructors/instructor3lg.png',
-        title: 'Title of instructor goes here',
-        qualifications: "Instructor qualifications go here. Hey, you know how I'm, like, always trying to save the planet?"
-      },
-      {
-        fullname: 'Cynthia Oluwabusola',
-        profile_pic: '/static/images/instructors/instructor2lg.png',
-        title: 'Title of instructor goes here',
-        qualifications: "Instructor qualifications go here. Hey, you know how I'm, like, always trying to save the planet?"
-      },
-      {
-        fullname: 'Beverly Onunyere',
-        profile_pic: '/static/images/instructors/instructor4lg.png',
-        title: 'Title of instructor goes here',
-        qualifications: "Instructor qualifications go here. Hey, you know how I'm, like, always trying to save the planet?"
-      },
-    ],
   }
 
   render() {
@@ -80,7 +36,7 @@ class MeetTheInstructor extends Component {
             </div>
           </div>
         </section>
-        <InstructorList instructors={this.state.instructors} />
+        <InstructorList isLoading={this.props.instructors.isLoading} instructors={this.props.instructors.all} />
         <Footer />
       </>
     );
@@ -90,9 +46,12 @@ class MeetTheInstructor extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    // user: getUser(state),
+    instructors: {
+      ...state.instructor,
+      all: getInstructors(state)
+    },
   }
 }
 
 
-export default connect(mapStateToProps, actions)(withMasterLayout(MeetTheInstructor));
+export default connect(mapStateToProps)(withMasterLayout(MeetTheInstructor));

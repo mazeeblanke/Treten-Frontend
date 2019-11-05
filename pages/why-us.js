@@ -3,6 +3,7 @@ import Footer from '../components/shared/Footer';
 import * as actions from '../store/actions';
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import Head from 'next/head';
 import Introduction from '../components/why-us/Introduction';
 import Facilities from '../components/why-us/Facilities';
 
@@ -17,6 +18,9 @@ class WhyUs extends Component {
   render () {
     return (
       <>
+        <Head>
+          <title key="title">Treten Academy - Why us</title>
+        </Head>
         <Introduction />
         <Facilities />
         <section className="whyus-extra mt-8">

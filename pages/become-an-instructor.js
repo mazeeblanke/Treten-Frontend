@@ -2,6 +2,7 @@ import InstructorForm from '../components/auth/InstructorForm';
 import withMasterLayout from '../pages/layouts/withMasterLayout';
 import Display from "../components/shared/Display";
 import Footer from '../components/shared/Footer';
+import Head from 'next/head';
 import React, { Component } from 'react';
 import Auth from '../components/shared/Auth';
 import PropTypes from 'prop-types';
@@ -20,6 +21,9 @@ class BecomeAnInstructor extends Component {
   render() {
     return (
       <Auth>
+        <Head>
+          <title key="title">Treten Academy - Become an instructor</title>
+        </Head>
         <section className="become-an-instructor has-min-full-vh pb-5">
           <div className="container pt-3 has-full-height">
             <h3 className="text-center mt-3 pb-1 mb-4">Become an Instructor</h3>

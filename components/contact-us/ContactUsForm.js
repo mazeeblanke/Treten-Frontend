@@ -1,9 +1,11 @@
-import { Form, Icon, Input, Button, message } from 'antd';
+import { Form, Icon, Input, Button } from 'antd';
 import ReactPhoneInput from 'react-phone-input-2'
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from "react-redux";
+import notifier from "simple-react-notifications";
+import "simple-react-notifications/dist/index.css";
 
 const { TextArea } = Input;
 
@@ -12,11 +14,11 @@ class ContactUsForm extends Component {
     isLoading: false
   }
 
-  mounted() {
-    message.config({
-      maxCount: 1,
-    });
-  }
+  // mounted() {
+  //   message.config({
+  //     maxCount: 1,
+  //   });
+  // }
 
   handleSubmit = (e) => {
 
@@ -36,12 +38,12 @@ class ContactUsForm extends Component {
             isLoading: false
           });
 
-          message.success(res.data.message, 21);
+          notifier.success(res.data.message);
 
           this.props.form.resetFields();
 
         }).catch((err) => {
-          message.error('The Form contains some errors', 21);
+          notifier.error("ERROR! The Form contains some errors");
 
           let errors = err.response.data.errors || {};
           this.setState({

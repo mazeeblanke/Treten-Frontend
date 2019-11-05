@@ -10,7 +10,7 @@ const InstructorList = props => {
           {
             props.instructors.map((instructor) => (
               <div key={instructor.title} className="col-sm-12 col-md-6 col-lg-3">
-                <Instructor { ...instructor } />
+                <Instructor hasBorder={false} isLoading={props.isLoading} { ...instructor } />
               </div>
             ))
           }

@@ -4,6 +4,7 @@ import Footer from '../components/shared/Footer';
 import * as actions from '../store/actions';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Head from 'next/head';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
 
@@ -173,6 +174,9 @@ class WhatOurStudentSay extends Component {
   render() {
     return (
       <>
+        <Head>
+          <title key="title">Treten Academy - Testimonials</title>
+        </Head>
         <section className="testimonials mt-2 pb-2">
           <h3 className="text-center testimonials__main-text pt-5">
             What our students say

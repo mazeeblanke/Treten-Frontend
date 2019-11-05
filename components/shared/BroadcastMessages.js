@@ -16,13 +16,13 @@ const BroadcastMessages = props => {
       >
         <div className="col-md-12 col-lg-4 pl-0 sidebar">
           <div className="sidebar__message-box">
-            <Display if={props.messages.length}>
+            <Display if={props.broadcasts.all.length}>
               <List
                 messageLayout="horizontal"
-                dataSource={props.messages}
-                renderItem={message =>
+                dataSource={props.broadcasts.all}
+                renderItem={message => (
                   <List.Item
-                    key={message.id}
+                    key={message.message_uuid}
                     onClick={() => props.selectMessage(message)}
                     style={{
                       background:
@@ -36,21 +36,20 @@ const BroadcastMessages = props => {
                       title={
                         <div className="d-flex align-items-center justify-content-sm-between">
                           <h5 className="m-0 mr-2">
-                            {message.sender.fullname}
+                            {message.sender.name}
                           </h5>
                           <div>
                             <small className="float-right">
-                              {message.formattedDate}
+                              {message.formatted_date}
                             </small>
                           </div>
                         </div>
                       }
                       avatar={<Avatar src={message.sender.profile_pic} />}
                     />
-                    <p>
-                      {message.title}
-                    </p>
-                  </List.Item>}
+                    <p>{message.title}</p>
+                  </List.Item>
+                )}
               />
             </Display>
           </div>
@@ -59,24 +58,24 @@ const BroadcastMessages = props => {
       <div className="col-md-12 col-lg-8 p-0">
         <Display if={props.selectedMessage.title}>
           <div className="message__top-bar d-flex align-items-center pl-6 pr-6">
-            {props.isViewingSelectedMessage &&
-              props.windowWidth < 978 &&
+            {props.isViewingSelectedMessage && props.windowWidth < 978 && (
               <img
                 className="mr-3"
                 onClick={props.clearSelectedMessage}
                 src="/static/images/back.png"
-              />}
+              />
+            )}
             <Avatar
               className="mr-2"
               size="large"
               src={(props.selectedMessage.sender || {}).profile_pic}
             />
             <h5 className="m-0">
-              {(props.selectedMessage.sender || {}).fullname}
+              {(props.selectedMessage.sender || {}).name}
             </h5>
           </div>
           <div className="pl-6 pr-6 pt-5 message__content">
-            {ReactHtmlParser(props.selectedMessage.content)}
+            {ReactHtmlParser(props.selectedMessage.message)}
           </div>
         </Display>
         <Display if={!props.selectedMessage.title}>

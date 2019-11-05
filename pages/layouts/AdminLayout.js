@@ -1,11 +1,15 @@
 import Display from "../../components/shared/Display";
 const { Header, Sider, Content } = Layout;
-import { ROUTES } from "../../lib/helpers";
+import { ROUTES } from "../../lib/constants";
 import React, { Component } from "react";
 import { withRouter } from "next/router";
 import { connect } from 'react-redux'
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Alert } from "antd";
+// import { Offline } from "react-detect-offline";
 import Link from 'next/link';
+const Cookies = require("js-cookie");
+import Head from 'next/head';
+import "simple-react-notifications/dist/index.css";
 
 class AdminLayout extends Component {
   state = {
@@ -39,18 +43,12 @@ class AdminLayout extends Component {
     );
   }
 
-  // static async getInitialProps(ctx) {
-  //   let pageProps = {};
-  //   if (Page.getInitialProps) {
-  //     pageProps = await Page.getInitialProps(ctx);
-  //   }
-
-  //   return { ...pageProps };
-  // }
-
   render() {
     return (
-      <Layout id="treten" style={{ margin: "0rem" }}>
+      <Layout id="treten" style={{ margin: "0rem", display: 'flex', flexDirection: 'row' }}>
+        <Head>
+          <meta name="csrf-token" content={Cookies.get("XSRF-TOKEN")} />
+        </Head>
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
           <div className="d-flex justify-content-sm-between align-items-center sidenav-top">
             <div className="logo m-4">
@@ -270,7 +268,7 @@ class AdminLayout extends Component {
                             : "/static/images/admin/manage-reviews-white.png"
                         }
                       />
-                      <span className="is-white ml-4 pl-1">Manage reviews</span>
+                      <span className="is-white ml-4 ">Manage reviews</span>
                     </Menu.Item>
                   )
                 :  null
@@ -292,7 +290,7 @@ class AdminLayout extends Component {
                             : "/static/images/admin/manage-website-white.png"
                         }
                       />
-                      <span className="is-white ml-4 pl-2">Manage website</span>
+                      <span className="is-white ml-4 ">Manage website</span>
                     </Menu.Item>
                   )
                 :  null
@@ -314,10 +312,10 @@ class AdminLayout extends Component {
               key={ROUTES.STUDENT_DASHBOARD_PROFILEDETAILS}>
               <img
                 className="mr-2 rounded-circle"
-                style={{ marginLeft: "-10px" }}
-                src="/static/images/admin/Man Wearing Blue Shirt Smiling Outside · Free Stock Photo.png"
+                style={{ marginLeft: "-10px", height: '40px', width: '40px' }}
+                src={`${this.props.user.profile_pic}`}
               />
-              <span className="is-white ml-4 pl-1">My profile</span>
+              <span className="is-white ml-2 pl-1">My profile</span>
             </Menu.Item>
             <Menu.Item key="8">
               <img
@@ -374,6 +372,9 @@ class AdminLayout extends Component {
             }}
           >
             <div className="mt-5 has-full-height">
+            {/* <Offline>
+            <Alert message="You're offline right now. Check your connection." type="warning" showIcon />
+          </Offline> */}
               {
                 this.props.children
               }

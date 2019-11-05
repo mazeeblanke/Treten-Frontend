@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import PersonalTutorDetailsForm from '../../../components/shared/PersonalTutorDetailsForm';
+import TutorDetailsForm from '../../../components/shared/TutorDetailsForm';
 import withProfileLayout from '../../layouts/withProfileLayout';
 
 
@@ -20,11 +20,7 @@ class TutorDetails extends Component {
             <img src="/static/images/arrow-right.png"></img>
           </div>
         </div>
-        {/* <div className="row"> */}
-         <PersonalTutorDetailsForm />
-        {/* </div> */}
-
-
+         <TutorDetailsForm />
       </div>
     );
   }

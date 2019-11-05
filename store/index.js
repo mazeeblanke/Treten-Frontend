@@ -14,8 +14,11 @@ const INITIAL_STATE = {
 export function initStore (initialState = INITIAL_STATE, isServer = false, req) {
   let api;
   let cookie;
+
+  axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
   if (isServer) {
-    console.log('is the iserver', isServer);
+    // console.log('is the iserver', isServer);
     if (req) {
       // console.log('whejwhewe ehjw ehj ', req.headers);
       // console.log('cookie', req.headers.cookie)
@@ -24,14 +27,26 @@ export function initStore (initialState = INITIAL_STATE, isServer = false, req) 
 
     api = axios.create({
       baseURL: process.env.PROXYURL,
-      headers: { cookie: cookie || '' }
+      headers: { cookie: cookie || '', 'X-Requested-With': 'XMLHttpRequest' }
     })
   }
 
   if (!isServer) {
-    console.log('not server');
+    
+    let token = document.head.querySelector('meta[name="csrf-token"]');
+
+    if (token) {
+        axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+        console.info('Using CSRF token found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+    } else {
+        console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+    }
+
     api = axios.create({
-      baseURL: '/api'
+      baseURL: '/t',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      }
     })
   }
 

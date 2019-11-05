@@ -6,6 +6,7 @@ import * as actions from '../store/actions';
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import MeetTeam from '../components/about-us/MeetTeam';
+import Head from 'next/head';
 
 
 class AboutUs extends Component {
@@ -47,6 +48,9 @@ class AboutUs extends Component {
   render () {
     return (
       <>
+        <Head>
+          <title key="title">Treten Academy - About Us</title>
+        </Head>
         <Introduction />
         <Goals />
         <MeetTeam teamMembers={this.state.teamMembers} />

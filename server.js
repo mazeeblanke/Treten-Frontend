@@ -8,10 +8,12 @@ const app = next({
 });
 const handler = app.getRequestHandler();
 // process.env.PROXYURL = 'http://localhost:80';
-process.env.PROXYURL = process.env.NODE_ENV === 'production'
-  ? 'https://treten-ng-backend.herokuapp.com/'
-  // : 'http://localhost:4000';
-  : 'http://172.19.0.4:80';
+process.env.PROXYURL =
+  process.env.NODE_ENV === "production"
+    ? "https://treten-ng-backend.herokuapp.com/"
+    : // : 'http://localhost:4000';
+      "http://172.19.0.6:80";
+// : 'tretenweb';
 
 var proxy = require("express-http-proxy");
 
@@ -20,13 +22,18 @@ app
   .then(() => {
     // server.use("/api", proxy(`${process.env.PROXYURL}`));
 
-    server.use("/t", proxy(process.env.PROXYURL));
+    server.use(
+      "/t",
+      proxy(process.env.PROXYURL, {
+        limit: "420mb"
+      })
+    );
 
     server.get("/", (req, res) => {
       app.render(req, res, "/home", {});
     });
 
-    server.get("/instructors/:name", (req, res) => {
+    server.get("/instructors/:instructor_slug", (req, res) => {
       app.render(req, res, "/instructor", {});
     });
 

@@ -14,11 +14,12 @@ import '../static/sass/application.scss';
 
 
 class Treten extends App {
-  render () {
+  render() {
     const { Component, pageProps, reduxStore } = this.props
     return (
       <Container>
         <Head>
+          <link rel="shortcut icon" type="image/png" href="/static/images/logo.png" />
           {/* <!-- Chrome, Firefox OS and Opera --> */}
           <meta name="theme-color" content="#E12828" />
           {/* <!-- Windows Phone --> */}
@@ -29,7 +30,6 @@ class Treten extends App {
         </Head>
 
         <Provider store={reduxStore}>
-
           <Component {...pageProps} />
         </Provider>
         <CookieConsent
@@ -55,11 +55,5 @@ class Treten extends App {
   }
 }
 
-// const msDelay = 1000;
-// // Treten = withReduxStore(Treten);
-// Treten = withNProgress(msDelay)(Treten);
+export default withReduxStore(Treten);
 
- // default is 300
-export default withReduxStore(Treten) ;
-
-// export default

@@ -1,280 +1,74 @@
-import AdminLayout from '../../layouts/AdminLayout';
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { getTransactions } from "../../../store/reducers/transactions";
+import { parsedPaginationTotalText } from "../../../lib/helpers";
+import { TRANSACTIONS_COLUMNS } from "../../../lib/constants";
+import AdminLayout from "../../layouts/AdminLayout";
+import * as actions from "../../../store/actions";
 import { Table, Input, Button } from "antd";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { CSVLink } from "react-csv";
+import PropTypes from "prop-types";
 
 const Search = Input.Search;
 
-const columns = [
-  {
-    title: "Date",
-    dataIndex: "date",
-    width: 100,
-    key: 5,
-    fixed: 'left',
-  },
-  {
-    title: "Invoice ID",
-    dataIndex: "invoice_id",
-    width: 180,
-    key: 1
-  },
-  {
-    title: "Name",
-    dataIndex: "name",
-    width: 180,
-    key: 2,
-  },
-  {
-    title: "Email Address",
-    dataIndex: "email",
-    // fixed: 'right',
-    key: 3,
-    width: 180
-  },
-  {
-    title: "Description",
-    dataIndex: "description",
-    // fixed: 'right',
-    key: 7,
-    width: 230
-  },
-  {
-    title: "Amount (N)",
-    dataIndex: "amount",
-    // fixed: 'right',
-    align: 'right',
-    key: 8,
-    width: 130
-  },
-];
-
-
-
 class Transactions extends Component {
-  constructor(props) {
-    super(props);
 
+  static async getInitialProps({ reduxStore }) {
+    await reduxStore.dispatch(actions.fetchTransactions())
+    return {}
   }
 
-  paginationOptions = {
-    showTotal: (total, range) => {
-      if (this.state.feedback !== `Showing ${range[0]} - ${range[1]} of ${total}`) {
-        this.setState({
-          feedback: `Showing ${range[0]} - ${range[1]} of ${total}`
-          // feedback: `${range[0]}-${range[1]} of ${total} items`
-        })
-      }
-    },
-    pageSize: 7,
-    itemRender: (current, type, originalElement) => {
-      if (type === 'prev') {
-        return (
-          <div className="ant-pagination-prev">
-            <a className="ant-pagination-item-link">
-              <img src="/static/images/arrow-right-grey.png" />
-            </a>
-          </div>
-        )
-      } if (type === 'next') {
-        return (
-          <div className="ant-pagination-next">
-            <a className="ant-pagination-item-link">
-              <img src="/static/images/arrow-left-grey.png" />
-            </a>
-          </div>
-        )
-      }
-      return originalElement;
-    }
+  constructor(props) {
+    super(props);
+    this.csvDownloadRef = React.createRef();
   }
 
   state = {
-    feedback: '',
-    transactions: [
-      {
-        key: "1",
-        course: "CCNA R&S",
-        status: "Active",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        amount: "250,000",
-        invoice_id: "TRETEN5c3f3500c0ea3",
-        email: "coopernewski@outlook.com",
-        description: "CCNA R&S (Remote)"
-      },
-      {
-        key: "13",
-        course: "CCNA R&S",
-        status: "Active",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        amount: "250,000",
-        invoice_id: "TRETEN5c3f3500c0ea3",
-        email: "coopernewski@outlook.com",
-        description: "CCNA R&S (Remote)"
-      },
-      {
-        key: "2",
-        course: "CCNA R&S",
-        status: "Active",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        amount: "250,000",
-        invoice_id: "TRETEN5c3f3500c0ea3",
-        email: "coopernewski@outlook.com",
-        description: "CCNA R&S (On demand)"
-      },
-      {
-        key: "20",
-        course: "CCNA R&S",
-        status: "Active",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        amount: "250,000",
-        invoice_id: "TRETEN5c3f3500c0ea3",
-        email: "coopernewski@outlook.com",
-        description: "CCNA R&S (On demand)"
-      },
-      {
-        key: "3",
-        course: "CCNA R&S",
-        status: "Active",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        amount: "250,000",
-        invoice_id: "TRETEN5c3f3500c0ea3",
-        email: "coopernewski@outlook.com",
-        description: "CCNA R&S (Remote)"
-      },
-      {
-        key: "4",
-        course: "CCNA R&S",
-        status: "Active",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        amount: "250,000",
-        invoice_id: "TRETEN5c3f3500c0ea3",
-        email: "coopernewski@outlook.com",
-        description: "CCNA R&S (On demand)"
-      },
-      {
-        key: "40",
-        course: "CCNA R&S",
-        status: "Active",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        amount: "250,000",
-        invoice_id: "TRETEN5c3f3500c0ea3",
-        email: "coopernewski@outlook.com",
-        description: "CCNA R&S (On demand)"
-      },
-      {
-        key: "1",
-        course: "CCNA R&S",
-        status: "Active",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        amount: "250,000",
-        invoice_id: "TRETEN5c3f3500c0ea3",
-        email: "coopernewski@outlook.com",
-        description: "CCNA R&S (Remote)"
-      },
-      {
-        key: "13",
-        course: "CCNA R&S",
-        status: "Active",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        amount: "250,000",
-        invoice_id: "TRETEN5c3f3500c0ea3",
-        email: "coopernewski@outlook.com",
-        description: "CCNA R&S (Remote)"
-      },
-      {
-        key: "2",
-        course: "CCNA R&S",
-        status: "Active",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        amount: "250,000",
-        invoice_id: "TRETEN5c3f3500c0ea3",
-        email: "coopernewski@outlook.com",
-        description: "CCNA R&S (On demand)"
-      },
-      {
-        key: "20",
-        course: "CCNA R&S",
-        status: "Active",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        amount: "250,000",
-        invoice_id: "TRETEN5c3f3500c0ea3",
-        email: "coopernewski@outlook.com",
-        description: "CCNA R&S (On demand)"
-      },
-      {
-        key: "3",
-        course: "CCNA R&S",
-        status: "Active",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        amount: "250,000",
-        invoice_id: "TRETEN5c3f3500c0ea3",
-        email: "coopernewski@outlook.com",
-        description: "CCNA R&S (Remote)"
-      },
-      {
-        key: "4",
-        course: "CCNA R&S",
-        status: "Active",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        amount: "250,000",
-        invoice_id: "TRETEN5c3f3500c0ea3",
-        email: "coopernewski@outlook.com",
-        description: "CCNA R&S (On demand)"
-      },
-      {
-        key: "40",
-        course: "CCNA R&S",
-        status: "Active",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        amount: "250,000",
-        invoice_id: "TRETEN5c3f3500c0ea3",
-        email: "coopernewski@outlook.com",
-        description: "CCNA R&S (On demand)"
-      },
-    ],
-  }
-  // componentWillMount() {
+    loadingCSV: false,
+    csvData: [],
+    searchQuery: ''
+  };
 
+  // componentDidMount() {
+  //   // this.props.fetchTransactions();
   // }
 
-  componentDidMount() {
+  componentWillUnmount() {}
 
-  }
+  handleTableChange = pagination => {
+    this.props.fetchTransactions({
+      page: pagination.current,
+      q: this.state.searchQuery
+    });
+  };
 
-  // componentWillReceiveProps(nextProps) {
+  downloadCSV = () => {
+    this.setState({
+      loadingCSV: true
+    });
 
-  // }
+    this.props.downloadCSV("transactions").then(res => {
+      this.setState({
+        loadingCSV: false,
+        csvData: res
+      });
 
-  // shouldComponentUpdate(nextProps, nextState) {
+      this.csvDownloadRef.current.link.click();
+    }).catch(() => {
+      this.setState({
+        loadingCSV: false
+      });
+    })
+  };
 
-  // }
+  search = q => {
+    this.setState({ searchQuery: q })
+    this.props.fetchTransactions({
+      q
+    });
+  };
 
-  // componentWillUpdate(nextProps, nextState) {
-
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-
-  // }
-
-  componentWillUnmount() {
-
-  }
+  csvFileName = "Transactions.csv";
 
   render() {
     return (
@@ -286,19 +80,42 @@ class Transactions extends Component {
                 <div className="col-md-12">
                   <div className="row justify-content-between align-items-center">
                     <div className="col-md-4  col-sm-12 mb-3">
-                      <p>{this.state.feedback}</p>
+                      <p>
+                        {parsedPaginationTotalText(
+                          this.props.transactions.pagination
+                        )}
+                      </p>
                     </div>
                     <div className="col-md-8 col-sm-12 justify-content-md-end d-flex">
                       <Search
                         className="mr-3 mb-3"
                         placeholder="Search"
-                        onSearch={value => console.log(value)}
-                        style={{ width: '180px', height: '42px' }}
+                        onSearch={value => this.search(value)}
+                        onChange={e => this.search(e.target.value)}
+                        style={{ width: "180px", height: "42px" }}
                       />
-                      <Button className="mb-3" type="danger" style={{ width: '126px', height: '40px' }} >
+                      <Button
+                        loading={this.state.loadingCSV}
+                        onClick={this.downloadCSV}
+                        className="mb-3"
+                        type="danger"
+                        style={{ width: "126px", height: "40px" }}
+                      >
                         <span>Download</span>
                         <img className="ml-2" src="/static/images/down.png" />
                       </Button>
+                      {
+                        <CSVLink
+                          ref={this.csvDownloadRef}
+                          data={this.state.csvData}
+                          filename={this.csvFileName}
+                          target="_blank"
+                          style={{ display: "none" }}
+                        >
+                          {" "}
+                          Download
+                        </CSVLink>
+                      }
                     </div>
                   </div>
                 </div>
@@ -308,7 +125,15 @@ class Transactions extends Component {
           <div className="container">
             <div className="row pl-6 pr-6">
               <div className="col-md-12">
-                <Table scroll={{ x: 1000 }} pagination={this.paginationOptions} columns={columns} dataSource={this.state.transactions} />
+                <Table
+                  rowKey="id"
+                  loading={this.props.transactions.isLoadingTransactions}
+                  scroll={{ x: 1000 }}
+                  pagination={this.props.transactions.pagination}
+                  columns={TRANSACTIONS_COLUMNS}
+                  dataSource={this.props.transactions.all}
+                  onChange={pagination => this.handleTableChange(pagination)}
+                />
               </div>
             </div>
           </div>
@@ -318,8 +143,18 @@ class Transactions extends Component {
   }
 }
 
-Transactions.propTypes = {
+Transactions.propTypes = {};
 
+const mapStateToProps = state => {
+  return {
+    transactions: {
+      ...state.transactions,
+      all: getTransactions(state)
+    }
+  };
 };
 
-export default Transactions;
+export default connect(
+  mapStateToProps,
+  { ...actions }
+)(Transactions);

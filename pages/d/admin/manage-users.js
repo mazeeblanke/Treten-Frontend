@@ -1,186 +1,95 @@
-import AdminLayout from '../../layouts/AdminLayout';
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import AdminLayout from "../../layouts/AdminLayout";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import StarRatings from "react-star-ratings";
-import { Table, Input, Button, Select, Radio, Tabs, Modal, Menu, Dropdown  } from "antd";
-import InviteUsersForm from '../../../components/shared/InviteUsersForm';
-import AssignInstructorsForm from '../../../components/instructor/AssignInstructorsForm';
-const uuidv1 = require('uuid/v1');
+import {
+  Table,
+  Input,
+  Button,
+  Select,
+  Radio,
+  Tabs,
+  Modal,
+  Menu,
+  Dropdown
+} from "antd";
+import InviteUsersForm from "../../../components/shared/InviteUsersForm";
+import AssignInstructorsForm from "../../../components/instructor/AssignInstructorsForm";
+const uuidv1 = require("uuid/v1");
 const Search = Input.Search;
 const { Option } = Select;
 const { TabPane } = Tabs;
-
-const users = [
-  {
-    key: "1",
-    phone_number: "09056743321",
-    created_at: "01/02/2019 3:45am",
-    name: "Sheldon Cooper",
-    email: 'sheldoncooper@outlook.com',
-    status: 0,
-  },
-  {
-    key: "13",
-    phone_number: "09056743321",
-    created_at: "01/02/2019 3:45am",
-    name: "Sheldon Cooper",
-    email: 'sheldoncooper@outlook.com',
-    status: 0,
-  },
-  {
-    key: "2",
-    phone_number: "09056743321",
-    created_at: "01/02/2019 3:45am",
-    name: "Sheldon Cooper",
-    email: 'sheldoncooper@outlook.com',
-    status: 1,
-  },
-  {
-    key: "20",
-    phone_number: "09056743321",
-    created_at: "01/02/2019 3:45am",
-    name: "Sheldon Cooper",
-    email: 'sheldoncooper@outlook.com',
-    status: 1,
-  },
-  {
-    key: "3",
-    phone_number: "09056743321",
-    created_at: "01/02/2019 3:45am",
-    name: "Sheldon Cooper",
-    email: 'sheldoncooper@outlook.com',
-    status: 0,
-  },
-  {
-    key: "4",
-    phone_number: "09056743321",
-    created_at: "01/02/2019 3:45am",
-    name: "Sheldon Cooper",
-    email: 'sheldoncooper@outlook.com',
-    status: 0,
-  },
-  {
-    key: "40",
-    phone_number: "09056743321",
-    created_at: "01/02/2019 3:45am",
-    name: "Sheldon Cooper",
-    email: 'sheldoncooper@outlook.com',
-    status: 0,
-  },
-  {
-    key: "1",
-    phone_number: "09056743321",
-    created_at: "01/02/2019 3:45am",
-    name: "Sheldon Cooper",
-    email: 'sheldoncooper@outlook.com',
-    status: 1,
-  },
-  {
-    key: "13",
-    phone_number: "09056743321",
-    created_at: "01/02/2019 3:45am",
-    name: "Sheldon Cooper",
-    email: 'sheldoncooper@outlook.com',
-    status: 0,
-  },
-  {
-    key: "2",
-    phone_number: "09056743321",
-    created_at: "01/02/2019 3:45am",
-    name: "Sheldon Cooper",
-    email: 'sheldoncooper@outlook.com',
-    status: 0,
-  },
-  {
-    key: "20",
-    phone_number: "09056743321",
-    created_at: "01/02/2019 3:45am",
-    name: "Sheldon Cooper",
-    email: 'sheldoncooper@outlook.com',
-    status: 1,
-  },
-  {
-    key: "3",
-    phone_number: "09056743321",
-    created_at: "01/02/2019 3:45am",
-    name: "Sheldon Cooper",
-    email: 'sheldoncooper@outlook.com',
-    status: 1,
-  },
-  {
-    key: "4",
-    phone_number: "09056743321",
-    created_at: "01/02/2019 3:45am",
-    name: "Sheldon Cooper",
-    email: 'sheldoncooper@outlook.com',
-    status: 0,
-  },
-  {
-    key: "40",
-    phone_number: "09056743321",
-    created_at: "01/02/2019 3:45am",
-    name: "Sheldon Cooper",
-    email: 'sheldoncooper@outlook.com',
-    status: 1,
-  }
-]
-
-
+import capitalize from "capitalize";
+import * as actions from "../../../store/actions";
+import { connect } from "react-redux";
+import { CSVLink } from "react-csv";
+import { parsedPaginationTotalText } from "../../../lib/helpers";
 
 class ManageUsers extends Component {
+
+  static async getInitialProps ({ reduxStore }) {
+    await Promise.all([
+      reduxStore.dispatch(actions.fetchInstructors()),
+      reduxStore.dispatch(actions.fetchStudents())
+    ]);
+    return {};
+  }
+
   constructor(props) {
     super(props);
-    // this.columns = columns
+    this.csvDownloadRef = React.createRef();
   }
 
   columns = [
     {
       title: "Name",
       dataIndex: "name",
-      width: 150,
+      width: 190,
       fixed: true,
-      key: 12,
+      key: 12
     },
     {
       title: "Email address",
       dataIndex: "email",
       width: 150,
-      key: 112,
+      key: 112
     },
     {
       title: "Phone number",
       dataIndex: "phone_number",
       width: 180,
-      key: 1112,
+      key: 1112
     },
     {
       title: "Status",
       dataIndex: "status",
       key: 38,
       width: 150,
-      render: (status) => {
-        return (
-          status
-            ? <div className="tag is-success">Active</div>
-            : <div className="tag is-grey">Not active</div>
-        )
+      render: status => {
+        return status === "active" ? (
+          <div className="tag is-success">Active</div>
+        ) : (
+          <div className="tag is-grey">Not active</div>
+        );
       }
     },
     {
       title: "Sign up date and time",
       dataIndex: "created_at",
       width: 190,
-      key: 332,
+      key: 332
     },
     {
-      title: 'Action',
-      key: 'operation',
+      title: "Action",
+      key: "operation",
       width: 90,
-      render: (row) => {
+      render: row => {
         let menu = (
           <Menu>
             <Menu.Item>
-              <a onClick={() => this.toggleAssignInstructorForm(true, row)}>Assign course</a>
+              <a onClick={() => this.toggleAssignInstructorForm(true, row)}>
+                Assign course
+              </a>
             </Menu.Item>
             <Menu.Item>
               <a onClick={() => {}}>Deactivate account</a>
@@ -199,198 +108,137 @@ class ManageUsers extends Component {
             </Dropdown>
           </div>
         );
-      },
-    },
+      }
+    }
   ];
 
   toggleAssignInstructorForm = (visibility, row) => {
-    let instructors = { ...this.state.instructors };
-    instructors.isShowingAssignInstructorForm = visibility;
-    instructors.assignInstructorForm.user = row;
-    this.setState({
-      ...this.state,
-      instructors
+    this.props.setAddUsersModal({
+      payload: false,
+      userType: this.state.activeTab
     });
-  }
-
-  paginationOptions = (tab) => {
-    return {
-      showTotal: (total, range) => {
-        if (this.state[tab].feedback !== `Showing ${range[0]} - ${range[1]} of ${total}`) {
-          const content = { ...this.state[tab] }
-          content.feedback = `Showing ${range[0]} - ${range[1]} of ${total}`;
-          this.setState({
-            [tab]: content
-          }, () => console.log(this.state))
-        }
-      },
-      pageSize: 5,
-      itemRender: (current, type, originalElement) => {
-        if (type === 'prev') {
-          return (
-            <div className="ant-pagination-prev">
-              <a className="ant-pagination-item-link">
-                <img src="/static/images/arrow-right-grey.png" />
-              </a>
-            </div>
-          )
-        } if (type === 'next') {
-          return (
-            <div className="ant-pagination-next">
-              <a className="ant-pagination-item-link">
-                <img src="/static/images/arrow-left-grey.png" />
-              </a>
-            </div>
-          )
-        }
-        return originalElement;
-      }
-    }
-  }
+  };
 
   state = {
-    activeTab: 'students',
-    students: {
-      all: users,
-      isShowingAddNewForm: false,
-      paginationOptions: this.paginationOptions('students'),
-      feedback: ''
-    },
-    instructors: {
-      all: users,
-      isShowingAddNewForm: false,
-      isShowingAssignInstructorForm: false,
-      paginationOptions: this.paginationOptions('instructors'),
-      feedback: '',
-      assignInstructorForm: {
-        course: '',
-        batch: '',
-        user: {}
-      },
-      form: [
-        {
-          email: '',
-          id: uuidv1(),
-        }
-      ]
-    },
-    admins: {
-      all: users,
-      isShowingAddNewForm: false,
-      paginationOptions: this.paginationOptions('admins'),
-      feedback: '',
-      form: [
-        {
-          email: '',
-          id: uuidv1(),
-        }
-      ]
-    },
-  }
-  // componentWillMount() {
+    activeTab: "students",
+    loadingCSV: false,
+    csvData: [],
+    searchQuery: ''
+  };
 
+  // componentDidMount() {
+  //   this.props.fetchInstructors();
+  //   this.props.fetchStudents();
   // }
 
-  componentDidMount() {
+  componentWillUnmount() {}
 
-  }
-
-  // componentWillReceiveProps(nextProps) {
-
+  // closeModal = () => {
+  //   let state = { ...this.state };
+  //   state[this.state.activeTab].isShowingAddNewForm = false;
+  //   this.setState({
+  //     [this.state.activeTab]: state[this.state.activeTab]
+  //   })
   // }
 
-  // shouldComponentUpdate(nextProps, nextState) {
+  setAddNewFormVisibility = (visibility = true) => {
+    this.props.setAddUsersModal({
+      payload: visibility,
+      userType: this.state.activeTab
+    });
+  };
 
-  // }
-
-  // componentWillUpdate(nextProps, nextState) {
-
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-
-  // }
-
-  componentWillUnmount() {
-
-  }
-
-  closeModal = () => {
-    let state = { ...this.state };
-    state[this.state.activeTab].isShowingAddNewForm = false;
-    this.setState({
-      [this.state.activeTab]: state[this.state.activeTab]
-    })
-  }
-
-  addNew = () => {
-    let state = { ...this.state };
-    state[this.state.activeTab].isShowingAddNewForm = true;
-
-    this.setState({
-      [this.state.activeTab]: state[this.state.activeTab]
-    })
-  }
-
-
-  handleTabChange = (e) => {
+  handleTabChange = e => {
     this.setState({
       activeTab: e.target.value
-    })
-  }
+    });
+  };
 
-  handleSubmit = () => {
+  handleSubmit = () => {};
 
-  }
+  // setForm = (payload, index) => {
+  //   const { activeTab } = this.state;
+  //   let form = [...this.state[activeTab].form];
+  //   form[index] = {
+  //     ...form[index],
+  //     ...payload
+  //   }
 
-  setForm = (payload, index) => {
-    const { activeTab } = this.state;
-    let form = [ ...this.state[activeTab].form ];
-    form[index] = {
-      ...form[index],
-      ...payload
-    }
-
-    this.setState({
-      [activeTab]: {
-        ...this.state[activeTab],
-        form
-      }
-    })
-  }
+  //   this.setState({
+  //     [activeTab]: {
+  //       ...this.state[activeTab],
+  //       form
+  //     }
+  //   })
+  // }
 
   setAssignInstructorForm = (value, key) => {
     let form = { ...this.state.instructors.assignInstructorForm };
     let assignInstructorForm = {
       ...form,
       [key]: value
-    }
+    };
 
-    // console.log(key, value, assignInstructorForm);
-
-    this.setState({
-      instructors: {
-        ...this.state.instructors,
-        assignInstructorForm
-      }
-    }, () => console.log(this.state))
-  }
+    this.setState(
+      {
+        instructors: {
+          ...this.state.instructors,
+          assignInstructorForm
+        }
+      },
+      () => console.log(this.state)
+    );
+  };
 
   add = () => {
-    const { activeTab } = this.state;
-    let form = [ ...this.state[activeTab].form ];
-    form.push({
-      email: '',
-      id: uuidv1()
+    // const { activeTab } = this.state;
+    // let form = [...this.state[activeTab].form];
+    // form.push({
+    //   email: '',
+    //   id: uuidv1()
+    // });
+    // this.setState({
+    //   [activeTab]: {
+    //     ...this.state[activeTab],
+    //     form
+    //   }
+    // })
+  };
+
+  // showParsedTotal = parsedPaginationTotalText(pagination);
+
+  downloadCSV = () => {
+    this.setState({
+      loadingCSV: true
     });
 
-    this.setState({
-      [activeTab]: {
-        ...this.state[activeTab],
-        form
-      }
+    this.props.downloadCSV(this.state.activeTab).then(res => {
+      this.setState({
+        loadingCSV: false,
+        csvData: res
+      });
+
+      this.csvDownloadRef.current.link.click();
+    }).catch(() => {
+      this.setState({
+        loadingCSV: false
+      });
     })
-  }
+  };
+
+  handleTableChange = (pagination, type) => {
+    this.props[`fetch${type}`]({
+      page: pagination.current,
+      q: this.state.searchQuery
+    });
+  };
+
+  search = q => {
+    this.setState({ searchQuery: q })
+    this.props[`fetch${capitalize(this.state.activeTab)}`]({
+      q
+    });
+  };
 
   usersView = () => {
     const { activeTab } = this.state;
@@ -403,9 +251,16 @@ class ManageUsers extends Component {
                 <div className="col-md-12">
                   <div className="row justify-content-between align-items-center">
                     <div className="col-md-6 mb-3 col-lg-6 col-sm-12">
-                      <Radio.Group onChange={this.handleTabChange} value={activeTab} size="large" buttonStyle="solid">
+                      <Radio.Group
+                        onChange={this.handleTabChange}
+                        value={activeTab}
+                        size="large"
+                        buttonStyle="solid"
+                      >
                         <Radio.Button value="students">Students</Radio.Button>
-                        <Radio.Button value="instructors">Instructors</Radio.Button>
+                        <Radio.Button value="instructors">
+                          Instructors
+                        </Radio.Button>
                         <Radio.Button value="admins">Admins</Radio.Button>
                       </Radio.Group>
                     </div>
@@ -413,24 +268,43 @@ class ManageUsers extends Component {
                       <Search
                         className="mr-3 mb-3"
                         placeholder="Search"
-                        onSearch={value => console.log(value)}
-                        style={{ width: '180px', height: '42px' }}
+                        onSearch={value => this.search(value)}
+                        onChange={e => this.search(e.target.value)}
+                        style={{ width: "180px", height: "42px" }}
                       />
-                      {
-                        activeTab !== 'students'
-                          ? <Button
-                              onClick={this.addNew}
-                              className="mr-3 mb-3"
-                              style={{ height: '42px', width: '105px' }}
-                              type="primary"
-                              ghost
-                            >Add new</Button>
-                          : null
-                      }
-                      <Button className="mb-3" type="danger" style={{ width: '126px', height: '40px' }} >
+                      {activeTab !== "students" ? (
+                        <Button
+                          onClick={() => this.setAddNewFormVisibility()}
+                          className="mr-3 mb-3"
+                          style={{ height: "42px", width: "105px" }}
+                          type="primary"
+                          ghost
+                        >
+                          Add new
+                        </Button>
+                      ) : null}
+                      <Button
+                        loading={this.state.loadingCSV}
+                        onClick={this.downloadCSV}
+                        className="mb-3"
+                        type="danger"
+                        style={{ width: "126px", height: "40px" }}
+                      >
                         <span>Download</span>
                         <img className="ml-2" src="/static/images/down.png" />
                       </Button>
+                      {
+                        <CSVLink
+                          ref={this.csvDownloadRef}
+                          data={this.state.csvData}
+                          filename={`${this.state.activeTab}.csv`}
+                          target="_blank"
+                          style={{ display: "none" }}
+                        >
+                          {" "}
+                          Download
+                        </CSVLink>
+                      }
                     </div>
                   </div>
                 </div>
@@ -442,39 +316,49 @@ class ManageUsers extends Component {
             <div className="container">
               <div className="row pl-6 pr-6 pt-5">
                 <div className="col-md-12">
-                  <div className="has-white-bg" style={{ height: '60px' }}>
-                    <p className="mb-0">{this.state[activeTab].feedback}</p>
+                  <div className="has-white-bg" style={{ height: "60px" }}>
+                    <p className="mb-0">
+                      {parsedPaginationTotalText(this.props[activeTab].pagination)}
+                    </p>
                   </div>
                 </div>
               </div>
               <div className="row pl-6 pr-6">
                 <div className="col-md-12">
-                  <Tabs
-                    activeKey={activeTab}
-                  >
+                  <Tabs activeKey={activeTab}>
                     <TabPane tab="students" key="students">
                       <Table
+                        rowKey="id"
+                        loading={this.props.students.isLoading}
                         scroll={{ x: 1100 }}
-                        pagination={this.state.students.paginationOptions}
+                        pagination={this.props.students.pagination}
                         columns={this.columns}
-                        dataSource={this.state.students.all}
+                        dataSource={this.props.students.all}
+                        onChange={pagination =>
+                          this.handleTableChange(pagination, "Students")
+                        }
                       />
                     </TabPane>
                     <TabPane tab="insructors" key="instructors">
                       <Table
+                        rowKey="id"
+                        loading={this.props.instructors.isLoading}
                         scroll={{ x: 1100 }}
-                        pagination={this.state.instructors.paginationOptions}
+                        pagination={this.props.instructors.pagination}
                         columns={this.columns}
-                        dataSource={this.state.instructors.all}
+                        dataSource={this.props.instructors.all}
+                        onChange={pagination =>
+                          this.handleTableChange(pagination, "Instructors")
+                        }
                       />
                     </TabPane>
                     <TabPane tab="admins" key="admins">
-                      <Table
+                      {/* <Table
                         scroll={{ x: 1100 }}
                         pagination={this.state.admins.paginationOptions}
                         columns={this.columns}
                         dataSource={this.state.admins.all}
-                      />
+                      /> */}
                     </TabPane>
                   </Tabs>
                 </div>
@@ -484,14 +368,14 @@ class ManageUsers extends Component {
         </AdminLayout>
       </section>
     );
-  }
+  };
 
   render() {
-    const { activeTab } = this.state;
+    const { activeTab } = this.props;
     return (
       <>
         {this.usersView()}
-        { this.state[activeTab].isShowingAddNewForm && (
+        {/* { this.props[activeTab].isShowingAddNewForm && (
           <Modal
             footer={null}
             wrapClassName="add-new-form-modal"
@@ -499,7 +383,7 @@ class ManageUsers extends Component {
             height="314px"
             centered
             onCancel={this.closeModal}
-            visible={this.state[activeTab].isShowingAddNewForm}
+            visible={this.props[activeTab].isShowingAddNewForm}
             title={
               <div className="d-flex align-items-center justify-content-between">
                 <h5>Add new {activeTab}</h5>
@@ -508,22 +392,22 @@ class ManageUsers extends Component {
           >
             <InviteUsersForm
               activeTab={activeTab}
-              form={this.state[activeTab].form}
+              form={this.props[activeTab].form}
               setForm={this.setForm}
               handleSubmit={this.handleSubmit}
               add={this.add}
             />
           </Modal>
-        )}
-        { this.state.instructors.isShowingAssignInstructorForm && (
+        )} */}
+        {this.props.instructors.isShowingAddNewForm && (
           <Modal
             footer={null}
             wrapClassName="assign-instructor-form-modal"
             width="464px"
             height="314px"
             centered
-            onCancel={() => this.toggleAssignInstructorForm(false) }
-            visible={this.state.instructors.isShowingAssignInstructorForm}
+            onCancel={() => this.setAddNewFormVisibility(false)}
+            visible={this.props.instructors.isShowingAddNewForm}
             title={
               <div className="d-flex align-items-center justify-content-between">
                 <h5>Assign instructor to course</h5>
@@ -531,19 +415,37 @@ class ManageUsers extends Component {
             }
           >
             <AssignInstructorsForm
-              form={this.state.instructors.assignInstructorForm}
+              form={this.props.instructors.assignInstructorForm}
               handleSubmit={this.handleSubmit}
               setAssignInstructorForm={this.setAssignInstructorForm}
             />
           </Modal>
         )}
       </>
-    )
+    );
   }
 }
 
-ManageUsers.propTypes = {
+ManageUsers.propTypes = {};
 
+const mapStateToProps = state => {
+  return {
+    instructors: {
+      ...state.admin.manageUsers.instructors,
+      all: state.admin.manageUsers.instructors.byIds.map(i => {
+        return state.admin.manageUsers.instructors.all[i];
+      })
+    },
+    students: {
+      ...state.admin.manageUsers.students,
+      all: state.admin.manageUsers.students.byIds.map(i => {
+        return state.admin.manageUsers.students.all[i];
+      })
+    }
+  };
 };
 
-export default ManageUsers;
+export default connect(
+  mapStateToProps,
+  { ...actions }
+)(ManageUsers);

@@ -8,19 +8,26 @@ import Features from '../components/home/Features';
 import Partners from '../components/home/Partners';
 import Courses from '../components/home/Courses';
 import Footer from '../components/shared/Footer';
+import Head from 'next/head';
 import Banner from '../components/home/Banner';
 import * as actions from '../store/actions';
 import Blog from '../components/home/Blog';
 import { connect } from 'react-redux';
-import { getUser } from '../store';
 import { Button } from 'antd';
 import Link from 'next/link';
 
+import Echo from "laravel-echo";
+import { getInstructors } from '../store/reducers/instructor';
+import { getLatestBlogPosts } from '../store/reducers/blogPosts';
+
 class Home extends Component {
 
-  static async getInitialProps (ctx) {
+  static async getInitialProps ({ reduxStore }) {
     // const isServer = !!req
-    // DISPATCH ACTIONS HERE ONLY WITH `reduxStore.dispatch`
+    await Promise.all([
+      reduxStore.dispatch(actions.fetchInstructors({ pageSize: 8 })),
+      reduxStore.dispatch(actions.fetchLatestBlogPosts())
+    ]);
     return {}
   }
 
@@ -77,56 +84,6 @@ class Home extends Component {
           fullname: 'Adewale McDavids',
           profile_text: 'Network Engineer, Paystack'
         }
-      },
-    ],
-    instructors: [
-      {
-        fullname: 'Mohammed Hassan',
-        profile_pic: '/static/images/instructors/instructor1lg.png',
-        title: 'Title of instructor goes here',
-        qualifications: "Instructor qualifications go here. Hey, you know how I'm, like, always trying to save the planet?"
-      },
-      {
-        fullname: 'Timothy Holloway',
-        profile_pic: '/static/images/instructors/instructor2lg.png',
-        title: 'Title of instructor goes here',
-        qualifications: "Instructor qualifications go here. Hey, you know how I'm, like, always trying to save the planet?"
-      },
-      {
-        fullname: 'Cynthia Oluwabusola',
-        profile_pic: '/static/images/instructors/instructor3lg.png',
-        title: 'Title of instructor goes here',
-        qualifications: "Instructor qualifications go here. Hey, you know how I'm, like, always trying to save the planet?"
-      },
-      {
-        fullname: 'Beverly Onunyere',
-        profile_pic: '/static/images/instructors/instructor4lg.png',
-        title: 'Title of instructor goes here',
-        qualifications: "Instructor qualifications go here. Hey, you know how I'm, like, always trying to save the planet?"
-      },
-      {
-        fullname: 'Mohammed Hassan',
-        profile_pic: '/static/images/instructors/instructor1lg.png',
-        title: 'Title of instructor goes here',
-        qualifications: "Instructor qualifications go here. Hey, you know how I'm, like, always trying to save the planet?"
-      },
-      {
-        fullname: 'Timothy Holloway',
-        profile_pic: '/static/images/instructors/instructor3lg.png',
-        title: 'Title of instructor goes here',
-        qualifications: "Instructor qualifications go here. Hey, you know how I'm, like, always trying to save the planet?"
-      },
-      {
-        fullname: 'Cynthia Oluwabusola',
-        profile_pic: '/static/images/instructors/instructor2lg.png',
-        title: 'Title of instructor goes here',
-        qualifications: "Instructor qualifications go here. Hey, you know how I'm, like, always trying to save the planet?"
-      },
-      {
-        fullname: 'Beverly Onunyere',
-        profile_pic: '/static/images/instructors/instructor4lg.png',
-        title: 'Title of instructor goes here',
-        qualifications: "Instructor qualifications go here. Hey, you know how I'm, like, always trying to save the planet?"
       },
     ],
     popularCourses: [
@@ -312,12 +269,26 @@ class Home extends Component {
   }
 
   componentDidMount () {
-    // console.log(NODE_PATH);
+    window.tretenEcho = new Echo({
+      broadcaster: 'socket.io',
+      host: window.location.hostname + ":6001",
+      encrypted: true
+      // key: 'your-pusher-channels-key'
+    });
+
+    // var socketId = Echo.socketId();
+    window.tretenEcho.channel(`treten_database_doneChannel`)
+    .listen('done', (e) => {
+        console.log(e);
+    });
   }
 
   render () {
     return (
       <>
+        <Head>
+          <title key="title">Treten Academy - Africa's largest virtual lab</title>
+        </Head>
         <Banner />
         <Partners />
         <Features />
@@ -344,7 +315,8 @@ class Home extends Component {
           </Link>
         </div>
         <MeetTheInstructors
-          instructors={this.state.instructors}
+          instructors={this.props.instructors.all}
+          isLoading={this.props.instructors.isLoading}
         />
         <Testimonials
           mainText=" What our students say"
@@ -360,7 +332,7 @@ class Home extends Component {
             </Button>
           </Link>
         </div>
-        <Blog />
+        <Blog latestBlogPosts={this.props.latestBlogPosts.all} isLoading={this.props.latestBlogPosts.isLoading} />
         <NewsLetterSubscription />
         <Resources />
         <Footer />
@@ -371,7 +343,14 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    // user: getUser(state),
+    instructors: {
+      ...state.instructor,
+      all: getInstructors(state)
+    },
+    latestBlogPosts: {
+      all: getLatestBlogPosts(state),
+      isLoading: state.blogPosts.latestBlogPosts.isLoading
+    }
   }
 }
 

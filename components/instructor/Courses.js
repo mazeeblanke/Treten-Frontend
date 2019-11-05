@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Courses = props => {
   return (
-    <div className="card instructor-experience mb-9  mt-2 pb-1">
+    <div className="card instructor-experience mb-9  pb-1">
       <div className="card-body pb-4">
         <h5 className="card-title mb-3 p-2">Courses</h5>
           {
