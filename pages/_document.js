@@ -15,6 +15,7 @@ class TretenDocument extends Document {
       <Html>
         <Head>
           <script src="//localhost:6001/socket.io/socket.io.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
         </Head>
         <body>
           <Main />
