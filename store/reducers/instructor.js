@@ -1,4 +1,4 @@
-import { transformArray } from "../../lib/helpers";
+import { transformArray } from '../../lib/helpers'
 
 const INITIAL_STATE = {
   successfullyRegistered: false,
@@ -8,15 +8,15 @@ const INITIAL_STATE = {
   activeInstructor: {
     isLoading: false
   }
-};
+}
 
-export default function(state = INITIAL_STATE, action) {
+export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
-    case "REGISTRATION_REQUEST": {
+    case 'REGISTRATION_REQUEST': {
       return {
         ...state,
         successfullyRegistered: action.payload
-      };
+      }
     }
     case 'SET_INSTUCTORS_LOADING': {
       return {
@@ -29,7 +29,7 @@ export default function(state = INITIAL_STATE, action) {
         ...state,
         activeInstructor: {
           ...state.activeInstructor,
-          isLoading: action.payload,
+          isLoading: action.payload
         }
       }
     }
@@ -49,15 +49,10 @@ export default function(state = INITIAL_STATE, action) {
       }
     }
     default:
-      return state;
+      return state
   }
 }
 
+export const getInstructors = state => state.instructor.byIds.map(id => state.instructor.all[id])
 
-export const getInstructors = (state) => {
-  return state.instructor.byIds.map(id => state.instructor.all[id]);
-}
-
-export const getInstructor = (state) => {
-  return state.instructor.activeInstructor;
-}
+export const getInstructor = state => state.instructor.activeInstructor

@@ -1,11 +1,10 @@
-import { SET_LOGIN_STATE } from '../actions/types';
+// import { SET_LOGIN_STATE } from '../actions/types';
 
 const INITIAL_STATE = {
-  isLoggedIn: null,
+  isLoggedIn: null
 }
 
 export default function (state = INITIAL_STATE, { type, payload }) {
-
   switch (type) {
     case 'SET_AUTH': {
       return {
@@ -14,7 +13,6 @@ export default function (state = INITIAL_STATE, { type, payload }) {
       }
     }
     default:
-     return state
+      return state
   }
-
 }

@@ -1,30 +1,30 @@
 // _document is only rendered on the server side and not on the client side
 // Event handlers like onClick can't be added to this file
 
-// ./pages/_document.js
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+import React from 'react'
+import Document, { Html, Head, Main, NextScript } from 'next/document'
 
 class TretenDocument extends Document {
-  static async getInitialProps(ctx) {
+  static async getInitialProps (ctx) {
     const initialProps = await Document.getInitialProps(ctx)
     return { ...initialProps }
   }
 
-  render() {
+  render () {
     return (
       <Html>
         <Head>
-          <script src="//localhost:6001/socket.io/socket.io.js"></script>
-          <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
+          <script src="//localhost:6001/socket.io/socket.io.js" />
+          <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js" />
         </Head>
         <body>
           <Main />
           <NextScript />
-          <script 
+          <script
             async
             type="text/javascript"
             dangerouslySetInnerHTML={{
-                __html: `
+              __html: `
                     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
                     (function(){
                     var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -36,7 +36,7 @@ class TretenDocument extends Document {
                     })();  
                 `
             }}
-        />
+          />
         </body>
       </Html>
     )

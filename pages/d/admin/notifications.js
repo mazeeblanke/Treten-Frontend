@@ -1,17 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import withAdminLayout from '../../layouts/withAdminLayout';
-import { Tabs, Button, Select } from 'antd';
-import EmptyState from '../../../components/shared/EmptyState';
-import Display from '../../../components/shared/Display';
-import { List, Avatar } from 'antd';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import withAdminLayout from '../../layouts/withAdminLayout'
+import EmptyState from '../../../components/shared/EmptyState'
+import Display from '../../../components/shared/Display'
+import { List } from 'antd'
 
+/* eslint-disable */
 class Notifications extends Component {
-  constructor(props) {
-    super(props);
-
-  }
-
   state = {
     selected: '',
     notifications: [
@@ -34,15 +29,15 @@ class Notifications extends Component {
     // notifications: []
   }
 
-  componentWillMount() {
+  componentWillMount () {
 
   }
 
-  componentDidMount() {
+  componentDidMount () {
 
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
 
   }
 
@@ -52,7 +47,7 @@ class Notifications extends Component {
     })
   }
 
-  render() {
+  render () {
     return (
       <section className="notifications has-full-height">
         <div className="container has-full-height">
@@ -67,7 +62,7 @@ class Notifications extends Component {
                     itemLayout="horizontal"
                     dataSource={this.state.notifications}
                     renderItem={item => (
-                      <List.Item onClick={() => this.selectNotification(item)} style={{ background: this.state.selected == item.title ? '#FAFAFA' : '', cursor: 'pointer' }} extra={<span>2 hrs</span>}>
+                      <List.Item onClick={() => this.selectNotification(item)} style={{ background: this.state.selected === item.title ? '#FAFAFA' : '', cursor: 'pointer' }} extra={<span>2 hrs</span>}>
                         <List.Item.Meta
                           title={<a href="https://ant.design">{item.title}</a>}
                           description="Ant Design, a design language for background applications, is refined by Ant UED Team"
@@ -82,14 +77,14 @@ class Notifications extends Component {
 
         </div>
       </section>
-    );
+    )
   }
 }
 
 Notifications.propTypes = {
 
-};
+}
 
-Notifications.headerName = "Notifications"
+Notifications.headerName = 'Notifications'
 
-export default withAdminLayout(Notifications);
+export default withAdminLayout(Notifications)

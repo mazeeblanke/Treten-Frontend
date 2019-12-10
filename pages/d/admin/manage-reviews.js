@@ -1,356 +1,281 @@
-import AdminLayout from '../../layouts/AdminLayout';
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import StarRatings from "react-star-ratings";
-import { Table, Input, Button, Select } from "antd";
+/* eslint-disable */
+import PropTypes from 'prop-types'
+import { CSVLink } from 'react-csv'
+import { connect } from 'react-redux'
+import React, { Component } from 'react'
+import StarRatings from 'react-star-ratings'
+import TextTruncate from 'react-text-truncate'
+import * as actions from '../../../store/actions'
+import AdminLayout from '../../layouts/AdminLayout'
+import withRedirect from '../../layouts/withRedirect'
+import { 
+  Menu,
+  Table, 
+  Input, 
+  Button, 
+  // Select, 
+  Tooltip, 
+  Modal,
+  Dropdown, 
+  Icon
+} from 'antd'
+import { parsedPaginationTotalText } from '../../../lib/helpers'
+import { 
+  getCourseReviews,
+  getCourseReviewsPagination,
+  getCourseReviewsLoadingState,
+  reviewIsApproved,
+} from '../../../store/reducers/courseReviews'
+import notifier from 'simple-react-notifications'
+import PaginationNav from '../../../components/shared/PaginationNav'
+import Display from '../../../components/shared/Display'
+// import { reviewIsApproved } from '../../../store/reducers/courseReviews'
 
-const Search = Input.Search;
-const { Option } = Select;
-
-const columns = [
-  {
-    title: "Date",
-    dataIndex: "date",
-    width: 90,
-    key: 5,
-    fixed: 'left',
-  },
-  {
-    title: "Name",
-    dataIndex: "name",
-    width: 150,
-    key: 2,
-  },
-  {
-    title: "Course",
-    dataIndex: "course",
-    key: 3,
-    width: 150
-  },
-  {
-    title: "Number of stars",
-    dataIndex: "number_of_stars",
-    key: 7,
-    width: 150,
-    render: (number_of_stars) => {
-      console.log(number_of_stars);
-      return (
-        <StarRatings
-          starDimension="15px"
-          starSpacing="3px"
-          rating={number_of_stars}
-          starRatedColor="#E12828"
-          changeRating={() => {}}
-          number_of_stars={5}
-          name='rating'
-        />
-      )
-    }
-  },
-  {
-    title: "Review message",
-    dataIndex: "review_message",
-    // fixed: 'right',
-    // align: 'right',
-    render: (review_message) => {
-      return (
-        <div>{review_message.substr(0, 80)}...<b>see more</b></div>
-      )
-    },
-    key: 8,
-    width: 250
-  },
-  {
-    title: "Approval",
-    dataIndex: "approval",
-    // fixed: 'right',
-    // align: 'right',
-    key: 38,
-    width: 150,
-    render: (approved) => {
-      return (
-        approved
-          ? <div className="tag is-success">Approved</div>
-          : <div className="tag is-grey">Not approved</div>
-      )
-    }
-  },
-  {
-    title: "Publication",
-    dataIndex: "published",
-    // fixed: 'right',
-    // align: 'right',
-    key: 28,
-    width: 150,
-    render: (published) => {
-      return (
-        published
-          ? <div className="tag is-success">Published</div>
-          : <div className="tag is-grey">Not published</div>
-      )
-    }
-  },
-  {
-    title: 'Action',
-    key: 'operation',
-    width: 90,
-    render: () => (
-      <div>
-        <Select defaultValue="Action" style={{ width: 85, height: 42 }}>
-          <Option value="jack">Jack</Option>
-          <Option value="none">None</Option>
-          <Option value="disabled" disabled>
-            Disabled
-          </Option>
-          <Option value="Yiminghe">yiminghe</Option>
-        </Select>
-      </div>
-    ),
-  },
-];
-
-
+const { confirm } = Modal
+const Search = Input.Search
+// const { Option } = Select 
 
 class ManageReviews extends Component {
-  constructor(props) {
-    super(props);
-
+  static async getInitialProps ({ reduxStore }) {
+    await Promise.all([
+      reduxStore.dispatch(actions.fetchReviews())
+    ])
+    return {}
   }
 
-  paginationOptions = {
-    showTotal: (total, range) => {
-      if (this.state.feedback !== `Showing ${range[0]} - ${range[1]} of ${total}`) {
-        this.setState({
-          feedback: `Showing ${range[0]} - ${range[1]} of ${total}`
-          // feedback: `${range[0]}-${range[1]} of ${total} items`
-        })
-      }
-    },
-    pageSize: 6,
-    itemRender: (current, type, originalElement) => {
-      if (type === 'prev') {
-        return (
-          <div className="ant-pagination-prev">
-            <a className="ant-pagination-item-link">
-              <img src="/static/images/arrow-right-grey.png" />
-            </a>
-          </div>
-        )
-      } if (type === 'next') {
-        return (
-          <div className="ant-pagination-next">
-            <a className="ant-pagination-item-link">
-              <img src="/static/images/arrow-left-grey.png" />
-            </a>
-          </div>
-        )
-      }
-      return originalElement;
-    }
+  constructor (props) {
+    super(props)
+    this.csvDownloadRef = React.createRef()
   }
 
   state = {
-    feedback: '',
-    reviews: [
-      {
-        key: "1",
-        course: "CCNA R&S",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        number_of_stars: 3,
-        review_message: `Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world `,
-        approval: 0,
-        published: 1,
-      },
-      {
-        key: "13",
-        course: "CCNA R&S",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        number_of_stars: 3,
-        review_message: `Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world `,
-        approval: 0,
-        published: 1,
-      },
-      {
-        key: "2",
-        course: "CCNA R&S",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        number_of_stars: 3,
-        review_message: `Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world `,
-        approval: 1,
-        published: 0,
-      },
-      {
-        key: "20",
-        course: "CCNA R&S",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        number_of_stars: 1,
-        review_message: `Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world `,
-        approval: 0,
-        published: 1,
-      },
-      {
-        key: "3",
-        course: "CCNA R&S",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        number_of_stars: 3,
-        review_message: `Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world `,
-        approval: 1,
-        published: 0,
-      },
-      {
-        key: "4",
-        course: "CCNA R&S",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        number_of_stars: 5,
-        review_message: `Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world `,
-        approval: 0,
-        published: 1,
-      },
-      {
-        key: "40",
-        course: "CCNA R&S",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        number_of_stars: 3,
-        review_message: `Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world `,
-        approval: 1,
-        published: 0,
-      },
-      {
-        key: "1",
-        course: "CCNA R&S",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        number_of_stars: 3,
-        review_message: `Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world `,
-        approval: 0,
-        published: 1,
-      },
-      {
-        key: "13",
-        course: "CCNA R&S",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        number_of_stars: 3,
-        review_message: `Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world `,
-        approval: 0,
-        published: 1,
-      },
-      {
-        key: "2",
-        course: "CCNA R&S",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        number_of_stars: 3,
-        review_message: `Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world `,
-        approval: 1,
-        published: 0,
-      },
-      {
-        key: "20",
-        course: "CCNA R&S",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        number_of_stars: 1,
-        review_message: `Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world `,
-        approval: 0,
-        published: 1,
-      },
-      {
-        key: "3",
-        course: "CCNA R&S",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        number_of_stars: 3,
-        review_message: `Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world `,
-        approval: 1,
-        published: 0,
-      },
-      {
-        key: "4",
-        course: "CCNA R&S",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        number_of_stars: 5,
-        review_message: `Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world `,
-        approval: 0,
-        published: 1,
-      },
-      {
-        key: "40",
-        course: "CCNA R&S",
-        date: "01/02/2019",
-        name: "Sheldon Cooper",
-        number_of_stars: 3,
-        review_message: `Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world
-        Trillion astonishment rings of Uranus cosmos prime number of the whole world `,
-        approval: 1,
-        published: 0,
+    searchQuery: '',
+    loadingCSV: '',
+    csvData: [],
+  }
+
+  columns = [
+    {
+      title: 'Date',
+      dataIndex: 'createdAt',
+      width: 50,
+      key: 5,
+      // fixed: 'left',
+    },
+    {
+      title: 'Name',
+      dataIndex: 'enrollee.name',
+      width: 130,
+      key: 2,
+    },
+    {
+      title: 'Course',
+      dataIndex: 'course.title',
+      key: 3,
+      width: 130
+    },
+    {
+      title: 'Number of stars',
+      dataIndex: 'rating',
+      key: 7,
+      width: 130,
+      render: (rating) => {
+        return (
+          <StarRatings
+            starDimension="15px"
+            starSpacing="3px"
+            rating={rating}
+            starRatedColor="#E12828"
+            numberOfStars={5}
+            name='rating'
+          />
+        )
       }
-    ],
+    },
+    {
+      title: 'Review message',
+      dataIndex: 'reviewText',
+      // fixed: 'right',
+      // align: 'right',
+      render: (reviewText) => {
+        return (
+          <Tooltip title={reviewText}>
+            <TextTruncate
+              line={3}
+              text={reviewText}
+            />
+          </Tooltip>
+        )
+      },
+      key: 8,
+      width: 230
+    },
+    {
+      title: 'Approval',
+      dataIndex: 'approved',
+      // fixed: 'right',
+      // align: 'right',
+      key: 38,
+      width: 130,
+      render: (approved) => {
+        return (
+          approved
+            ? <div style={{width: 130}} className="tag is-success">Approved</div>
+            : <div style={{width: 130}} className="tag is-grey">Not approved</div>
+        )
+      }
+    },
+    // {
+    //   title: 'Publication',
+    //   dataIndex: 'published',
+    //   // fixed: 'right',
+    //   // align: 'right',
+    //   key: 28,
+    //   width: 150,
+    //   render: (published) => {
+    //     return (
+    //       published
+    //         ? <div className="tag is-success">Published</div>
+    //         : <div className="tag is-grey">Not published</div>
+    //     )
+    //   }
+    // },
+    {
+      title: 'Action',
+      key: 'operation',
+      width: 90,
+      render: review => {
+        const menu = (
+          <Menu>
+            <Menu.Item disabled={reviewIsApproved(review)}>
+              <a 
+                disabled={reviewIsApproved(review)}
+                onClick={() => this.handleApproval(true, review)}
+              >
+                Approve
+              </a>
+            </Menu.Item>
+            <Menu.Item disabled={!reviewIsApproved(review)}>
+              <a 
+                disabled={!reviewIsApproved(review)}
+                onClick={() => {reviewIsApproved(review) && this.handleApproval(false, review)}}
+              >
+                Disapprove
+              </a>
+            </Menu.Item>
+            <Menu.Item>
+              <a onClick={() => this.handleDelete(review)}>Delete</a>
+            </Menu.Item>
+          </Menu>
+        )
+        return (
+          <div>
+            <Display if={review.isEditing}>
+              <Icon type="loading" />
+            </Display>
+            <Display if={!review.isEditing}>
+              <Dropdown overlay={menu} placement="bottomLeft">
+                <Button>
+                  <div className="d-flex justify-content-between align-items-center">
+                    <span className="mr-3">Action</span>
+                    <img src="/static/images/select.png" />
+                  </div>
+                </Button>
+              </Dropdown>
+            </Display>
+          </div>
+        )
+      }
+      // render: (item, review) => (
+      //   <div>
+      //     <Select defaultValue="Action" style={{ width: 85, height: 42 }}>
+      //       <Option key="approve" onClick={() => this.handleApproval(1, review)}>Approve</Option>
+      //       <Option key="disapprove" onClick={() => this.handleApproval(0, review)}>Disapprove</Option>
+      //     </Select>
+      //   </div>
+      // ),
+    },
+  ]
+
+  csvFileName = 'Reviews.csv'
+
+  handleApproval = (approved, review) => {
+    console.log(approved, review)
+    const action = approved ? 'approve' : 'disapprove'
+    this.showConfirm(
+      `Are you sure you want to ${action} this review ?`,
+      () => this.props.handleApproval({approved, review})
+        .then((res) => {
+          notifier.success(res.message)
+        }).catch((err) => {
+          notifier.error(`ERROR! ${err.response.data.message}`)
+        })
+    )
   }
-  // componentWillMount() {
 
-  // }
-
-  componentDidMount() {
-
+  handleDelete = (review) => {
+    this.showConfirm(
+      'Are you sure you want to delete this review ?',
+      () => this.props.deleteReview(review)
+        .then((res) => {
+          notifier.success(res.message)
+        }).catch((err) => {
+          notifier.error(`ERROR! ${err.response.data.message}`)
+        })
+    )
   }
 
-  // componentWillReceiveProps(nextProps) {
-
-  // }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-
-  // }
-
-  // componentWillUpdate(nextProps, nextState) {
-
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-
-  // }
-
-  componentWillUnmount() {
-
+  showConfirm = (content, handleOk, handleCancel) => {
+    confirm({
+      content,
+      onOk () {
+        handleOk && handleOk()
+      },
+      onCancel () {
+        handleCancel && handleCancel()
+      },
+    })
   }
 
-  render() {
+  search = q => {
+    this.setState({ searchQuery: q })
+    this.props.fetchReviews({
+      q
+    })
+  }
+
+  downloadCSV = () => {
+    this.setState({
+      loadingCSV: true
+    })
+    this.props.downloadCSV('reviews').then(res => {
+      this.setState({
+        loadingCSV: false,
+        csvData: res
+      })
+
+      this.csvDownloadRef.current.link.click()
+    }).catch(() => {
+      this.setState({
+        loadingCSV: false
+      })
+    })
+  };
+
+  handleTableChange = pagination => {
+    this.props.fetchReviews({
+      page: pagination.current,
+      q: this.state.searchQuery,
+      pageSize: pagination.pageSize,
+    })
+  }
+
+  render () {
+    const {
+      courseReviews,
+      courseReviewsIsLoading,
+      courseReviewsPagination,
+    } = this.props
     return (
       <section className="reviews">
         <AdminLayout headerName="Manage Reviews">
@@ -360,19 +285,42 @@ class ManageReviews extends Component {
                 <div className="col-md-12">
                   <div className="row justify-content-between align-items-center">
                     <div className="col-md-4  col-sm-12 mb-3">
-                      <p>{this.state.feedback}</p>
+                      <p>
+                        {parsedPaginationTotalText(
+                          courseReviewsPagination
+                        )}
+                      </p>
                     </div>
                     <div className="col-md-8 col-sm-12 justify-content-md-end d-flex">
                       <Search
                         className="mr-3 mb-3"
                         placeholder="Search"
-                        onSearch={value => console.log(value)}
+                        onSearch={value => this.search(value)}
+                        onChange={e => this.search(e.target.value)}
                         style={{ width: '180px', height: '42px' }}
                       />
-                      <Button className="mb-3" type="danger" style={{ width: '126px', height: '40px' }} >
+                      <Button
+                        loading={this.state.loadingCSV}
+                        onClick={this.downloadCSV}
+                        className="mb-3"
+                        type="danger"
+                        style={{ width: '126px', height: '40px' }}
+                      >
                         <span>Download</span>
-                        <img className="ml-2" src="/static/images/down.png" />
+                        <img className="ml-2" src="/static/images/down.png" alt="arrow down" />
                       </Button>
+                      {
+                        <CSVLink
+                          ref={this.csvDownloadRef}
+                          data={this.state.csvData}
+                          filename={this.csvFileName}
+                          target="_blank"
+                          style={{ display: 'none' }}
+                        >
+                          {' '}
+                          Download
+                        </CSVLink>
+                      }
                     </div>
                   </div>
                 </div>
@@ -382,18 +330,40 @@ class ManageReviews extends Component {
           <div className="container">
             <div className="row pl-6 pr-6">
               <div className="col-md-12">
-                <Table scroll={{ x: 1300 }} pagination={this.paginationOptions} columns={columns} dataSource={this.state.reviews} />
+                <Table 
+                  rowKey="id"
+                  columns={this.columns} 
+                  scroll={{ x: 1000 }}
+                  dataSource={courseReviews}
+                  loading={courseReviewsIsLoading}
+                  pagination={courseReviewsPagination}
+                  onChange={pagination => this.handleTableChange(pagination)}
+                />
               </div>
             </div>
           </div>
         </AdminLayout>
       </section>
-    );
+    )
   }
 }
 
-ManageReviews.propTypes = {
+ManageReviews.propTypes = {}
 
-};
+const mapStateToProps = (state) => {
+  return {
+    courseReviews: getCourseReviews(state),
+    courseReviewsPagination: {
+      ...getCourseReviewsPagination(state),
+      itemRender: PaginationNav
+    },
+    courseReviewsIsLoading: getCourseReviewsLoadingState(state),
+  }
+}
 
-export default ManageReviews;
+export default withRedirect(connect(mapStateToProps, {
+  downloadCSV: actions.downloadCSV,
+  fetchReviews: actions.fetchReviews,
+  deleteReview: actions.deleteReview,
+  handleApproval: actions.handleApproval,
+})(ManageReviews))

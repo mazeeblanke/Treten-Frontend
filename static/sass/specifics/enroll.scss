@@ -1,4 +1,4 @@
-#treten {
+#treten .enroll {
     /* ENROLL */
 
   .step {
@@ -45,6 +45,8 @@
     box-sizing: border-box;
     border-radius: 4px;
     cursor: pointer;
+    width: 120px;
+    text-align: center;
   }
 
   .step .plan {
@@ -125,6 +127,15 @@
 
   .step.first::before{
     top: 0px;
+  }
+
+  .slick-dots {
+    bottom: -25px !important;
+  }
+
+  .slick-list {
+    min-height: 10px;
+    height: 50px;
   }
 
   /* .step.active::before{

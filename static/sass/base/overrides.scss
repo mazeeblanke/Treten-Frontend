@@ -42,10 +42,16 @@ body, html {
     border-color: #f5c6cb !important;
   }
 
-  .ant-btn-danger:disabled {
-    color: #ff9898 !important;
-    border: none !important;
+  .instructors-list td {
+    padding: 26px 16px !important;
   }
+
+  // .ant-btn-danger[disabled] {
+  //   // color: #ff9898 !important;
+  //   border: none !important;
+  //   background: #e1282875 !important;
+  //   color: #e6e6e6 !important;
+  // }
 
   .ant-tabs-ink-bar {
     height: 3px;
@@ -94,6 +100,11 @@ body, html {
     border-bottom: 1px solid #F0F1F3;
   }
 
+  .el-select-dropdown__item.selected {
+    background: #f0f0f0 !important;
+    color: black;
+  }
+
   .main-header {
     font-size: 1.72rem;
   }
@@ -116,7 +127,8 @@ body, html {
     height: 100vh;
     overflow-y: scroll;
     min-width: 295px;
-    background: #FDFDFD !important;
+    // background: #FDFDFD !important;
+    background: #fbfbfb !important
   }
 
   li.ant-menu-item.ant-menu-item-selected,
@@ -128,6 +140,10 @@ body, html {
     height: 64px;
     display: flex;
     align-items: center;
+  }
+  .ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-tail::after {
+    background: #E12828 !important;
+    color: #E12828 !important;
   }
 
   .ant-menu.ant-menu-dark .ant-menu-item-selected,
@@ -159,6 +175,37 @@ body, html {
 
   .ant-input {
     border: 1px solid #D3D4D8;
+
+    background: white;
+    border: 1px solid #cccccc !important;
+  }
+
+  .ant-slider-track {
+    background-color: #E12828;
+  }
+
+  .ant-slider-handle {
+    border: solid 2px #E12828;
+  }
+
+  .search-bar {
+    input.ant-input{
+      height: 50px !important;
+      border-radius: 0px !important;
+    }
+
+    .ant-select-selection.ant-select-selection--single {
+      height: 50px;
+    }
+    
+    .ant-select-selection-selected-value {
+      padding-top: 7px;
+    }
+  }
+
+ .ant-input[disabled] {
+    border: 1px solid #ececec !important;
+    color: #cecece !important;
   }
 
   .slick-slide {
@@ -189,6 +236,17 @@ body, html {
 
   .slick-list {
     min-height: 300px;
+     .slick-track {    
+      margin-left: 0;
+    }
+  }
+
+  .center {
+    .slick-list {
+       .slick-track {    
+        margin-left: auto !important;
+      }
+    }
   }
 
   .react-tel-input input[type=text],
@@ -218,6 +276,11 @@ body, html {
     overflow: visible;
   } */
 
+  .slick-next:before {
+    font-family: 'slick';
+    font-size: 28px;
+    color: black !important;
+  }
 
   .ant-pagination-prev, .ant-pagination-next {
     width: 45px;
@@ -256,6 +319,22 @@ body, html {
   .tag.is-grey {
     background: #F0F1F3;
     color: #505565;
+  }
+
+  .tag.is-danger {
+    background: #ff00004a;
+    color: #dc3545 !important;
+    width: 150px;
+  }
+
+  .tag.is-warning {
+    background: #ffc1072e;
+    color: #ffc107 !important;
+    width: 150px;
+  }
+
+  .tag.no-radius {
+    border-radius: 0px; 
   }
 
   label {
@@ -353,6 +432,10 @@ body, html {
     height: 200px;
   }
 
+  .ql-editor {
+    background: white;
+  }
+
   .ant-steps-item-finish > .ant-steps-item-tail::after {
     background-color: #e12828;
   }
@@ -365,10 +448,15 @@ body, html {
     background: #e12828;
   }
 
-  .ant-btn:active, .ant-btn.active, .ant-btn:hover, .ant-btn:focus {
+  .ant-btn-secondary:active, .ant-btn-secondary.active, .ant-btn-secondary:hover, .ant-btn-secondary:focus {
     color: #ffffff;
     background-color: #fff;
     border-color: transparent;
+  }
+
+  .ant-btn-secondary.ant-btn-lg[disabled], .ant-btn-secondary.ant-btn-lg[disabled]:hover, .ant-btn-secondary.ant-btn-lg[disabled]:focus {
+    color: #b5b5b5cf;
+    background: #222829b8 !important
   }
 
   .ant-table-scroll table .ant-table-fixed-columns-in-body {
@@ -423,6 +511,17 @@ body, html {
   outline: none;
   justify-content: center;
   transition: border .24s ease-in-out;
+}
+
+// .ant-select-selection__rendered {
+//   height: 50px;
+// }
+
+.ant-btn-danger[disabled] {
+  // color: #ff9898 !important;
+  border: none !important;
+  background: #e1282875 !important;
+  color: #e6e6e6 !important;
 }
 
 @media (min-width: 1200px) {

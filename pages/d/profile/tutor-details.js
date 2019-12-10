@@ -1,16 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import TutorDetailsForm from '../../../components/shared/TutorDetailsForm';
-import withProfileLayout from '../../layouts/withProfileLayout';
-
+import React, { Component } from 'react'
+import TutorDetailsForm from '../../../components/shared/TutorDetailsForm'
+import withProfileLayout from '../../layouts/withProfileLayout'
+import withRedirect from '../../layouts/withRedirect'
 
 class TutorDetails extends Component {
-  constructor(props) {
-    super(props);
-
-  }
-
-  render() {
+  render () {
     return (
       <div>
         <div className="d-flex justify-content-between">
@@ -20,14 +14,10 @@ class TutorDetails extends Component {
             <img src="/static/images/arrow-right.png"></img>
           </div>
         </div>
-         <TutorDetailsForm />
+        <TutorDetailsForm />
       </div>
-    );
+    )
   }
 }
 
-TutorDetails.propTypes = {
-
-};
-
-export default withProfileLayout(TutorDetails);
+export default withRedirect(withProfileLayout(TutorDetails))

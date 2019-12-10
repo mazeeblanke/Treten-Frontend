@@ -1,21 +1,21 @@
-const express = require("express");
-const next = require("next");
-const server = express();
-const PORT = process.env.PORT || 3000;
-const dev = process.env.NODE_ENV !== "production";
+const express = require('express')
+const next = require('next')
+
+const server = express()
+const PORT = process.env.PORT || 3000
+const dev = process.env.NODE_ENV !== 'production'
 const app = next({
-  dev: dev
-});
-const handler = app.getRequestHandler();
+  dev
+})
+const handler = app.getRequestHandler()
 // process.env.PROXYURL = 'http://localhost:80';
 process.env.PROXYURL =
-  process.env.NODE_ENV === "production"
-    ? "https://treten-ng-backend.herokuapp.com"
-    : // : 'http://localhost:4000';
-      "http://172.19.0.6:80";
+  process.env.NODE_ENV === 'production'
+    ? 'https://treten-ng-backend.herokuapp.com'
+    : 'http://172.19.0.6:80'
 // : 'tretenweb';
 
-var proxy = require("express-http-proxy");
+const proxy = require('express-http-proxy')
 
 app
   .prepare()
@@ -23,47 +23,103 @@ app
     // server.use("/api", proxy(`${process.env.PROXYURL}`));
 
     server.use(
-      "/t",
+      '/t',
       proxy(process.env.PROXYURL, {
-        limit: "420mb"
+        limit: '420mb'
       })
-    );
+    )
 
-    server.get("/", (req, res) => {
-      app.render(req, res, "/home", {});
-    });
+    server.get('/', (req, res) => {
+      app.render(req, res, '/home', {})
+    })
 
-    server.get("/instructors/:instructor_slug", (req, res) => {
-      app.render(req, res, "/instructor", {});
-    });
+    server.get('/d/admin', (req, res) => {
+      res.redirect(302, { Location: '/d/admin/home' })
+      res.end()
+    })
 
-    server.get("/d/instructor/resources", (req, res) => {
-      app.render(req, res, "/d/student/resources", {});
-    });
+    server.get('/d/student', (req, res) => {
+      res.writeHead(302, { Location: '/d/student/courses' })
+      res.end()
+    })
 
-    server.get("/d/instructor/notifications", (req, res) => {
-      app.render(req, res, "/d/student/notifications", {});
-    });
+    server.get('/d/instructor', (req, res) => {
+      res.writeHead(302, { Location: '/d/instructor/home' })
+      res.end()
+    })
 
-    server.get("/d/admin/course", (req, res) => {
-      app.render(req, res, "/d/instructor/course", {});
-    });
+    server.get('/d/student/home', (req, res) => {
+      res.writeHead(302, { Location: '/d/student/courses' })
+      res.end()
+    })
 
-    server.get("/d/admin/resources", (req, res) => {
-      app.render(req, res, "/d/student/resources", {});
-    });
+    server.get('/instructors/:instructorSlug', (req, res) => {
+      app.render(req, res, '/instructor', {})
+    })
 
-    server.get("/blog/:blogslug", (req, res) => {
-      app.render(req, res, "/blog-post", {});
-    });
+    server.get('/d/instructor/resources', (req, res) => {
+      app.render(req, res, '/d/student/resources', {})
+    })
 
-    server.get("*", (req, res) => {
-      return handler(req, res);
-    });
+    server.get('/d/instructor/notifications', (req, res) => {
+      app.render(req, res, '/d/student/notifications', {})
+    })
 
-    server.listen(PORT, _ => console.log(`> server running on port ${PORT}`));
+    server.get('/d/instructor/messages', (req, res) => {
+      app.render(req, res, '/d/student/messages', {})
+    })
+
+    server.get('/d/student/courses/:courseSlug', (req, res) => {
+      app.render(req, res, '/d/student/course', {})
+    })
+
+    server.get('/d/admin/messages', (req, res) => {
+      app.render(req, res, '/d/student/messages', {})
+    })
+
+    server.get('/courses/:courseSlug', (req, res) => {
+      app.render(req, res, '/course', {})
+    })
+
+    server.get('/courses/:courseSlug/enroll', (req, res) => {
+      app.render(req, res, '/enroll', {})
+    })
+
+    server.get('/d/admin/courses/:courseSlug', (req, res) => {
+      app.render(req, res, '/d/instructor/course', {})
+    })
+
+    server.get('/d/instructor/courses/:courseSlug', (req, res) => {
+      app.render(req, res, '/d/instructor/course', {})
+    })
+
+    server.get('/d/admin/resources', (req, res) => {
+      app.render(req, res, '/d/student/resources', {})
+    })
+
+    server.get('/blog/:blogSlug', (req, res) => {
+      app.render(req, res, '/blog-post', {})
+    })
+
+    // server.use(function(err, req, res, next) {
+    //   console.log('kkkkk', err)
+    //   if (err) {
+    //     res.redirect(302, { Location: '/' })
+    //     res.end()
+    //   }
+    //   // // set locals, only providing error in development
+    //   // res.locals.message = err.message;
+    //   // res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    //   // // render the error page
+    //   // res.status(err.status || 500);
+    //   // res.render('error');
+    // });
+
+    server.get('*', (req, res) => handler(req, res))
+
+    server.listen(PORT)
   })
-  .catch(err => {
-    console.log(err);
-    process.exit(1);
-  });
+  .catch(() => {
+    process.exit(1)
+  })

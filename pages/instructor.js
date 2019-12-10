@@ -1,117 +1,70 @@
-import Certifications from "../components/instructor/Certifications";
-import withMasterLayout from "./layouts/withMasterLayout";
-import Experience from "../components/instructor/Experience";
-import Instructor from "../components/instructor/Instructor";
-import Education from "../components/instructor/Education";
-import Courses from "../components/instructor/Courses";
-import Footer from "../components/shared/Footer";
-import * as actions from "../store/actions";
-import React, { Component } from "react";
-import { connect } from "react-redux"
-import PropTypes from "prop-types";
-import { getInstructor } from "../store/reducers/instructor";
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import Certifications from '../components/instructor/Certifications'
+import withMasterLayout from './layouts/withMasterLayout'
+import Experience from '../components/instructor/Experience'
+import Instructor from '../components/instructor/Instructor'
+import Education from '../components/instructor/Education'
+import Courses from '../components/instructor/Courses'
+import Footer from '../components/shared/Footer'
+import * as actions from '../store/actions'
+import { getInstructor } from '../store/reducers/instructor'
 
 class InstructorProfile extends Component {
+  static async getInitialProps ({ reduxStore, req }) {
+    await reduxStore.dispatch(actions.fetchInstructor(req.params.instructorSlug))
+    return {}
+  }
 
-	static async getInitialProps ({ reduxStore, req }) {
-		await reduxStore.dispatch(actions.fetchInstructor(req.params.instructor_slug));
-		return {};
-	}
-
-  state = {
-    instructor: {
-      profile_pic: "/static/images/instructors/instructor1lg.png",
-      fullname: "Instructor name here",
-      title: "Title of instructor goes here",
-      qualifications:
-        "Bio here. Eventually, you do plan to have dinosaurs on your dinosaur tour, right? God help us, we're in the hands of engineers.",
-      social_links: {
-        facebook: "wehjwe",
-        linkedin: "ewewi",
-        twitter: "ejkerjk"
-      },
-      experience: [
-        {
-          company: "Microsoft",
-          datePeriod: "Apr 2017 - present",
-          position: "Lead Trainer",
-          summary:
-            "Did he just throw my cat out of the window? You really think you can fly that thing? Jaguar shark!"
-        },
-        {
-          company: "Dell Technology",
-          datePeriod: "Dec 2017 - Jan 2018",
-          position: "Technology Associate",
-          summary:
-            "Yeah, but John, if The Pirates of the Caribbean breaks down, the pirates don’t eat the tourists."
-        }
-      ],
-      certifications: [
-        {
-          title: "Certification title",
-          logo: "/static/images/certifications/cisco.png",
-          datePeriod: "Apr 2017 - present"
-        },
-        {
-          title: "Certification title",
-          logo: "/static/images/certifications/microsoft.png",
-          datePeriod: "Apr 2017 - present"
-        },
-        {
-          title: "Certification title",
-          logo: "/static/images/certifications/microsoft.png",
-          datePeriod: "Apr 2017 - present"
-        }
-      ],
-      courses: [
-        {
-          title: "CCNA R&S",
-          level: "Expert",
-          excerpt:
-            "Brief course description goes here. Did he just throw my cat out of the window? You really think you can fly that thing? Jaguar shark! "
-        }
-      ],
-      education: [
-        {
-          institutionName: "Name of institution",
-          qualification: "Qualification obtained from institution",
-          datePeriod: "Apr 2009 - Sept 2014"
-        },
-        {
-          institutionName: "Name of institution",
-          qualification: "Qualification obtained from institution",
-          datePeriod: "Apr 2009 - Sept 2014"
-        },
-        {
-          institutionName: "Name of institution",
-          qualification: "Qualification obtained from institution",
-          datePeriod: "Apr 2009 - Sept 2014"
-        }
-      ]
+  constructor (props) {
+    super(props)
+    this.state = {
+      instructor: {
+        certifications: [
+          {
+            logo: '/static/images/certifications/cisco.png'
+          },
+          {
+            logo: '/static/images/certifications/microsoft.png'
+          },
+          {
+            logo: '/static/images/certifications/microsoft.png'
+          }
+        ],
+        courses: [
+          {
+            title: 'CCNA R&S',
+            level: 'Expert',
+            excerpt:
+              'Brief course description goes here. Did he just throw my cat out of the window? You really think you can fly that thing? Jaguar shark! '
+          }
+        ]
+      }
     }
-  };
+  }
 
-  render() {
+  render () {
     return (
       <>
         <section className="instructor-profile pt-9 pb-2">
           <div className="container">
             <div className="row">
               <div className="col-sm-12 col-md-3">
-                <Instructor width="100%" wrapperBorder { ...this.props.instructor } />
+                <Instructor width="100%" wrapperBorder {...this.props.instructor} />
               </div>
               <div className="col-sm-12 col-md-9">
                 <div className="row">
                   <div className="col-sm-12 col-md-6">
                     <Certifications
-                      certifications={this.state.instructor.certifications}
+                      certifications={this.props.instructor.userable.certifications}
                     />
                   </div>
                   <div className="col-sm-12 col-md-6">
-                    <Experience experience={this.state.instructor.experience} />
+                    <Experience experience={this.props.instructor.userable.workExperience} />
                   </div>
                   <div className="col-sm-12 col-md-6">
-                    <Education education={this.state.instructor.education} />
+                    <Education education={this.props.instructor.userable.education} />
                   </div>
                   <div className="col-sm-12 col-md-6">
                     <Courses courses={this.state.instructor.courses} />
@@ -123,17 +76,19 @@ class InstructorProfile extends Component {
         </section>
         <Footer />
       </>
-    );
+    )
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    instructor: getInstructor(state)
-  };
-};
+InstructorProfile.propTypes = {
+  instructor: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+  instructor: getInstructor(state)
+})
 
 export default connect(
   mapStateToProps,
   actions
-)(withMasterLayout(InstructorProfile));
+)(withMasterLayout(InstructorProfile))

@@ -1,24 +1,19 @@
-import { transformArray } from "../../lib/helpers";
+import { transformArray } from '../../lib/helpers'
 
 const INITIAL_STATE = {
   stats: {
-    students_count: 0,
-    instructors_count: 0,
-    courses_count: 0,
-    active_classes_count: 0
+    studentsCount: 0,
+    instructorsCount: 0,
+    coursesCount: 0,
+    activeClassesCount: 0,
   },
   newStudents: {
     byIds: [],
     all: {},
     isRefreshingNewStudents: false
   },
-  latestEnrollments: {
-    byIds: [],
-    all: {},
-    isLoadingLatestEnrollments: false
-  },
-};
-
+  latestEnrollments: []
+}
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -41,25 +36,31 @@ export default (state = INITIAL_STATE, action) => {
       }
     }
     case 'SET_STATS': {
+      const {
+        coursesCount,
+        studentsCount,
+        instructorsCount,
+        activeClassesCount
+      } = action.payload.data
       return {
         ...state,
         stats: {
           ...state.stats,
-          ...action.payload.data
-        }
+          coursesCount,
+          studentsCount,
+          instructorsCount,
+          activeClassesCount,
+        },
+        latestEnrollments: action.payload.data.latestEnrollments
       }
     }
+    default:
+      return state
   }
-  return state;
 }
 
+export const getNewStudents = state =>
+  state.dashboard.newStudents.byIds.map(id => state.dashboard.newStudents.all[id])
 
-export const getNewStudents = (state) => {
-  return state.dashboard.newStudents.byIds.map((id) => {
-    return state.dashboard.newStudents.all[id];
-  })
-}
-
-export const getIsRefreshingNewStudents = (state) => {
-  return state.dashboard.newStudents.isRefreshingNewStudents;
-}
+export const getIsRefreshingNewStudents = state =>
+  state.dashboard.newStudents.isRefreshingNewStudents

@@ -1,451 +1,399 @@
-import AdminLayout from "../../layouts/AdminLayout";
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import StarRatings from "react-star-ratings";
 import {
-  Table,
-  Input,
-  Button,
-  Select,
-  Radio,
-  Tabs,
   Modal,
-  Menu,
-  Dropdown
-} from "antd";
-import InviteUsersForm from "../../../components/shared/InviteUsersForm";
-import AssignInstructorsForm from "../../../components/instructor/AssignInstructorsForm";
-const uuidv1 = require("uuid/v1");
-const Search = Input.Search;
-const { Option } = Select;
-const { TabPane } = Tabs;
-import capitalize from "capitalize";
-import * as actions from "../../../store/actions";
-import { connect } from "react-redux";
-import { CSVLink } from "react-csv";
-import { parsedPaginationTotalText } from "../../../lib/helpers";
+} from 'antd'
+import PropTypes from 'prop-types'
+import pluralize from 'pluralize'
+import capitalize from 'capitalize'
+import { connect } from 'react-redux'
+import yupToObject from 'yup-to-object'
+import React, { Component } from 'react'
+import * as actions from '../../../store/actions'
+import notifier from 'simple-react-notifications'
+import AdminLayout from '../../layouts/AdminLayout'
+import withRedirect from '../../layouts/withRedirect'
+import inviteUserSchema from '../../../lib/schemas/inviteUsers'
+import MenuBar from '../../../components/admin/ManageUsers/MenuBar'
+import UsersList from '../../../components/admin/ManageUsers/UsersList'
+import InviteUsersForm from '../../../components/shared/InviteUsersForm'
+import PaginationStatus from '../../../components/admin/ManageUsers/PaginationStatus'
+import AssignInstructorsForm from '../../../components/instructor/AssignInstructorsForm'
+import { getAllAdminInstructors, getAllAdminStudents, getAllAdmins } from '../../../store/reducers/admin'
+import { getUserDetails } from '../../../store/reducers/user'
+
+const uuidv1 = require('uuid/v1')
+const { confirm } = Modal
 
 class ManageUsers extends Component {
-
   static async getInitialProps ({ reduxStore }) {
     await Promise.all([
       reduxStore.dispatch(actions.fetchInstructors()),
-      reduxStore.dispatch(actions.fetchStudents())
-    ]);
-    return {};
+      reduxStore.dispatch(actions.fetchStudents()),
+      reduxStore.dispatch(actions.fetchAdmins()),
+    ])
+    return {}
   }
 
-  constructor(props) {
-    super(props);
-    this.csvDownloadRef = React.createRef();
+  constructor (props) {
+    super(props)
+    this.csvDownloadRef = React.createRef()
+    this.inviteUserFormRef = React.createRef()
   }
-
-  columns = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      width: 190,
-      fixed: true,
-      key: 12
-    },
-    {
-      title: "Email address",
-      dataIndex: "email",
-      width: 150,
-      key: 112
-    },
-    {
-      title: "Phone number",
-      dataIndex: "phone_number",
-      width: 180,
-      key: 1112
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: 38,
-      width: 150,
-      render: status => {
-        return status === "active" ? (
-          <div className="tag is-success">Active</div>
-        ) : (
-          <div className="tag is-grey">Not active</div>
-        );
-      }
-    },
-    {
-      title: "Sign up date and time",
-      dataIndex: "created_at",
-      width: 190,
-      key: 332
-    },
-    {
-      title: "Action",
-      key: "operation",
-      width: 90,
-      render: row => {
-        let menu = (
-          <Menu>
-            <Menu.Item>
-              <a onClick={() => this.toggleAssignInstructorForm(true, row)}>
-                Assign course
-              </a>
-            </Menu.Item>
-            <Menu.Item>
-              <a onClick={() => {}}>Deactivate account</a>
-            </Menu.Item>
-          </Menu>
-        );
-        return (
-          <div>
-            <Dropdown overlay={menu} placement="bottomLeft">
-              <Button>
-                <div className="d-flex justify-content-between align-items-center">
-                  <span className="mr-3">Action</span>
-                  <img src="/static/images/select.png" />
-                </div>
-              </Button>
-            </Dropdown>
-          </div>
-        );
-      }
-    }
-  ];
-
-  toggleAssignInstructorForm = (visibility, row) => {
-    this.props.setAddUsersModal({
-      payload: false,
-      userType: this.state.activeTab
-    });
-  };
 
   state = {
-    activeTab: "students",
-    loadingCSV: false,
+    errors: {},
     csvData: [],
-    searchQuery: ''
-  };
+    searchQuery: '',
+    loadingCSV: false,
+  }
 
-  // componentDidMount() {
-  //   this.props.fetchInstructors();
-  //   this.props.fetchStudents();
-  // }
-
-  componentWillUnmount() {}
-
-  // closeModal = () => {
-  //   let state = { ...this.state };
-  //   state[this.state.activeTab].isShowingAddNewForm = false;
-  //   this.setState({
-  //     [this.state.activeTab]: state[this.state.activeTab]
-  //   })
-  // }
+  toggleAssignInstructorForm = (visibility, row) => {
+    this.props.setAssignInstructorModalVisibility(
+      visibility,
+    )
+    this.setAssignInstructorForm(row.id, 'authorId')
+  }
 
   setAddNewFormVisibility = (visibility = true) => {
     this.props.setAddUsersModal({
       payload: visibility,
-      userType: this.state.activeTab
-    });
-  };
+      userType: this.props.activeTab
+    })
+  }
+
+  closeInvitationForm = () => {
+    this.setAddNewFormVisibility(false)
+  }
 
   handleTabChange = e => {
-    this.setState({
-      activeTab: e.target.value
-    });
-  };
+    this.props.setManageUsersActiveTab(
+      e.target.value
+    )
+  }
 
-  handleSubmit = () => {};
+  setInvitationUserForm = (payload, index) => {
+    this.validateInvitationForm()
+    this.props.setInvitationUserForm({
+      userType: this.props.activeTab,
+      payload,
+      index
+    })
+  }
 
-  // setForm = (payload, index) => {
-  //   const { activeTab } = this.state;
-  //   let form = [...this.state[activeTab].form];
-  //   form[index] = {
-  //     ...form[index],
-  //     ...payload
-  //   }
+  validateInvitationForm = () => {
+    inviteUserSchema
+      .validate(this.props[this.props.activeTab].form, { abortEarly: false })
+      .then(() => {
+        this.setState({
+          errors: {
+            [this.props.activeTab]: {}
+          }
+        })
+      })
+      .catch(yupError => {
+        const errors = yupToObject(yupError)
+        this.setState({
+          errors: {
+            [this.props.activeTab]: errors
+          },
+        })
+      })
+  }
 
-  //   this.setState({
-  //     [activeTab]: {
-  //       ...this.state[activeTab],
-  //       form
-  //     }
-  //   })
-  // }
+  inviteUsers = (e) => {
+    e.preventDefault()
+    const {
+      activeTab
+    } = this.props
+    inviteUserSchema
+      .validate(this.props[activeTab].form, { abortEarly: false })
+      .then(() => {
+        this.setState({
+          errors: {
+            [activeTab]: {}
+          }
+        })
+        const payload = this.props[activeTab].form.map(entry => entry.email)
+        this.props.inviteUsers({
+          emails: payload,
+          role: pluralize.singular(activeTab)
+        }).then((res) => {
+          notifier.success(res.message)
+        })
+          .catch((err) => {
+            notifier.error(`ERROR! ${err.response.data.message}`)
+            const emailErrors = err.response.data.errors
+            if (emailErrors && emailErrors instanceof Object) {
+              const errors = Object.keys(emailErrors).reduce((agg, cur) => {
+                agg[cur.split('.').pop()] = { email: emailErrors[cur][0] }
+                return agg
+              }, {})
+              this.setState({
+                errors: {
+                  [activeTab]: errors
+                }
+              })
+            }
+          })
+      })
+      .catch(yupError => {
+        const errors = yupToObject(yupError)
+        this.setState({
+          errors: {
+            [this.props.activeTab]: errors
+          },
+        })
+      })
+  }
 
   setAssignInstructorForm = (value, key) => {
-    let form = { ...this.state.instructors.assignInstructorForm };
-    let assignInstructorForm = {
-      ...form,
-      [key]: value
-    };
-
-    this.setState(
-      {
-        instructors: {
-          ...this.state.instructors,
-          assignInstructorForm
-        }
-      },
-      () => console.log(this.state)
-    );
+    this.props.setAssignInstructorForm({ value, key })
   };
 
-  add = () => {
-    // const { activeTab } = this.state;
-    // let form = [...this.state[activeTab].form];
-    // form.push({
-    //   email: '',
-    //   id: uuidv1()
-    // });
-    // this.setState({
-    //   [activeTab]: {
-    //     ...this.state[activeTab],
-    //     form
-    //   }
-    // })
-  };
+  addUserToInvite = () => {
+    this.props.addUserToInvite({
+      userType: this.props.activeTab,
+      payload: {
+        email: '',
+        id: uuidv1()
+      }
+    })
+    this.validateInvitationForm()
+    const inviteUserFormWrapper = document.getElementById(
+      'inviteUserFormWrapper'
+    )
+    setTimeout(() => {
+      inviteUserFormWrapper.scrollTo(0, inviteUserFormWrapper.scrollHeight - 100)
+    }, 10)
+  }
 
-  // showParsedTotal = parsedPaginationTotalText(pagination);
+  removeUserFromInvite = (userEntry) => {
+    this.validateInvitationForm()
+    this.props.removeUserFromInvite({
+      userType: this.props.activeTab,
+      payload: {
+        userEntry
+      }
+    })
+  }
 
   downloadCSV = () => {
+    const {
+      activeTab
+    } = this.props
     this.setState({
       loadingCSV: true
-    });
-
-    this.props.downloadCSV(this.state.activeTab).then(res => {
-      this.setState({
-        loadingCSV: false,
-        csvData: res
-      });
-
-      this.csvDownloadRef.current.link.click();
-    }).catch(() => {
-      this.setState({
-        loadingCSV: false
-      });
     })
+    this.props.downloadCSV(activeTab)
+      .then(res => {
+        this.setState({
+          loadingCSV: false,
+          csvData: res
+        })
+        this.csvDownloadRef.current.link.click()
+      }).catch(() => {
+        this.setState({
+          loadingCSV: false
+        })
+      })
   };
 
   handleTableChange = (pagination, type) => {
     this.props[`fetch${type}`]({
       page: pagination.current,
       q: this.state.searchQuery
-    });
-  };
+    })
+  }
+
+  handleDeactivation = (deactivate, user) => {
+    const action = !deactivate ? 'activate' : 'deactivate'
+    this.showConfirm(
+      `Are you sure you want to ${action} this user ?`,
+      () => this.props.handleDeactivation({ deactivate, user }).then((res) => {
+        notifier.success(res.message)
+      }).catch((err) => {
+        // console.log(err)
+        notifier.error(`ERROR! ${err.response.data.message}`)
+      })
+    )
+  }
+
+  showConfirm = (content, handleOk, handleCancel) => {
+    confirm({
+      content,
+      onOk () {
+        handleOk && handleOk()
+      },
+      onCancel () {
+        handleCancel && handleCancel()
+      },
+    })
+  }
 
   search = q => {
     this.setState({ searchQuery: q })
-    this.props[`fetch${capitalize(this.state.activeTab)}`]({
+    this.props[`fetch${capitalize(this.props.activeTab)}`]({
       q
-    });
+    })
   };
 
-  usersView = () => {
-    const { activeTab } = this.state;
-    return (
-      <section className="manage-users">
-        <AdminLayout headerName="Manage Users">
-          <div className="menu-bar-container">
-            <div className="container">
-              <div className="row menu-bar pl-6 pr-6 pt-5 pb-5">
-                <div className="col-md-12">
-                  <div className="row justify-content-between align-items-center">
-                    <div className="col-md-6 mb-3 col-lg-6 col-sm-12">
-                      <Radio.Group
-                        onChange={this.handleTabChange}
-                        value={activeTab}
-                        size="large"
-                        buttonStyle="solid"
-                      >
-                        <Radio.Button value="students">Students</Radio.Button>
-                        <Radio.Button value="instructors">
-                          Instructors
-                        </Radio.Button>
-                        <Radio.Button value="admins">Admins</Radio.Button>
-                      </Radio.Group>
-                    </div>
-                    <div className="col-md-12 col-lg-6 col-sm-12 flex-xs-column flex-sm-row justify-content-lg-end d-flex">
-                      <Search
-                        className="mr-3 mb-3"
-                        placeholder="Search"
-                        onSearch={value => this.search(value)}
-                        onChange={e => this.search(e.target.value)}
-                        style={{ width: "180px", height: "42px" }}
-                      />
-                      {activeTab !== "students" ? (
-                        <Button
-                          onClick={() => this.setAddNewFormVisibility()}
-                          className="mr-3 mb-3"
-                          style={{ height: "42px", width: "105px" }}
-                          type="primary"
-                          ghost
-                        >
-                          Add new
-                        </Button>
-                      ) : null}
-                      <Button
-                        loading={this.state.loadingCSV}
-                        onClick={this.downloadCSV}
-                        className="mb-3"
-                        type="danger"
-                        style={{ width: "126px", height: "40px" }}
-                      >
-                        <span>Download</span>
-                        <img className="ml-2" src="/static/images/down.png" />
-                      </Button>
-                      {
-                        <CSVLink
-                          ref={this.csvDownloadRef}
-                          data={this.state.csvData}
-                          filename={`${this.state.activeTab}.csv`}
-                          target="_blank"
-                          style={{ display: "none" }}
-                        >
-                          {" "}
-                          Download
-                        </CSVLink>
-                      }
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="has-full-height has-white-bg">
-            <div className="container">
-              <div className="row pl-6 pr-6 pt-5">
-                <div className="col-md-12">
-                  <div className="has-white-bg" style={{ height: "60px" }}>
-                    <p className="mb-0">
-                      {parsedPaginationTotalText(this.props[activeTab].pagination)}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="row pl-6 pr-6">
-                <div className="col-md-12">
-                  <Tabs activeKey={activeTab}>
-                    <TabPane tab="students" key="students">
-                      <Table
-                        rowKey="id"
-                        loading={this.props.students.isLoading}
-                        scroll={{ x: 1100 }}
-                        pagination={this.props.students.pagination}
-                        columns={this.columns}
-                        dataSource={this.props.students.all}
-                        onChange={pagination =>
-                          this.handleTableChange(pagination, "Students")
-                        }
-                      />
-                    </TabPane>
-                    <TabPane tab="insructors" key="instructors">
-                      <Table
-                        rowKey="id"
-                        loading={this.props.instructors.isLoading}
-                        scroll={{ x: 1100 }}
-                        pagination={this.props.instructors.pagination}
-                        columns={this.columns}
-                        dataSource={this.props.instructors.all}
-                        onChange={pagination =>
-                          this.handleTableChange(pagination, "Instructors")
-                        }
-                      />
-                    </TabPane>
-                    <TabPane tab="admins" key="admins">
-                      {/* <Table
-                        scroll={{ x: 1100 }}
-                        pagination={this.state.admins.paginationOptions}
-                        columns={this.columns}
-                        dataSource={this.state.admins.all}
-                      /> */}
-                    </TabPane>
-                  </Tabs>
-                </div>
-              </div>
-            </div>
-          </div>
-        </AdminLayout>
-      </section>
-    );
-  };
-
-  render() {
-    const { activeTab } = this.props;
+  render () {
+    const {
+      user,
+      admins,
+      students,
+      activeTab,
+      instructors,
+      searchCourses,
+      searchCourseBatches,
+      assignCourseToInstructor,
+      setAssignInstructorModalVisibility
+    } = this.props
     return (
       <>
-        {this.usersView()}
-        {/* { this.props[activeTab].isShowingAddNewForm && (
-          <Modal
-            footer={null}
-            wrapClassName="add-new-form-modal"
-            width="464px"
-            height="314px"
-            centered
-            onCancel={this.closeModal}
-            visible={this.props[activeTab].isShowingAddNewForm}
-            title={
-              <div className="d-flex align-items-center justify-content-between">
-                <h5>Add new {activeTab}</h5>
-              </div>
-            }
-          >
-            <InviteUsersForm
+        <section className="manage-users">
+          <AdminLayout headerName="Manage Users">
+            <MenuBar
+              search={this.search}
               activeTab={activeTab}
-              form={this.props[activeTab].form}
-              setForm={this.setForm}
-              handleSubmit={this.handleSubmit}
-              add={this.add}
+              csvData={this.state.csvData}
+              downloadCSV={this.downloadCSV}
+              loadingCSV={this.state.loadingCSV}
+              csvDownloadRef={this.csvDownloadRef}
+              handleTabChange={this.handleTabChange}
+              setAddNewFormVisibility={this.setAddNewFormVisibility}
+              setAssignInstructorModalVisibility={setAssignInstructorModalVisibility}
             />
-          </Modal>
-        )} */}
-        {this.props.instructors.isShowingAddNewForm && (
-          <Modal
-            footer={null}
-            wrapClassName="assign-instructor-form-modal"
-            width="464px"
-            height="314px"
-            centered
-            onCancel={() => this.setAddNewFormVisibility(false)}
-            visible={this.props.instructors.isShowingAddNewForm}
-            title={
-              <div className="d-flex align-items-center justify-content-between">
-                <h5>Assign instructor to course</h5>
+            <div className="has-full-height has-white-bg">
+              <div className="container">
+                <PaginationStatus pagination={this.props[activeTab].pagination}/>
+                <UsersList
+                  user={user}
+                  admins={admins}
+                  students={students}
+                  activeTab={activeTab}
+                  instructors={instructors}
+                  handleTableChange={this.handleTableChange}
+                  handleDeactivation={this.handleDeactivation}
+                  toggleAssignInstructorForm={this.toggleAssignInstructorForm}
+                />
               </div>
-            }
-          >
-            <AssignInstructorsForm
-              form={this.props.instructors.assignInstructorForm}
-              handleSubmit={this.handleSubmit}
-              setAssignInstructorForm={this.setAssignInstructorForm}
-            />
-          </Modal>
-        )}
+            </div>
+          </AdminLayout>
+        </section>
+        <Modal
+          centered
+          footer={null}
+          width="464px"
+          height="314px"
+          onCancel={this.closeInvitationForm}
+          wrapClassName="add-new-form-modal"
+          visible={this.props[activeTab].isShowingAddNewForm}
+          title={
+            <div className="d-flex align-items-center justify-content-between">
+              <h5>Add new {activeTab}</h5>
+            </div>
+          }
+        >
+          <InviteUsersForm
+            activeTab={activeTab}
+            errors={this.state.errors}
+            add={this.addUserToInvite}
+            remove={this.removeUserFromInvite}
+            handleSubmit={this.inviteUsers}
+            form={this.props[activeTab].form}
+            setForm={this.setInvitationUserForm}
+            isInviting={this.props[activeTab].isInviting}
+          />
+        </Modal>
+        <Modal
+          centered
+          footer={null}
+          width="464px"
+          height="314px"
+          visible={instructors.assignInstructorForm.isVisible}
+          wrapClassName="assign-instructor-form-modal"
+          onCancel={() => this.props.setAssignInstructorModalVisibility(false)}
+          title={
+            <div className="d-flex align-items-center justify-content-between">
+              <h5>Assign instructor to course</h5>
+            </div>
+          }
+        >
+          <AssignInstructorsForm
+            searchCourses={searchCourses}
+            handleSubmit={this.inviteUsers}
+            form={instructors.assignInstructorForm}
+            searchCourseBatches={searchCourseBatches}
+            assignCourseToInstructor={assignCourseToInstructor}
+            setAssignInstructorForm={this.setAssignInstructorForm}
+          />
+        </Modal>
       </>
-    );
+    )
   }
 }
 
-ManageUsers.propTypes = {};
+ManageUsers.propTypes = {
+  user: PropTypes.object.isRequired,
+  admins: PropTypes.object.isRequired,
+  students: PropTypes.object.isRequired,
+  activeTab: PropTypes.string.isRequired,
+  downloadCSV: PropTypes.func.isRequired,
+  inviteUsers: PropTypes.func.isRequired,
+  fetchAdmins: PropTypes.func.isRequired,
+  searchCourses: PropTypes.func.isRequired,
+  instructors: PropTypes.object.isRequired,
+  fetchStudents: PropTypes.func.isRequired,
+  fetchInstructors: PropTypes.func.isRequired,
+  setAddUsersModal: PropTypes.func.isRequired,
+  addUserToInvite: PropTypes.func.isRequired,
+  handleDeactivation: PropTypes.func.isRequired,
+  searchCourseBatches: PropTypes.func.isRequired,
+  removeUserFromInvite: PropTypes.func.isRequired,
+  setInvitationUserForm: PropTypes.func.isRequired,
+  setAssignInstructorForm: PropTypes.func.isRequired,
+  setManageUsersActiveTab: PropTypes.func.isRequired,
+  assignCourseToInstructor: PropTypes.func.isRequired,
+  setAssignInstructorModalVisibility: PropTypes.func.isRequired,
+}
 
 const mapStateToProps = state => {
   return {
+    user: getUserDetails(state),
+    activeTab: state.admin.manageUsers.activeTab,
     instructors: {
       ...state.admin.manageUsers.instructors,
-      all: state.admin.manageUsers.instructors.byIds.map(i => {
-        return state.admin.manageUsers.instructors.all[i];
-      })
+      all: getAllAdminInstructors(state)
     },
     students: {
       ...state.admin.manageUsers.students,
-      all: state.admin.manageUsers.students.byIds.map(i => {
-        return state.admin.manageUsers.students.all[i];
-      })
-    }
-  };
-};
+      all: getAllAdminStudents(state)
+    },
+    admins: {
+      ...state.admin.manageUsers.admins,
+      all: getAllAdmins(state)
+    },
+  }
+}
 
 export default connect(
   mapStateToProps,
-  { ...actions }
-)(ManageUsers);
+  {
+    inviteUsers: actions.inviteUsers,
+    fetchAdmins: actions.fetchAdmins,
+    downloadCSV: actions.downloadCSV,
+    searchCourses: actions.searchCourses,
+    fetchStudents: actions.fetchStudents,
+    addUserToInvite: actions.addUserToInvite,
+    setAddUsersModal: actions.setAddUsersModal,
+    fetchInstructors: actions.fetchInstructors,
+    handleDeactivation: actions.handleDeactivation,
+    searchCourseBatches: actions.searchCourseBatches,
+    removeUserFromInvite: actions.removeUserFromInvite,
+    setInvitationUserForm: actions.setInvitationUserForm,
+    setManageUsersActiveTab: actions.setManageUsersActiveTab,
+    setAssignInstructorForm: actions.setAssignInstructorForm,
+    assignCourseToInstructor: actions.assignCourseToInstructor,
+    setAssignInstructorModalVisibility: actions.setAssignInstructorModalVisibility,
+  }
+)(withRedirect(ManageUsers))

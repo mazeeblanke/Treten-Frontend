@@ -1,79 +1,38 @@
-import { Button } from "antd";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import * as actions from "../../../store/actions";
-import React, { Component } from "react";
-import AdminLayout from "../../layouts/AdminLayout";
-import Display from "../../../components/shared/Display";
-import EmptyState from "../../../components/shared/EmptyState";
-import NewStudents from "../../../components/admin/NewStudents";
-import LatestEnrollments from "../../../components/admin/LatestEnrollments";
-import { getNewStudents, getIsRefreshingNewStudents } from "../../../store/reducers/dashboard";
+// import Router from 'next/router'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import React, { Component } from 'react'
+import * as actions from '../../../store/actions'
+import AdminLayout from '../../layouts/AdminLayout'
+import withRedirect from '../../layouts/withRedirect'
+import NewStudents from '../../../components/admin/NewStudents'
+import DashboardCard from '../../../components/shared/DashboardCard'
+import LatestEnrollments from '../../../components/admin/LatestEnrollments'
+import { getNewStudents, getIsRefreshingNewStudents } from '../../../store/reducers/dashboard'
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-	}
-	
-	static async getInitialProps ({ reduxStore }) {
-		await Promise.all([
-			reduxStore.dispatch(actions.fetchDashboardStats()),
-			reduxStore.dispatch(actions.refreshNewStudents()),
-		])
-		return {
-
-		}
-	}
-
-  state = {
-    latestEnrollments: [
-      {
-        key: "1",
-        course: "CCNA R&S",
-        status: "Active",
-        date: "01/02/2019; 3:45pm",
-        name: "Sheldon Cooper"
-      },
-      {
-        key: "2",
-        course: "CCNA R&S",
-        status: "Active",
-        date: "01/02/2019; 3:45pm",
-        name: "Sheldon Cooper"
-      },
-      {
-        key: "3",
-        course: "CCNA R&S",
-        status: "Active",
-        date: "01/02/2019; 3:45pm",
-        name: "Sheldon Cooper"
-      },
-      {
-        key: "4",
-        course: "CCNA R&S",
-        status: "Active",
-        date: "01/02/2019; 3:45pm",
-        name: "Sheldon Cooper"
-      }
-    ]
-    // courses: []
-  };
-
-  componentWillMount() {}
-
-  componentDidMount() {}
-
-  componentWillUnmount() {}
-
-  refreshNewStudents = () => {
-    // check if is currently refreshing, if yes skip/return
-    if (!this.props.isRefreshingNewStudents) {
-			this.props.refreshNewStudents()
-    }
-    //else refresh
+  static async getInitialProps ({ reduxStore, res }) {
+    await Promise.all([
+      reduxStore.dispatch(actions.fetchDashboardStats()),
+      reduxStore.dispatch(actions.refreshNewStudents())
+    ])
+    return {}
   }
 
-  render() {
+  refreshNewStudents = () => {
+    if (!this.props.isRefreshingNewStudents) {
+      this.props.refreshNewStudents()
+    }
+  }
+
+  render () {
+    const {
+      stats,
+      newStudents,
+      latestEnrollments,
+      refreshNewStudents,
+      isRefreshingNewStudents,
+    } = this.props
     return (
       <AdminLayout headerName="Home">
         <section className="courses admin-home has-height-80">
@@ -82,76 +41,32 @@ class Home extends Component {
               <div className="col-md-12 pl-6 pr-6">
                 <div className="row">
                   <div className="col-md-6 col-xl-3 mb-4">
-                    <div
-                      className="card dashboard__card border-0"
-                      style={{ height: "12.57rem" }}
-                    >
-                      <div className="card-body">
-                        <div className="d-flex justify-content-around align-items-center has-full-height">
-                          <div>
-                            <img src="/static/images/admin/prof_cap.png"></img>
-                          </div>
-                          <div>
-                            <p className="m-0">Student count</p>
-                            <h3>{this.props.stats.students_count}</h3>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <DashboardCard
+                      statCount={stats.studentsCount}
+                      image="/static/images/admin/prof_cap.png"
+                      title="Student count"
+                    />
                   </div>
                   <div className="col-md-6 col-xl-3 mb-4">
-                    <div
-                      className="card dashboard__card border-0"
-                      style={{ height: "12.57rem" }}
-                    >
-                      <div className="card-body">
-                        <div className="d-flex justify-content-around align-items-center has-full-height">
-                          <div>
-                            <img src="/static/images/admin/instructor_count.png"></img>
-                          </div>
-                          <div>
-                            <p className="m-0">Instructor count</p>
-                            <h3>{this.props.stats.instructors_count}</h3>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <DashboardCard
+                      statCount={stats.instructorsCount}
+                      image="/static/images/admin/instructor_count.png"
+                      title="Instructor count"
+                    />
                   </div>
                   <div className="col-md-6 col-xl-3 mb-4">
-                    <div
-                      className="card dashboard__card border-0"
-                      style={{ height: "12.57rem" }}
-                    >
-                      <div className="card-body">
-                        <div className="d-flex justify-content-around align-items-center has-full-height">
-                          <div>
-                            <img src="/static/images/admin/books.png"></img>
-                          </div>
-                          <div>
-                            <p className="m-0">Course count</p>
-                            <h3>{this.props.stats.courses_count}</h3>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <DashboardCard
+                      statCount={stats.coursesCount}
+                      image="/static/images/admin/books.png"
+                      title="Course count"
+                    />
                   </div>
                   <div className="col-md-6 col-xl-3 mb-4">
-                    <div
-                      className="card dashboard__card border-0"
-                      style={{ height: "12.57rem" }}
-                    >
-                      <div className="card-body">
-                        <div className="d-flex justify-content-around align-items-center has-full-height">
-                          <div>
-                            <img src="/static/images/admin/active-classes.png"></img>
-                          </div>
-                          <div>
-                            <p className="m-0">Active classes</p>
-                            <h3>{this.props.stats.active_classes_count}</h3>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <DashboardCard
+                      statCount={stats.activeClassesCount}
+                      image="/static/images/admin/active-classes.png"
+                      title="Active classes"
+                    />
                   </div>
                 </div>
               </div>
@@ -161,13 +76,11 @@ class Home extends Component {
             <div className="row">
               <div className="col-md-12 pl-6 pr-6">
                 <div className="row">
-                  <LatestEnrollments
-                    latestEnrollments={this.state.latestEnrollments}
-                  />
+                  <LatestEnrollments latestEnrollments={latestEnrollments} />
                   <NewStudents
-                    isRefreshingNewStudents={this.props.isRefreshingNewStudents}
-                    refreshNewStudents={this.refreshNewStudents}
-                    newStudents={this.props.newStudents}
+                    isRefreshingNewStudents={isRefreshingNewStudents}
+                    refreshNewStudents={refreshNewStudents}
+                    newStudents={newStudents}
                   />
                 </div>
               </div>
@@ -175,19 +88,35 @@ class Home extends Component {
           </div>
         </section>
       </AdminLayout>
-    );
+    )
   }
 }
 
-Home.propTypes = {};
+Home.propTypes = {
+  stats: PropTypes.shape({
+    coursesCount: PropTypes.number,
+    studentsCount: PropTypes.number,
+    instructorsCount: PropTypes.number,
+    activeClassesCount: PropTypes.string
+  }).isRequired,
+  user: PropTypes.object.isRequired,
+  newStudents: PropTypes.array.isRequired,
+  latestEnrollments: PropTypes.array.isRequired,
+  refreshNewStudents: PropTypes.func.isRequired,
+  isRefreshingNewStudents: PropTypes.bool.isRequired,
+}
 
 const mapStateToProps = state => ({
-	newStudents: getNewStudents(state),
-	isRefreshingNewStudents: getIsRefreshingNewStudents(state),
-	stats: state.dashboard.stats
-});
+  latestEnrollments: state.dashboard.latestEnrollments,
+  isRefreshingNewStudents: getIsRefreshingNewStudents(state),
+  newStudents: getNewStudents(state),
+  stats: state.dashboard.stats,
+  user: state.user
+})
 
 export default connect(
   mapStateToProps,
-  { ...actions }
-)(Home);
+  {
+    refreshNewStudents: actions.refreshNewStudents
+  }
+)(withRedirect(Home))

@@ -1,161 +1,106 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-// import withAdminLayout from '../../layouts/withAdminLayout';
-import EmptyState from "../../../components/shared/EmptyState";
-import { Button, Select, Tabs } from "antd";
-import AdminLayout from "../../layouts/AdminLayout";
-import Display from "../../../components/shared/Display";
-import Link from "next/link";
-import Router from "next/router";
+import 'element-theme-default'
+import Router from 'next/router'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import React, { Component } from 'react'
+import { Button, Tabs, Select } from 'antd'
+import {
+  getAllAdminCourses,
+  getExpertAdminCourses,
+  getAssociateAdminCourses,
+  getProfessionalAdminCourses,
+  getAdminCoursesSortDirection
+} from '../../../store/reducers/adminCourses'
+import * as actions from '../../../store/actions'
+import AdminLayout from '../../layouts/AdminLayout'
+import withRedirect from '../../layouts/withRedirect'
+import CourseList from '../../../components/admin/CourseList'
+import { getUserDetails } from '../../../store/reducers/user'
 
-const { TabPane } = Tabs;
-const { Option } = Select;
-// const Router = useRouter();
-
-const operations = (
-  <div className="d-none d-sm-none d-md-block">
-    <span className="mr-3">
-      <b>Sort By:</b>
-    </span>
-    <Select defaultValue="none" style={{ width: 120 }}>
-      <Option value="jack">Jack</Option>
-      <Option value="none">None</Option>
-      <Option value="disabled" disabled>
-        Disabled
-      </Option>
-      <Option value="Yiminghe">yiminghe</Option>
-    </Select>
-  </div>
-);
+const { TabPane } = Tabs
+const { Option } = Select
 
 class Courses extends Component {
-  constructor(props) {
-    super(props);
+  static async getInitialProps ({ reduxStore }) {
+    await Promise.all([
+      reduxStore.dispatch(actions.fetchCourses({
+        page: 1,
+        pageSize: 8,
+        category: 'all'
+      })),
+    ])
+    return {}
   }
 
   state = {
-    courses: [
-      {
-        instructor: {
-          name: "Tim Cook",
-          profile_pic: "/static/images/instructors/instructor1.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: "remote",
-        banner_image: "/static/images/courses/course1.png"
-      },
-      {
-        instructor: {
-          name: "Tim Berners-Lee",
-          profile_pic: "/static/images/instructors/instructor2.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: "on-demand",
-        banner_image: "/static/images/courses/course2.png"
-      },
-      {
-        instructor: {
-          name: "Oluwadare Michelangelo",
-          profile_pic: "/static/images/instructors/instructor3.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: "remote",
-        banner_image: "/static/images/courses/course3.png"
-      },
-      {
-        instructor: {
-          name: "Chukwuemeka Nnadi",
-          profile_pic: "/static/images/instructors/instructor4.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: "on-demand",
-        banner_image: "/static/images/courses/course4.png"
-      },
-      {
-        instructor: {
-          name: "Sharon james",
-          profile_pic: "/static/images/instructors/instructor1.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: "remote",
-        banner_image: "/static/images/courses/course5.png"
-      },
-      {
-        instructor: {
-          name: "Oluwadare Michelangelo",
-          profile_pic: "/static/images/instructors/instructor3.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: "on-demand",
-        banner_image: "/static/images/courses/course3.png"
-      },
-      {
-        instructor: {
-          name: "Chukwuemeka Nnadi",
-          profile_pic: "/static/images/instructors/instructor4.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: "on-site",
-        banner_image: "/static/images/courses/course4.png"
-      },
-      {
-        instructor: {
-          name: "Sharon james",
-          profile_pic: "/static/images/instructors/instructor1.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: "on-site",
-        banner_image: "/static/images/courses/course5.png"
-      }
-    ],
-    // courses: []
-  };
+    sort: ''
+  }
 
-  componentWillMount() {}
+  operations = () => {
+    const { getSortDirection, activeTab } = this.props
+    return (
+      <div className="d-none d-sm-none d-md-block">
+        <span className="mr-3">
+          <b>Sort By:</b>
+        </span>
+        <Select
+          value={getSortDirection(activeTab)}
+          onChange={(value) => this.handlePageChange({
+            tab: activeTab,
+            sort: value
+          })
+          }
+          placeholder="Sort by"
+          style={{ width: 150 }}
+        >
+          <Option value=''>...</Option>
+          <Option value="asc">Asc</Option>
+          <Option value="desc">Desc</Option>
+        </Select>
+      </div>
+    )
+  }
 
-  componentDidMount() {}
+  handlePageChange = ({ page = 1, tab: category, sort = null }) => {
+    if (!sort) sort = this.props.getSortDirection(category)
+    this.props.setTabSortDirection({ category, sort })
+    this.props.fetchCourses({
+      page,
+      category,
+      sort
+    })
+  }
 
-  // componentWillReceiveProps(nextProps) {
+  handleActiveTabChange = (tab) => {
+    this.props.handleActiveTabChange({
+      tab,
+      sort: this.props.getSortDirection(tab)
+    })
+  }
 
-  // }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-
-  // }
-
-  // componentWillUpdate(nextProps, nextState) {
-
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-
-  // }
-
-  componentWillUnmount() {}
-
-  render() {
+  render () {
+    const {
+      user,
+      activeTab,
+      allCourses,
+      expertCourses,
+      associateCourses,
+      professionalCourses,
+      isLoadingAllCourses,
+      allCoursesPagination,
+      isLoadingExpertCourses,
+      expertCoursesPagination,
+      isLoadingAssociateCourses,
+      associateCoursesPagination,
+      isLoadingProfessionalCourses,
+      professionalCoursesPagination
+    } = this.props
     return (
       <AdminLayout
         action={
           <Button
-            onClick={() => Router.push("/d/admin/add-course")}
-            style={{ width: "105px", height: "40px" }}
+            onClick={() => Router.push('/d/admin/add-course')}
+            style={{ width: '105px', height: '40px' }}
             type="danger"
           >
             Add New
@@ -164,84 +109,112 @@ class Courses extends Component {
         headerName="Home"
       >
         <section className="courses has-height-80 mt-5-neg">
-          <Display if={!this.state.courses.length}>
-            <div className="has-full-height pt-7">
-              <EmptyState emptyText="You have not signed up for any course">
-                <Button
-                  style={{ width: "195px" }}
-                  className="ml-3"
-                  size="large"
-                  type="danger"
+          <div className="container pt-7">
+            <div className="row">
+              <div className="col-md-12 pl-6 pr-6">
+                <Tabs
+                  activeKey={activeTab}
+                  onTabClick={this.handleActiveTabChange}
+                  tabBarExtraContent={this.operations()}
                 >
-                  Explore course catalog
-                </Button>
-              </EmptyState>
-            </div>
-          </Display>
-          <Display if={this.state.courses.length}>
-            <div className="container pt-7">
-              <div className="row">
-                <div className="col-md-12 pl-6 pr-6">
-                  <Tabs tabBarExtraContent={operations}>
-                    <TabPane tab="All courses" key="1">
-                      <div className="row mt-4">
-                        {this.state.courses.map((course, index) =>
-                          <Link key={index} href="/d/admin/course">
-                            <div className="col-sm-12 col-md-6 col-lg-3 mb-5">
-                              <div key={index}>
-                                <div className="card border-0">
-                                  <img
-                                    src={course.banner_image}
-                                    className="card-img-top"
-                                    alt={course.title}
-                                  />
-                                  <div className="card-body">
-                                    <h5 className="card-title">
-                                      {course.title}
-                                    </h5>
-                                    <h6 className="mb-3 mt-1">
-                                      {course.type}
-                                    </h6>
-                                    <Link href="/d/admin/course">
-                                      <h6>
-                                        <b>View Course</b>
-                                        <img
-                                          className="ml-2"
-                                          src="/static/images/arrow-right.png"
-                                        />
-                                      </h6>
-                                    </Link>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </Link>
-                        )}
-                      </div>
-                    </TabPane>
-                    <TabPane tab="Associate level" key="2">
-                      Content of tab 2
-                    </TabPane>
-                    <TabPane tab="Professional level" key="3">
+                  <TabPane tab="All courses" key="all">
+                    <CourseList
+                      user={user}
+                      tab="all"
+                      courses={allCourses}
+                      isLoading={isLoadingAllCourses}
+                      pagination={allCoursesPagination}
+                      handlePageChange={this.handlePageChange}
+                    />
+                  </TabPane>
+                  <TabPane tab="Associate level" key="associate">
+                    <CourseList
+                      user={user}
+                      tab="associate"
+                      courses={associateCourses}
+                      isLoading={isLoadingAssociateCourses}
+                      pagination={associateCoursesPagination}
+                      handlePageChange={this.handlePageChange}
+                    />
+                  </TabPane>
+                  <TabPane tab="Professional level" key="professional">
+                    <CourseList
+                      user={user}
+                      tab="professional"
+                      courses={professionalCourses}
+                      isLoading={isLoadingProfessionalCourses}
+                      handlePageChange={this.handlePageChange}
+                      pagination={professionalCoursesPagination}
+                    />
+                  </TabPane>
+                  <TabPane tab="Expert level" key="expert">
+                    <CourseList
+                      tab="expert"
+                      user={user}
+                      courses={expertCourses}
+                      isLoading={isLoadingExpertCourses}
+                      pagination={expertCoursesPagination}
+                      handlePageChange={this.handlePageChange}
+                    />
+                  </TabPane>
+                  {/* <TabPane tab="Bootcamps" key="5">
                       Content of tab 3
-                    </TabPane>
-                    <TabPane tab="Expert level" key="4">
-                      Content of tab 3
-                    </TabPane>
-                    <TabPane tab="Bootcamps" key="5">
-                      Content of tab 3
-                    </TabPane>
-                  </Tabs>
-                </div>
+                  </TabPane> */}
+                </Tabs>
               </div>
             </div>
-          </Display>
+          </div>
         </section>
       </AdminLayout>
-    );
+    )
   }
 }
 
-Courses.propTypes = {};
+Courses.propTypes = {
+  user: PropTypes.object.isRequired,
+  activeTab: PropTypes.string.isRequired,
+  allCourses: PropTypes.array.isRequired,
+  fetchCourses: PropTypes.func.isRequired,
+  expertCourses: PropTypes.array.isRequired,
+  getSortDirection: PropTypes.func.isRequired,
+  associateCourses: PropTypes.array.isRequired,
+  isLoadingAllCourses: PropTypes.bool.isRequired,
+  setTabSortDirection: PropTypes.func.isRequired,
+  professionalCourses: PropTypes.array.isRequired,
+  handleActiveTabChange: PropTypes.func.isRequired,
+  isLoadingExpertCourses: PropTypes.bool.isRequired,
+  allCoursesPagination: PropTypes.object.isRequired,
+  expertCoursesPagination: PropTypes.object.isRequired,
+  isLoadingAssociateCourses: PropTypes.bool.isRequired,
+  associateCoursesPagination: PropTypes.object.isRequired,
+  isLoadingProfessionalCourses: PropTypes.bool.isRequired,
+  professionalCoursesPagination: PropTypes.object.isRequired,
+}
 
-export default Courses;
+const mapStateToProps = (state) => {
+  return {
+    user: getUserDetails(state),
+    allCourses: getAllAdminCourses(state),
+    activeTab: state.adminCourses.activeTab,
+    expertCourses: getExpertAdminCourses(state),
+    associateCourses: getAssociateAdminCourses(state),
+    isLoadingAllCourses: state.adminCourses.all.isLoading,
+    professionalCourses: getProfessionalAdminCourses(state),
+    allCoursesPagination: state.adminCourses.all.pagination,
+    isLoadingExpertCourses: state.adminCourses.expert.isLoading,
+    expertCoursesPagination: state.adminCourses.expert.pagination,
+    isLoadingAssociateCourses: state.adminCourses.associate.isLoading,
+    associateCoursesPagination: state.adminCourses.associate.pagination,
+    isLoadingProfessionalCourses: state.adminCourses.professional.isLoading,
+    professionalCoursesPagination: state.adminCourses.professional.pagination,
+    getSortDirection: (tab) => {
+      return getAdminCoursesSortDirection(state, tab)
+    }
+  }
+}
+
+export default connect(mapStateToProps, {
+  fetchCourses: actions.fetchCourses,
+  setTabSortDirection: actions.setTabSortDirection,
+  handleActiveTabChange: actions.handleActiveTabChange,
+})(withRedirect(Courses))

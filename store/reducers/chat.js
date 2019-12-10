@@ -1,27 +1,23 @@
-import { transformArray } from "../../lib/helpers";
-import { CHATS_PAGE_SIZE } from "../../lib/constants";
+import { transformArray } from '../../lib/helpers'
+import { CHATS_PAGE_SIZE } from '../../lib/constants'
 
-const paginationOptions = (options = {}) => {
-  return {
-    total: options.total || 0,
-    current: options.page,
-    pageSize: CHATS_PAGE_SIZE
-  };
-};
+const paginationOptions = (options = {}) => ({
+  total: options.total || 0,
+  current: options.page,
+  pageSize: CHATS_PAGE_SIZE
+})
 
-const initSelectedChat = () => {
-  return {
-    byIds: [],
-    all: {},
-    isLoadingChat: false,
-    pagination: paginationOptions(),
-    isViewing: false,
-    messageBeingTyped: "",
-    hash: null,
-    message_uuid: null,
-    typingWhisperDirection: null
-  };
-};
+const initSelectedChat = () => ({
+  byIds: [],
+  all: {},
+  isLoadingChat: false,
+  pagination: paginationOptions(),
+  isViewing: false,
+  messageBeingTyped: '',
+  hash: null,
+  messageUuid: null,
+  typingWhisperDirection: null
+})
 
 const INITIAL_STATE = {
   isShowingChatForm: false,
@@ -46,108 +42,117 @@ const INITIAL_STATE = {
     byIds: [],
     all: {}
   }
-};
+}
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "SET_CHAT_FORM_VISIBILITY": {
+    case 'SET_CHAT_FORM_VISIBILITY': {
       return {
         ...state,
         isShowingChatForm: action.payload
-      };
+      }
     }
-    case "SET_CHAT_RECIPIENT": {
-      let payload =
-        action.payload.id === state.recipient.id ? {} : action.payload;
+    case 'SET_CHAT_RECIPIENT': {
+      const payload = action.payload.id === state.recipient.id ? {} : action.payload
 
       return {
         ...state,
         recipient: {
           ...payload
         }
-      };
+      }
     }
-    case "SET_LOADING_CHAT_USERS": {
+    case 'SET_LOADING_CHAT_USERS': {
       return {
         ...state,
         isLoadingChatUsers: action.payload
-      };
+      }
     }
-    case "SET_LOADING_CHATS": {
+    case 'SET_LOADING_CHATS': {
       return {
         ...state,
         chats: {
           ...state.chats,
           isLoadingChats: action.payload
         }
-      };
+      }
     }
-    case "SET_LOADING_CHAT": {
+    case 'SET_LOADING_CHAT': {
       const selectedChat = {
         ...state.selectedChat,
         isLoadingChat: action.payload
-      };
+      }
       return {
         ...state,
         selectedChat
-      };
+      }
     }
-    case "SET_LOADING_BROADCASTS": {
+    case 'SET_LOADING_BROADCAST': {
+      const selectedBroadcast = {
+        ...state.selectedBroadcast,
+        isLoading: action.payload,
+        isViewing: false
+      }
+      return {
+        ...state,
+        selectedBroadcast
+      }
+    }
+    case 'SET_LOADING_BROADCASTS': {
       return {
         ...state,
         broadcasts: {
           ...state.broadcasts,
           isLoadingBroadcasts: action.payload
         }
-      };
+      }
     }
-    case "SET_CHATS": {
+    case 'SET_CHATS': {
       return {
         ...state,
         chats: {
           ...state.chats,
-          ...transformArray(action.payload.data, "message_uuid"),
+          ...transformArray(action.payload.data, 'messageUuid'),
           pagination: paginationOptions({
             page: action.payload.page,
             pageSize: action.payload.pageSize,
             total: action.payload.data.total
           })
         }
-      };
+      }
     }
-    case "SET_CACHED_SELECTED_CHAT": {
+    case 'SET_CACHED_SELECTED_CHAT': {
       return {
         ...state,
         selectedChat: {
           ...state.selectedChat,
-          ...(state.chatThreads[action.payload.message_uuid] ||
-            initSelectedChat())
+          ...(state.chatThreads[action.payload.messageUuid] || initSelectedChat())
         }
-      };
+      }
     }
-    case "START_NEW_CHAT": {
-      const chats = { ...state.chats };
+    case 'START_NEW_CHAT': {
+      const chats = { ...state.chats }
 
-      let chatMsgMock = {
+      const chatMsgMock = {
         sender: action.payload.sender,
         receiver: action.payload.receiver,
         id: null,
-        message_uuid: null,
+        messageUuid: null,
         sender_id: action.payload.sender.id,
         receiver_id: action.payload.receiver.id,
         hash: action.payload.hash,
         message: null,
         title: null,
-        message_type: "chat",
+        message_type: 'chat',
         read: 0,
         created_at: null,
         updated_at: null,
         formatted_date: null
-      };
+      }
 
-      chats.byIds = [action.payload.hash, ...chats.byIds];
+      chats.byIds = [action.payload.hash, ...chats.byIds]
 
-      chats.all[action.payload.hash] = chatMsgMock;
+      chats.all[action.payload.hash] = chatMsgMock
 
       return {
         ...state,
@@ -164,47 +169,47 @@ export default (state = INITIAL_STATE, action) => {
             hash: action.payload.hash
           }
         }
-      };
+      }
     }
-    case "SET_MESSAGE_BEING_TYPED": {
+    case 'SET_MESSAGE_BEING_TYPED': {
       // console.log(action.payload);
-      let selectedChat = {
+      const selectedChat = {
         ...state.selectedChat,
         messageBeingTyped: action.payload
-      };
+      }
       // TODO: update the chatthreads
       return {
         ...state,
-        selectedChat
+        selectedChat,
         // chatThreads: {
-        // 	...state.chatThreads,
+        //   ...state.chatThreads
         // }
-      };
+      }
     }
-    case "SET_SELECTED_CHAT_TYPING_WHISPER_DIRECTION": {
+    case 'SET_SELECTED_CHAT_TYPING_WHISPER_DIRECTION': {
       const selectedChat = {
         ...state.selectedChat,
         typingWhisperDirection: action.payload
-      };
+      }
       return {
         ...state,
         selectedChat
         // chatThreads: {
         //   ...state.chatThreads,
-        //   [message_uuid]: {
-        //     ...(state.chatThreads[message_uuid] || {}),
+        //   [messageUuid]: {
+        //     ...(state.chatThreads[messageUuid] || {}),
         //     ...selectedChat
         //   }
         // }
-      };
+      }
     }
-    case "SET_SELECTED_CHAT": {
-      let { byIds, all } = transformArray(action.payload.data);
-      const message_uuid = action.payload.message_uuid;
+    case 'SET_SELECTED_CHAT': {
+      const { byIds, all } = transformArray(action.payload.data)
+      const { messageUuid } = action.payload
       const selectedChat = {
         ...state.selectedChat,
         all,
-        message_uuid,
+        messageUuid,
         byIds: byIds.reverse(),
         isViewing: true,
         pagination: paginationOptions({
@@ -212,41 +217,69 @@ export default (state = INITIAL_STATE, action) => {
           pageSize: action.payload.pageSize,
           total: action.payload.data.total
         })
-      };
+      }
 
       return {
         ...state,
         selectedChat,
         chatThreads: {
           ...state.chatThreads,
-          [message_uuid]: {
-            ...(state.chatThreads[message_uuid] || {}),
+          [messageUuid]: {
+            ...(state.chatThreads[messageUuid] || {}),
             ...selectedChat
           }
         }
-      };
+      }
     }
-    case "CLEAR_MESSAGE_BEING_TYPED": {
+    case 'SET_SELECTED_BROADCAST': {
+      // const { byIds, all } = transformArray(action.payload.data)
+      const selectedBroadcastData = (action.payload.data || [{}])[0]
+      const { messageUuid } = action.payload
+      const selectedBroadcast = {
+        ...state.selectedBroadcast,
+        ...selectedBroadcastData,
+        // all,
+        // messageUuid,
+        // byIds: byIds.reverse(),
+        isViewing: true,
+        pagination: paginationOptions({
+          page: action.payload.page,
+          pageSize: action.payload.pageSize,
+          total: action.payload.data.total
+        })
+      }
+
+      return {
+        ...state,
+        selectedBroadcast,
+        // chatThreads: {
+        //   ...state.chatThreads,
+        //   [messageUuid]: {
+        //     ...(state.chatThreads[messageUuid] || {}),
+        //     ...selectedChat
+        //   }
+        // }
+      }
+    }
+    case 'CLEAR_MESSAGE_BEING_TYPED': {
       // TODO: also clear/set chat thresds
       return {
         ...state,
         selectedChat: {
           ...state.selectedChat,
-          messageBeingTyped: "",
+          messageBeingTyped: '',
           typingWhisperDirection: null
         }
-      };
+      }
     }
-    case "SET_SENDING_CHAT": {
+    case 'SET_SENDING_CHAT': {
       // update the byids of the selected chat
-      let byIds = Array.from(
-        new Set([...state.selectedChat.byIds, action.payload.hash])
-      );
+      const byIds = Array.from(new Set([...state.selectedChat.byIds, action.payload.hash]))
       // update the all key with the hash of the new chat
-      let all = {
+      const all = {
         ...state.selectedChat.all,
         [action.payload.hash]: action.payload
-      };
+      }
 
       // store the selectedChat in the chatthreads
 
@@ -255,7 +288,7 @@ export default (state = INITIAL_STATE, action) => {
         byIds,
         all,
         isViewing: true
-      };
+      }
 
       return {
         ...state,
@@ -267,35 +300,35 @@ export default (state = INITIAL_STATE, action) => {
             ...selectedChat
           }
         }
-      };
+      }
     }
-    case "UPDATE_SENT_CHAT": {
-      const firstSelectedChatMsg = state.selectedChat.byIds[0];
+    case 'UPDATE_SENT_CHAT': {
+      const firstSelectedChatMsg = state.selectedChat.byIds[0]
+      const chats = { ...state.chats }
       // TODO: handle state update for new chats/threads
       if (
         firstSelectedChatMsg &&
-        state.selectedChat.all[firstSelectedChatMsg].message_uuid ===
-          action.payload.message_uuid
+        state.selectedChat.all[firstSelectedChatMsg].messageUuid === action.payload.messageUuid
       ) {
-        // if the message uuid of the selected chat is sams as action.payload.message_uuid
+        // if the message uuid of the selected chat is sams as action.payload.messageUuid
         // then update the all key, deleting the 'hash' and adding the id from payload.id
-        //p.splice(p.indexOf('438'), 1)
-        let byIds = [...state.selectedChat.byIds];
-        let all = { ...state.selectedChat.all };
+        // p.splice(p.indexOf('438'), 1)
+        let byIds = [...state.selectedChat.byIds]
+        const all = { ...state.selectedChat.all }
 
         // if message uuid exist already, no need
-        if (all[action.payload.id]) return state;
+        if (all[action.payload.id]) return state
 
         // uodate thw ids
         if (byIds.indexOf(+action.payload.hash) > -1) {
-          byIds.splice(byIds.indexOf(+action.payload.hash), 1);
+          byIds.splice(byIds.indexOf(+action.payload.hash), 1)
         }
 
-        byIds = Array.from(new Set([...byIds, action.payload.id]));
+        byIds = Array.from(new Set([...byIds, action.payload.id]))
 
-        //update the all object
-        delete all[action.payload.hash];
-        all[action.payload.id] = action.payload;
+        // update the all object
+        delete all[action.payload.hash]
+        all[action.payload.id] = action.payload
 
         const selectedChat = {
           ...state.selectedChat,
@@ -303,145 +336,155 @@ export default (state = INITIAL_STATE, action) => {
           all,
           typingWhisperDirection: null
           // isViewing: true,
-        };
+        }
 
         // delete prev chatthread taht was using hash
-        delete state.chatThreads[action.payload.hash];
+        delete state.chatThreads[action.payload.hash]
+        chats.all[action.payload.messageUuid] = action.payload
+        chats.byIds = Array.from(new Set([action.payload.messageUuid, ...chats.byIds]))
 
         return {
           ...state,
           selectedChat,
+          chats,
           chatThreads: {
             ...state.chatThreads,
-            [action.payload.message_uuid]: {
+            [action.payload.messageUuid]: {
               ...selectedChat
             }
           }
-        };
+        }
       }
-      else if (
-        firstSelectedChatMsg &&
-        state.selectedChat.all[firstSelectedChatMsg].message_uuid !=
-          action.payload.message_uuid
-      ) {
-        const chatThreads = { ...state.chatThreads };
-        let selectedChat = { ...state.selectedChat };
+      // if (
+      //   firstSelectedChatMsg &&
+      //   state.selectedChat.all[firstSelectedChatMsg].messageUuid !== action.payload.messageUuid
+      // ) {
+      const chatThreads = { ...state.chatThreads }
+      let selectedChat = { ...state.selectedChat }
 
-        if (chatThreads[action.payload.message_uuid]) {
-          let chatThread = {
-            ...chatThreads[action.payload.message_uuid]
-          };
+      if (chatThreads[action.payload.messageUuid]) {
+        const chatThread = {
+          ...chatThreads[action.payload.messageUuid]
+        }
 
-          let byIds = [...chatThread.byIds];
-          let all = { ...chatThread.all };
+        let byIds = [...chatThread.byIds]
+        const all = { ...chatThread.all }
 
-          // uodate thw ids
-          if (byIds.indexOf(+action.payload.hash) > -1) {
-            byIds.splice(byIds.indexOf(+action.payload.hash), 1);
-          }
-          byIds = Array.from(new Set([...byIds, action.payload.id]));
+        // uodate thw ids
+        if (byIds.indexOf(+action.payload.hash) > -1) {
+          byIds.splice(byIds.indexOf(+action.payload.hash), 1)
+        }
+        byIds = Array.from(new Set([...byIds, action.payload.id]))
 
-          //update the all object
-          delete all[action.payload.hash];
-          all[action.payload.id] = action.payload;
+        // update the all object
+        delete all[action.payload.hash]
+        all[action.payload.id] = action.payload
 
-          return {
-            ...state,
-            chatThreads: {
-              ...state.chatThreads,
-              [action.payload.message_uuid]: {
-                ...chatThread,
-                all,
-                byIds,
-                typingWhisperDirection: null
-              }
+        chats.all[action.payload.messageUuid] = action.payload
+        chats.byIds = Array.from(new Set([action.payload.messageUuid, ...chats.byIds]))
+
+        return {
+          ...state,
+          chats,
+          chatThreads: {
+            ...state.chatThreads,
+            [action.payload.messageUuid]: {
+              ...chatThread,
+              all,
+              byIds,
+              typingWhisperDirection: null
             }
-          };
-        }
-
-				// If there's no chat thread its probaly a new chat, 
-				// so try using the hash and uodating it rto message_uuid
-        else if (!chatThreads[action.payload.message_uuid]) {
-          const { byIds, all } = transformArray([action.payload]);
-          selectedChat = {
-            ...selectedChat,
-            byIds,
-            all,
-            typingWhisperDirection: null
-          };
-          chatThreads[action.payload.message_uuid] = selectedChat;
-          //dlete the hash from the chat theads
-          delete chatThreads[action.payload.hash];
-          return {
-            ...state,
-            selectedChat,
-            chatThreads
-          };
+          }
         }
       }
-      return state;
+
+      // If there's no chat thread its probaly a new chat,
+      // so try using the hash and uodating it rto messageUuid
+      if (!chatThreads[action.payload.messageUuid]) {
+        const { byIds, all } = transformArray([action.payload])
+        let newSelectedChat
+        selectedChat = {
+          ...selectedChat,
+          byIds,
+          all,
+          typingWhisperDirection: null
+        }
+        chatThreads[action.payload.messageUuid] = selectedChat
+        // dlete the hash from the chat theads
+        delete chatThreads[action.payload.hash]
+        const index = chats.byIds.indexOf(action.payload.hash)
+        if (index >= 0) {
+          chats.byIds.splice(index, 1)
+        }
+
+        chats.all[action.payload.messageUuid] = action.payload
+        chats.byIds = Array.from(new Set([action.payload.messageUuid, ...chats.byIds]))
+        if (
+          action.payload.messageUuid === state.selectedChat.messageUuid ||
+            action.payload.hash === state.selectedChat.hash
+        ) {
+          newSelectedChat = { ...selectedChat }
+        } else {
+          newSelectedChat = { ...state.selectedChat }
+        }
+        return {
+          ...state,
+          chats,
+          selectedChat: newSelectedChat,
+          chatThreads
+        }
+      }
+      // }
+      return state
     }
-    case "CLEAR_SELECTED_CHAT": {
+    case 'CLEAR_SELECTED_CHAT': {
       return {
         ...state,
         selectedChat: initSelectedChat()
-      };
+      }
     }
-    case "SET_BROADCASTS": {
+    case 'SET_BROADCASTS': {
       return {
         ...state,
         broadcasts: {
           ...state.broadcasts,
-          ...transformArray(action.payload.data, "message_uuid"),
+          ...transformArray(action.payload.data, 'messageUuid'),
           pagination: paginationOptions({
             page: action.payload.page,
             pageSize: action.payload.pageSize,
             total: action.payload.data.total
           })
         }
-      };
+      }
     }
-    case "SET_CHAT_USERS": {
+    case 'SET_CHAT_USERS': {
       return {
         ...state,
         users: {
           ...transformArray(action.payload.data)
         }
-      };
+      }
     }
+    default:
+      return state
   }
-  return state;
-};
+}
 
-export const getChatUsers = state => {
-  return state.chat.users.byIds.map(id => {
-    return state.chat.users.all[id];
-  });
-};
+export const getChatUsers = state => state.chat.users.byIds.map(id => state.chat.users.all[id])
 
-export const getAllChats = state => {
-  return state.chat.chats.byIds.map(id => {
-    return state.chat.chats.all[id];
-  });
-};
+export const getAllChats = state => state.chat.chats.byIds.map(id => state.chat.chats.all[id])
 
-export const getAllBroadcasts = state => {
-  return state.chat.broadcasts.byIds.map(id => {
-    return state.chat.broadcasts.all[id];
-  });
-};
+export const getAllBroadcasts = state =>
+  state.chat.broadcasts.byIds.map(id => state.chat.broadcasts.all[id])
 
-export const getSelectedChatThread = state => {
-  return state.chat.selectedChat.byIds.map(id => {
-    let chat = state.chat.selectedChat.all[id];
+export const getSelectedChatThread = state =>
+  state.chat.selectedChat.byIds.map(id => {
+    const chat = state.chat.selectedChat.all[id]
     // console.log(chat, id);
     return {
       ...chat,
       msg: chat.message,
-      time: chat.created_at
-        ? chat.created_at.split(" ")[1]
-        : chat.sendingStatus,
-      origin: state.user.id === chat.sender.id ? "to" : "from"
-    };
-  });
-};
+      time: chat.created_at ? chat.created_at.split(' ')[1] : chat.sendingStatus,
+      origin: state.user.id === chat.sender.id ? 'to' : 'from'
+    }
+  })

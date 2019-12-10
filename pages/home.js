@@ -1,311 +1,112 @@
-import React, {Component} from 'react';
-import NewsLetterSubscription from '../components/home/NewsLetterSubscription';
-import MeetTheInstructors from '../components/home/MeetTheInstructors';
-import withMasterLayout from '../pages/layouts/withMasterLayout';
-import Testimonials from '../components/shared/Testimonials';
-import Resources from '../components/home/Resources';
-import Features from '../components/home/Features';
-import Partners from '../components/home/Partners';
-import Courses from '../components/home/Courses';
-import Footer from '../components/shared/Footer';
-import Head from 'next/head';
-import Banner from '../components/home/Banner';
-import * as actions from '../store/actions';
-import Blog from '../components/home/Blog';
-import { connect } from 'react-redux';
-import { Button } from 'antd';
-import Link from 'next/link';
-
-import Echo from "laravel-echo";
-import { getInstructors } from '../store/reducers/instructor';
-import { getLatestBlogPosts } from '../store/reducers/blogPosts';
+import Head from 'next/head'
+import Link from 'next/link'
+import { Button } from 'antd'
+import Echo from 'laravel-echo'
+import { NextSeo } from 'next-seo'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import React, { Component } from 'react'
+import * as actions from '../store/actions'
+import Banner from '../components/home/Banner'
+import Footer from '../components/shared/Footer'
+import Partners from '../components/home/Partners'
+import Features from '../components/home/Features'
+import Resources from '../components/home/Resources'
+import CourseList from '../components/home/CourseList'
+import withMasterLayout from './layouts/withMasterLayout'
+import Testimonials from '../components/shared/Testimonials'
+import { getInstructors } from '../store/reducers/instructor'
+import { getPopularCourses } from '../store/reducers/courses'
+import { getCoursePaths } from '../store/reducers/coursePaths'
+import { getTestimonials } from '../store/reducers/testimonials'
+import LatestBlogPosts from '../components/home/LatestBlogPosts'
+import { getLatestBlogPosts } from '../store/reducers/blogPosts'
+import MeetTheInstructors from '../components/home/MeetTheInstructors'
+import NewsLetterSubscription from '../components/home/NewsLetterSubscription'
 
 class Home extends Component {
-
   static async getInitialProps ({ reduxStore }) {
-    // const isServer = !!req
     await Promise.all([
       reduxStore.dispatch(actions.fetchInstructors({ pageSize: 8 })),
-      reduxStore.dispatch(actions.fetchLatestBlogPosts())
-    ]);
+      reduxStore.dispatch(actions.fetchLatestBlogPosts()),
+      reduxStore.dispatch(actions.fetchPopularCourses()),
+      reduxStore.dispatch(actions.fetchTestimonials()),
+      reduxStore.dispatch(actions.fetchCoursePaths()),
+    ])
     return {}
-  }
-
-  state = {
-    testimonials: [
-      {
-        text: `Yeah, but John, if The Pirates of the
-        Caribbean breaks down, the pirates don’t eat the tourists.
-        Yes, Yes, without the oops! Is this my espresso machine?
-        Wh-what is-h-how did you get my espresso machine?
-        They're using our own satellites against us. Hey,
-        you know how I'm, like, always trying to save the planet?`,
-        student: {
-          profile_pic: '/static/images/instructors/instructor2.png',
-          fullname: 'Clarisa Ward',
-          profile_text: 'Network Engineer, Microsoft'
-        }
-      },
-      {
-        text: `Yeah, but John, if The Pirates of the
-        Caribbean breaks down, the pirates don’t eat the tourists.
-        Yes, Yes, without the oops! Is this my espresso machine?
-        Wh-what is-h-how did you get my espresso machine?
-        They're using our own satellites against us. Hey,
-        you know how I'm, like, always trying to save the planet?`,
-        student: {
-          profile_pic: '/static/images/instructors/instructor2.png',
-          fullname: 'Nnomthi Phillips',
-          profile_text: 'Cyber Security Ninja, CBN'
-        }
-      },
-      {
-        text: `Yeah, but John, if The Pirates of the
-        Caribbean breaks down, the pirates don’t eat the tourists.
-        Yes, Yes, without the oops! Is this my espresso machine?
-        Wh-what is-h-how did you get my espresso machine?
-        They're using our own satellites against us. Hey,
-        you know how I'm, like, always trying to save the planet?`,
-        student: {
-          profile_pic: '/static/images/instructors/instructor4.png',
-          fullname: 'Adewale McDavids',
-          profile_text: 'Network Engineer, Paystack'
-        }
-      },
-      {
-        text: `Yeah, but John, if The Pirates of the
-        Caribbean breaks down, the pirates don’t eat the tourists.
-        Yes, Yes, without the oops! Is this my espresso machine?
-        Wh-what is-h-how did you get my espresso machine?
-        They're using our own satellites against us. Hey,
-        you know how I'm, like, always trying to save the planet?`,
-        student: {
-          profile_pic: '/static/images/instructors/instructor2.png',
-          fullname: 'Adewale McDavids',
-          profile_text: 'Network Engineer, Paystack'
-        }
-      },
-    ],
-    popularCourses: [
-      {
-        instructor: {
-          name: "Tim Cook",
-          profile_pic: "/static/images/instructors/instructor1.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'remote',
-        banner_image: "/static/images/courses/course1.png"
-      },
-      {
-        instructor: {
-          name: "Tim Berners-Lee",
-          profile_pic: "/static/images/instructors/instructor2.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'on-demand',
-        banner_image: "/static/images/courses/course2.png"
-      },
-      {
-        instructor: {
-          name: "Oluwadare Michelangelo",
-          profile_pic: "/static/images/instructors/instructor3.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'remote',
-        banner_image: "/static/images/courses/course3.png"
-      },
-      {
-        instructor: {
-          name: "Chukwuemeka Nnadi",
-          profile_pic: "/static/images/instructors/instructor4.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'on-demand',
-        banner_image: "/static/images/courses/course4.png"
-      },
-      {
-        instructor: {
-          name: "Sharon james",
-          profile_pic: "/static/images/instructors/instructor1.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'remote',
-        banner_image: "/static/images/courses/course5.png"
-      },
-      {
-        instructor: {
-          name: "Oluwadare Michelangelo",
-          profile_pic: "/static/images/instructors/instructor3.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'on-demand',
-        banner_image: "/static/images/courses/course3.png"
-      },
-      {
-        instructor: {
-          name: "Chukwuemeka Nnadi",
-          profile_pic: "/static/images/instructors/instructor4.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'on-site',
-        banner_image: "/static/images/courses/course4.png"
-      },
-      {
-        instructor: {
-          name: "Sharon james",
-          profile_pic: "/static/images/instructors/instructor1.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'on-site',
-        banner_image: "/static/images/courses/course5.png"
-      },
-    ],
-    zeroToHeroCourses: [
-      {
-        instructor: {
-          name: "Tim Cook",
-          profile_pic: "/static/images/instructors/instructor1.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'remote',
-        banner_image: "/static/images/courses/course1.png"
-      },
-      {
-        instructor: {
-          name: "Tim Berners-Lee",
-          profile_pic: "/static/images/instructors/instructor2.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'on-demand',
-        banner_image: "/static/images/courses/course2.png"
-      },
-      {
-        instructor: {
-          name: "Oluwadare Michelangelo",
-          profile_pic: "/static/images/instructors/instructor3.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'remote',
-        banner_image: "/static/images/courses/course3.png"
-      },
-      {
-        instructor: {
-          name: "Chukwuemeka Nnadi",
-          profile_pic: "/static/images/instructors/instructor4.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'on-demand',
-        banner_image: "/static/images/courses/course4.png"
-      },
-      {
-        instructor: {
-          name: "Sharon james",
-          profile_pic: "/static/images/instructors/instructor1.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'remote',
-        banner_image: "/static/images/courses/course5.png"
-      },
-      {
-        instructor: {
-          name: "Oluwadare Michelangelo",
-          profile_pic: "/static/images/instructors/instructor3.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'on-demand',
-        banner_image: "/static/images/courses/course3.png"
-      },
-      {
-        instructor: {
-          name: "Chukwuemeka Nnadi",
-          profile_pic: "/static/images/instructors/instructor4.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'on-site',
-        banner_image: "/static/images/courses/course4.png"
-      },
-      {
-        instructor: {
-          name: "Sharon james",
-          profile_pic: "/static/images/instructors/instructor1.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'on-site',
-        banner_image: "/static/images/courses/course5.png"
-      },
-    ]
   }
 
   componentDidMount () {
     window.tretenEcho = new Echo({
       broadcaster: 'socket.io',
-      host: window.location.hostname + ":6001",
+      host: `${window.location.hostname}:6001`,
       encrypted: true
       // key: 'your-pusher-channels-key'
-    });
+    })
 
     // var socketId = Echo.socketId();
-    window.tretenEcho.channel(`treten_database_doneChannel`)
-    .listen('done', (e) => {
-        console.log(e);
-    });
+    window.tretenEcho.channel('treten_database_doneChannel').listen('done', () => {
+      // console.log(e)
+    })
   }
 
   render () {
     return (
       <>
         <Head>
-          <title key="title">Treten Academy - Africa's largest virtual lab</title>
+          <title key="title">Treten Academy - Africa largest virtual lab</title>
         </Head>
+        <NextSeo
+          title="Treten Academy - Africa largest virtual lab"
+          description={
+              `We Are Africa’s Largest Virtual Lab Focused On Developing Capacity, 
+              Capability And Competence Especially In The Area of Information Technology. 
+              We seek to empower professionals with the required skills and training to take 
+              them from Zero to Hero
+            `}
+          canonical="https://tretenacademy.com"
+          openGraph={{
+            url: 'https://tretenacademy.com',
+            title: 'Treten Academy - Africa largest virtual lab',
+            description: `
+                We Are Africa's Largest Virtual Lab Focused On Developing Capacity, 
+                Capability And Competence Especially In The Area of Information Technology. 
+                We seek to empower professionals with the required skills and training to take 
+                them from Zero to Hero
+              `,
+            images: [
+              {
+                url: 'https://tretenacademy.com/static/images/why-us.png',
+                width: 800,
+                height: 600,
+                alt: 'treten academy',
+              },
+            ],
+            site_name: 'Treten Academy',
+          }}
+          twitter={{
+            handle: '@tretenacademy',
+            site: '@tretenacademy',
+            cardType: 'summary_large_image',
+          }}
+        />
         <Banner />
         <Partners />
         <Features />
-        <Courses
+        <CourseList
           className="zero-to-hero-courses pt-5 mb-5"
           primaryHeading="Zero to Hero Courses"
           subHeading="Are you just getting started and feeling unsure about where
           to begin? Our Zero to Hero Courses give you a powerful headstart."
-          courses={this.state.zeroToHeroCourses}
+          courses={this.props.coursePaths}
         />
-        <Courses
+        <CourseList
           subHeadingCol="col-md-6"
           className="popular-courses pt-5 pb-7"
           primaryHeading="Our Popular Courses"
           subHeading="Flatland culture star stuff harvesting star light two ghostly white
           figures in coveralls and helmets are soflty dancing vanquish the impossible invent the universe."
-          courses={this.state.popularCourses}
+          courses={this.props.popularCourses}
         />
         <div className="d-flex justify-content-center pt-4 pb-5 mb-5">
           <Link href="/courses">
@@ -323,7 +124,7 @@ class Home extends Component {
           subText="Flatland culture star stuff harvesting star light two ghostly
           white figures in coveralls and helmets are soflty dancing vanquish
           the impossible invent the universe.."
-          testimonials={this.state.testimonials}
+          testimonials={this.props.testimonials}
         />
         <div className="d-flex justify-content-center pt-5 pb-5 mb-5">
           <Link href="/testimonials">
@@ -332,7 +133,10 @@ class Home extends Component {
             </Button>
           </Link>
         </div>
-        <Blog latestBlogPosts={this.props.latestBlogPosts.all} isLoading={this.props.latestBlogPosts.isLoading} />
+        <LatestBlogPosts
+          latestBlogPosts={this.props.latestBlogPosts.all}
+          isLoading={this.props.latestBlogPosts.isLoading}
+        />
         <NewsLetterSubscription />
         <Resources />
         <Footer />
@@ -341,17 +145,40 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    instructors: {
-      ...state.instructor,
-      all: getInstructors(state)
-    },
-    latestBlogPosts: {
-      all: getLatestBlogPosts(state),
-      isLoading: state.blogPosts.latestBlogPosts.isLoading
-    }
-  }
+const mapStateToProps = state => ({
+  instructors: {
+    ...state.instructor,
+    all: getInstructors(state)
+  },
+  latestBlogPosts: {
+    all: getLatestBlogPosts(state),
+    isLoading: state.blogPosts.latestBlogPosts.isLoading
+  },
+  popularCourses: getPopularCourses(state),
+  testimonials: getTestimonials(state),
+  coursePaths: getCoursePaths(state)
+})
+
+Home.propTypes = {
+  instructors: PropTypes.object.isRequired,
+  latestBlogPosts: PropTypes.object.isRequired,
+  popularCourses: PropTypes.array.isRequired,
+  fetchInstructors: PropTypes.func.isRequired,
+  fetchPopularCourses: PropTypes.func.isRequired,
+  fetchLatestBlogPosts: PropTypes.func.isRequired,
+  getTestimonials: PropTypes.func.isRequired,
+  testimonials: PropTypes.array.isRequired,
+  coursePaths: PropTypes.array.isRequired,
+  fetchCoursePaths: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps, actions)(withMasterLayout(Home));
+export default connect(
+  mapStateToProps,
+  {
+    fetchInstructors: actions.fetchInstructors,
+    fetchPopularCourses: actions.fetchPopularCourses,
+    fetchLatestBlogPosts: actions.fetchLatestBlogPosts,
+    getTestimonials: actions.getTestimonials,
+    fetchCoursePaths: actions.fetchCoursePaths
+  }
+)(withMasterLayout(Home))

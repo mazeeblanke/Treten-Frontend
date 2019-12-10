@@ -56,6 +56,9 @@
 
   .coursereview-form {
     stroke: black !important;
+    height: 500px;
+    overflow-y: scroll;
+    width: 100%;
   }
 
   .course-materials {
@@ -106,7 +109,7 @@
     line-height: 2.142rem;
   }
 
-  .student-course-dashboard {
+  .student-course-dashboard, .course-dashboard-details {
     .ant-tabs-tab-active.ant-tabs-tab {
       background: transparent;
       border-color: #fafafa;
@@ -235,6 +238,7 @@
 
 @media screen and (max-width: 576px) {
   #treten  .student-course-dashboard,
+  #treten  .course-dashboard-details,
   #treten  .student-course-header {
     .pl-6,
     .pr-6 {
@@ -246,6 +250,7 @@
     font-size: 1.414rem;
   }
 
+  #treten .course-dashboard-details,
   #treten .student-course-dashboard {
     table {
       td,
@@ -521,7 +526,8 @@
       float: right;
       background: #FAFAFA;
       color: #637381;
-      border-bottom-right-radius: 6px;
+      border-radius: 8px;
+      border-bottom-right-radius: 0px;
       clear: both;
       padding: 10px 20px;
 
@@ -538,7 +544,8 @@
 
     p.from {
       float: left;
-      border-top-left-radius: 6px;
+      border-radius: 8px;
+      border-top-left-radius: 0px;
       background: #212B36;
       clear: both;
       padding: 10px 20px ;

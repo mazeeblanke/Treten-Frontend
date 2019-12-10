@@ -1,23 +1,29 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import withAdminLayout from '../../layouts/withAdminLayout';
-import EmptyState from '../../../components/shared/EmptyState';
-import { Button, Tabs } from 'antd';
-import Display from '../../../components/shared/Display';
-import Link from 'next/link';
-import CourseSchedule from '../../../components/student/CourseSchedule';
-import CourseHeader from '../../../components/student/CourseHeader';
-import CourseMaterials from '../../../components/student/CourseMaterials';
-import CourseInstructor from '../../../components/student/CourseInstructor';
-import CourseReviewForm from '../../../components/student/CourseReviewForm';
-const TabPane = Tabs.TabPane;
-
-const courseTypes = [ 'remote', 'on-demand', 'onsite' ];
+import React, { Component } from 'react'
+import withAdminLayout from '../../layouts/withAdminLayout'
+import { Tabs } from 'antd'
+import { connect } from 'react-redux'
+import * as actions from '../../../store/actions'
+import CourseSchedule from '../../../components/student/CourseSchedule'
+import CourseHeader from '../../../components/student/CourseHeader'
+import PropTypes from 'prop-types'
+import CourseMaterials from '../../../components/student/CourseMaterials'
+import CourseInstructor from '../../../components/student/CourseInstructor'
+import CourseReviewForm from '../../../components/student/CourseReviewForm'
+import InstructorReviewForm from '../../../components/student/InstructorReviewForm'
+import withRedirect from '../../layouts/withRedirect'
+import { getCourse } from '../../../store/reducers/course'
+import { getUserDetails } from '../../../store/reducers/user'
+const TabPane = Tabs.TabPane
 
 class Course extends Component {
-  constructor(props) {
-    super(props);
-
+  static async getInitialProps ({ reduxStore, req }) {
+    await Promise.all([
+      reduxStore.dispatch(actions.fetchCourse({
+        slug: req ? req.params.courseSlug : location.pathname.split('/').pop(),
+        enrolled: 1
+      })),
+    ])
+    return {}
   }
 
   state = {
@@ -26,6 +32,9 @@ class Course extends Component {
       level: 'Professional level',
       type: 'remote',
       learners: '250',
+      category: {
+        name: 'wewew'
+      },
       startDate: 'Monday, 01 Aug 2019',
       instructor: {
         profile_pic: '/static/images/instructors/instructor1lg.png',
@@ -93,13 +102,13 @@ class Course extends Component {
           },
         ],
       },
-      content:{
+      content: {
         availableDate: 'Monday, 01 Aug 2019',
         videos: [
           {
             videoUrl: '',
             poster: '/static/images/videos/video1.png',
-            title: `This is where the title of this course content goes, and if longer, extends this way. See?`,
+            title: 'This is where the title of this course content goes, and if longer, extends this way. See?',
             description: `Tesseract cosmic ocean preserve and cherish that pale blue dot
             two ghostly white figures in coveralls and helmets are soflty dancing brain is
             the seed of intelligence invent the universe? At the edge of forever prime number extraordinary claims
@@ -108,7 +117,7 @@ class Course extends Component {
           {
             videoUrl: '',
             poster: '/static/images/videos/video2.png',
-            title: `This is where the title of this course content goes, and if longer, extends this way. See?`,
+            title: 'This is where the title of this course content goes, and if longer, extends this way. See?',
             description: `Tesseract cosmic ocean preserve and cherish that pale blue dot
             two ghostly white figures in coveralls and helmets are soflty dancing brain is
             the seed of intelligence invent the universe? At the edge of forever prime number extraordinary claims
@@ -117,7 +126,7 @@ class Course extends Component {
           {
             videoUrl: '',
             poster: '/static/images/videos/video3.png',
-            title: `This is where the title of this course content goes, and if longer, extends this way. See?`,
+            title: 'This is where the title of this course content goes, and if longer, extends this way. See?',
             description: `Tesseract cosmic ocean preserve and cherish that pale blue dot
             two ghostly white figures in coveralls and helmets are soflty dancing brain is
             the seed of intelligence invent the universe? At the edge of forever prime number extraordinary claims
@@ -170,54 +179,47 @@ class Course extends Component {
     }
   }
 
-  componentWillMount() {
-
-  }
-
-  componentDidMount() {
-
-  }
-
-  // componentWillReceiveProps(nextProps) {
-
-  // }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-
-  // }
-
-  // componentWillUpdate(nextProps, nextState) {
-
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-
-  // }
-
-  componentWillUnmount() {
-
-  }
-
-  render() {
+  render () {
+    const {
+      user,
+      course,
+      addCourseReview,
+      editCourseReview,
+      addInstructorReview,
+      editInstructorReview,
+    } = this.props
     return (
       <>
-        <CourseHeader {...this.props} course={this.state.course} />
+        <CourseHeader {...this.props} course={course} />
         <section className="student-course-dashboard mt-5">
           <div className="container">
             <div className="row">
               <div className="col-md-12 pl-6 pr-6">
                 <Tabs defaultActiveKey="Schedule">
                   <TabPane tab="Schedule" key="Schedule">
-                    <CourseSchedule course={this.state.course} />
+                    <CourseSchedule timetable={course.timetable} />
                   </TabPane>
                   <TabPane tab="Course materials" key="Course materials">
-                    <CourseMaterials course={this.state.course} />
+                    <CourseMaterials resources={course.resources} />
                   </TabPane>
-                  <TabPane tab="Instructor" key="Instructor">
-                    <CourseInstructor instructor={this.state.course.instructor} />
+                  <TabPane tab="Instructors" key="Instructors">
+                    <CourseInstructor instructors={course.timetable} />
+                  </TabPane>
+                  <TabPane tab="Review Instructor" key="Review Instructor">
+                    <InstructorReviewForm
+                      course={course}
+                      user={user}
+                      editInstructorReview={editInstructorReview}
+                      addInstructorReview={addInstructorReview}
+                    />
                   </TabPane>
                   <TabPane tab="Review course" key="Review course">
-                    <CourseReviewForm />
+                    <CourseReviewForm
+                      course={course}
+                      user={user}
+                      editCourseReview={editCourseReview}
+                      addCourseReview={addCourseReview}
+                    />
                   </TabPane>
                 </Tabs>
               </div>
@@ -225,14 +227,38 @@ class Course extends Component {
           </div>
         </section>
       </>
-    );
+    )
   }
 }
 
 Course.propTypes = {
-
-};
+  user: PropTypes.object.isRequired,
+  course: PropTypes.object.isRequired,
+  addCourseReview: PropTypes.func.isRequired,
+  editCourseReview: PropTypes.func.isRequired,
+  addInstructorReview: PropTypes.func.isRequired,
+  editInstructorReview: PropTypes.func.isRequired,
+}
 
 Course.backText = 'Back to courses'
 
-export default withAdminLayout(Course);
+const mapStateToProps = (state) => {
+  return {
+    course: getCourse(state),
+    user: getUserDetails(state)
+    // batches: getBatches(state)
+  }
+}
+
+export default withRedirect(withAdminLayout(
+  connect(
+    mapStateToProps,
+    {
+      fetchCourse: actions.fetchCourse,
+      addCourseReview: actions.addCourseReview,
+      editCourseReview: actions.editCourseReview,
+      addInstructorReview: actions.addInstructorReview,
+      editInstructorReview: actions.editInstructorReview,
+    }
+  )(Course)
+))

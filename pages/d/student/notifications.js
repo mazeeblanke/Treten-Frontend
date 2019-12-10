@@ -1,51 +1,48 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import withAdminLayout from "../../layouts/withAdminLayout";
-import { Tabs, Button, Select } from "antd";
-import EmptyState from "../../../components/shared/EmptyState";
-import Display from "../../../components/shared/Display";
-import { List, Avatar } from "antd";
+import React, { Component } from 'react'
+// import PropTypes from 'prop-types'
+import withAdminLayout from '../../layouts/withAdminLayout'
+import { List } from 'antd'
+import EmptyState from '../../../components/shared/EmptyState'
+import Display from '../../../components/shared/Display'
+import withRedirect from '../../layouts/withRedirect'
 
+/* eslint-disable */
 class Notifications extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   state = {
-    selected: "",
+    selected: '',
     notifications: [
       {
-        title: "qqwqw qw ewew wwew ew e wewew"
+        title: 'qqwqw qw ewew wwew ew e wewew'
       },
       {
-        title: "qqwqw wew ewe wew w e wewew"
+        title: 'qqwqw wew ewe wew w e wewew'
       },
       {
-        title: "qqwqw ee eewe w wew ew e wewew"
+        title: 'qqwqw ee eewe w wew ew e wewew'
       },
       {
-        title: "qqwqw wew ew e w ewe eewew"
+        title: 'qqwqw wew ew e w ewe eewew'
       },
       {
-        title: "qqwqw wew ew  wewe e wewew"
+        title: 'qqwqw wew ew  wewe e wewew'
       }
     ],
     notifications: []
   };
 
-  componentWillMount() {}
+  componentWillMount () { }
 
-  componentDidMount() {}
+  componentDidMount () { }
 
-  componentWillUnmount() {}
+  componentWillUnmount () { }
 
   selectNotification = item => {
     this.setState({
       selected: item.title
-    });
+    })
   };
 
-  render() {
+  render () {
     return (
       <section className="notifications has-full-height">
         <div className="container has-full-height">
@@ -66,8 +63,8 @@ class Notifications extends Component {
                         onClick={() => this.selectNotification(item)}
                         style={{
                           background:
-                            this.state.selected == item.title ? "#FAFAFA" : "",
-                          cursor: "pointer"
+                            this.state.selected === item.title ? '#FAFAFA' : '',
+                          cursor: 'pointer'
                         }}
                         extra={<span>2 hrs</span>}
                       >
@@ -87,12 +84,16 @@ class Notifications extends Component {
           </div>
         </div>
       </section>
-    );
+    )
   }
 }
 
-Notifications.propTypes = {};
+// Notifications.propTypes = {
+//   user: PropTypes.shape({
+//     role: PropTypes.string
+//   }).isRequired
+// }
 
-Notifications.headerName = "Notifications";
+Notifications.headerName = 'Notifications'
 
-export default withAdminLayout(Notifications);
+export default withRedirect(withAdminLayout(Notifications))

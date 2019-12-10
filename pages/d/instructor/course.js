@@ -1,329 +1,146 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import withAdminLayout from '../../layouts/withAdminLayout';
-import EmptyState from '../../../components/shared/EmptyState';
-import { Button, Modal, Tabs } from 'antd';
-import AddCourseForm from '../../../components/admin/AddCourseForm';
-import CourseHeader from '../../../components/student/CourseHeader';
-import ExpandableBlock from '../../../components/shared/ExpandableBlock';
-import BatchForm from '../../../components/instructor/BatchForm';
-import Display from '../../../components/shared/Display';
-const uuidv1 = require('uuid/v1');
-const TabPane = Tabs.TabPane;
-
-const courseTypes = [ 'remote', 'on-demand', 'onsite' ];
-
-const initialScheduleTemplate = Array(3).fill({}).map((n, index) => ({
-  activityName: '',
-  begin: '',
-  end: '',
-  time: '',
-  id: uuidv1()
-}))
+// import CourseForm from '../../../components/admin/CourseForm'
+import { userIsAdmin, userIsInstructor } from '../../../store/reducers/user'
+import { getCourse, getBatches } from '../../../store/reducers/course'
+import CourseHeader from '../../../components/student/CourseHeader'
+import CourseDetail from '../../../components/admin/CourseDetail'
+import BatchForm from '../../../components/instructor/BatchForm'
+import BatchList from '../../../components/instructor/BatchList'
+import withAdminLayout from '../../layouts/withAdminLayout'
+import Display from '../../../components/shared/Display'
+import { Button, Modal, Icon, Popconfirm } from 'antd'
+import * as actions from '../../../store/actions'
+import notifier from 'simple-react-notifications'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import moment from 'moment'
+import withRedirect from '../../layouts/withRedirect'
+const uuidv1 = require('uuid/v1')
 
 const initBatchForm = () => ({
-  modeOfDelivery: [],
-  batch_name: '',
-  commencement_date: '',
-  timeTable: [
-    { day: 'mondays', sessions: [ ...initialScheduleTemplate ] },
-    { day: 'tuesdays', sessions: [ ...initialScheduleTemplate ] },
-    { day: 'wednesdays', sessions: [ ...initialScheduleTemplate ] },
-    { day: 'thursdays', sessions: [ ...initialScheduleTemplate ] },
-    { day: 'fridays', sessions: [ ...initialScheduleTemplate ] },
-    { day: 'saturdays', sessions: [ ...initialScheduleTemplate ] },
+  modeOfDelivery: 'on site',
+  commencementDate: null,
+  batchName: null,
+  price: null,
+  timetable: [
+    { day: 'mondays', sessions: [] },
+    { day: 'tuesdays', sessions: [] },
+    { day: 'wednesdays', sessions: [] },
+    { day: 'thursdays', sessions: [] },
+    { day: 'fridays', sessions: [] },
+    { day: 'saturdays', sessions: [] },
   ]
 })
 
 class Course extends Component {
-  constructor(props) {
-    super(props);
-
+  static async getInitialProps ({ reduxStore, req }) {
+    await Promise.all([
+      reduxStore.dispatch(actions.fetchCourse({
+        slug: req ? req.params.courseSlug : location.pathname.split('/').pop()
+      })),
+    ])
+    return {}
   }
-
-
 
   state = {
+    isAddingBatch: false,
+    batchToDelete: null,
     isShowingBatchForm: false,
     batchForm: initBatchForm(),
-    course: {
-      title: 'Course title goes here, and it just keeps going',
-      level: 'Professional level',
-      type: 'remote',
-      learners: '250',
-      commencement_date: 'Monday, 01 Aug 2019',
-      batches: [
-        {
-          batch_name: 'Batch A 2019',
-          commencement_date: 'Friday, 01 Aug 2019',
-          timeTable: [
-            {
-              day: 'mondays',
-              sessions: [
-                {
-                  begin: '12:08:23',
-                  end: '15:08:23',
-                  activityName: 'Name of class or activity for this time goes here'
-                },
-                {
-                  begin: '17:08:23',
-                  end: '19:08:23',
-                  activityName: 'Name of class or activity for this time goes here'
-                },
-              ],
-            },
-            {
-              day: 'tuesdays',
-              sessions: [
-                {
-                  begin: '1:08:23',
-                  end: '3:08:23',
-                  activityName: 'Name of class or activity for this time goes here'
-                }
-              ]
-            },
-          ]
-        },
-        {
-          batch_name: 'Batch B 2019',
-          commencement_date: 'Monday, 01 Aug 2019',
-          timeTable: [
-            {
-              day: 'mondays',
-              sessions: [
-                {
-                  begin: '12:00pm',
-                  end: '04:00pm',
-                  activityName: 'Name of class or activity for this time goes here'
-                },
-                {
-                  begin: '12:00pm',
-                  end: '04:00pm',
-                  activityName: 'Name of class or activity for this time goes here'
-                },
-              ],
-            },
-            {
-              day: 'tuesdays',
-              sessions: [
-                {
-                  begin: '12:00pm',
-                  end: '04:00pm',
-                  activityName: 'Name of class or activity for this time goes here'
-                }
-              ]
-            },
-          ]
-        },
-      ],
-      instructor: {
-        profile_pic: '/static/images/instructors/instructor1lg.png',
-        fullname: 'Instructor name here',
-        title: 'Title of instructor goes here',
-        qualifications: "Bio here. Eventually, you do plan to have dinosaurs on your dinosaur tour, right? God help us, we're in the hands of engineers.",
-        social_links: {
-          facebook: 'wehjwe',
-          linkedin: 'ewewi',
-          twitter: 'ejkerjk'
-        },
-        experience: [
-          {
-            company: 'Microsoft',
-            datePeriod: 'Apr 2017 - present',
-            position: 'Lead Trainer',
-            summary: 'Did he just throw my cat out of the window? You really think you can fly that thing? Jaguar shark!'
-          },
-          {
-            company: 'Dell Technology',
-            datePeriod: 'Dec 2017 - Jan 2018',
-            position: 'Technology Associate',
-            summary: 'Yeah, but John, if The Pirates of the Caribbean breaks down, the pirates don’t eat the tourists.'
-          },
-        ],
-        certifications: [
-          {
-            title: 'Certification title',
-            logo: '/static/images/certifications/cisco.png',
-            datePeriod: 'Apr 2017 - present'
-          },
-          {
-            title: 'Certification title',
-            logo: '/static/images/certifications/microsoft.png',
-            datePeriod: 'Apr 2017 - present'
-          },
-          {
-            title: 'Certification title',
-            logo: '/static/images/certifications/microsoft.png',
-            datePeriod: 'Apr 2017 - present'
-          },
-        ],
-        courses: [
-          {
-            title: 'CCNA R&S',
-            level: 'Expert',
-            excerpt: 'Brief course description goes here. Did he just throw my cat out of the window? You really think you can fly that thing? Jaguar shark! '
-          }
-        ],
-        education: [
-          {
-            institutionName: 'Name of institution',
-            qualification: 'Qualification obtained from institution',
-            datePeriod: 'Apr 2009 - Sept 2014'
-          },
-          {
-            institutionName: 'Name of institution',
-            qualification: 'Qualification obtained from institution',
-            datePeriod: 'Apr 2009 - Sept 2014'
-          },
-          {
-            institutionName: 'Name of institution',
-            qualification: 'Qualification obtained from institution',
-            datePeriod: 'Apr 2009 - Sept 2014'
-          },
-        ],
-      },
-      content:{
-        availableDate: 'Monday, 01 Aug 2019',
-        videos: [
-          {
-            videoUrl: '',
-            poster: '/static/images/videos/video1.png',
-            title: `This is where the title of this course content goes, and if longer, extends this way. See?`,
-            description: `Tesseract cosmic ocean preserve and cherish that pale blue dot
-            two ghostly white figures in coveralls and helmets are soflty dancing brain is
-            the seed of intelligence invent the universe? At the edge of forever prime number extraordinary claims
-            require extraordinary evidence dispassionate extraterrestrial.`
-          },
-          {
-            videoUrl: '',
-            poster: '/static/images/videos/video2.png',
-            title: `This is where the title of this course content goes, and if longer, extends this way. See?`,
-            description: `Tesseract cosmic ocean preserve and cherish that pale blue dot
-            two ghostly white figures in coveralls and helmets are soflty dancing brain is
-            the seed of intelligence invent the universe? At the edge of forever prime number extraordinary claims
-            require extraordinary evidence dispassionate extraterrestrial.`
-          },
-          {
-            videoUrl: '',
-            poster: '/static/images/videos/video3.png',
-            title: `This is where the title of this course content goes, and if longer, extends this way. See?`,
-            description: `Tesseract cosmic ocean preserve and cherish that pale blue dot
-            two ghostly white figures in coveralls and helmets are soflty dancing brain is
-            the seed of intelligence invent the universe? At the edge of forever prime number extraordinary claims
-            require extraordinary evidence dispassionate extraterrestrial.`
-          },
-        ]
-      },
-      materials: [
-        {
-          title: 'Resource title goes here and if its long, the next line',
-          resourceSumary: 'PDF, 45 pages. 24 MB',
-          role: 'Role on the team',
-        },
-        {
-          title: 'Resource title goes here and if its long, the next line',
-          resourceSumary: 'PDF, 45 pages. 24 MB',
-          role: 'Role on the team',
-        },
-        {
-          title: 'Resource title goes here and if its long, the next line',
-          resourceSumary: 'PDF, 45 pages. 24 MB',
-          role: 'Role on the team',
-        },
-        {
-          title: 'Resource title goes here and if its long, the next line',
-          resourceSumary: 'PDF, 45 pages. 24 MB',
-          role: 'Role on the team',
-        },
-        {
-          title: 'Resource title goes here and if its long, the next line',
-          resourceSumary: 'PDF, 45 pages. 24 MB',
-          role: 'Role on the team',
-        },
-        {
-          title: 'Resource title goes here and if its long, the next line',
-          resourceSumary: 'PDF, 45 pages. 24 MB',
-          role: 'Role on the team',
-        },
-        {
-          title: 'Resource title goes here and if its long, the next line',
-          resourceSumary: 'PDF, 45 pages. 24 MB',
-          role: 'Role on the team',
-        },
-        {
-          title: 'Resource title goes here and if its long, the next line',
-          resourceSumary: 'PDF, 45 pages. 24 MB',
-          role: 'Role on the team',
-        },
-      ]
-    }
   }
 
-  componentWillMount() {
-
+  componentDidMount () {
+    const { batches, setBatchExpandedState } = this.props
+    batches.length && setBatchExpandedState(
+      batches[0],
+      true
+    )
   }
 
-  componentDidMount() {
-
-  }
-
-  componentWillUnmount() {
-
+  processForm = (form) => {
+    return new Promise((resolve, reject) => {
+      const batchForm = { ...form }
+      const timetable = batchForm.timetable
+        .map(schedule => schedule.sessions.length && schedule)
+        .filter(schedule => schedule)
+      resolve({
+        ...batchForm,
+        timetable,
+        courseId: this.props.course.id
+      })
+    })
   }
 
   handleSubmit = e => {
-    e.preventDefault();
-    // this.props.form.validateFields((err, values) => {
-    //   if (!err) {
-    //     console.log('Received values of form: ', values);
-        let batches = this.state.course.batches.slice();
-        batches.push({ ...this.state.batchForm });
-        this.setState({
-          isShowingBatchForm: false,
-          batchForm: initBatchForm(),
-          course: {
-            ...this.state.course,
-            batches
-          }
-        });
-
-        console.log(this.state.batchForm);
-
-    //   }
-    // });
-  };
+    e && e.preventDefault()
+    const {
+      batchName,
+      modeOfDelivery,
+      commencementDate,
+    } = this.state.batchForm
+    if (!commencementDate || !batchName || !modeOfDelivery) return
+    this.processForm(this.state.batchForm).then(batchForm => {
+      const action = batchForm.id ? 'editCourseBatch' : 'addCourseBatch'
+      this.setState({
+        isAddingBatch: true,
+      })
+      this.props[action](batchForm)
+        .then((res) => {
+          notifier.success(res.message)
+          this.setState({
+            isShowingBatchForm: false,
+            batchForm: initBatchForm(),
+          })
+        })
+        .catch(() => {
+          notifier.error('ERROR! Unable to save the batch')
+        })
+        .finally(() => {
+          this.setState({
+            isAddingBatch: false,
+          })
+        })
+    })
+  }
 
   setSession = (session, dayIndex, sessionIndex) => {
-    let timeTable = this.state.batchForm.timeTable.slice();
-    timeTable[dayIndex].sessions[sessionIndex] = {
-      ...session,
+    const timetable = this.state.batchForm.timetable.slice()
+
+    if (session.remove) {
+      timetable[dayIndex].sessions.splice(sessionIndex, 1)
+    }
+
+    if (!session.remove) {
+      timetable[dayIndex].sessions[sessionIndex] = {
+        ...session,
+      }
     }
 
     this.setState({
       batchForm: {
         ...this.state.batchForm,
-        timeTable,
+        timetable,
       }
     })
   }
 
   addSession = (dayIndex) => {
-    let timeTable = this.state.batchForm.timeTable.slice();
-    timeTable[dayIndex].sessions = [
+    const timetable = this.state.batchForm.timetable.slice()
+    timetable[dayIndex].sessions = [
       {
         activityName: '',
-        begin: '',
-        end: '',
+        begin: null,
+        end: null,
         id: uuidv1(),
         time: ''
       },
-      ...timeTable[dayIndex].sessions
+      ...timetable[dayIndex].sessions
     ]
 
     this.setState({
       batchForm: {
         ...this.state.batchForm,
-        timeTable
+        timetable
       }
     })
   }
@@ -332,18 +149,27 @@ class Course extends Component {
     this.setState({
       batchForm: {
         ...this.state.batchForm,
-        batch_name: e.target.value,
+        batchName: e.target.value,
       }
-    }, () => { console.log(this.state) });
+    })
   }
 
   onCommencementDateChange = (date, dateString) => {
     this.setState({
       batchForm: {
         ...this.state.batchForm,
-        commencement_date: dateString,
+        commencementDate: dateString,
       }
-    }, () => { console.log(this.state) });
+    })
+  }
+
+  onPriceChange = (e) => {
+    this.setState({
+      batchForm: {
+        ...this.state.batchForm,
+        price: e.target.value,
+      }
+    })
   }
 
   onModeOfDeliveryChange = (modeOfDelivery) => {
@@ -352,21 +178,53 @@ class Course extends Component {
         ...this.state.batchForm,
         modeOfDelivery,
       }
-    }, () => { console.log(this.state) });
+    })
   }
 
   showBatchForm = () => {
     this.setState({
-      isShowingBatchForm: true
+      isShowingBatchForm: true,
+      batchForm: initBatchForm()
     })
   }
 
   editBatch = (batchIndex) => {
+    const initForm = initBatchForm()
+    const batchForm = {
+      ...this.props.batches[batchIndex],
+    }
+    if (!batchForm.timetable.length) {
+      batchForm.timetable = [
+        ...initForm.timetable
+      ]
+    } else if (batchForm.timetable.length) {
+      const daysHash = batchForm.timetable.map(t => t.day)
+      const timetable = initForm.timetable.map(t => {
+        const dayHashIndex = daysHash.indexOf(t.day)
+        if (dayHashIndex >= 0) {
+          return batchForm.timetable[dayHashIndex]
+        }
+        return t
+      })
+      batchForm.timetable = [
+        ...timetable
+      ]
+    }
     this.setState({
       isShowingBatchForm: true,
-      batchForm: { ...this.state.course.batches[batchIndex] }
+      batchForm
+    })
+  }
+
+  completeBatch = () => {
+    this.setState({
+      batchForm: {
+        ...this.state.batchForm,
+        hasEnded: true,
+        endDate: moment(Date.now()).format('YYYY-MM-DD h:mm:ss')
+      }
     }, () => {
-      console.log(this.state.batchForm)
+      this.handleSubmit()
     })
   }
 
@@ -376,97 +234,110 @@ class Course extends Component {
     })
   }
 
-  renderSchedule (paddingClasses) {
+  closeConfirmation = () => {
+    this.setState({
+      batchToDelete: null
+    })
+  }
+
+  proceedWithConfirmation = () => {
+    this.setState({
+      batchToDelete: null
+    })
+    const action = userIsAdmin(this.props.user)
+      ? this.props.deleteBatch
+      : this.props.deleteSchedule
+    action(
+      this.state.batchToDelete
+    ).then((res) => {
+      notifier.success(res.message)
+    }).catch(() => {
+      notifier.error('ERROR, Unable to delete branch')
+    })
+  }
+
+  setBatchToDelete = (batch) => {
+    this.setState({
+      batchToDelete: batch
+    })
+  }
+
+  renderBatchModalTitle = () => {
+    const {
+      batchForm: { id, commencementDate, batchName, price },
+      isAddingBatch
+    } = this.state
+    const {
+      user
+    } = this.props
     return (
-      <section className="student-course-dashboard">
-        <div className="container">
-          <div className="row">
-            <div className={`col-md-12 col-lg-11 col-xl-7 ${paddingClasses}`}>
-              <div>
-                {
-                  this.state.course.batches.map((batch, batchIndex) => {
-                    return (
-                      <ExpandableBlock
-                          expanded={batchIndex === 0}
-                          left={
-                            <div>
-                              <h6 className="text-capitalize">{batch.batch_name}</h6>
-                              <p>{batch.commencement_date}</p>
-                            </div>
-                          }
-                          right="View schedule"
-                          content={
-                          <>
-                            <table className="has-full-width">
-                              <thead>
-                                <tr>
-                                  <th style={{ width: '30%' }}>Days of the week</th>
-                                  <th style={{ width: '70%' }}>Timetable</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {
-                                  batch.timeTable.map((_schedule) => (
-                                    <tr>
-                                      <td style={{ verticalAlign: 'top' }}>
-                                      <span className="text-capitalize">{_schedule.day}</span>
-                                      </td>
-                                      <td>
-                                        {
-                                          _schedule.sessions.map((session, index) => (
-                                            <p key={index}>
-                                              <span>{`${session.begin}-${session.end}`}</span>
-                                              <br></br>
-                                              <span>
-                                                <b>{session.activityName}</b>
-                                              </span>
-                                            </p>
-                                          ))
-                                        }
-                                      </td>
-                                    </tr>
-                                  ))
-                                }
-                              </tbody>
-                            </table>
-                            <Button
-                              onClick={() => this.editBatch(batchIndex) }
-                              size="large"
-                              type="secondary"
-                              className="mt-3">
-                                Edit schedule
-                            </Button>
-                          </>
-                        }
-                      />
-                    )
-                  })
-                }
-              </div>
-            </div>
-          </div>
+      <div className="d-flex align-items-center justify-content-between">
+        <h5>Add new batch</h5>
+        <div className="d-flex">
+          <Button
+            loading={isAddingBatch}
+            disabled={isAddingBatch || (!commencementDate || !batchName || !price)}
+            onClick={this.handleSubmit}
+            type="danger"
+            style={{ width: '140px', height: '42px', marginRight: '6%' }}
+          >
+            { id ? 'Update batch' : 'Add batch' }
+          </Button>
+          <Display if={!!id && !isAddingBatch}>
+            <Popconfirm
+              placement="topRight"
+              title="End/complete Batch"
+              onConfirm={this.completeBatch}
+              okText="Yes"
+              cancelText="No"
+              disabled={(!commencementDate || !batchName || !price) || !userIsAdmin(user)}
+            >
+              <Button disabled={(!commencementDate || !batchName || !price) || !userIsAdmin(user)} style={{ borderColor: 'red' }}>
+                <Icon
+                  style={{ fontSize: '30px' }}
+                  type="check-circle"
+                  theme="twoTone"
+                  twoToneColor="red"
+                  className="ml-3 mr-3 mt-2"
+                />
+              </Button>
+            </Popconfirm>
+          </Display>
         </div>
-      </section>
+      </div>
     )
   }
 
-  renderAddBranchBtn () {
-    return (
+  renderAddBranchBtn = () => (
+    <Display if={userIsAdmin(this.props.user)}>
       <Button
-        style={{ width: '136px', height: '42px' }}
-        onClick={this.showBatchForm}
         type="danger"
+        onClick={this.showBatchForm}
+        style={{ width: '136px', height: '42px' }}
       >
-        Add new branch
+        Add new batch
       </Button>
-    )
-  }
+    </Display>
+  )
 
-  renderCourseAndBatches () {
+  render () {
+    const {
+      user,
+      course,
+      batches,
+      saveCourse,
+      createCourse,
+      fetchInstructors,
+      setBatchExpandedState
+    } = this.props
     return (
       <>
-        <CourseHeader {...this.props} className={this.props.user.role !== 'admin' ? 'mb-7' : null } course={this.state.course}>
-          <Display if={this.props.user.role === 'instructor'}>
+        <CourseHeader
+          user={user}
+          course={course}
+          className={userIsAdmin(user) ? 'mb-7' : ''}
+        >
+          <Display if={userIsInstructor(user)}>
             <div className="col-md-12 pl-6 pr-6 mt-7">
               <div className="d-flex justify-content-between mb-4">
                 <h4>Batch and schedule</h4>
@@ -475,82 +346,103 @@ class Course extends Component {
             </div>
           </Display>
         </CourseHeader>
-        <Display if={this.props.user.role === 'instructor'}>
-          {this.renderSchedule('pl-6 pr-6')}
+        <Display if={userIsInstructor(user)}>
+          <BatchList
+            user={user}
+            batches={batches}
+            paddingClasses="pl-6 pr-6"
+            editBatch={this.editBatch}
+            setBatchToDelete={this.setBatchToDelete}
+            setBatchExpandedState={setBatchExpandedState}
+          />
         </Display>
-        <Display if={this.props.user.role === 'admin'}>
-          <div className={`container course__admin ${this.props.user.role === 'admin'  ? 'mt-5-neg' : null}`}>
-            <div className="row">
-              <div className="col-md-12 pl-6 pr-6">
-                <Tabs tabBarExtraContent={
-                  <div className="d-none d-md-block">
-                    {
-                      this.renderAddBranchBtn()
-                    }
-                  </div>
-                }>
-                  <TabPane tab="Batch and schedule" key="1">
-                    <div className="row mt-4 batch-schedule-tab">
-                      {this.renderSchedule()}
-                    </div>
-                  </TabPane>
-                  <TabPane tab="Instructor" key="2">
-                    Content of tab 2
-                  </TabPane>
-                  <TabPane tab="Settings" key="3">
-                    <div className="mt-5 settings">
-                      <AddCourseForm />
-                    </div>
-                  </TabPane>
-                </Tabs>
-              </div>
-            </div>
-          </div>
+        <Display if={userIsAdmin(user)}>
+          <CourseDetail
+            user={user}
+            course={course}
+            batches={batches}
+            saveCourse={saveCourse}
+            editBatch={this.editBatch}
+            createCourse={createCourse}
+            showBatchForm={this.showBatchForm}
+            fetchInstructors={fetchInstructors}
+            setBatchToDelete={this.setBatchToDelete}
+            setBatchExpandedState={setBatchExpandedState}
+          />
         </Display>
+        <Modal
+          centered
+          width="870px"
+          footer={null}
+          onCancel={this.closeModal}
+          wrapClassName="batch-form-modal"
+          title={this.renderBatchModalTitle()}
+          visible={this.state.isShowingBatchForm}
+        >
+          {this.state.isShowingBatchForm &&
+          <BatchForm
+            user={user}
+            setSession={this.setSession}
+            addSession={this.addSession}
+            batchForm={this.state.batchForm}
+            handleSubmit={this.handleSubmit}
+            showBatchForm={this.showBatchForm}
+            onPriceChange={this.onPriceChange}
+            onBatchNameChange={this.onBatchNameChange}
+            onModeOfDeliveryChange={this.onModeOfDeliveryChange}
+            onCommencementDateChange={this.onCommencementDateChange}
+          />}
+        </Modal>
+        <Modal
+          title="Confirmation"
+          onCancel={this.closeConfirmation}
+          onOk={this.proceedWithConfirmation}
+          visible={!!this.state.batchToDelete}
+        >
+          <p className="text-center">Are you sure you want to delete this batch ?</p>
+        </Modal>
       </>
     )
-  }
-
-  render() {
-    return (
-      <>
-        { this.renderCourseAndBatches() }
-        { this.state.isShowingBatchForm && (
-            <Modal
-              footer={null}
-              wrapClassName="batch-form-modal"
-              width="870px"
-              centered
-              onCancel={this.closeModal}
-              visible={this.state.isShowingBatchForm}
-              title={
-                <div className="d-flex align-items-center justify-content-between">
-                  <h5>Add new batch</h5>
-                  <Button onClick={this.handleSubmit} type="danger" style={{ width: '140px', height: '42px', marginRight: '6%' }}>Add batch</Button>
-                </div>
-              }
-            >
-              <BatchForm
-                batchForm={this.state.batchForm}
-                onCommencementDateChange={this.onCommencementDateChange}
-                onModeOfDeliveryChange={this.onModeOfDeliveryChange}
-                onBatchNameChange={this.onBatchNameChange}
-                showBatchForm={this.showBatchForm}
-                handleSubmit={this.handleSubmit}
-                setSession={this.setSession}
-                addSession={this.addSession}
-              />
-            </Modal>
-        )}
-      </>
-    );
   }
 }
 
 Course.propTypes = {
+  user: PropTypes.shape({
+    role: PropTypes.string
+  }).isRequired,
+  batches: PropTypes.array.isRequired,
+  course: PropTypes.object.isRequired,
+  deleteBatch: PropTypes.func.isRequired,
+  fetchCourse: PropTypes.func.isRequired,
+  createCourse: PropTypes.func.isRequired,
+  saveCourse: PropTypes.func.isRequired,
+  deleteSchedule: PropTypes.func.isRequired,
+  addCourseBatch: PropTypes.func.isRequired,
+  editCourseBatch: PropTypes.func.isRequired,
+  fetchInstructors: PropTypes.func.isRequired,
+  setBatchExpandedState: PropTypes.func.isRequired,
+}
 
-};
+const mapStateToProps = (state) => {
+  return {
+    course: getCourse(state),
+    batches: getBatches(state)
+  }
+}
 
 Course.backText = 'Back to courses'
 
-export default withAdminLayout(Course);
+export default withRedirect(withAdminLayout(connect(
+  mapStateToProps,
+  {
+    fetchCourse: actions.fetchCourse,
+    saveCourse: actions.saveCourse,
+    createCourse: actions.createCourse,
+    deleteBatch: actions.deleteBatch,
+    deleteSchedule: actions.deleteSchedule,
+    addCourseBatch: actions.addCourseBatch,
+    editCourseBatch: actions.editCourseBatch,
+    fetchInstructors: actions.fetchInstructors,
+    setBatchExpandedState: actions.setBatchExpandedState,
+  }
+)(Course)))

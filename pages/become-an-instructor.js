@@ -1,26 +1,32 @@
-import InstructorForm from '../components/auth/InstructorForm';
-import withMasterLayout from '../pages/layouts/withMasterLayout';
-import Display from "../components/shared/Display";
-import Footer from '../components/shared/Footer';
-import Head from 'next/head';
-import React, { Component } from 'react';
-import Auth from '../components/shared/Auth';
-import PropTypes from 'prop-types';
-import { Tabs, Button } from 'antd';
-import { connect } from 'react-redux';
+import Head from 'next/head'
+// import PropTypes from 'prop-types';
+// import { Tabs, Button } from 'antd';
+// import { connect } from 'react-redux';
+import React, { Component } from 'react'
+// import Auth from '../components/shared/Auth'
+import { Animated } from 'react-animated-css'
+import Footer from '../components/shared/Footer'
+import Display from '../components/shared/Display'
+import withMasterLayout from './layouts/withMasterLayout'
+import InstructorForm from '../components/auth/InstructorForm'
 
 class BecomeAnInstructor extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    submittedForm: false
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return true
+  handleSuccessfullSubmittion = () => {
+    this.setState({
+      submittedForm: true
+    })
   }
 
-  render() {
+  render () {
+    const {
+      submittedForm
+    } = this.state
     return (
-      <Auth>
+      <>
         <Head>
           <title key="title">Treten Academy - Become an instructor</title>
         </Head>
@@ -30,15 +36,37 @@ class BecomeAnInstructor extends Component {
             <div className="row justify-content-center has-full-height">
               <div className="col-md-4 pl-5 pr-5 auth__wrapper">
                 <div className="auth__container">
-                  <Display if={!this.props.successfullyRegistered}>
+                  <Display if={!submittedForm}>
                     <h5 className="text-center fw-600 mb-5 mt-5">Complete the form below</h5>
-                    <InstructorForm />
+                    <Animated
+                      animationIn="fadeIn"
+                      animationOut="slideInUp"
+                      isVisible={!submittedForm}
+                    >
+                      <InstructorForm
+                        onSuccessfullSubmittion={this.handleSuccessfullSubmittion}
+                      />
+                    </Animated>
                   </Display>
-                  <Display if={this.props.successfullyRegistered}>
+                  <Display if={submittedForm}>
                     <div className="d-flex justify-content-center flex-sm-direction align-items-center confirmation">
                       <div className="d-flex align-items-center flex-column justify-content-center">
-                        <img className="mb-2" src="/static/images/confirmation.png" />
-                        <p className="text-center pl-5 pr-5">Thanks for your interest! We will be in touch with you shortly.</p>
+                        <Animated
+                          animationIn="bounceIn"
+                          animationOut="slideInUp"
+                          isVisible={submittedForm}
+                        >
+                          <img className="mb-2" src="/static/images/confirmation.png" />
+                        </Animated>
+                        <Animated
+                          animationIn="slideInUp"
+                          animationOut="fadeOut"
+                          isVisible={submittedForm}
+                        >
+                          <p className="text-center pl-5 pr-5">
+                            Thanks for your interest! We will be in touch with you shortly.
+                          </p>
+                        </Animated>
                       </div>
                     </div>
                   </Display>
@@ -48,19 +76,11 @@ class BecomeAnInstructor extends Component {
           </div>
         </section>
         <Footer />
-      </Auth>
-    );
+      </>
+    )
   }
 }
 
-BecomeAnInstructor.propTypes = {
+BecomeAnInstructor.propTypes = {}
 
-};
-
-const mapStateToProps = (state) => {
-  return {
-    successfullyRegistered: state.instructor.successfullyRegistered
-  };
-}
-
-export default connect(mapStateToProps)(withMasterLayout(BecomeAnInstructor));
+export default withMasterLayout(BecomeAnInstructor)

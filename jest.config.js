@@ -24,21 +24,21 @@ module.exports = {
   // collectCoverageFrom: null,
 
   // The directory where Jest should output its coverage files
-  coverageDirectory: "coverage",
+  coverageDirectory: 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
   coveragePathIgnorePatterns: [
-    "\\\\node_modules\\\\",
-    "/node_modules/",
-    "setupTests.js"
+    '\\\\node_modules\\\\',
+    '/node_modules/',
+    'setupTests.js',
   ],
 
   // A list of reporter names that Jest uses when writing coverage reports
   coverageReporters: [
-    "json",
-    "text",
-    "lcov",
-    "clover"
+    'json',
+    'text',
+    'lcov',
+    'clover',
   ],
 
   // An object that configures minimum threshold enforcement for coverage results
@@ -69,12 +69,12 @@ module.exports = {
 
   // An array of file extensions your modules use
   moduleFileExtensions: [
-    "js",
-    "json",
-    "jsx",
-    "ts",
-    "tsx",
-    "node"
+    'js',
+    'json',
+    'jsx',
+    'ts',
+    'tsx',
+    'node',
   ],
 
   // A map from regular expressions to module names that allow to stub out resources with a single module
@@ -128,7 +128,7 @@ module.exports = {
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   setupFilesAfterEnv: [
-    "./setupTests.js"
+    './setupTests.js',
   ],
 
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
@@ -171,7 +171,7 @@ module.exports = {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    "^.+\\.jsx?$": "babel-jest"
+    '^.+\\.jsx?$': 'babel-jest',
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation

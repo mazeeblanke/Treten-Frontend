@@ -1,26 +1,27 @@
-import { getTransactions } from "../../../store/reducers/transactions";
-import { parsedPaginationTotalText } from "../../../lib/helpers";
-import { TRANSACTIONS_COLUMNS } from "../../../lib/constants";
-import AdminLayout from "../../layouts/AdminLayout";
-import * as actions from "../../../store/actions";
-import { Table, Input, Button } from "antd";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { CSVLink } from "react-csv";
-import PropTypes from "prop-types";
+import { getTransactions } from '../../../store/reducers/transactions'
+import { parsedPaginationTotalText } from '../../../lib/helpers'
+import { TRANSACTIONS_COLUMNS } from '../../../lib/constants'
+import withRedirect from '../../layouts/withRedirect'
+import AdminLayout from '../../layouts/AdminLayout'
+import * as actions from '../../../store/actions'
+import { Table, Input, Button } from 'antd'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { CSVLink } from 'react-csv'
+import PropTypes from 'prop-types'
+import PaginationNav from '../../../components/shared/PaginationNav'
 
-const Search = Input.Search;
+const Search = Input.Search
 
 class Transactions extends Component {
-
-  static async getInitialProps({ reduxStore }) {
+  static async getInitialProps ({ reduxStore }) {
     await reduxStore.dispatch(actions.fetchTransactions())
     return {}
   }
 
-  constructor(props) {
-    super(props);
-    this.csvDownloadRef = React.createRef();
+  constructor (props) {
+    super(props)
+    this.csvDownloadRef = React.createRef()
   }
 
   state = {
@@ -29,35 +30,29 @@ class Transactions extends Component {
     searchQuery: ''
   };
 
-  // componentDidMount() {
-  //   // this.props.fetchTransactions();
-  // }
-
-  componentWillUnmount() {}
-
   handleTableChange = pagination => {
     this.props.fetchTransactions({
       page: pagination.current,
       q: this.state.searchQuery
-    });
-  };
+    })
+  }
 
   downloadCSV = () => {
     this.setState({
       loadingCSV: true
-    });
+    })
 
-    this.props.downloadCSV("transactions").then(res => {
+    this.props.downloadCSV('transactions').then(res => {
       this.setState({
         loadingCSV: false,
         csvData: res
-      });
+      })
 
-      this.csvDownloadRef.current.link.click();
+      this.csvDownloadRef.current.link.click()
     }).catch(() => {
       this.setState({
         loadingCSV: false
-      });
+      })
     })
   };
 
@@ -65,12 +60,12 @@ class Transactions extends Component {
     this.setState({ searchQuery: q })
     this.props.fetchTransactions({
       q
-    });
+    })
   };
 
-  csvFileName = "Transactions.csv";
+  csvFileName = 'Transactions.csv';
 
-  render() {
+  render () {
     return (
       <section className="transactions">
         <AdminLayout headerName="Transactions">
@@ -92,17 +87,17 @@ class Transactions extends Component {
                         placeholder="Search"
                         onSearch={value => this.search(value)}
                         onChange={e => this.search(e.target.value)}
-                        style={{ width: "180px", height: "42px" }}
+                        style={{ width: '180px', height: '42px' }}
                       />
                       <Button
                         loading={this.state.loadingCSV}
                         onClick={this.downloadCSV}
                         className="mb-3"
                         type="danger"
-                        style={{ width: "126px", height: "40px" }}
+                        style={{ width: '126px', height: '40px' }}
                       >
                         <span>Download</span>
-                        <img className="ml-2" src="/static/images/down.png" />
+                        <img className="ml-2" src="/static/images/down.png" alt="arrow down" />
                       </Button>
                       {
                         <CSVLink
@@ -110,9 +105,9 @@ class Transactions extends Component {
                           data={this.state.csvData}
                           filename={this.csvFileName}
                           target="_blank"
-                          style={{ display: "none" }}
+                          style={{ display: 'none' }}
                         >
-                          {" "}
+                          {' '}
                           Download
                         </CSVLink>
                       }
@@ -139,22 +134,33 @@ class Transactions extends Component {
           </div>
         </AdminLayout>
       </section>
-    );
+    )
   }
 }
 
-Transactions.propTypes = {};
+Transactions.propTypes = {
+  downloadCSV: PropTypes.func.isRequired,
+  transactions: PropTypes.object.isRequired,
+  fetchTransactions: PropTypes.func.isRequired,
+}
 
 const mapStateToProps = state => {
   return {
     transactions: {
       ...state.transactions,
-      all: getTransactions(state)
+      all: getTransactions(state),
+      pagination: {
+        ...state.transactions.pagination,
+        itemRender: PaginationNav
+      }
     }
-  };
-};
+  }
+}
 
 export default connect(
   mapStateToProps,
-  { ...actions }
-)(Transactions);
+  {
+    fetchTransactions: actions.fetchTransactions,
+    downloadCSV: actions.downloadCSV
+  }
+)(withRedirect(Transactions))

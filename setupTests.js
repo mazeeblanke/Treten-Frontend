@@ -1,13 +1,13 @@
-const Adapter = require("enzyme-adapter-react-16");
+const Adapter = require('enzyme-adapter-react-16')
 
 window.matchMedia =
   window.matchMedia ||
-  function() {
+  function () {
     return {
       matches: false,
-      addListener: function() {},
-      removeListener: function() {}
-    };
-  };
+      addListener () {},
+      removeListener () {}
+    }
+  }
 
-require("enzyme").configure({ adapter: new Adapter() });
+require('enzyme').configure({ adapter: new Adapter() })

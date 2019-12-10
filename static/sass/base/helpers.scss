@@ -15,6 +15,10 @@
   color: #01295F !important;
 }
 
+.has-light-border {
+  border: 1px solid #eee !important;
+}
+
 .is-grey-light {
   color: #8B90A0;
 }
@@ -48,6 +52,9 @@
   height: 15px;
 }
 
+.h20{
+  height: 20px;
+}
 
 .h28{
   height: 28px;
@@ -325,6 +332,29 @@
   border-color: #f5222d !important;
 }
 
+#treten .has-error .quill, .has-error .quill:hover {
+  border: 1px solid #f5222d !important;
+}
+
+.Select-control {
+  height: 30px;
+
+  .Select-placeholder {
+    line-height: 26px;
+  }
+
+  .Select-value {
+    line-height: 26px !important;
+
+    .Select-value-label {
+      line-height: 26px;
+    }
+  }
+
+  .Select-input {
+    height: 26px;
+  }
+}
 // .ant-btn-primary:hover, .ant-btn-primary:focus {
 //   color: #fff;
 //   background-color: #E12828 !important;

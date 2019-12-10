@@ -1,266 +1,137 @@
-import { Tabs, Button, Select } from 'antd';
-import React, { Component } from 'react';
-import StarRatings from "react-star-ratings";
-import { connect } from 'react-redux';
-import * as actions from '../store/actions';
-import withMasterLayout from '../pages/layouts/withMasterLayout';
-import Footer from '../components/shared/Footer';
-import About from '../components/course/About';
-import Reviews from '../components/shared/Testimonials';
-import Instructor from '../components/course/Instructor';
-import HowItWorks from '../components/course/HowItWorks';
-import Link from 'next/link';
-import ExpandableBlock from '../components/shared/ExpandableBlock';
-const { TabPane } = Tabs;
-const { Option } = Select;
+import Link from 'next/link'
+import Head from 'next/head'
+import { NextSeo } from 'next-seo'
+import PropTypes from 'prop-types'
+import { Tabs, Button } from 'antd'
+import { connect } from 'react-redux'
+import React, { Component } from 'react'
+import * as actions from '../store/actions'
+import StarRatings from 'react-star-ratings'
+import About from '../components/course/About'
+import ReactHtmlParser from 'react-html-parser'
+import Footer from '../components/shared/Footer'
+import Display from '../components/shared/Display'
+import { getCourse } from '../store/reducers/course'
+import Reviews from '../components/shared/Testimonials'
+import Instructor from '../components/course/Instructor'
+import HowItWorks from '../components/course/HowItWorks'
+import withMasterLayout from './layouts/withMasterLayout'
+import ExpandableBlock from '../components/shared/ExpandableBlock'
+import {
+  userIsStudent,
+  getUserDetails,
+  userIsAdmin,
+  userIsInstructor
+} from '../store/reducers/user'
+import EmptyState from '../components/shared/EmptyState'
 
-const operations = (
-  <div>
-    <img src="/static/images/bookmark.png" className="mr-4"></img>
-    <Link href="/enroll">
-      <Button size="large" type="secondary">Enroll now</Button>
-    </Link>
-  </div>
-);
+const { TabPane } = Tabs
 
 class Course extends Component {
-
-  static async getInitialProps (ctx) {
-    // const isServer = !!req
-    // DISPATCH ACTIONS HERE ONLY WITH `reduxStore.dispatch`
+  static async getInitialProps ({ reduxStore, req }) {
+    await Promise.all([
+      reduxStore.dispatch(actions.fetchCourse({
+        slug: req
+          ? req.params.courseSlug
+          : location.pathname.split('/').pop(),
+      })),
+    ])
     return {}
   }
 
-  state = {
-    instructor: {
-      profile_pic: '/static/images/instructors/instructor1lg.png',
-      fullname: 'Instructor name here',
-      title: 'Title of instructor goes here',
-      qualifications: "Bio here. Eventually, you do plan to have dinosaurs on your dinosaur tour, right? God help us, we're in the hands of engineers.",
-      social_links: {
-        facebook: 'wehjwe',
-        linkedin: 'ewewi',
-        twitter: 'ejkerjk'
-      },
-      experience: [
-        {
-          company: 'Microsoft',
-          datePeriod: 'Apr 2017 - present',
-          position: 'Lead Trainer',
-          summary: 'Did he just throw my cat out of the window? You really think you can fly that thing? Jaguar shark!'
-        },
-        {
-          company: 'Dell Technology',
-          datePeriod: 'Dec 2017 - Jan 2018',
-          position: 'Technology Associate',
-          summary: 'Yeah, but John, if The Pirates of the Caribbean breaks down, the pirates don’t eat the tourists.'
-        },
-      ],
-      certifications: [
-        {
-          title: 'Certification title',
-          logo: '/static/images/certifications/cisco.png',
-          datePeriod: 'Apr 2017 - present'
-        },
-        {
-          title: 'Certification title',
-          logo: '/static/images/certifications/microsoft.png',
-          datePeriod: 'Apr 2017 - present'
-        },
-        {
-          title: 'Certification title',
-          logo: '/static/images/certifications/microsoft.png',
-          datePeriod: 'Apr 2017 - present'
-        },
-      ],
-      courses: [
-        {
-          title: 'CCNA R&S',
-          level: 'Expert',
-          excerpt: 'Brief course description goes here. Did he just throw my cat out of the window? You really think you can fly that thing? Jaguar shark! '
-        }
-      ],
-      education: [
-        {
-          institutionName: 'Name of institution',
-          qualification: 'Qualification obtained from institution',
-          datePeriod: 'Apr 2009 - Sept 2014'
-        },
-        {
-          institutionName: 'Name of institution',
-          qualification: 'Qualification obtained from institution',
-          datePeriod: 'Apr 2009 - Sept 2014'
-        },
-        {
-          institutionName: 'Name of institution',
-          qualification: 'Qualification obtained from institution',
-          datePeriod: 'Apr 2009 - Sept 2014'
-        },
-      ]
-    },
-    faqs: [
-      {
-        question: 'This is where the question being asked goes? ',
-        answer: `What do they got in there? King Kong?
-        God creates dinosaurs. God destroys dinosaurs.
-        God creates Man. Man destroys God. Man creates Dinosaurs.
-        Must go faster. What do they got in there? King Kong?
-        You know what? It is beets. I've crashed into a beet truck.`
-      },
-      {
-        question: 'This is where the question being asked goes? ',
-        answer: `What do they got in there? King Kong?
-        God creates dinosaurs. God destroys dinosaurs.
-        God creates Man. Man destroys God. Man creates Dinosaurs.
-        Must go faster. What do they got in there? King Kong?
-        You know what? It is beets. I've crashed into a beet truck.`
-      },
-      {
-        question: 'This is where the question being asked goes? ',
-        answer: `What do they got in there? King Kong?
-        God creates dinosaurs. God destroys dinosaurs.
-        God creates Man. Man destroys God. Man creates Dinosaurs.
-        Must go faster. What do they got in there? King Kong?
-        You know what? It is beets. I've crashed into a beet truck.`
-      },
-      {
-        question: 'This is where the question being asked goes? ',
-        answer: `What do they got in there? King Kong?
-        God creates dinosaurs. God destroys dinosaurs.
-        God creates Man. Man destroys God. Man creates Dinosaurs.
-        Must go faster. What do they got in there? King Kong?
-        You know what? It is beets. I've crashed into a beet truck.`
-      },
-      {
-        question: 'This is where the question being asked goes? ',
-        answer: `What do they got in there? King Kong?
-        God creates dinosaurs. God destroys dinosaurs.
-        God creates Man. Man destroys God. Man creates Dinosaurs.
-        Must go faster. What do they got in there? King Kong?
-        You know what? It is beets. I've crashed into a beet truck.`
-      },
-    ],
-    courses: [
-      {
-        instructor: {
-          name: "Tim Cook",
-          profile_pic: "/static/images/instructors/instructor1.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        banner_image: "/static/images/courses/course1.png"
-      },
-      {
-        instructor: {
-          name: "Tim Berners-Lee",
-          profile_pic: "/static/images/instructors/instructor2.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        banner_image: "/static/images/courses/course2.png"
-      },
-      {
-        instructor: {
-          name: "Oluwadare Michelangelo",
-          profile_pic: "/static/images/instructors/instructor3.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        banner_image: "/static/images/courses/course3.png"
-      },
-      {
-        instructor: {
-          name: "Chukwuemeka Nnadi",
-          profile_pic: "/static/images/instructors/instructor4.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        banner_image: "/static/images/courses/course4.png"
-      },
-    ],
-    reviews: [
-      {
-        text: `Yeah, but John, if The Pirates of the
-        Caribbean breaks down, the pirates don’t eat the tourists.
-        Yes, Yes, without the oops! Is this my espresso machine?
-        Wh-what is-h-how did you get my espresso machine?
-        They're using our own satellites against us. Hey,
-        you know how I'm, like, always trying to save the planet?`,
-        student: {
-          profile_pic: '/static/images/instructors/instructor2.png',
-          fullname: 'Clarisa Ward',
-          profile_text: 'Network Engineer, Microsoft'
-        }
-      },
-      {
-        text: `Yeah, but John, if The Pirates of the
-        Caribbean breaks down, the pirates don’t eat the tourists.
-        Yes, Yes, without the oops! Is this my espresso machine?
-        Wh-what is-h-how did you get my espresso machine?
-        They're using our own satellites against us. Hey,
-        you know how I'm, like, always trying to save the planet?`,
-        student: {
-          profile_pic: '/static/images/instructors/instructor2.png',
-          fullname: 'Nnomthi Phillips',
-          profile_text: 'Cyber Security Ninja, CBN'
-        }
-      },
-      {
-        text: `Yeah, but John, if The Pirates of the
-        Caribbean breaks down, the pirates don’t eat the tourists.
-        Yes, Yes, without the oops! Is this my espresso machine?
-        Wh-what is-h-how did you get my espresso machine?
-        They're using our own satellites against us. Hey,
-        you know how I'm, like, always trying to save the planet?`,
-        student: {
-          profile_pic: '/static/images/instructors/instructor4.png',
-          fullname: 'Adewale McDavids',
-          profile_text: 'Network Engineer, Paystack'
-        }
-      },
-      {
-        text: `Yeah, but John, if The Pirates of the
-        Caribbean breaks down, the pirates don’t eat the tourists.
-        Yes, Yes, without the oops! Is this my espresso machine?
-        Wh-what is-h-how did you get my espresso machine?
-        They're using our own satellites against us. Hey,
-        you know how I'm, like, always trying to save the planet?`,
-        student: {
-          profile_pic: '/static/images/instructors/instructor2.png',
-          fullname: 'Adewale McDavids',
-          profile_text: 'Network Engineer, Paystack'
-        }
-      },
-    ],
+  operations = () => {
+    const {
+      user,
+      course
+    } = this.props
+    return (
+      <div>
+        <img src="/static/images/bookmark.png" className="mr-4" alt="bookmark" />
+        <Display if={(course.transaction || {}).status === 'success' &&
+          !!(course.enrollment || {}).active && userIsStudent(this.props.user)
+        }>
+          <Link href={'/d/student/courses/' + this.props.course.slug}>
+            <Button style={{ width: '195px' }} className="ml-3" size="large" type="danger">
+              View Course
+            </Button>
+          </Link>
+        </Display>
+        <Display if={(course.transaction || {}).status !== 'success' &&
+          !(course.enrollment || {}).active &&
+          !userIsAdmin(user) && !userIsInstructor(user)
+        }>
+          <Link href={`${this.props.course.slug}/enroll`}>
+            <Button size="large" type="secondary">
+              Enroll now
+            </Button>
+          </Link>
+        </Display>
+      </div>
+    )
   }
 
-  componentDidMount () {
-  }
-
+  componentDidMount () {}
 
   render () {
+    const {
+      course
+    } = this.props
     return (
       <>
-        <section style={{
-            backgroundImage: "linear-gradient(to left, rgba(34, 40, 41, 1), rgba(34, 40, 41, 0.7)), url('/static/images/course/course-bg.png')",
+        <Head>
+          <title key="title">Treten Academy - {course.title}</title>
+        </Head>
+        <NextSeo
+          title={`Treten Academy course - ${course.title}`}
+          description={course.description.substr(0, 200).replace(/<\/?[^>]+(>|$)/g, '')}
+          canonical="https://tretenacademy.com"
+          openGraph={{
+            url: 'https://tretenacademy.com',
+            title: 'Treten Academy - Africa largest virtual lab',
+            description: course.description.substr(0, 200).replace(/<\/?[^>]+(>|$)/g, ''),
+            images: [
+              {
+                url: course.bannerImage,
+                width: 800,
+                height: 600,
+                alt: course.title,
+              },
+            ],
+            site_name: 'Treten Academy',
+          }}
+          twitter={{
+            handle: '@tretenacademy',
+            site: '@tretenacademy',
+            cardType: 'summary_large_image',
+          }}
+        />
+        <section
+          style={{
+            backgroundImage:
+              `linear-gradient(to left, rgba(34, 40, 41, 1), rgba(34, 40, 41, 0.7)), 
+              url('/static/images/course/course-bg.png')`,
             height: '220px'
-          }} className="has-grey-bg has-full-height">
+          }}
+          className="has-grey-bg has-full-height"
+        >
           <div className="container">
-            <h3 className="text-center is-white pt-8 courses__main-text">
-              Course title goes here, and it just keeps going
+            <h3 className="text-center is-white pt-8 courses__main-text text-capitalize">
+              {course.title}
             </h3>
             <div className="row justify-content-center is-white mb-5">
               <div className="mr-3">
-                <img className="mr-1" src="/static/images/scholar.png" />
-                <span>Professional level</span>
+                <img
+                  className="mr-1 text-capitalize"
+                  src="/static/images/scholar.png"
+                  alt="scholar"
+                />
+                <span className="text-capitalize">
+                  {course.category && `${course.category.name} Level`}
+                </span>
               </div>
               <div>
-                <img className="mr-1" src="/static/images/users.png" />
-                <span>250 learners</span>
+                <img className="mr-1" src="/static/images/users.png" alt="users" />
+                <span>{course.learnersCount} learners</span>
               </div>
             </div>
           </div>
@@ -268,12 +139,20 @@ class Course extends Component {
         <section className="courses has-white-bg pt-4 mb-8">
           <hr />
           <div className="container">
-            <Tabs tabBarExtraContent={operations}>
+            <Tabs tabBarExtraContent={this.operations()}>
               <TabPane tab="About this course" key="1">
-                <About />
+                <About course={course} />
               </TabPane>
               <TabPane tab="Instructor" key="instructor">
-                <Instructor { ...this.state.instructor } />
+                {course.instructor && <Instructor
+                  heading="Lead Instructor"
+                  name={course.instructor.name}
+                  title={(course.instructor.userable || {}).title}
+                  profilePic={course.instructor.profilePic}
+                  instructorSlug={(course.instructor.userable || {}).instructorSlug}
+                  qualifications={(course.instructor.userable || {}).qualifications}
+                />
+                }
               </TabPane>
               <TabPane tab="How it works" key="how-it-works">
                 <HowItWorks />
@@ -282,9 +161,12 @@ class Course extends Component {
                 <div className="container">
                   <h5 className="fw-600 mt-3">Course reviews</h5>
                 </div>
-                <Reviews
-                  testimonials={this.state.reviews}
-                 />
+                <Display if={!!course.courseReviews.length}>
+                  <Reviews testimonials={course.courseReviews} />
+                </Display>
+                <Display if={!course.courseReviews.length}>
+                  <EmptyState emptyText="No reviews yet"></EmptyState>
+                </Display>
               </TabPane>
               <TabPane tab="FAQs" key="bootcamps">
                 <div className="container mb-4">
@@ -292,60 +174,70 @@ class Course extends Component {
                     <b>FAQs</b>
                   </h5>
                   <div className="row">
-                    <div className="col-md-6">
-                      {
-                        this.state.faqs.map((faq, index) => (
+                    <Display if={!!course.faqs.length}>
+                      <div className="col-md-6">
+                        {course.faqs && course.faqs.slice(0, 8).map((faq, index) => (
                           <ExpandableBlock
                             key={index}
-                            expanded={index === 0 ? true : false}
-                            left={faq.question}
-                            content={<p>{faq.answer}</p>}
+                            expanded={index === 0}
+                            left={<span className="text-capitalize">{faq.question}</span>}
+                            content={ReactHtmlParser(faq.answer)}
                           />
-                        ))
-                      }
-                    </div>
-                    <div className="col-md-6">
-                      {
-                        this.state.faqs.slice(3).map((faq, index) => (
+                        ))}
+                      </div>
+                      <div className="col-md-6">
+                        {course.faqs && course.faqs.slice(9, 17).map(faq => (
                           <ExpandableBlock
-                            key={index}
+                            key={faq.question}
                             left={faq.question}
-                            content={<p>{faq.answer}</p>}
+                            content={ReactHtmlParser(faq.answer)}
                           />
-                        ))
-                      }
-                    </div>
+                        ))}
+                      </div>
+                    </Display>
+                    <Display if={!course.faqs.length}>
+                      <div className="col-md-12">
+                        <EmptyState emptyText="No Faqs yet"></EmptyState>
+                      </div>
+                    </Display>
                   </div>
                 </div>
               </TabPane>
             </Tabs>
-            <h5 className="fw-600 mt-4">You might also be interested in</h5>
+            {!!course.relatedCourses.length &&
+              <h5 className="fw-600 mt-4">
+                You might also be interested in
+              </h5>
+            }
             <div className="row mt-4">
-              {
-                this.state.courses.map((course) => (
-                  <div className="col-sm-12 col-md-3 mb-5" key={course.title}>
-                    <div class="card border-0">
-                      <img src={course.banner_image} class="card-img-top" alt={course.title} />
-                      <div class="card-body">
-                        <h5 class="card-title">{course.title}</h5>
+              {course.relatedCourses.map(_course => (
+                <div className="col-sm-12 col-md-3 mb-5" key={_course.title}>
+                  <Link href={`/courses/${_course.slug}`}>
+                    <div className="card border-0">
+                      <img src={_course.banner_image} className="card-img-top" alt={_course.title} />
+                      <div className="card-body">
+                        <h5 className="card-title">{_course.title}</h5>
                         <StarRatings
                           starDimension="15px"
                           starSpacing="3px"
-                          rating={course.rating}
+                          rating={_course.avg_rating}
                           starRatedColor="#E12828"
-                          changeRating={() => {}}
                           numberOfStars={5}
-                          name='rating'
+                          name="rating"
                         />
                         <div className="is-flex is-vcentered mt-2">
-                          <img className="mr-2 h28 rounded-circle" src={course.instructor.profile_pic} />
-                          <span>{course.instructor.name}</span>
+                          <img
+                            className="mr-2 h28 rounded-circle"
+                            src={_course.instructor.profile_pic}
+                            alt="s"
+                          />
+                          <span>{_course.instructor.name}</span>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))
-              }
+                  </Link>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -355,10 +247,21 @@ class Course extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    // user: getUser(state),
-  }
+const mapStateToProps = (state) => ({
+  // user: getUser(state),
+  user: getUserDetails(state),
+  course: getCourse(state),
+})
+
+Course.propTypes = {
+  course: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  fetchCourse: PropTypes.func.isRequired,
 }
 
-export default connect(mapStateToProps, actions)(withMasterLayout(Course));
+export default connect(
+  mapStateToProps,
+  {
+    fetchCourse: actions.fetchCourse
+  }
+)(withMasterLayout(Course))

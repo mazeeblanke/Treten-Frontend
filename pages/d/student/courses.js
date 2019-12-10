@@ -1,191 +1,102 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import withAdminLayout from '../../layouts/withAdminLayout';
-import EmptyState from '../../../components/shared/EmptyState';
-import { Button } from 'antd';
-import Display from '../../../components/shared/Display';
-import Link from 'next/link';
+import Link from 'next/link'
+import { Button } from 'antd'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import React, { Component } from 'react'
+import * as actions from '../../../store/actions'
+import withRedirect from '../../layouts/withRedirect'
+import Display from '../../../components/shared/Display'
+import withAdminLayout from '../../layouts/withAdminLayout'
+import { getUserDetails } from '../../../store/reducers/user'
+import CourseList from '../../../components/admin/CourseList'
+import EmptyState from '../../../components/shared/EmptyState'
+import { getAllEnrolledCourses } from '../../../store/reducers/enrolledCourses'
 
 class Courses extends Component {
-  constructor(props) {
-    super(props);
-
+  static async getInitialProps ({ reduxStore }) {
+    await Promise.all([
+      reduxStore.dispatch(actions.fetchCourses({
+        enrolled: 1,
+        scope: 'enrolled'
+      })),
+    ])
+    return {}
   }
 
-  state = {
-    courses: [
-      {
-        instructor: {
-          name: "Tim Cook",
-          profile_pic: "/static/images/instructors/instructor1.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'remote',
-        banner_image: "/static/images/courses/course1.png"
-      },
-      {
-        instructor: {
-          name: "Tim Berners-Lee",
-          profile_pic: "/static/images/instructors/instructor2.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'on-demand',
-        banner_image: "/static/images/courses/course2.png"
-      },
-      {
-        instructor: {
-          name: "Oluwadare Michelangelo",
-          profile_pic: "/static/images/instructors/instructor3.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'remote',
-        banner_image: "/static/images/courses/course3.png"
-      },
-      {
-        instructor: {
-          name: "Chukwuemeka Nnadi",
-          profile_pic: "/static/images/instructors/instructor4.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'on-demand',
-        banner_image: "/static/images/courses/course4.png"
-      },
-      {
-        instructor: {
-          name: "Sharon james",
-          profile_pic: "/static/images/instructors/instructor1.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'remote',
-        banner_image: "/static/images/courses/course5.png"
-      },
-      {
-        instructor: {
-          name: "Oluwadare Michelangelo",
-          profile_pic: "/static/images/instructors/instructor3.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'on-demand',
-        banner_image: "/static/images/courses/course3.png"
-      },
-      {
-        instructor: {
-          name: "Chukwuemeka Nnadi",
-          profile_pic: "/static/images/instructors/instructor4.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'on-site',
-        banner_image: "/static/images/courses/course4.png"
-      },
-      {
-        instructor: {
-          name: "Sharon james",
-          profile_pic: "/static/images/instructors/instructor1.png"
-        },
-        title: "Course title goes here",
-        rating: 3,
-        reviews_count: 56,
-        type: 'on-site',
-        banner_image: "/static/images/courses/course5.png"
-      },
-    ],
-    // courses: []
+  handlePageChange = ({ page = 1 }) => {
+    this.props.fetchEnrolledCourses({
+      page,
+      enrolled: 1,
+      scope: 'enrolled',
+    })
   }
 
-  componentWillMount() {
-
-  }
-
-  componentDidMount() {
-
-  }
-
-  // componentWillReceiveProps(nextProps) {
-
-  // }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-
-  // }
-
-  // componentWillUpdate(nextProps, nextState) {
-
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-
-  // }
-
-  componentWillUnmount() {
-
-  }
-
-  render() {
+  render () {
+    const {
+      user,
+      enrolledCourses,
+      isLoadingEnrolledCourses,
+      enrolledCoursesPagination
+    } = this.props
     return (
       <section className="courses has-height-80">
-        <Display if={!this.state.courses.length}>
+        <Display if={!this.props.enrolledCourses.length}>
           <div className="has-full-height">
-            <EmptyState emptyText="You have not signed up for any course">
-              <Button style={{ width: '195px' }} className="ml-3" size="large" type="danger">Explore course catalog</Button>
+            <EmptyState
+              emptyText="You have not signed up for any course"
+            >
+              <Link href="/courses">
+                <Button
+                  style={{ width: '195px' }}
+                  className="ml-3"
+                  size="large"
+                  type="danger"
+                >
+                  Explore course catalog
+                </Button>
+              </Link>
             </EmptyState>
           </div>
         </Display>
-        <Display if={this.state.courses.length}>
-          <div className="container mt-6">
-            <div className="row">
-              <div className="col-md-12 pl-6 pr-6">
-                <div className="row">
-                  {
-                    this.state.courses.map((course) => (
-                      <Link href={"/d/student/course"}>
-                        <div className="col-sm-12 col-md-6 col-lg-3 mb-5">
-                          <div key={course.title}>
-                            <div className="card border-0">
-                              <img src={course.banner_image} className="card-img-top" alt={course.title} />
-                              <div className="card-body">
-                                <h5 className="card-title">{course.title}</h5>
-                                <h6 className="mb-3 mt-1">{course.type}</h6>
-                                <Link href="/d/student/course">
-                                  <h6>
-                                    <b>View Course</b>
-                                    <img className="ml-2" src="/static/images/arrow-right.png" />
-                                  </h6>
-                                </Link>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </Link>
-                    ))
-                  }
-                </div>
-              </div>
-            </div>
+        <Display if={this.props.enrolledCourses.length}>
+          <div className="container mt-6 pl-6 pr-6">
+            <CourseList
+              user={user}
+              studentView={true}
+              courses={enrolledCourses}
+              isLoading={isLoadingEnrolledCourses}
+              pagination={enrolledCoursesPagination}
+              handlePageChange={this.handlePageChange}
+            />
           </div>
         </Display>
       </section>
-    );
+    )
   }
 }
 
 Courses.propTypes = {
+  user: PropTypes.object.isRequired,
+  enrolledCourses: PropTypes.array.isRequired,
+  fetchEnrolledCourses: PropTypes.func.isRequired,
+  isLoadingEnrolledCourses: PropTypes.bool.isRequired,
+  enrolledCoursesPagination: PropTypes.object.isRequired,
+}
 
-};
+Courses.headerName = 'My Courses'
 
-Courses.headerName = "My Courses"
+const mapstateToProps = (state) => {
+  return {
+    user: getUserDetails(state),
+    enrolledCourses: getAllEnrolledCourses(state),
+    isLoadingEnrolledCourses: state.enrolledCourses.isLoading,
+    enrolledCoursesPagination: state.enrolledCourses.pagination,
+  }
+}
 
-export default withAdminLayout(Courses);
+export default withRedirect(withAdminLayout(connect(
+  mapstateToProps,
+  {
+    fetchEnrolledCourses: actions.fetchCourses
+  }
+)(Courses)))

@@ -1,27 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import PersonalDetailsForm from '../../../components/shared/PersonalDetailsForm';
-import withProfileLayout from '../../layouts/withProfileLayout';
-
+import React, { Component } from 'react'
+import PersonalDetailsForm from '../../../components/shared/PersonalDetailsForm'
+import withProfileLayout from '../../layouts/withProfileLayout'
+import withRedirect from '../../layouts/withRedirect'
 
 class Details extends Component {
-  constructor(props) {
-    super(props);
-
-  }
-
-  render() {
+  render () {
     return (
       <div>
         <h5>Update your personal details</h5>
         <PersonalDetailsForm />
       </div>
-    );
+    )
   }
 }
 
-Details.propTypes = {
-
-};
-
-export default withProfileLayout(Details);
+export default withRedirect(withProfileLayout(Details))

@@ -1,65 +1,64 @@
-import Link from "next/link";
-import Head from "next/head";
-import PropTypes from "prop-types";
-const Cookies = require("js-cookie");
-import React, { Component } from "react";
-import { withRouter } from "next/router";
-import { ROUTES } from "../../lib/constants";
-import withAdminLayout from "./withAdminLayout";
-import notifier from "simple-react-notifications";
-import "simple-react-notifications/dist/index.css";
+import Link from 'next/link'
+import Head from 'next/head'
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { ROUTES } from '../../lib/constants'
+import withAdminLayout from './withAdminLayout'
+import notifier from 'simple-react-notifications'
+import 'simple-react-notifications/dist/index.css'
+const Cookies = require('js-cookie')
 
 export default Comp => {
   class Profile extends Component {
-    constructor(props) {
-      super(props);
-      this.fileInputRef = React.createRef();
+    constructor (props) {
+      super(props)
+      this.fileInputRef = React.createRef()
     }
 
     state = {
-      selected: "",
+      selected: '',
       profile: []
     };
 
-    componentWillMount() {}
+    componentWillMount () { }
 
-    componentDidMount() {
-			notifier.configure({
-				onlyLast: true,
-			});
-		}
+    componentDidMount () {
+      notifier.configure({
+        onlyLast: true,
+      })
+    }
 
-    componentWillUnmount() {}
+    componentWillUnmount () { }
 
     changeProfileImage = e => {
-      e.preventDefault();
-      const fileReader = new FileReader();
-      const file = e.target.files[0];
+      e.preventDefault()
+      const fileReader = new FileReader()
+      const file = e.target.files[0]
       fileReader.onloadend = () => {
-				notifier.info("Saving profile image....", {
-					autoClose: false
-				});
+        notifier.info('Saving profile image....', {
+          autoClose: false
+        })
         this.props
           .updateUserDetails({
-            profile_pic: file,
+            profilePic: file,
             imagePreviewUrl: fileReader.result
           })
-          .then(() => notifier.success("Your profile has been updated"))
+          .then(() => notifier.success('Your profile has been updated'))
           .catch(() =>
-            notifier.error("ERROR! Your profile could not be updated")
+            notifier.error('ERROR! Your profile could not be updated')
           )
           .finally(() => {
-            this.fileInputRef.current.value = "";
-          });
-      };
-      fileReader.readAsDataURL(file);
+            this.fileInputRef.current.value = ''
+          })
+      }
+      fileReader.readAsDataURL(file)
     };
 
-    render() {
+    render () {
       return (
         <section className="profile has-full-height">
           <Head>
-            <meta name="csrf-token" content={Cookies.get("XSRF-TOKEN")} />
+            <meta name="csrf-token" content={Cookies.get('XSRF-TOKEN')} />
           </Head>
           <div className="container has-full-height">
             <div className="row has-full-height pr-6 pl-6">
@@ -72,7 +71,7 @@ export default Comp => {
                         type="file"
                         accept="image/*"
                         onChange={this.changeProfileImage}
-                        style={{ display: "none" }}
+                        style={{ display: 'none' }}
                       ></input>
                       <img
                         className="edit"
@@ -80,8 +79,8 @@ export default Comp => {
                         onClick={() => this.fileInputRef.current.click()}
                       />
                       <img
-                        src={`${this.props.user.profile_pic}`}
-                        className="card-img-top"
+                        src={`${this.props.user.profilePic}`}
+                        className="card-img"
                         alt="profile pic"
                       />
                       <div className="card-body">
@@ -97,19 +96,19 @@ export default Comp => {
                           <li
                             className={`list-group-item has-pointer-cursor ${
                               this.props.router.pathname ===
-                              ROUTES.STUDENT_DASHBOARD_PROFILEDETAILS
-                                ? "active"
-                                : ""
-                            }`}
+                                ROUTES.STUDENT_DASHBOARD_PROFILEDETAILS
+                                ? 'active'
+                                : ''
+                              }`}
                           >
                             <img
                               className="mr-3"
                               src={`/static/images/profile/${
                                 this.props.router.pathname ===
-                                ROUTES.STUDENT_DASHBOARD_PROFILEDETAILS
-                                  ? "user-white.png"
-                                  : "user-black.png"
-                              }`}
+                                  ROUTES.STUDENT_DASHBOARD_PROFILEDETAILS
+                                  ? 'user-white.png'
+                                  : 'user-black.png'
+                                }`}
                             />
                             <span>Update your personal details</span>
                           </li>
@@ -118,41 +117,41 @@ export default Comp => {
                           <li
                             className={`list-group-item has-pointer-cursor ${
                               this.props.router.pathname ===
-                              ROUTES.STUDENT_DASHBOARD_CHANGEPASSWORD
-                                ? "active"
-                                : ""
-                            }`}
+                                ROUTES.STUDENT_DASHBOARD_CHANGEPASSWORD
+                                ? 'active'
+                                : ''
+                              }`}
                           >
                             <img
                               className="mr-3"
                               src={`/static/images/profile/${
                                 this.props.router.pathname ===
-                                ROUTES.STUDENT_DASHBOARD_CHANGEPASSWORD
-                                  ? "padlock-white.png"
-                                  : "padlock-black.png"
-                              }`}
+                                  ROUTES.STUDENT_DASHBOARD_CHANGEPASSWORD
+                                  ? 'padlock-white.png'
+                                  : 'padlock-black.png'
+                                }`}
                             />
                             <span>Change account password</span>
                           </li>
                         </Link>
-                        {this.props.user.role === "instructor" && (
+                        {this.props.user.role === 'instructor' && (
                           <Link href={ROUTES.INSTRUCTOR_DASHBOARD_TUTORDETAILS}>
                             <li
                               className={`list-group-item has-pointer-cursor ${
                                 this.props.router.pathname ===
-                                ROUTES.INSTRUCTOR_DASHBOARD_TUTORDETAILS
-                                  ? "active"
-                                  : ""
-                              }`}
+                                  ROUTES.INSTRUCTOR_DASHBOARD_TUTORDETAILS
+                                  ? 'active'
+                                  : ''
+                                }`}
                             >
                               <img
                                 className="mr-3"
                                 src={`/static/images/profile/${
                                   this.props.router.pathname ===
-                                  ROUTES.INSTRUCTOR_DASHBOARD_TUTORDETAILS
-                                    ? "lock-white.png"
-                                    : "lock-black.png"
-                                }`}
+                                    ROUTES.INSTRUCTOR_DASHBOARD_TUTORDETAILS
+                                    ? 'lock-white.png'
+                                    : 'lock-black.png'
+                                  }`}
                               />
                               <span>Update tutor profile</span>
                             </li>
@@ -178,13 +177,21 @@ export default Comp => {
             </div>
           </div>
         </section>
-      );
+      )
     }
   }
 
-  Profile.propTypes = {};
+  Profile.propTypes = {
+    user: PropTypes.shape({
+      profilePic: PropTypes.string,
+      name: PropTypes.string,
+      role: PropTypes.string
+    }).isRequired,
+    router: PropTypes.object.isRequired,
+    updateUserDetails: PropTypes.func.isRequired
+  }
 
-  Profile.headerName = "My Profile";
+  Profile.headerName = 'My Profile'
 
-  return withAdminLayout(Profile);
-};
+  return withAdminLayout(Profile)
+}

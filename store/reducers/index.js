@@ -1,24 +1,46 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
 
 // IMPORT REDUCERS HERE
-import userReducer from '../reducers/user';
-import authReducer from '../reducers/auth';
-import adminReducer from '../reducers/admin';
-import instructorReducer from '../reducers/instructor';
-import chatReducer from '../reducers/chat';
-import transactionsReducer from '../reducers/transactions';
-import blogPostsReducer from '../reducers/blogPosts';
-import dashboardReducer from '../reducers/dashboard';
+import userReducer from './user'
+import authReducer from './auth'
+import adminReducer from './admin'
+import instructorReducer from './instructor'
+import chatReducer from './chat'
+import transactionsReducer from './transactions'
+import blogPostsReducer from './blogPosts'
+import dashboardReducer from './dashboard'
+import adminCourseReducer from './adminCourses'
+import generalCourseReducer from './generalCourses'
+import instructorCourseReducer from './instructorCourses'
+import coursesReducer from './courses'
+import searchCourseReducer from './searchCourses'
+import courseReducer from './course'
+import resourcesReducer from './resources'
+import enrolledCourseReducer from './enrolledCourses'
+import courseReviewsReducer from './courseReviews'
+import coursePathsReducer from './coursePaths'
+import testimonialsReducer from './testimonials'
 
-let rootReducer = combineReducers({
+const rootReducer = combineReducers({
   user: userReducer,
   auth: authReducer,
   chat: chatReducer,
   admin: adminReducer,
+  course: courseReducer,
+  courses: coursesReducer,
   dashboard: dashboardReducer,
+  resources: resourcesReducer,
   blogPosts: blogPostsReducer,
   instructor: instructorReducer,
+  adminCourses: adminCourseReducer,
+  searchCourses: searchCourseReducer,
   transactions: transactionsReducer,
-});
+  courseReviews: courseReviewsReducer,
+  generalCourses: generalCourseReducer,
+  enrolledCourses: enrolledCourseReducer,
+  testimonials: testimonialsReducer,
+  coursePaths: coursePathsReducer,
+  instructorCourses: instructorCourseReducer,
+})
 
-export default rootReducer;
+export default rootReducer
