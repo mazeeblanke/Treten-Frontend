@@ -1,8 +1,10 @@
 {
+  "root": true,
   "env": {
     "browser": true,
     "es6": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "extends": ["standard", "plugin:react/recommended"],
   "globals": {
@@ -44,9 +46,9 @@
   },
   "plugins": ["react"],
   "rules": {
-    "comma-dangle": 0,
+    "prefer-promise-reject-errors": 0,
     "react/jsx-uses-vars": 1,
-    "react/display-name": 1,
+    "react/display-name": 0,
     "no-unused-vars": "warn",
     "no-console": 1,
     "no-unexpected-multiline": "warn"

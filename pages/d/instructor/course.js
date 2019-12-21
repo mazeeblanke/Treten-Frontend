@@ -28,7 +28,7 @@ const initBatchForm = () => ({
     { day: 'wednesdays', sessions: [] },
     { day: 'thursdays', sessions: [] },
     { day: 'fridays', sessions: [] },
-    { day: 'saturdays', sessions: [] },
+    { day: 'saturdays', sessions: [] }
   ]
 })
 
@@ -37,7 +37,7 @@ class Course extends Component {
     await Promise.all([
       reduxStore.dispatch(actions.fetchCourse({
         slug: req ? req.params.courseSlug : location.pathname.split('/').pop()
-      })),
+      }))
     ])
     return {}
   }
@@ -46,7 +46,7 @@ class Course extends Component {
     isAddingBatch: false,
     batchToDelete: null,
     isShowingBatchForm: false,
-    batchForm: initBatchForm(),
+    batchForm: initBatchForm()
   }
 
   componentDidMount () {
@@ -76,20 +76,20 @@ class Course extends Component {
     const {
       batchName,
       modeOfDelivery,
-      commencementDate,
+      commencementDate
     } = this.state.batchForm
     if (!commencementDate || !batchName || !modeOfDelivery) return
     this.processForm(this.state.batchForm).then(batchForm => {
       const action = batchForm.id ? 'editCourseBatch' : 'addCourseBatch'
       this.setState({
-        isAddingBatch: true,
+        isAddingBatch: true
       })
       this.props[action](batchForm)
         .then((res) => {
           notifier.success(res.message)
           this.setState({
             isShowingBatchForm: false,
-            batchForm: initBatchForm(),
+            batchForm: initBatchForm()
           })
         })
         .catch(() => {
@@ -97,7 +97,7 @@ class Course extends Component {
         })
         .finally(() => {
           this.setState({
-            isAddingBatch: false,
+            isAddingBatch: false
           })
         })
     })
@@ -112,14 +112,14 @@ class Course extends Component {
 
     if (!session.remove) {
       timetable[dayIndex].sessions[sessionIndex] = {
-        ...session,
+        ...session
       }
     }
 
     this.setState({
       batchForm: {
         ...this.state.batchForm,
-        timetable,
+        timetable
       }
     })
   }
@@ -149,7 +149,7 @@ class Course extends Component {
     this.setState({
       batchForm: {
         ...this.state.batchForm,
-        batchName: e.target.value,
+        batchName: e.target.value
       }
     })
   }
@@ -158,7 +158,7 @@ class Course extends Component {
     this.setState({
       batchForm: {
         ...this.state.batchForm,
-        commencementDate: dateString,
+        commencementDate: dateString
       }
     })
   }
@@ -167,7 +167,7 @@ class Course extends Component {
     this.setState({
       batchForm: {
         ...this.state.batchForm,
-        price: e.target.value,
+        price: e.target.value
       }
     })
   }
@@ -176,7 +176,7 @@ class Course extends Component {
     this.setState({
       batchForm: {
         ...this.state.batchForm,
-        modeOfDelivery,
+        modeOfDelivery
       }
     })
   }
@@ -191,7 +191,7 @@ class Course extends Component {
   editBatch = (batchIndex) => {
     const initForm = initBatchForm()
     const batchForm = {
-      ...this.props.batches[batchIndex],
+      ...this.props.batches[batchIndex]
     }
     if (!batchForm.timetable.length) {
       batchForm.timetable = [
@@ -420,7 +420,7 @@ Course.propTypes = {
   addCourseBatch: PropTypes.func.isRequired,
   editCourseBatch: PropTypes.func.isRequired,
   fetchInstructors: PropTypes.func.isRequired,
-  setBatchExpandedState: PropTypes.func.isRequired,
+  setBatchExpandedState: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {
@@ -443,6 +443,6 @@ export default withRedirect(withAdminLayout(connect(
     addCourseBatch: actions.addCourseBatch,
     editCourseBatch: actions.editCourseBatch,
     fetchInstructors: actions.fetchInstructors,
-    setBatchExpandedState: actions.setBatchExpandedState,
+    setBatchExpandedState: actions.setBatchExpandedState
   }
 )(Course)))

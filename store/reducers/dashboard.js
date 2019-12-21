@@ -5,7 +5,7 @@ const INITIAL_STATE = {
     studentsCount: 0,
     instructorsCount: 0,
     coursesCount: 0,
-    activeClassesCount: 0,
+    activeClassesCount: 0
   },
   newStudents: {
     byIds: [],
@@ -49,7 +49,7 @@ export default (state = INITIAL_STATE, action) => {
           coursesCount,
           studentsCount,
           instructorsCount,
-          activeClassesCount,
+          activeClassesCount
         },
         latestEnrollments: action.payload.data.latestEnrollments
       }

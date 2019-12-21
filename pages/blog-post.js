@@ -10,7 +10,7 @@ import { getBlogPost } from '../store/reducers/blogPosts'
 class Blog extends Component {
   static async getInitialProps ({ reduxStore, req }) {
     await reduxStore.dispatch(actions.fetchBlogPost(
-      req ? req.params.blogSlug : location.pathname.split('/').pop(),
+      req ? req.params.blogSlug : location.pathname.split('/').pop()
     ))
     return {}
   }

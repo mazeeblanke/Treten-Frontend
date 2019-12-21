@@ -14,7 +14,7 @@ class Testimonials extends Component {
     await Promise.all([
       reduxStore.dispatch(actions.fetchTestimonials({
         pageSize: 100
-      })),
+      }))
     ])
     return {}
   }

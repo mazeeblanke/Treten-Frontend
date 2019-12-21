@@ -33,8 +33,8 @@ class Course extends Component {
       reduxStore.dispatch(actions.fetchCourse({
         slug: req
           ? req.params.courseSlug
-          : location.pathname.split('/').pop(),
-      })),
+          : location.pathname.split('/').pop()
+      }))
     ])
     return {}
   }
@@ -94,15 +94,15 @@ class Course extends Component {
                 url: course.bannerImage,
                 width: 800,
                 height: 600,
-                alt: course.title,
-              },
+                alt: course.title
+              }
             ],
-            site_name: 'Treten Academy',
+            site_name: 'Treten Academy'
           }}
           twitter={{
             handle: '@tretenacademy',
             site: '@tretenacademy',
-            cardType: 'summary_large_image',
+            cardType: 'summary_large_image'
           }}
         />
         <section
@@ -250,13 +250,13 @@ class Course extends Component {
 const mapStateToProps = (state) => ({
   // user: getUser(state),
   user: getUserDetails(state),
-  course: getCourse(state),
+  course: getCourse(state)
 })
 
 Course.propTypes = {
   course: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
-  fetchCourse: PropTypes.func.isRequired,
+  fetchCourse: PropTypes.func.isRequired
 }
 
 export default connect(

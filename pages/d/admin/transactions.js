@@ -141,7 +141,7 @@ class Transactions extends Component {
 Transactions.propTypes = {
   downloadCSV: PropTypes.func.isRequired,
   transactions: PropTypes.object.isRequired,
-  fetchTransactions: PropTypes.func.isRequired,
+  fetchTransactions: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {

@@ -38,7 +38,7 @@ class Home extends Component {
       pageSize: 4,
       notAssigned: 0,
       scope: 'instructor',
-      authorId: this.props.user.id,
+      authorId: this.props.user.id
     })
   }
 
@@ -47,7 +47,7 @@ class Home extends Component {
       stats,
       allCourses,
       isLoadingAllCourses,
-      allCoursesPagination,
+      allCoursesPagination
     } = this.props
     return (
       <AdminLayout headerName="Home">
@@ -130,14 +130,14 @@ class Home extends Component {
 Home.propTypes = {
   stats: PropTypes.shape({
     studentsCount: PropTypes.number,
-    coursesCount: PropTypes.number,
+    coursesCount: PropTypes.number
   }).isRequired,
   user: PropTypes.object.isRequired,
   allCourses: PropTypes.array.isRequired,
   fetchCourses: PropTypes.func.isRequired,
   fetchDashboardStats: PropTypes.func.isRequired,
   isLoadingAllCourses: PropTypes.bool.isRequired,
-  allCoursesPagination: PropTypes.object.isRequired,
+  allCoursesPagination: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => {

@@ -101,7 +101,7 @@ export default function (state = INITIAL_STATE, { type, payload }) {
     case 'UPDATE_COURSE': {
       return {
         ...state,
-        ...payload.course,
+        ...payload.course
       }
     }
 

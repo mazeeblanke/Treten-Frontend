@@ -4,7 +4,7 @@ import { TRANSACTIONS_PAGE_SIZE } from '../../lib/constants'
 const paginationOptions = (options = {}) => ({
   total: options.total || 0,
   current: options.page,
-  pageSize: TRANSACTIONS_PAGE_SIZE,
+  pageSize: TRANSACTIONS_PAGE_SIZE
 })
 
 const INITIAL_STATE = {

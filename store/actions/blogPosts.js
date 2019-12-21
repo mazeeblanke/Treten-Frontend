@@ -50,7 +50,7 @@ export const fetchBlogPost = (blogPostSlug) => (
       dispatch({
         type: 'SET_ACTIVE_BLOG_POST',
         payload: {
-          data: res.data,
+          data: res.data
         }
       })
       dispatch({

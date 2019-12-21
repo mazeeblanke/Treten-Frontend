@@ -27,7 +27,7 @@ class Courses extends Component {
         page: 1,
         pageSize: 8,
         category: 'all'
-      })),
+      }))
     ])
     return {}
   }
@@ -188,7 +188,7 @@ Courses.propTypes = {
   isLoadingAssociateCourses: PropTypes.bool.isRequired,
   associateCoursesPagination: PropTypes.object.isRequired,
   isLoadingProfessionalCourses: PropTypes.bool.isRequired,
-  professionalCoursesPagination: PropTypes.object.isRequired,
+  professionalCoursesPagination: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => {
@@ -216,5 +216,5 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   fetchCourses: actions.fetchCourses,
   setTabSortDirection: actions.setTabSortDirection,
-  handleActiveTabChange: actions.handleActiveTabChange,
+  handleActiveTabChange: actions.handleActiveTabChange
 })(withRedirect(Courses))

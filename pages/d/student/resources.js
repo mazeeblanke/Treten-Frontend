@@ -14,7 +14,7 @@ import {
   resourcesIsLoading,
   getResourcesPagination,
   getResourcesCategoryId,
-  getResourcesSortDirection,
+  getResourcesSortDirection
 } from '../../../store/reducers/resources'
 import ResourcesList from '../../../components/resources/ResourcesList'
 import withRedirect from '../../layouts/withRedirect'
@@ -42,7 +42,7 @@ class Resources extends Component {
     courseOptions: [],
     courseCategoryOptions: [],
     isShowingAddResourcesForm: false,
-    isFetchingCourseCategories: false,
+    isFetchingCourseCategories: false
   }
 
   handlePageChange = ({ page = 1, categoryId = null, sort = null }) => {
@@ -152,7 +152,7 @@ class Resources extends Component {
     this.props.fetchCourseCategories({ q: query })
       .then((res) => {
         this.setState({
-          courseCategoryOptions: res.data,
+          courseCategoryOptions: res.data
         })
       })
       .finally(() => {
@@ -169,7 +169,7 @@ class Resources extends Component {
       resources,
       isLoading,
       pagination,
-      categoryId,
+      categoryId
     } = this.props
     return (
       <AdminLayout headerName="Resources" action={
@@ -303,7 +303,7 @@ Resources.propTypes = {
   user: PropTypes.shape({
     role: PropTypes.string,
     id: PropTypes.number,
-    userableId: PropTypes.string,
+    userableId: PropTypes.string
   }).isRequired,
   categoryId: PropTypes.number,
   sort: PropTypes.string.isRequired,
@@ -315,7 +315,7 @@ Resources.propTypes = {
   setCategoryId: PropTypes.func.isRequired,
   fetchResources: PropTypes.func.isRequired,
   setSortDirection: PropTypes.func.isRequired,
-  fetchCourseCategories: PropTypes.func.isRequired,
+  fetchCourseCategories: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {
@@ -335,5 +335,5 @@ export default connect(mapStateToProps, {
   fetchResources: actions.fetchResources,
   setCategoryId: actions.setResourcesCategoryId,
   setSortDirection: actions.setResourcesSortDirection,
-  fetchCourseCategories: actions.fetchCourseCategories,
+  fetchCourseCategories: actions.fetchCourseCategories
 })(withRedirect(Resources))

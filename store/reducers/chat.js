@@ -180,7 +180,7 @@ export default (state = INITIAL_STATE, action) => {
       // TODO: update the chatthreads
       return {
         ...state,
-        selectedChat,
+        selectedChat
         // chatThreads: {
         //   ...state.chatThreads
         // }
@@ -234,7 +234,7 @@ export default (state = INITIAL_STATE, action) => {
     case 'SET_SELECTED_BROADCAST': {
       // const { byIds, all } = transformArray(action.payload.data)
       const selectedBroadcastData = (action.payload.data || [{}])[0]
-      const { messageUuid } = action.payload
+      // const { messageUuid } = action.payload
       const selectedBroadcast = {
         ...state.selectedBroadcast,
         ...selectedBroadcastData,
@@ -251,7 +251,7 @@ export default (state = INITIAL_STATE, action) => {
 
       return {
         ...state,
-        selectedBroadcast,
+        selectedBroadcast
         // chatThreads: {
         //   ...state.chatThreads,
         //   [messageUuid]: {

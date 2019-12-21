@@ -18,7 +18,7 @@ class Courses extends Component {
       reduxStore.dispatch(actions.fetchCourses({
         enrolled: 1,
         scope: 'enrolled'
-      })),
+      }))
     ])
     return {}
   }
@@ -27,7 +27,7 @@ class Courses extends Component {
     this.props.fetchEnrolledCourses({
       page,
       enrolled: 1,
-      scope: 'enrolled',
+      scope: 'enrolled'
     })
   }
 
@@ -80,7 +80,7 @@ Courses.propTypes = {
   enrolledCourses: PropTypes.array.isRequired,
   fetchEnrolledCourses: PropTypes.func.isRequired,
   isLoadingEnrolledCourses: PropTypes.bool.isRequired,
-  enrolledCoursesPagination: PropTypes.object.isRequired,
+  enrolledCoursesPagination: PropTypes.object.isRequired
 }
 
 Courses.headerName = 'My Courses'
@@ -90,7 +90,7 @@ const mapstateToProps = (state) => {
     user: getUserDetails(state),
     enrolledCourses: getAllEnrolledCourses(state),
     isLoadingEnrolledCourses: state.enrolledCourses.isLoading,
-    enrolledCoursesPagination: state.enrolledCourses.pagination,
+    enrolledCoursesPagination: state.enrolledCourses.pagination
   }
 }
 

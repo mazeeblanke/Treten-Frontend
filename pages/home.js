@@ -31,7 +31,7 @@ class Home extends Component {
       reduxStore.dispatch(actions.fetchLatestBlogPosts()),
       reduxStore.dispatch(actions.fetchPopularCourses()),
       reduxStore.dispatch(actions.fetchTestimonials()),
-      reduxStore.dispatch(actions.fetchCoursePaths()),
+      reduxStore.dispatch(actions.fetchCoursePaths())
     ])
     return {}
   }
@@ -79,15 +79,15 @@ class Home extends Component {
                 url: 'https://tretenacademy.com/static/images/why-us.png',
                 width: 800,
                 height: 600,
-                alt: 'treten academy',
-              },
+                alt: 'treten academy'
+              }
             ],
-            site_name: 'Treten Academy',
+            site_name: 'Treten Academy'
           }}
           twitter={{
             handle: '@tretenacademy',
             site: '@tretenacademy',
-            cardType: 'summary_large_image',
+            cardType: 'summary_large_image'
           }}
         />
         <Banner />

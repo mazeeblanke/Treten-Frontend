@@ -1,6 +1,5 @@
 /static
 /node_modules
-/components/__tests__
 /jest.config.js
 /next.config.js
 /.eslintrc.json

@@ -52,7 +52,7 @@ export default function (state = INITIAL_STATE, { type, payload }) {
         pagination: paginationOptions({
           page: payload.page,
           pageSize: payload.pageSize,
-          total: payload.data.total,
+          total: payload.data.total
         })
       }
       return newState

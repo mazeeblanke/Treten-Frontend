@@ -10,7 +10,7 @@ import {
   getExpertGeneralCourses,
   getAssociateGeneralCourses,
   getProfessionalGeneralCourses,
-  getGeneralCoursesSortDirection,
+  getGeneralCoursesSortDirection
 } from '../store/reducers/generalCourses'
 import CourseList from '../components/admin/CourseList'
 import { getUserDetails } from '../store/reducers/user'
@@ -27,8 +27,8 @@ class Courses extends Component {
         isPublished: 1,
         category: 'all',
         scope: 'general',
-        hasInstructor: 1,
-      })),
+        hasInstructor: 1
+      }))
     ])
     return {}
   }
@@ -67,7 +67,7 @@ class Courses extends Component {
       category,
       isPublished: 1,
       hasInstructor: 1,
-      scope: 'general',
+      scope: 'general'
     })
   }
 
@@ -213,7 +213,7 @@ Courses.propTypes = {
   isLoadingAssociateCourses: PropTypes.bool.isRequired,
   associateCoursesPagination: PropTypes.object.isRequired,
   isLoadingProfessionalCourses: PropTypes.bool.isRequired,
-  professionalCoursesPagination: PropTypes.object.isRequired,
+  professionalCoursesPagination: PropTypes.object.isRequired
 }
 
 export default connect(
@@ -221,6 +221,6 @@ export default connect(
   {
     fetchCourses: actions.fetchCourses,
     setTabSortDirection: actions.setTabSortDirection,
-    handleActiveTabChange: actions.handleActiveTabChange,
+    handleActiveTabChange: actions.handleActiveTabChange
   }
 )(withMasterLayout(Courses))

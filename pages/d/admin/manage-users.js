@@ -1,5 +1,5 @@
 import {
-  Modal,
+  Modal
 } from 'antd'
 import PropTypes from 'prop-types'
 import pluralize from 'pluralize'
@@ -28,7 +28,7 @@ class ManageUsers extends Component {
     await Promise.all([
       reduxStore.dispatch(actions.fetchInstructors()),
       reduxStore.dispatch(actions.fetchStudents()),
-      reduxStore.dispatch(actions.fetchAdmins()),
+      reduxStore.dispatch(actions.fetchAdmins())
     ])
     return {}
   }
@@ -43,12 +43,12 @@ class ManageUsers extends Component {
     errors: {},
     csvData: [],
     searchQuery: '',
-    loadingCSV: false,
+    loadingCSV: false
   }
 
   toggleAssignInstructorForm = (visibility, row) => {
     this.props.setAssignInstructorModalVisibility(
-      visibility,
+      visibility
     )
     this.setAssignInstructorForm(row.id, 'authorId')
   }
@@ -94,7 +94,7 @@ class ManageUsers extends Component {
         this.setState({
           errors: {
             [this.props.activeTab]: errors
-          },
+          }
         })
       })
   }
@@ -140,7 +140,7 @@ class ManageUsers extends Component {
         this.setState({
           errors: {
             [this.props.activeTab]: errors
-          },
+          }
         })
       })
   }
@@ -225,7 +225,7 @@ class ManageUsers extends Component {
       },
       onCancel () {
         handleCancel && handleCancel()
-      },
+      }
     })
   }
 
@@ -354,7 +354,7 @@ ManageUsers.propTypes = {
   setAssignInstructorForm: PropTypes.func.isRequired,
   setManageUsersActiveTab: PropTypes.func.isRequired,
   assignCourseToInstructor: PropTypes.func.isRequired,
-  setAssignInstructorModalVisibility: PropTypes.func.isRequired,
+  setAssignInstructorModalVisibility: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {
@@ -372,7 +372,7 @@ const mapStateToProps = state => {
     admins: {
       ...state.admin.manageUsers.admins,
       all: getAllAdmins(state)
-    },
+    }
   }
 }
 
@@ -394,6 +394,6 @@ export default connect(
     setManageUsersActiveTab: actions.setManageUsersActiveTab,
     setAssignInstructorForm: actions.setAssignInstructorForm,
     assignCourseToInstructor: actions.assignCourseToInstructor,
-    setAssignInstructorModalVisibility: actions.setAssignInstructorModalVisibility,
+    setAssignInstructorModalVisibility: actions.setAssignInstructorModalVisibility
   }
 )(withRedirect(ManageUsers))

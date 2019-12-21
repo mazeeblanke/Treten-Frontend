@@ -24,7 +24,7 @@ export default Comp => {
 
     componentDidMount () {
       notifier.configure({
-        onlyLast: true,
+        onlyLast: true
       })
     }
 

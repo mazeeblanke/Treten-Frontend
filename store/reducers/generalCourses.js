@@ -33,7 +33,7 @@ const INITIAL_STATE = {
     feedback: '',
     isLoading: false,
     sort: 'desc',
-    pagination: paginationOptions({}),
+    pagination: paginationOptions({})
   },
   associate: {
     byIds: [],
@@ -42,7 +42,7 @@ const INITIAL_STATE = {
     feedback: '',
     sort: 'desc',
     isLoading: false,
-    pagination: paginationOptions({}),
+    pagination: paginationOptions({})
   }
 }
 
@@ -86,7 +86,7 @@ export default function (state = INITIAL_STATE, { type, payload }) {
         pagination: paginationOptions({
           page: payload.page,
           pageSize: payload.pageSize,
-          total: payload.data.total,
+          total: payload.data.total
         })
       }
 

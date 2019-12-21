@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   all: {},
   byIds: [],
   isLoading: false,
-  pagination: paginationOptions(),
+  pagination: paginationOptions()
 }
 
 export default function (state = INITIAL_STATE, { type, payload }) {
@@ -29,7 +29,7 @@ export default function (state = INITIAL_STATE, { type, payload }) {
         pagination: paginationOptions({
           page: payload.page,
           total: payload.data.total,
-          pageSize: payload.pageSize,
+          pageSize: payload.pageSize
         })
       }
     }

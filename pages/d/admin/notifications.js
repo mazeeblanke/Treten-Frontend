@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import withAdminLayout from '../../layouts/withAdminLayout'
 import EmptyState from '../../../components/shared/EmptyState'
 import Display from '../../../components/shared/Display'

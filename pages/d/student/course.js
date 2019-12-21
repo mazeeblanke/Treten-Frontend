@@ -21,7 +21,7 @@ class Course extends Component {
       reduxStore.dispatch(actions.fetchCourse({
         slug: req ? req.params.courseSlug : location.pathname.split('/').pop(),
         enrolled: 1
-      })),
+      }))
     ])
     return {}
   }
@@ -58,7 +58,7 @@ class Course extends Component {
             datePeriod: 'Dec 2017 - Jan 2018',
             position: 'Technology Associate',
             summary: 'Yeah, but John, if The Pirates of the Caribbean breaks down, the pirates don’t eat the tourists.'
-          },
+          }
         ],
         certifications: [
           {
@@ -75,7 +75,7 @@ class Course extends Component {
             title: 'Certification title',
             logo: '/static/images/certifications/microsoft.png',
             datePeriod: 'Apr 2017 - present'
-          },
+          }
         ],
         courses: [
           {
@@ -99,8 +99,8 @@ class Course extends Component {
             institutionName: 'Name of institution',
             qualification: 'Qualification obtained from institution',
             datePeriod: 'Apr 2009 - Sept 2014'
-          },
-        ],
+          }
+        ]
       },
       content: {
         availableDate: 'Monday, 01 Aug 2019',
@@ -131,50 +131,50 @@ class Course extends Component {
             two ghostly white figures in coveralls and helmets are soflty dancing brain is
             the seed of intelligence invent the universe? At the edge of forever prime number extraordinary claims
             require extraordinary evidence dispassionate extraterrestrial.`
-          },
+          }
         ]
       },
       materials: [
         {
           title: 'Resource title goes here and if its long, the next line',
           resourceSumary: 'PDF, 45 pages. 24 MB',
-          role: 'Role on the team',
+          role: 'Role on the team'
         },
         {
           title: 'Resource title goes here and if its long, the next line',
           resourceSumary: 'PDF, 45 pages. 24 MB',
-          role: 'Role on the team',
+          role: 'Role on the team'
         },
         {
           title: 'Resource title goes here and if its long, the next line',
           resourceSumary: 'PDF, 45 pages. 24 MB',
-          role: 'Role on the team',
+          role: 'Role on the team'
         },
         {
           title: 'Resource title goes here and if its long, the next line',
           resourceSumary: 'PDF, 45 pages. 24 MB',
-          role: 'Role on the team',
+          role: 'Role on the team'
         },
         {
           title: 'Resource title goes here and if its long, the next line',
           resourceSumary: 'PDF, 45 pages. 24 MB',
-          role: 'Role on the team',
+          role: 'Role on the team'
         },
         {
           title: 'Resource title goes here and if its long, the next line',
           resourceSumary: 'PDF, 45 pages. 24 MB',
-          role: 'Role on the team',
+          role: 'Role on the team'
         },
         {
           title: 'Resource title goes here and if its long, the next line',
           resourceSumary: 'PDF, 45 pages. 24 MB',
-          role: 'Role on the team',
+          role: 'Role on the team'
         },
         {
           title: 'Resource title goes here and if its long, the next line',
           resourceSumary: 'PDF, 45 pages. 24 MB',
-          role: 'Role on the team',
-        },
+          role: 'Role on the team'
+        }
       ]
     }
   }
@@ -186,7 +186,7 @@ class Course extends Component {
       addCourseReview,
       editCourseReview,
       addInstructorReview,
-      editInstructorReview,
+      editInstructorReview
     } = this.props
     return (
       <>
@@ -237,7 +237,7 @@ Course.propTypes = {
   addCourseReview: PropTypes.func.isRequired,
   editCourseReview: PropTypes.func.isRequired,
   addInstructorReview: PropTypes.func.isRequired,
-  editInstructorReview: PropTypes.func.isRequired,
+  editInstructorReview: PropTypes.func.isRequired
 }
 
 Course.backText = 'Back to courses'
@@ -258,7 +258,7 @@ export default withRedirect(withAdminLayout(
       addCourseReview: actions.addCourseReview,
       editCourseReview: actions.editCourseReview,
       addInstructorReview: actions.addInstructorReview,
-      editInstructorReview: actions.editInstructorReview,
+      editInstructorReview: actions.editInstructorReview
     }
   )(Course)
 ))

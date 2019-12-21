@@ -31,7 +31,7 @@ class Home extends Component {
       newStudents,
       latestEnrollments,
       refreshNewStudents,
-      isRefreshingNewStudents,
+      isRefreshingNewStudents
     } = this.props
     return (
       <AdminLayout headerName="Home">
@@ -103,7 +103,7 @@ Home.propTypes = {
   newStudents: PropTypes.array.isRequired,
   latestEnrollments: PropTypes.array.isRequired,
   refreshNewStudents: PropTypes.func.isRequired,
-  isRefreshingNewStudents: PropTypes.bool.isRequired,
+  isRefreshingNewStudents: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = state => ({

@@ -43,16 +43,16 @@ module.exports = withFonts(
           })
         );
 
-        // if (dev) {
-        config.module.rules.push({
-          test: /\.(js|jsx)$/,
-          exclude: /node_modules/,
-          loader: 'eslint-loader'
-          // options: {
-          //   // eslint options (if necessary)
-          // }
-        });
-        // }
+        // // if (dev) {
+        // config.module.rules.push({
+        //   test: /\.(js|jsx)$/,
+        //   exclude: /node_modules/,
+        //   loader: 'eslint-loader'
+        //   // options: {
+        //   //   // eslint options (if necessary)
+        //   // }
+        // });
+        // // }
 
         return config;
       }

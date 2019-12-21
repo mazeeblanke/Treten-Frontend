@@ -3,7 +3,7 @@ import { ROUTES } from '../../lib/constants'
 import React, { Component } from 'react'
 import { withRouter } from 'next/router'
 import { connect } from 'react-redux'
-import { Layout, Menu, Alert } from 'antd'
+import { Layout, Menu } from 'antd'
 // import { Offline } from 'react-detect-offline'
 import Link from 'next/link'
 import Head from 'next/head'
@@ -402,12 +402,12 @@ AdminLayout.propTypes = {
   router: PropTypes.object.isRequired,
   user: PropTypes.shape({
     role: PropTypes.string,
-    profilePic: PropTypes.string,
+    profilePic: PropTypes.string
   }),
   backText: PropTypes.string,
   headerName: PropTypes.string,
   children: PropTypes.node,
-  action: PropTypes.node,
+  action: PropTypes.node
 }
 
 export default withRouter(connect(mapStateToProps, {})(

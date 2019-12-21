@@ -3,7 +3,7 @@ export const fetchCourseCategories = ({
   page = 1,
   sort = null,
   pageSize = 8,
-  minimal = null,
+  minimal = null
 } = {}) => (
   dispatch,
   getState,

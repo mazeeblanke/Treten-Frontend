@@ -43,7 +43,7 @@ export const fetchCourses = ({
   notAssigned = null,
   hasInstructor = null,
   enrolled = null,
-  isPublished = null,
+  isPublished = null
 } = {}) => (
   dispatch,
   getState,
@@ -74,7 +74,7 @@ export const fetchCourses = ({
         isPublished,
         enrolled,
         hasInstructor,
-        authorId,
+        authorId
       }
     })
     .then(res => {
@@ -85,7 +85,7 @@ export const fetchCourses = ({
           page,
           pageSize,
           category,
-          data: res.data,
+          data: res.data
         }
       })
       dispatch({
@@ -191,7 +191,7 @@ export const searchCourses = ({
       pageSize,
       category,
       notAssigned,
-      authorId,
+      authorId
     }
   })
 }
@@ -230,14 +230,14 @@ export const handleActiveTabChange = ({
   sort = null,
   scope = 'admin',
   isPublished = null,
-  hasInstructor = null,
+  hasInstructor = null
 } = {}
 ) => (dispatch, getState, api) => {
   // const tabDetails = getState().adminCourses[tab]
   // console.log(tabDetails)
   dispatch({
     type: `SET_ACTIVE_TAB_${scope.toUpperCase()}_COURSES`,
-    payload: tab,
+    payload: tab
   })
   // if (getState()['adminCourses']) {
 

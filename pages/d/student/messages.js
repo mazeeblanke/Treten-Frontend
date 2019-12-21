@@ -304,6 +304,6 @@ export default withRedirect(connect(
     setMessageBeingTyped: actions.startNewChat,
     fetchBroadcast: actions.fetchBroadcast,
     fetchUserGroups: actions.fetchUserGroups,
-    sendBroadcast: actions.sendBroadcast,
+    sendBroadcast: actions.sendBroadcast
   }
 )(withAdminLayout(Messages)))

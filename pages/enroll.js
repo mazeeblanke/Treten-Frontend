@@ -19,7 +19,7 @@ const sliderSettings = {
   infinite: false,
   arrows: false,
   slidesToShow: 3.6,
-  slidesToScroll: 1,
+  slidesToScroll: 1
 }
 
 class Enroll extends Component {
@@ -28,7 +28,7 @@ class Enroll extends Component {
       reduxStore.dispatch(actions.fetchCourse({
         slug: req.params.courseSlug,
         userId: reduxStore.getState().user.id
-      })),
+      }))
     ])
     return {}
   }
@@ -80,7 +80,7 @@ class Enroll extends Component {
       price: '',
       courseId: '',
       courseBatchId: '',
-      availableDate: '',
+      availableDate: ''
     })
   };
 
@@ -95,7 +95,7 @@ class Enroll extends Component {
       availableDate: entry.startDate,
       price: entry.price || entry.amount,
       courseId: entry.courseId,
-      courseBatchId: entry.batchId,
+      courseBatchId: entry.batchId
     })
   }
 
@@ -104,7 +104,7 @@ class Enroll extends Component {
       plan: this.state.plan,
       availableDate: this.state.availableDate,
       courseId: this.state.courseId,
-      courseBatchId: this.state.courseBatchId,
+      courseBatchId: this.state.courseBatchId
     }).then((res) => {
       const data = res.data.data
       this.setState({
@@ -470,7 +470,7 @@ Enroll.propTypes = {
   enroll: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
-  updateCourse: PropTypes.func.isRequired,
+  updateCourse: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -486,7 +486,7 @@ const WrappedEnrollForm = Form.create({ name: 'login' })(
       enroll: actions.enroll,
       login: actions.login,
       register: actions.register,
-      updateCourse: actions.updateCourse,
+      updateCourse: actions.updateCourse
     }
   )(Enroll)
 )

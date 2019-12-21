@@ -40,7 +40,7 @@ const rootReducer = combineReducers({
   enrolledCourses: enrolledCourseReducer,
   testimonials: testimonialsReducer,
   coursePaths: coursePathsReducer,
-  instructorCourses: instructorCourseReducer,
+  instructorCourses: instructorCourseReducer
 })
 
 export default rootReducer

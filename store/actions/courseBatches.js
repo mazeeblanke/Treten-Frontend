@@ -5,7 +5,7 @@ export const setBatchExpandedState = (batch, expanded) => (dispatch) => {
     type: 'SET_BATCH_EXPANDED_STATE',
     payload: {
       batchId: batch.id,
-      expanded,
+      expanded
     }
   })
 }

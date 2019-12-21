@@ -13,7 +13,7 @@ const INITIAL_STATE = {
   isLoadingBlogPosts: false,
   paginationOptions: paginationOptions(),
   activeBlogPost: {
-    isLoading: false,
+    isLoading: false
   },
   latestBlogPosts: {
     isLoading: false,

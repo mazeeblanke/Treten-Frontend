@@ -8,7 +8,7 @@ const initInstructorForm = () => ({
   authorId: null,
   courseId: null,
   isVisible: false,
-  isAssigning: false,
+  isAssigning: false
 })
 
 const initInvitationForm = () => ([{
@@ -19,7 +19,7 @@ const initInvitationForm = () => ([{
 const paginationOptions = (tab, newState, options = {}) => ({
   current: options.page,
   pageSize: options.pageSize,
-  total: newState ? newState.manageUsers[tab].total : 0,
+  total: newState ? newState.manageUsers[tab].total : 0
 })
 
 const INITIAL_STATE = {
@@ -42,7 +42,7 @@ const INITIAL_STATE = {
       isInviting: false,
       form: initInvitationForm(),
       isShowingAddNewForm: false,
-      pagination: paginationOptions('admin'),
+      pagination: paginationOptions('admin')
     },
     instructors: {
       all: {},
@@ -54,7 +54,7 @@ const INITIAL_STATE = {
       form: initInvitationForm(),
       isShowingAddNewForm: false,
       assignInstructorForm: initInstructorForm(),
-      pagination: paginationOptions('instructors'),
+      pagination: paginationOptions('instructors')
     }
   }
 }
@@ -133,7 +133,7 @@ export default function (state = INITIAL_STATE, { type, payload }) {
       }
       return {
         ...state,
-        ...newState,
+        ...newState
       }
     }
 
@@ -145,7 +145,7 @@ export default function (state = INITIAL_STATE, { type, payload }) {
       }
       return {
         ...state,
-        ...newState,
+        ...newState
       }
     }
 
@@ -165,7 +165,7 @@ export default function (state = INITIAL_STATE, { type, payload }) {
         ...newState.manageUsers[userType],
         form: [
           ...newState.manageUsers[userType].form,
-          data,
+          data
         ]
       }
       return {
