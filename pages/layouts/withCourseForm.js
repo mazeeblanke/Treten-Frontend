@@ -12,7 +12,8 @@ const resetCourseForm = () => ({
   coursePath: '',
   coursePathPosition: '',
   bannerImage: '',
-  bannerImageBase64: '',
+	bannerImageBase64: '',
+	videoId: '',
   description: '',
   duration: null,
   price: null,
@@ -89,7 +90,7 @@ export default Page => {
 		}
 
 		setForm = (value, field, nested = null, index = null) => {
-		  const { courseForm } = { ...this.state }
+			const { courseForm } = { ...this.state }
 		  if (!nested && !index && field) {
 		    courseForm[field] = value
 		  } else if (nested && index >= 0 && field) {

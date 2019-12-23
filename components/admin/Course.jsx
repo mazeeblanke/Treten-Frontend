@@ -60,7 +60,7 @@ const Course = (props) => {
                     {(course.category || {}).name} level
                   </h6>
                 )}
-                <Link href="/d/admin/course">
+                <Link href={url}>
                   <h6>
                     <b>View Course</b>
                     <img

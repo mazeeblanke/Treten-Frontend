@@ -82,6 +82,7 @@
     "react-validate": "^0.2.1",
     "react-video-js-player": "^1.1.1",
     "react-virtualized": "^9.21.1",
+    "react-youtube": "^7.9.0",
     "reactstrap": "^8.0.1",
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.2",

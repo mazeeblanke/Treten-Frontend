@@ -11,7 +11,7 @@ const handler = app.getRequestHandler()
 // process.env.PROXYURL = 'http://localhost:80';
 process.env.PROXYURL =
   process.env.NODE_ENV === 'production'
-    ? 'https://treten-ng-backend.herokuapp.com'
+    ? 'http://api.tretenacademy.com.ng'
     : 'http://172.19.0.6:80'
 // : 'tretenweb';
 

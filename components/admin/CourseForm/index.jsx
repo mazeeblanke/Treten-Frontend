@@ -117,14 +117,14 @@ const Index = (props) => {
                             Next
                         </Button>
                     }
-                    {
+                    {/* {
                       currentTab === steps.length - 1 &&
                         <Button
                           type="secondary"
                           style={{ width: '105px', height: '42px' }} >
                             Done
                         </Button>
-                    }
+                    } */}
                   </div>
                 </div>
               </div>

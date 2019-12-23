@@ -123,6 +123,7 @@ class CourseDetail extends Component {
 			price: parseFloat(course.price) || 0,
 			title: course.title,
 			modules: course.modules,
+			videoId: course.videoId,
 			duration: +course.duration,
 			category: (course.category || {}).name,
 			institution: course.institution,

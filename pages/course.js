@@ -168,7 +168,7 @@ class Course extends Component {
                   <EmptyState emptyText="No reviews yet"></EmptyState>
                 </Display>
               </TabPane>
-              <TabPane tab="FAQs" key="bootcamps">
+              <TabPane tab="FAQs" key="faqs">
                 <div className="container mb-4">
                   <h5 className="mb-6 mt-6">
                     <b>FAQs</b>
@@ -198,6 +198,32 @@ class Course extends Component {
                     <Display if={!course.faqs.length}>
                       <div className="col-md-12">
                         <EmptyState emptyText="No Faqs yet"></EmptyState>
+                      </div>
+                    </Display>
+                  </div>
+                </div>
+              </TabPane>
+              <TabPane tab="Modules" key="modules">
+                <div className="container mb-4">
+                  <h5 className="mb-6 mt-6">
+                    <b>Modules</b>
+                  </h5>
+                  <div className="row">
+                    <Display if={!!course.modules.length}>
+                      <div className="col-md-6">
+                        {course.modules && course.modules.map((module, index) => (
+                          <ExpandableBlock
+                            key={index}
+                            expanded={index === 0}
+                            left={<span className="text-capitalize">{module.name}</span>}
+                            content={ReactHtmlParser(module.description)}
+                          />
+                        ))}
+                      </div>
+                    </Display>
+                    <Display if={!course.modules.length}>
+                      <div className="col-md-12">
+                        <EmptyState emptyText="No Modules"></EmptyState>
                       </div>
                     </Display>
                   </div>

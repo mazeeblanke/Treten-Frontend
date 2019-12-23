@@ -115,6 +115,21 @@ const CourseDetails = props => {
           />
         </div>
         <div className="col-md-6 mb-5">
+          <Form.Item>
+            <label htmlFor="course path">
+              <b>Course Video ID</b>
+            </label>
+            <Input
+              size="large"
+              allowClear
+              value={courseForm.videoId}
+              placeholder="Enter course id"
+              className="has-full-width mt-3 is-transparent-bg"
+              onChange={(e) => setForm(e.target.value, 'videoId')}
+            />
+          </Form.Item>  
+        </div>
+        <div className="col-md-6 mb-5">
           <label htmlFor="certification-by">
             <b>Certification by</b>
           </label>

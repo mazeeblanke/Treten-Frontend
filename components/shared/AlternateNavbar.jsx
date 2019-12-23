@@ -7,7 +7,8 @@ import {
 const AlternateNavbar = () => {
   return (
     <Navbar className="no-box-shadow light-border-bottom" color="faded" light expand="md">
-      <div className="container d-flex justify-content-center">
+      <div className="container d-flex">
+        <a href="/">Back</a>
         <Brand />
       </div>
     </Navbar>

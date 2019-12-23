@@ -13,7 +13,7 @@ import CoursePopover from './CoursePopover'
 
 const settings = {
   dots: true,
-  infinite: true,
+  infinite: false,
   speed: 800,
   arrows: true,
   autoplay: true,
@@ -81,7 +81,11 @@ class CourseList extends Component {
   render () {
     return (
       <>
-        <Display if={!this.state.selectedPathCourses.length}>
+        <Display 
+          if={
+            !this.state.selectedPathCourses.length &&
+            !!this.props.courses.length
+          }>
           <section className={['courses', this.props.className].join(' ')}>
             <Display if={!!this.props.primaryHeading}>
               <h3 className="text-center courses__main-text mt-3">
@@ -112,6 +116,10 @@ class CourseList extends Component {
                             placement="right"
                             key={course.id}
                             content={CoursePopover(course)}
+                            align={{
+                              targetOffset: ['90%','10%'],
+                              offset: [10, 10], 
+                            }}
                           >
                             <div>
                               <Course
@@ -138,8 +146,8 @@ class CourseList extends Component {
           </section>
         </Display>
         <Animated
-          animationIn="bounceIn"
-          animationOut="fadeOutUp"
+          animationIn="fadeIn"
+          animationOut="fadeOut"
           isVisible={!!this.state.selectedPathCourses.length}
         >
           <Display if={!!this.state.selectedPathCourses.length}>
@@ -177,6 +185,10 @@ class CourseList extends Component {
                           placement="right"
                           key={course.id}
                           content={CoursePopover(course)}
+                          align={{
+                            targetOffset: ['90%','10%'],
+                            offset: [10, 10],            // the offset sourceNode by 10px in x and 20px in y,
+                          }}
                         >
                           <div>
                             <Course

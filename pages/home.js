@@ -9,6 +9,7 @@ import React, { Component } from 'react'
 import * as actions from '../store/actions'
 import Banner from '../components/home/Banner'
 import Footer from '../components/shared/Footer'
+import Display from '../components/shared/Display'
 import Partners from '../components/home/Partners'
 import Features from '../components/home/Features'
 import Resources from '../components/home/Resources'
@@ -94,7 +95,7 @@ class Home extends Component {
         <Partners />
         <Features />
         <CourseList
-          className="zero-to-hero-courses pt-5 mb-5"
+          className="zero-to-hero-courses pt-5 pb-5"
           primaryHeading="Zero to Hero Courses"
           subHeading="Are you just getting started and feeling unsure about where
           to begin? Our Zero to Hero Courses give you a powerful headstart."
@@ -108,13 +109,15 @@ class Home extends Component {
           figures in coveralls and helmets are soflty dancing vanquish the impossible invent the universe."
           courses={this.props.popularCourses}
         />
-        <div className="d-flex justify-content-center pt-4 pb-5 mb-5">
-          <Link href="/courses">
-            <Button size="large" type="danger">
-              View all
-            </Button>
-          </Link>
-        </div>
+        <Display if={this.props.popularCourses.length}>
+          <div className="d-flex justify-content-center pt-4 pb-5 mb-5">
+            <Link href="/courses">
+              <Button size="large" type="danger">
+                View all
+              </Button>
+            </Link>
+          </div>
+        </Display>
         <MeetTheInstructors
           instructors={this.props.instructors.all}
           isLoading={this.props.instructors.isLoading}
