@@ -27,8 +27,12 @@ class ManageWebsite extends Component {
     this.props.fetchSettings().then((res) => {
       const { popularCourses } = res.data.data
       this.setState({
-        popularCourses: popularCourses.settingValue.ids,
-        coursesOptions: popularCourses.settingValue.courses
+        popularCourses: (popularCourses || {}).settingValue 
+          ? popularCourses.settingValue.ids
+          : {},
+        coursesOptions: (popularCourses || {}).settingValue 
+          ? popularCourses.settingValue.courses
+          : []
       })
     })
       .finally(() => {
