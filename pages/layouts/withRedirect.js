@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react'
-import redirectTo from '../../lib/helpers'
+import { redirectTo } from '../../lib/helpers'
 import { userIsInstructor, userIsStudent, userIsAdmin } from '../../store/reducers/user'
 
 export default Page => {

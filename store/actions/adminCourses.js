@@ -1,4 +1,7 @@
-// import { fetchCourses } from '../actions/courses'
+export const setCourse = res => ({
+  type: 'SET_COURSE',
+  payload: res.data
+})
 
 export const saveCourse = payload => (
   dispatch,
@@ -6,11 +9,7 @@ export const saveCourse = payload => (
   api
 ) => api.post(`/api/courses/${payload.get('id')}`, payload)
   .then((res) => {
-    // console.log(res)
-    dispatch({
-      type: 'SET_COURSE',
-      payload: res.data
-    })
+    dispatch(setCourse(res))
     return res
   })
 

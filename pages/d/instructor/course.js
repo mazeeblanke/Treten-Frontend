@@ -29,7 +29,7 @@ const initBatchForm = () => ({
     { day: 'thursdays', sessions: [] },
     { day: 'fridays', sessions: [] },
     { day: 'saturdays', sessions: [] },
-    { day: 'sundays', sessions: [] },
+    { day: 'sundays', sessions: [] }
   ]
 })
 

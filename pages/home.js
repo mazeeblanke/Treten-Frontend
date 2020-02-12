@@ -181,7 +181,7 @@ export default connect(
     fetchInstructors: actions.fetchInstructors,
     fetchPopularCourses: actions.fetchPopularCourses,
     fetchLatestBlogPosts: actions.fetchLatestBlogPosts,
-    getTestimonials: actions.getTestimonials,
+    getTestimonials,
     fetchCoursePaths: actions.fetchCoursePaths
   }
 )(withMasterLayout(Home))

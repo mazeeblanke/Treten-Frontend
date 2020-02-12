@@ -1,4 +1,4 @@
-import redirectTo, { convertToFormData } from '../../lib/helpers'
+import { redirectTo, convertToFormData } from '../../lib/helpers'
 // import dynamic from 'next/dynamic'
 // const Router = dynamic(() => import('next/router'), {
 //   ssr: false

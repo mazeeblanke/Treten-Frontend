@@ -3,7 +3,6 @@ export const setResourcesCategoryId = (payload) => ({
   payload
 })
 
-
 export const setResourcesSortDirection = (payload) => ({
   type: 'SET_RESOURCES_SORT_DIRECTION',
   payload

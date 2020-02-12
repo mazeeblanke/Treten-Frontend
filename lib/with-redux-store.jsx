@@ -2,7 +2,7 @@ import React from 'react'
 import { initStore } from '../store'
 import * as actions from '../store/actions'
 import PropTypes from 'prop-types'
-import redirectTo from './helpers'
+// import redirectTo from './helpers'
 const isServer = typeof window === 'undefined'
 const __NEXT_REDUX_STORE__ = '__NEXT_REDUX_STORE__'
 

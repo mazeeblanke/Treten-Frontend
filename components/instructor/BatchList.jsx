@@ -7,7 +7,7 @@ import BatchHeader from './BatchHeader'
 import Display from '../shared/Display'
 import { Icon } from 'antd'
 import EmptyState from '../../components/shared/EmptyState'
-import { userIsInstructor } from '../../store/reducers/user'
+import { userIsInstructor, userIsAdmin } from '../../store/reducers/user'
 
 const BatchList = (props) => {
 	const { 
@@ -39,7 +39,7 @@ const BatchList = (props) => {
 										<div key={batch.id} className="row align-items-center">
 											<div className="col-md-11">
 												<ExpandableBlock
-													right={userIsInstructor(user) 
+													right={userIsInstructor(user) || userIsAdmin(user)
 															? 'View schedule' 
 															: (
 																<img 
