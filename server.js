@@ -13,7 +13,7 @@ process.env.PROXYURL =
   process.env.NODE_ENV === 'production'
     ? 'http://api.tretenacademy.com.ng'
     : 'http://172.18.0.6:80'
-// : 'tretenweb';
+// : 'tretenapp';
 
 const proxy = require('express-http-proxy')
 

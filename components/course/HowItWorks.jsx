@@ -3,7 +3,7 @@ import React from 'react'
 
 const HowItWorks = () => {
   return (
-    <section className="mt-5 mb-5">
+    <section id="howItWorks" className="mt-5 mb-5">
       <div className="container">
         <div className="row">
           <div className="col-sm-12 col-md-6 p-0">

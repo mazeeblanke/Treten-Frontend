@@ -16,6 +16,37 @@
     top: 51px;
   }
 
+ .courses .menu-bar {
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    width: 100%;
+    background: white;
+    z-index: 23;
+    display: flex;
+    min-height: 60px;
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    ul {
+      display: flex;
+      list-style: none;
+      flex-wrap: wrap;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    li {
+      margin-right: 20px;
+
+      a {
+        font-size: 16px;
+      }
+    }
+ }  
+
   .course-about {
     font-size: 16px;
     line-height: 30px;
@@ -27,13 +58,13 @@
 
 
   .course-about__container {
-    border: 1px solid #F0F1F3;
+    // border: 1px solid #F0F1F3;
     box-sizing: border-box;
     border-radius: 4px;
   }
 
   .how-it-works, .course-instructor {
-    border: 1px solid #F0F1F3;
+    // border: 1px solid #F0F1F3;
     box-sizing: border-box;
     border-radius: 4px;
   }

@@ -24,6 +24,7 @@ export const fetchCoursePaths = ({ page = 1, pageSize = 6, q = null } = {}) => (
         pageSize
       }
     })
+    return res
   })
     .finally(() => {
       dispatch({

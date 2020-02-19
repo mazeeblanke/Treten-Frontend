@@ -196,6 +196,17 @@ export const searchCourses = ({
   })
 }
 
+
+export const deleteCourse = ({
+  id = null
+} = {}) => (
+  dispatch,
+  getState,
+  api
+) => {
+  return api.delete(`/api/courses/${id}`)
+}
+
 export const searchCourseBatches = ({
   q = null,
   courseId,

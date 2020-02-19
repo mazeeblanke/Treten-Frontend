@@ -327,6 +327,7 @@ class Course extends Component {
       course,
       batches,
       saveCourse,
+      deleteCourse,
       createCourse,
       fetchInstructors,
       setBatchExpandedState
@@ -336,6 +337,7 @@ class Course extends Component {
         <CourseHeader
           user={user}
           course={course}
+          deleteCourse={deleteCourse}
           className={userIsAdmin(user) ? 'mb-7' : ''}
         >
           <Display if={userIsInstructor(user)}>
@@ -414,6 +416,7 @@ Course.propTypes = {
   batches: PropTypes.array.isRequired,
   course: PropTypes.object.isRequired,
   deleteBatch: PropTypes.func.isRequired,
+  deleteCourse: PropTypes.func.isRequired,
   fetchCourse: PropTypes.func.isRequired,
   createCourse: PropTypes.func.isRequired,
   saveCourse: PropTypes.func.isRequired,
@@ -440,6 +443,7 @@ export default withRedirect(withAdminLayout(connect(
     saveCourse: actions.saveCourse,
     createCourse: actions.createCourse,
     deleteBatch: actions.deleteBatch,
+    deleteCourse: actions.deleteCourse,
     deleteSchedule: actions.deleteSchedule,
     addCourseBatch: actions.addCourseBatch,
     editCourseBatch: actions.editCourseBatch,

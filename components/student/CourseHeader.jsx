@@ -1,8 +1,10 @@
 import { userIsAdmin } from '../../store/reducers/user'
+import notifier from 'simple-react-notifications'
 import { Dropdown, Menu, Icon } from 'antd'
 import Display from '../shared/Display'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { ROUTES } from '../../lib/constants'
 
 const CourseHeader = props => {
   const {
@@ -10,10 +12,27 @@ const CourseHeader = props => {
     course,
     children,
     className,
+    deleteCourse
   } = props
-  const deleteCourse = () => {
 
+  const handleDelete = () => {
+    deleteCourse({
+      id: course.id
+    }).then((res) => {
+      notifier.success(res.message)
+      window.location = ROUTES.ADMIN_DASHBOARD_COURSES
+    })
+    .catch((err) => {
+      if (err.response.status === 404)
+      {
+        notifier.error('ERROR! Already deleted course')
+        window.location = ROUTES.ADMIN_DASHBOARD_COURSES
+      } else {
+        notifier.error('ERROR! Unable to delete course')
+      }
+    })
   }
+
   const actionMenu = (
     <Menu>
       <Menu.Item key="1">
@@ -75,7 +94,7 @@ const CourseHeader = props => {
                   userIsAdmin(user) && (
                     <Dropdown.Button
                       size="large"
-                      onClick={deleteCourse}
+                      onClick={handleDelete}
                       overlay={actionMenu}
                     >
                       <Icon style={{ fontSize: '22px' }} type="delete" />
@@ -113,6 +132,7 @@ const CourseHeader = props => {
 CourseHeader.propTypes = {
   user: PropTypes.object.isRequired,
   course: PropTypes.object.isRequired,
+  deleteCourse: PropTypes.func.isRequired,
   children: PropTypes.node,
   className: PropTypes.string,
 }

@@ -24,8 +24,8 @@ import {
   userIsInstructor
 } from '../store/reducers/user'
 import EmptyState from '../components/shared/EmptyState'
+import { scrollToY, debounce } from '../lib/helpers'
 
-const { TabPane } = Tabs
 
 class Course extends Component {
   static async getInitialProps ({ reduxStore, req }) {
@@ -39,13 +39,28 @@ class Course extends Component {
     return {}
   }
 
+  state = {
+    menuClasses: 'menu-bar',
+    elPositions: {
+      about: 0,
+      modules: 0,
+      instructor: 0,
+      howItWorks: 0,
+      courseReview: 0,
+      faqs: 0
+    }
+  }
+
   operations = () => {
     const {
       user,
       course
     } = this.props
     return (
-      <div>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center'
+      }}>
         <img src="/static/images/bookmark.png" className="mr-4" alt="bookmark" />
         <Display if={(course.transaction || {}).status === 'success' &&
           !!(course.enrollment || {}).active && userIsStudent(this.props.user)
@@ -70,9 +85,69 @@ class Course extends Component {
     )
   }
 
-  componentDidMount () {}
+  setMenuClasses = () => {
+    let classes = this.state.menuClasses.split(' ')
+    if (scrollY >= 219) {
+      if (classes.includes('s-fixed')) return
+      this.setState({
+        menuClasses: classes.concat('s-fixed').join(' ')
+      })
+    } else {
+      if (classes.indexOf('s-fixed') === -1) return
+      classes.splice(classes.indexOf('s-fixed'), 1)
+      this.setState({
+        menuClasses: classes.join(' ')
+      })
+    }
+  }
+
+  handleScroll = () => {
+    debounce(this.setMenuClasses, 20)
+  }
+
+  calculatePositions = () => {
+    return new Promise((resolve, reject) => {
+      const elPositions = {};
+
+      Object.keys(this.state.elPositions).reduce((acc, curr) => {
+        const el = document.querySelector('#'+curr)
+        acc[curr] = el 
+          ? el.getBoundingClientRect().top - 250 + (document.documentElement.scrollTop || document.body.scrollTop)
+          : 0
+
+        return acc
+      }, elPositions)
+
+      this.setState({
+        elPositions
+      }, resolve(true))
+    })
+  }
+
+  scrollToHashLocation = () => {
+    if (window.location.hash) {
+      scrollToY({
+        offset: this.state.elPositions[window.location.hash.replace('#', '')]
+      })
+    }
+  }
+
+  componentDidMount () {
+    window.addEventListener('scroll', this.handleScroll)
+    window.addEventListener('resize', this.calculatePositions)
+    this.calculatePositions().then(() => this.scrollToHashLocation())
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('resize', this.calculatePositions)
+  }
 
   render () {
+    const {
+      menuClasses,
+      elPositions
+    } = this.state
     const {
       course
     } = this.props
@@ -136,100 +211,116 @@ class Course extends Component {
             </div>
           </div>
         </section>
-        <section className="courses has-white-bg pt-4 mb-8">
-          <hr />
-          <div className="container">
-            <Tabs tabBarExtraContent={this.operations()}>
-              <TabPane tab="About this course" key="1">
-                <About course={course} />
-              </TabPane>
-              <TabPane tab="Instructor" key="instructor">
-                {course.instructor && <Instructor
-                  heading="Lead Instructor"
-                  name={course.instructor.name}
-                  title={(course.instructor.userable || {}).title}
-                  profilePic={course.instructor.profilePic}
-                  instructorSlug={(course.instructor.userable || {}).instructorSlug}
-                  qualifications={(course.instructor.userable || {}).qualifications}
-                />
+        <section className="courses has-white-bg mb-8">
+          <div className={menuClasses}>
+            <div className="container">
+              <ul>
+                <li onClick={() => scrollToY({ offset: elPositions.about })}>
+                  <a href="#about">About</a>
+                </li>
+                <li onClick={() => scrollToY({ offset: elPositions.modules })}>
+                  <a href="#modules">Modules</a>
+                </li>
+                <li onClick={() => scrollToY({ offset: elPositions.instructor })}>
+                  <a href="#instructor">Instructor</a>
+                </li>
+                <li onClick={() => scrollToY({ offset: elPositions.howItWorks })}>
+                  <a href="#howItWorks">How it works</a>
+                </li>
+                <li onClick={() => scrollToY({ offset: elPositions.courseReview })}>
+                  <a href="#reviews">Reviews</a>
+                </li>
+                <li onClick={() => {
+                  console.log({ offset: elPositions });
+                  scrollToY({ offset: elPositions.faqs })}
+                }>
+                  <a href="#faqs">FAQS</a>
+                </li>
+              </ul>
+              <div>
+                {
+                  this.operations()
                 }
-              </TabPane>
-              <TabPane tab="How it works" key="how-it-works">
-                <HowItWorks />
-              </TabPane>
-              <TabPane tab="Course reviews" key="course-reviews">
-                <div className="container">
-                  <h5 className="fw-600 mt-3">Course reviews</h5>
-                </div>
-                <Display if={!!course.courseReviews.length}>
-                  <Reviews testimonials={course.courseReviews} />
-                </Display>
-                <Display if={!course.courseReviews.length}>
-                  <EmptyState emptyText="No reviews yet"></EmptyState>
-                </Display>
-              </TabPane>
-              <TabPane tab="FAQs" key="faqs">
-                <div className="container mb-4">
-                  <h5 className="mb-6 mt-6">
-                    <b>FAQs</b>
-                  </h5>
-                  <div className="row">
-                    <Display if={!!course.faqs.length}>
-                      <div className="col-md-6">
-                        {course.faqs && course.faqs.slice(0, 8).map((faq, index) => (
-                          <ExpandableBlock
-                            key={index}
-                            expanded={index === 0}
-                            left={<span className="text-capitalize">{faq.question}</span>}
-                            content={ReactHtmlParser(faq.answer)}
-                          />
-                        ))}
-                      </div>
-                      <div className="col-md-6">
-                        {course.faqs && course.faqs.slice(9, 17).map(faq => (
-                          <ExpandableBlock
-                            key={faq.question}
-                            left={faq.question}
-                            content={ReactHtmlParser(faq.answer)}
-                          />
-                        ))}
-                      </div>
-                    </Display>
-                    <Display if={!course.faqs.length}>
-                      <div className="col-md-12">
-                        <EmptyState emptyText="No Faqs yet"></EmptyState>
-                      </div>
-                    </Display>
+              </div>
+            </div>
+          </div>
+          <div className="container">
+            <About course={course}/>
+            <div className="container mb-4" id="modules">
+              <h5 className="mb-6 mt-6">
+                <b>Modules</b>
+              </h5>
+              <div className="row">
+                <Display if={!!course.modules.length}>
+                  <div className="col-md-6">
+                    {course.modules && course.modules.map((module, index) => (
+                      <ExpandableBlock
+                        key={index}
+                        expanded={index === 0}
+                        left={<span className="text-capitalize">{module.name}</span>}
+                        content={ReactHtmlParser(module.description)}
+                      />
+                    ))}
                   </div>
-                </div>
-              </TabPane>
-              <TabPane tab="Modules" key="modules">
-                <div className="container mb-4">
-                  <h5 className="mb-6 mt-6">
-                    <b>Modules</b>
-                  </h5>
-                  <div className="row">
-                    <Display if={!!course.modules.length}>
-                      <div className="col-md-6">
-                        {course.modules && course.modules.map((module, index) => (
-                          <ExpandableBlock
-                            key={index}
-                            expanded={index === 0}
-                            left={<span className="text-capitalize">{module.name}</span>}
-                            content={ReactHtmlParser(module.description)}
-                          />
-                        ))}
-                      </div>
-                    </Display>
-                    <Display if={!course.modules.length}>
-                      <div className="col-md-12">
-                        <EmptyState emptyText="No Modules"></EmptyState>
-                      </div>
-                    </Display>
+                </Display>
+                <Display if={!course.modules.length}>
+                  <div className="col-md-12">
+                    <EmptyState emptyText="No Modules"></EmptyState>
                   </div>
-                </div>
-              </TabPane>
-            </Tabs>
+                </Display>
+              </div>
+            </div>
+            {course.instructor && <Instructor
+              heading="Lead Instructor"
+              name={course.instructor.name}
+              title={(course.instructor.userable || {}).title}
+              profilePic={course.instructor.profilePic}
+              instructorSlug={(course.instructor.userable || {}).instructorSlug}
+              qualifications={(course.instructor.userable || {}).qualifications}
+            />}
+            <HowItWorks />
+            <div id="courseReview" className="container">
+              <h5 className="fw-600 mt-3">Course reviews</h5>
+            </div>
+            <Display if={!!course.courseReviews.length}>
+              <Reviews testimonials={course.courseReviews} />
+            </Display>
+            <Display if={!course.courseReviews.length}>
+              <EmptyState emptyText="No reviews yet"></EmptyState>
+            </Display>
+            <div id="faqs" className="container mb-4">
+              <h5 className="mb-6 mt-6">
+                <b>FAQs</b>
+              </h5>
+              <div className="row">
+                <Display if={!!course.faqs.length}>
+                  <div className="col-md-6">
+                    {course.faqs && course.faqs.slice(0, 8).map((faq, index) => (
+                      <ExpandableBlock
+                        key={index}
+                        expanded={index === 0}
+                        left={<span className="text-capitalize">{faq.question}</span>}
+                        content={ReactHtmlParser(faq.answer)}
+                      />
+                    ))}
+                  </div>
+                  <div className="col-md-6">
+                    {course.faqs && course.faqs.slice(9, 17).map(faq => (
+                      <ExpandableBlock
+                        key={faq.question}
+                        left={faq.question}
+                        content={ReactHtmlParser(faq.answer)}
+                      />
+                    ))}
+                  </div>
+                </Display>
+                <Display if={!course.faqs.length}>
+                  <div className="col-md-12">
+                    <EmptyState emptyText="No Faqs yet"></EmptyState>
+                  </div>
+                </Display>
+              </div>
+            </div>
             {!!course.relatedCourses.length &&
               <h5 className="fw-600 mt-4">
                 You might also be interested in

@@ -2,7 +2,9 @@ import CreatableSelect from 'react-select/creatable'
 import Dropzone from 'react-dropzone'
 import { Input, Select, Form } from 'antd'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { fetchCoursePaths } from "../../../store/actions";
 
 const partners = [{
   value: 'Microsoft',
@@ -25,7 +27,9 @@ const partners = [{
 }]
 
 const CourseDetails = props => {
-  const { courseForm, setForm, errors } = props
+  const { courseForm, setForm, errors, fetchCoursePaths } = props
+
+  const [coursePathOptions, setCoursePathOptions] = useState([]);
 
   const handleBannerImageChange = (e) => {
     const file = e[0]
@@ -48,6 +52,14 @@ const CourseDetails = props => {
     valueContainer: base => ({
       ...base,
       height: 39
+    })
+  }
+
+  const search = (searchQuery) => {
+    fetchCoursePaths({
+      q: searchQuery,
+    }).then(({ data }) => {
+      setCoursePathOptions(data.data)
     })
   }
 
@@ -86,18 +98,31 @@ const CourseDetails = props => {
             <b>Course Path</b>
           </label>
           <div className="pt-3">
-            <CreatableSelect
-              isClearable
-              styles={customStyles}
-              placeholder="Select/Create course path"
-              value={courseForm.coursePath && { value: courseForm.coursePath, label: courseForm.coursePath }}
-              onChange={(e) => setForm(e && e.value, 'coursePath')}
-              options={[
-                { value: 'CCNA', label: 'CCNA' },
-                { value: 'CCNP', label: 'CCNP' },
-                { value: 'CCIE', label: 'CCIE' }
-              ]}
-            />
+            <Select
+              showSearch
+              size="large"
+              allowClear
+              showArrow={false}
+              onChange={(e) => {
+                setForm(e, 'coursePath')
+              }}
+              style={customStyles}
+              filterOption={false}
+              notFoundContent="No matched course path found"
+              onSearch={search}
+              className="has-full-width"
+              defaultActiveFirstOption={false}
+              placeholder='Select/Create course path'
+              value={courseForm.coursePath}
+            >
+              {
+                coursePathOptions.map((option, index) => (
+                  <Select.Option key={index} value={option.name}>
+                    {option.name}
+                  </Select.Option>
+                ))
+              }
+            </Select>
           </div>
         </div>
         <div className="col-md-6 mb-5">
@@ -127,7 +152,7 @@ const CourseDetails = props => {
               className="has-full-width mt-3 is-transparent-bg"
               onChange={(e) => setForm(e.target.value, 'videoId')}
             />
-          </Form.Item>  
+          </Form.Item>
         </div>
         <div className="col-md-6 mb-5">
           <label htmlFor="certification-by">
@@ -235,7 +260,8 @@ const CourseDetails = props => {
 CourseDetails.propTypes = {
   setForm: PropTypes.func.isRequired,
   courseForm: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  fetchCoursePaths: PropTypes.func.isRequired,
 }
 
-export default CourseDetails
+export default connect(null, { fetchCoursePaths })(CourseDetails)

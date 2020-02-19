@@ -12,7 +12,7 @@ const Instructor = props => {
     qualifications,
   } = props
   return (
-    <section className="mt-5 mb-5">
+    <section id="instructor" className="mt-5 mb-5">
       <div className="container">
         <div className="row">
           <div className="col-sm-12 col-md-4 p-0">
