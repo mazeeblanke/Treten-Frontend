@@ -3,7 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Button } from 'antd'
 import Display from '../shared/Display'
-import { userIsInstructor } from '../../store/reducers/user'
+import { userIsInstructor, userIsAdmin } from '../../store/reducers/user'
 
 const Schedule = (props) => {
   const {
@@ -13,7 +13,7 @@ const Schedule = (props) => {
     editBatch
   } = props
   return (
-    <Display if={userIsInstructor(user)}>
+    <Display if={userIsInstructor(user) || userIsAdmin(user)}>
       <>
         <table className="has-full-width">
           <thead>

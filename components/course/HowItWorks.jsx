@@ -8,7 +8,7 @@ const HowItWorks = () => {
         <div className="row">
           <div className="col-sm-12 col-md-6 p-0">
             <div className="how-it-works p-4">
-              <h6 className="fw-600">How it works</h6>
+              <h5 className="fw-600">How it works</h5>
               <div className="row">
                 <div className="col-sm-12 col-md-6">
                   <img src="/static/images/coursework.png"></img>

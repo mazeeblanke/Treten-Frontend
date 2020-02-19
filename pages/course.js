@@ -43,7 +43,7 @@ class Course extends Component {
     menuClasses: 'menu-bar',
     elPositions: {
       about: 0,
-      modules: 0,
+      courseContent: 0,
       instructor: 0,
       howItWorks: 0,
       courseReview: 0,
@@ -218,8 +218,8 @@ class Course extends Component {
                 <li onClick={() => scrollToY({ offset: elPositions.about })}>
                   <a href="#about">About</a>
                 </li>
-                <li onClick={() => scrollToY({ offset: elPositions.modules })}>
-                  <a href="#modules">Modules</a>
+                <li onClick={() => scrollToY({ offset: elPositions.courseContent })}>
+                  <a href="#courseContent">Course content</a>
                 </li>
                 <li onClick={() => scrollToY({ offset: elPositions.instructor })}>
                   <a href="#instructor">Instructor</a>
@@ -246,9 +246,9 @@ class Course extends Component {
           </div>
           <div className="container">
             <About course={course}/>
-            <div className="container mb-4" id="modules">
+            <div className="container mb-4" id="courseContent">
               <h5 className="mb-6 mt-6">
-                <b>Modules</b>
+                <b>Course content</b>
               </h5>
               <div className="row">
                 <Display if={!!course.modules.length}>
@@ -265,7 +265,7 @@ class Course extends Component {
                 </Display>
                 <Display if={!course.modules.length}>
                   <div className="col-md-12">
-                    <EmptyState emptyText="No Modules"></EmptyState>
+                    <EmptyState emptyText="No Course content"></EmptyState>
                   </div>
                 </Display>
               </div>

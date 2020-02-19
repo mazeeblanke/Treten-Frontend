@@ -1,10 +1,12 @@
 import { userIsAdmin } from '../../store/reducers/user'
 import notifier from 'simple-react-notifications'
-import { Dropdown, Menu, Icon } from 'antd'
+import { Button, Menu, Icon, Modal } from 'antd'
 import Display from '../shared/Display'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useState } from 'react'
 import { ROUTES } from '../../lib/constants'
+
+const { confirm } = Modal
 
 const CourseHeader = props => {
   const {
@@ -15,38 +17,47 @@ const CourseHeader = props => {
     deleteCourse
   } = props
 
+  const [loading, setLoading] = useState(false)
+
   const handleDelete = () => {
-    deleteCourse({
-      id: course.id
-    }).then((res) => {
-      notifier.success(res.message)
-      window.location = ROUTES.ADMIN_DASHBOARD_COURSES
-    })
-    .catch((err) => {
-      if (err.response.status === 404)
-      {
-        notifier.error('ERROR! Already deleted course')
-        window.location = ROUTES.ADMIN_DASHBOARD_COURSES
-      } else {
-        notifier.error('ERROR! Unable to delete course')
-      }
+    showConfirm(
+      'Are you sure you want to delete this course ?',
+      () => {
+        setLoading(true)
+        deleteCourse({
+          id: course.id
+        }).then((res) => {
+          notifier.success('Successfully deleted')
+          window.location = ROUTES.ADMIN_DASHBOARD_COURSES
+          setLoading(false)
+        })
+        .catch((err) => {
+          if (err.response.status === 404)
+          {
+            notifier.error('ERROR! Already deleted course')
+            window.location = ROUTES.ADMIN_DASHBOARD_COURSES
+          } else {
+            notifier.error('ERROR! Unable to delete course')
+          }
+          setLoading(false)
+      })}
+    )
+  }
+
+  const showConfirm = (content, handleOk, handleCancel) => {
+    confirm({
+      content,
+      onOk () {
+        handleOk && handleOk()
+      },
+      onCancel () {
+        handleCancel && handleCancel()
+      },
     })
   }
 
   const actionMenu = (
     <Menu>
-      <Menu.Item key="1">
-        <Icon type="user" />
-        1st menu item
-      </Menu.Item>
-      <Menu.Item key="2">
-        <Icon type="user" />
-        2nd menu item
-      </Menu.Item>
-      <Menu.Item key="3">
-        <Icon type="user" />
-        3rd item
-      </Menu.Item>
     </Menu>
   )
   return (
@@ -92,13 +103,14 @@ const CourseHeader = props => {
                 </div>
                 {
                   userIsAdmin(user) && (
-                    <Dropdown.Button
+                    <Button
+                      loading={loading}
                       size="large"
                       onClick={handleDelete}
                       overlay={actionMenu}
                     >
-                      <Icon style={{ fontSize: '22px' }} type="delete" />
-                    </Dropdown.Button>
+                      {!loading && <Icon style={{ fontSize: '22px' }} type="delete" />}
+                    </Button>
                   )
                 }
               </div>

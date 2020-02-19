@@ -52,7 +52,7 @@ const BatchList = (props) => {
 																</img>
 															)
 													}
-													showExpandableIcon={false}
+													showExpandableIcon={true}
 													expanded={batchIndex === 0}
 													left={<BatchHeader batch={batch} />}
 													onExpanded={
