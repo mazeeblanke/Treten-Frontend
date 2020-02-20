@@ -112,7 +112,7 @@ class Course extends Component {
       Object.keys(this.state.elPositions).reduce((acc, curr) => {
         const el = document.querySelector('#'+curr)
         acc[curr] = el 
-          ? el.getBoundingClientRect().top - 250 + (document.documentElement.scrollTop || document.body.scrollTop)
+          ? el.getBoundingClientRect().top + (document.documentElement.scrollTop || document.body.scrollTop) - 80 - 60 - 80
           : 0
 
         return acc
