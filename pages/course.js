@@ -231,7 +231,6 @@ class Course extends Component {
                   <a href="#reviews">Reviews</a>
                 </li>
                 <li onClick={() => {
-                  console.log({ offset: elPositions });
                   scrollToY({ offset: elPositions.faqs })}
                 }>
                   <a href="#faqs">FAQS</a>
@@ -244,7 +243,7 @@ class Course extends Component {
               </div>
             </div>
           </div>
-          <div className="container">
+          <div className="container ql-editor">
             <About course={course}/>
             <div className="container mb-4" id="courseContent">
               <h5 className="mb-6 mt-6">

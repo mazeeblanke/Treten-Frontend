@@ -55,12 +55,12 @@ export default Page => {
 		addModule = () => {
 		  let modules = [...this.state.courseForm.modules]
 		  modules = [
-		    {
+				...modules,
+				{
 		      name: '',
 		      description: '',
 		      id: uuidv1()
-		    },
-		    ...modules
+		    }
 		  ]
 
 		  this.setState({
@@ -68,25 +68,33 @@ export default Page => {
 		      ...this.state.courseForm,
 		      modules
 		    }
-		  })
+			},
+				() => {
+					this.moduleWrapperScrollContainer.scrollTo(0, this.moduleWrapperScrollContainer.scrollHeight - 400)
+				}
+			)
 		}
 
 		addFaq = () => {
 		  let faqs = [...this.state.courseForm.faqs]
 		  faqs = [
-		    {
+				...faqs,
+				{
 		      answer: '',
 		      question: '',
 		      id: uuidv1()
-		    },
-		    ...faqs
+		    }
 		  ]
 		  this.setState({
 		    courseForm: {
 		      ...this.state.courseForm,
 		      faqs
 		    }
-		  })
+			},
+				() => {
+					this.faqsWrapperScrollContainer.scrollTo(0, this.faqsWrapperScrollContainer.scrollHeight - 400)
+				}
+			)
 		}
 
 		setForm = (value, field, nested = null, index = null) => {
@@ -232,6 +240,19 @@ export default Page => {
 
 		componentDidMount () {
 			this._isMounted = true;
+		}
+
+		componentDidUpdate () {
+			if (!this.moduleWrapperScrollContainer) {
+				this.moduleWrapperScrollContainer = document.getElementById(
+					'moduleWrapperScrollContainer'
+				)
+			}
+			if (!this.faqsWrapperScrollContainer) {
+				this.faqsWrapperScrollContainer = document.getElementById(
+					'faqsWrapperScrollContainer'
+				)
+			}
 		}
 
 		componentWillUnmount() {

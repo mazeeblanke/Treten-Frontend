@@ -17,6 +17,7 @@ const Modules = props => {
   return (
     <div className="container mt-7">
       <div
+        id="moduleWrapperScrollContainer"
         className="row"
         style={{
           maxHeight: '250px',

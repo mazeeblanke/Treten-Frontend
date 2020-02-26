@@ -55,7 +55,7 @@ class AddCourse extends Component {
           setForm={this.props.setForm}
           prevStep={this.props.prevStep}
           nextStep={this.props.nextStep}
-          addModule={this.props.addModule}
+          modulesRef={this.props.modulesRef}
           currentTab={this.props.currentTab}
           courseForm={this.props.courseForm}
         />
