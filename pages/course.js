@@ -24,7 +24,8 @@ import {
   userIsInstructor
 } from '../store/reducers/user'
 import EmptyState from '../components/shared/EmptyState'
-import { scrollToY, debounce } from '../lib/helpers'
+import { debounce } from '../lib/helpers'
+import ScrollTo from '../components/shared/ScrollTo'
 
 
 class Course extends Component {
@@ -105,48 +106,33 @@ class Course extends Component {
     debounce(this.setMenuClasses, 20)
   }
 
-  calculatePositions = () => {
-    return new Promise((resolve, reject) => {
-      const elPositions = {};
-
-      Object.keys(this.state.elPositions).reduce((acc, curr) => {
-        const el = document.querySelector('#'+curr)
-        acc[curr] = el 
-          ? el.getBoundingClientRect().top + (document.documentElement.scrollTop || document.body.scrollTop) - 80 - 60 - 80
-          : 0
-
-        return acc
-      }, elPositions)
-
-      this.setState({
-        elPositions
-      }, resolve(true))
+  scrollToHashLocation = () => {
+    requestAnimationFrame(() => {
+      this.setMenuClasses()
+      if (window.location.hash) {
+        const el = document.querySelector(window.location.hash)
+        if (el) {
+          el.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          })
+        }
+      }
     })
   }
 
-  scrollToHashLocation = () => {
-    if (window.location.hash) {
-      scrollToY({
-        offset: this.state.elPositions[window.location.hash.replace('#', '')]
-      })
-    }
-  }
-
   componentDidMount () {
+    debounce(this.scrollToHashLocation, 50)
     window.addEventListener('scroll', this.handleScroll)
-    window.addEventListener('resize', this.calculatePositions)
-    this.calculatePositions().then(() => this.scrollToHashLocation())
   }
 
   componentWillUnmount () {
     window.removeEventListener('scroll', this.handleScroll)
-    window.removeEventListener('resize', this.calculatePositions)
   }
 
   render () {
     const {
       menuClasses,
-      elPositions
     } = this.state
     const {
       course
@@ -215,25 +201,23 @@ class Course extends Component {
           <div className={menuClasses}>
             <div className="container">
               <ul>
-                <li onClick={() => scrollToY({ offset: elPositions.about })}>
-                  <a href="#about">About</a>
+                <li>
+                  <ScrollTo href="#about">About</ScrollTo>
                 </li>
-                <li onClick={() => scrollToY({ offset: elPositions.courseContent })}>
-                  <a href="#courseContent">Course content</a>
+                <li>
+                  <ScrollTo href="#courseContent">Course content</ScrollTo>
                 </li>
-                <li onClick={() => scrollToY({ offset: elPositions.instructor })}>
-                  <a href="#instructor">Instructor</a>
+                <li>
+                  <ScrollTo href="#instructor">Instructor</ScrollTo>
                 </li>
-                <li onClick={() => scrollToY({ offset: elPositions.howItWorks })}>
-                  <a href="#howItWorks">How it works</a>
+                <li>
+                  <ScrollTo href="#howItWorks">How it works</ScrollTo>
                 </li>
-                <li onClick={() => scrollToY({ offset: elPositions.courseReview })}>
-                  <a href="#reviews">Reviews</a>
+                <li>
+                  <ScrollTo href="#courseReview">Reviews</ScrollTo>
                 </li>
-                <li onClick={() => {
-                  scrollToY({ offset: elPositions.faqs })}
-                }>
-                  <a href="#faqs">FAQS</a>
+                <li>
+                  <ScrollTo href="#faqs">FAQS</ScrollTo>
                 </li>
               </ul>
               <div>
