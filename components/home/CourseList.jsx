@@ -13,53 +13,94 @@ import CoursePopover from './CoursePopover'
 
 const settings = {
   dots: true,
+  variableWidth: true,
   infinite: false,
   speed: 800,
   arrows: true,
-  autoplay: true,
-  slidesToShow: 4.5,
+  autoplay: false,
+  // slidesToShow: 4.33,
   slidesToScroll: 1,
-  responsive: [
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 3.5,
-        slidesToScroll: 3,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 2.5,
-        slidesToScroll: 2,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 750,
-      settings: {
-        slidesToShow: 1.9,
-        slidesToScroll: 2,
-        // initialSlide: 2
-      }
-    },
-    {
-      breakpoint: 500,
-      settings: {
-        slidesToShow: 1.5,
-        slidesToScroll: 2,
-        // initialSlide: 2
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-  ]
+  // responsive: [
+  //   {
+  //     breakpoint: 1380,
+  //     settings: {
+  //       slidesToShow: 3.82,
+  //       slidesToScroll: 1,
+  //       dots: true
+  //     }
+  //   },
+  //   {
+  //     breakpoint: 1280,
+  //     settings: {
+  //       slidesToShow: 3.8,
+  //       slidesToScroll: 3,
+  //       dots: true
+  //     }
+  //   },
+  //   {
+  //     breakpoint: 1200,
+  //     settings: {
+  //       slidesToShow: 3.5,
+  //       slidesToScroll: 1,
+  //       dots: true
+  //     }
+  //   },
+  //   {
+  //     breakpoint: 1180,
+  //     settings: {
+  //       slidesToShow: 3.59,
+  //       slidesToScroll: 1,
+  //       dots: true
+  //     }
+  //   },
+  //   {
+  //     breakpoint: 1080,
+  //     settings: {
+  //       slidesToShow: 3.35,
+  //       slidesToScroll: 1,
+  //       dots: true
+  //     }
+  //   },
+  //   {
+  //     breakpoint: 980,
+  //     settings: {
+  //       slidesToShow: 2.7,
+  //       slidesToScroll: 1,
+  //       dots: true
+  //     }
+  //   },
+  //   {
+  //     breakpoint: 790,
+  //     settings: {
+  //       slidesToShow: 2.5,
+  //       slidesToScroll: 2,
+  //       // initialSlide: 2
+  //     }
+  //   },
+  //   {
+  //     breakpoint: 720,
+  //     settings: {
+  //       slidesToShow: 1.72,
+  //       slidesToScroll: 2,
+  //       // initialSlide: 2
+  //     }
+  //   },
+  //   {
+  //     breakpoint: 500,
+  //     settings: {
+  //       slidesToShow: 1.5,
+  //       slidesToScroll: 2,
+  //       // initialSlide: 2
+  //     }
+  //   },
+  //   {
+  //     breakpoint: 480,
+  //     settings: {
+  //       slidesToShow: 1,
+  //       slidesToScroll: 1
+  //     }
+  //   }
+  // ]
 }
 
 class CourseList extends Component {

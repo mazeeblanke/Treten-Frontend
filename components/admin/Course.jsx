@@ -30,7 +30,7 @@ const Course = (props) => {
                 alt={course.title}
               /> */}
               <Img
-                style={{ maxHeight: '134px' }}
+                style={{ maxHeight: '164px' }}
                 decode={false}
                 src={[course.bannerImage, '/static/images/courses/noimageavailable.png']}
               />

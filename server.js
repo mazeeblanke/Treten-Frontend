@@ -1,27 +1,23 @@
 const express = require('express')
 const next = require('next')
-
 const server = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 2000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({
   dev
 })
 const handler = app.getRequestHandler()
-// process.env.PROXYURL = 'http://localhost:80';
+
 process.env.PROXYURL =
   process.env.NODE_ENV === 'production'
     ? 'http://api.tretenacademy.com.ng'
-    : 'http://172.18.0.6:80'
-// : 'tretenapp';
+    : 'http://tretenweb';
 
 const proxy = require('express-http-proxy')
 
 app
   .prepare()
   .then(() => {
-    // server.use("/api", proxy(`${process.env.PROXYURL}`));
-
     server.use(
       '/t',
       proxy(process.env.PROXYURL, {

@@ -36,6 +36,11 @@ body, html {
     border-radius: .40rem !important;
   }
 
+  .dropdown-item {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .alert-danger {
     color: #721c24 !important;
     background-color: #f8d7da !important;

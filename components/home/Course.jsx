@@ -30,7 +30,7 @@ const Course = (props) => {
     >
       <Img
         alt={title || name}
-        style={{ maxHeight: '134px' }}
+        style={{ maxHeight: '164px' }}
         decode={false}
         src={[
           bannerImage,

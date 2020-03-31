@@ -102,6 +102,7 @@ class Navigation extends React.Component {
                             src={option.bannerImage} >
                           </img>
                           <span
+                            title={course.title}
                             className="ml-3"
                             style={{ float: 'right', color: '#8492a6', fontSize: 13 }}>
                             {option.title}
@@ -129,7 +130,7 @@ class Navigation extends React.Component {
                         (coursesByGroup.associate || []).map((course) => (
                           <DropdownItem key={course.id}>
                             <Link href={`/courses/${course.slug}`}>
-                              <span>{course.title}</span>
+                              <span title={course.title}>{course.title}</span>
                             </Link>
                           </DropdownItem>
                         ))
@@ -143,7 +144,7 @@ class Navigation extends React.Component {
                         (coursesByGroup.professional || []).map((course) => (
                           <DropdownItem key={course.id}>
                             <Link href={`/courses/${course.slug}`}>
-                              <span>{course.title}</span>
+                              <span title={course.title}>{course.title}</span>
                             </Link>
                           </DropdownItem>
                         ))
@@ -157,7 +158,7 @@ class Navigation extends React.Component {
                         (coursesByGroup.expert || []).map((course) => (
                           <DropdownItem key={course.id}>
                             <Link href={`/courses/${course.slug}`}>
-                              <span>{course.title}</span>
+                              <span title={course.title}>{course.title}</span>
                             </Link>
                           </DropdownItem>
                         ))
@@ -169,17 +170,23 @@ class Navigation extends React.Component {
                       </NavLink>
                       <DropdownItem>
                         <Link href="/resources/interview-questions">
-                          <span>Zero to Hero Cisco R&S</span>
+                          <span title="Zero to Hero Cisco R&S">
+                            Zero to Hero Cisco R&S
+                          </span>
                         </Link>
                       </DropdownItem>
                       <DropdownItem>
                         <Link href="/resources/interview-questions">
-                          <span>Zero to Hero Cisco Security</span>
+                          <span title="Zero to Hero Cisco Security">
+                            Zero to Hero Cisco Security
+                          </span>
                         </Link>
                       </DropdownItem>
                       <DropdownItem>
                         <Link href="/resources/interview-questions">
-                          <span>Zero to Hero Firewall Expert</span>
+                          <span title="Zero to Hero Firewall Expert">
+                            Zero to Hero Firewall Expert
+                          </span>
                         </Link>
                       </DropdownItem>
                     </div>
