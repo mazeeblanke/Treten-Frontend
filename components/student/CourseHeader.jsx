@@ -1,5 +1,5 @@
 import { userIsAdmin } from '../../store/reducers/user'
-import notifier from 'simple-react-notifications'
+import notifier from 'simple-react-notifier'
 import { Button, Menu, Icon, Modal } from 'antd'
 import Display from '../shared/Display'
 import PropTypes from 'prop-types'
@@ -31,16 +31,16 @@ const CourseHeader = props => {
           window.location = ROUTES.ADMIN_DASHBOARD_COURSES
           setLoading(false)
         })
-        .catch((err) => {
-          if (err.response.status === 404)
-          {
-            notifier.error('ERROR! Already deleted course')
-            window.location = ROUTES.ADMIN_DASHBOARD_COURSES
-          } else {
-            notifier.error('ERROR! Unable to delete course')
-          }
-          setLoading(false)
-      })}
+          .catch((err) => {
+            if (err.response.status === 404) {
+              notifier.error('ERROR! Already deleted course')
+              window.location = ROUTES.ADMIN_DASHBOARD_COURSES
+            } else {
+              notifier.error('ERROR! Unable to delete course')
+            }
+            setLoading(false)
+          })
+      }
     )
   }
 

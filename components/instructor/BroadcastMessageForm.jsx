@@ -2,7 +2,7 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 import PropTypes from 'prop-types'
 import { Form, Button, Input, Select } from 'antd'
-import notifier from 'simple-react-notifications'
+import notifier from 'simple-react-notifier'
 const { Option } = Select
 const ReactQuill = dynamic(() => import('react-quill'), {
   ssr: false

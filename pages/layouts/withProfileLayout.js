@@ -4,13 +4,13 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { ROUTES } from '../../lib/constants'
 import withAdminLayout from './withAdminLayout'
-import notifier from 'simple-react-notifications'
-import 'simple-react-notifications/dist/index.css'
+import notifier from 'simple-react-notifier'
+import 'simple-react-notifier/dist/index.css'
 const Cookies = require('js-cookie')
 
 export default Comp => {
   class Profile extends Component {
-    constructor (props) {
+    constructor(props) {
       super(props)
       this.fileInputRef = React.createRef()
     }

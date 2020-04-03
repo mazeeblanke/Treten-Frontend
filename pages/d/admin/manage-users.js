@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import yupToObject from 'yup-to-object'
 import React, { Component } from 'react'
 import * as actions from '../../../store/actions'
-import notifier from 'simple-react-notifications'
+import notifier from 'simple-react-notifier'
 import AdminLayout from '../../layouts/AdminLayout'
 import withRedirect from '../../layouts/withRedirect'
 import inviteUserSchema from '../../../lib/schemas/inviteUsers'
@@ -33,7 +33,7 @@ class ManageUsers extends Component {
     return {}
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.csvDownloadRef = React.createRef()
     this.inviteUserFormRef = React.createRef()
@@ -265,7 +265,7 @@ class ManageUsers extends Component {
             />
             <div className="has-full-height has-white-bg">
               <div className="container">
-                <PaginationStatus pagination={this.props[activeTab].pagination}/>
+                <PaginationStatus pagination={this.props[activeTab].pagination} />
                 <UsersList
                   user={user}
                   admins={admins}

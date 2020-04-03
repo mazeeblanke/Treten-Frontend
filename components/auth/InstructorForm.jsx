@@ -6,7 +6,7 @@ import Dropzone from 'react-dropzone'
 import { Form, Input, Button } from 'antd'
 // import 'react-phone-input-2/dist/style.css'
 // import ReactPhoneInput from 'react-phone-input-2'
-import notifier from 'simple-react-notifications'
+import notifier from 'simple-react-notifier'
 import PhoneInput from 'react-phone-number-input'
 import { isValidPhoneNumber, convertToFormData } from '../../lib/helpers'
 // import * as actions from '../../store/actions/index'
@@ -219,7 +219,7 @@ class InstructorForm extends React.Component {
             })(
               <PhoneInput
                 placeholder="Enter phone number"
-                onChange={ value => setFieldsValue({
+                onChange={value => setFieldsValue({
                   phone_number: value,
                 })
                 }
@@ -252,42 +252,42 @@ class InstructorForm extends React.Component {
                   <input accept=".pdf" {...getInputProps()} />
                   <img src="/static/images/cloud.png" />
                   <p className="text-center mt-2">
-                      Click to upload file or drag in from computer
+                    Click to upload file or drag in from computer
                   </p>
                   <em>(Only *.pdf files will be accepted)</em>
                 </div>
               )}
             </Dropzone>
           ) : (
-            <div className="text-center">
-              <div className="d-flex justify-content-center align-items-center">
-                {file.type === 'application/pdf' ? (
-                  <img
-                    style={{ height: '75px' }}
-                    className="mr-3"
-                    src="/static/images/file_des.svg"
-                  />
-                ) : (
-                  <img
-                    style={{ height: '75px' }}
-                    className="mr-3"
-                    src="/static/images/file.svg"
-                  />
-                )}
-                <p className="m-0 p-0">
-                  {file.name}
-                </p>
-              </div>
-              <small
-                onClick={e =>
-                  this.setState({ file: e[0] })
-                }
-                style={{ color: '#e12828' }}
-              >
-                remove file
+              <div className="text-center">
+                <div className="d-flex justify-content-center align-items-center">
+                  {file.type === 'application/pdf' ? (
+                    <img
+                      style={{ height: '75px' }}
+                      className="mr-3"
+                      src="/static/images/file_des.svg"
+                    />
+                  ) : (
+                      <img
+                        style={{ height: '75px' }}
+                        className="mr-3"
+                        src="/static/images/file.svg"
+                      />
+                    )}
+                  <p className="m-0 p-0">
+                    {file.name}
+                  </p>
+                </div>
+                <small
+                  onClick={e =>
+                    this.setState({ file: e[0] })
+                  }
+                  style={{ color: '#e12828' }}
+                >
+                  remove file
               </small>
-            </div>
-          )}
+              </div>
+            )}
         </Form.Item>
         <Recaptcha
           sitekey={captchaKey}

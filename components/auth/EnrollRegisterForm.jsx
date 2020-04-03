@@ -3,7 +3,7 @@ import { Form, Input, Button } from 'antd'
 // import ReactPhoneInput from 'react-phone-input-2'
 // import 'react-phone-input-2/dist/style.css'
 import PropTypes from 'prop-types'
-import notifier from 'simple-react-notifications'
+import notifier from 'simple-react-notifier'
 import PhoneInput from 'react-phone-number-input'
 import { isValidPhoneNumber } from '../../lib/helpers'
 
@@ -167,7 +167,7 @@ class EnrollRegisterForm extends React.Component {
               })(
                 <PhoneInput
                   placeholder="Enter phone number"
-                  onChange={ value => setFieldsValue({
+                  onChange={value => setFieldsValue({
                     phone_number: value,
                   })
                   }

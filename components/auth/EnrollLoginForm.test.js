@@ -1,16 +1,16 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import notifier from 'simple-react-notifications'
+import notifier from 'simple-react-notifier'
 import EnrollLoginForm from './EnrollLoginForm'
 
-jest.mock('simple-react-notifications')
+jest.mock('simple-react-notifier')
 
 describe('EnrollLoginForm', () => {
   it('renders the form correctly', () => {
     const wrapper = mount(
       <EnrollLoginForm
-        proceed={() => {}}
-        login={() => {}}
+        proceed={() => { }}
+        login={() => { }}
       />)
     expect(wrapper.find('Button').text()).toEqual(
       'Proceed'

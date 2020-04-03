@@ -2,7 +2,7 @@
 import React from 'react'
 import { Form, Button, Select } from 'antd'
 import PropTypes from 'prop-types'
-import notifier from 'simple-react-notifications'
+import notifier from 'simple-react-notifier'
 const Option = Select.Option
 
 class AssignInstructorsForm extends React.Component {
@@ -35,7 +35,7 @@ class AssignInstructorsForm extends React.Component {
     // 	{
     // 		setPopularCourse('', number )
     // 	} else {
-    this.props.searchCourses({ 
+    this.props.searchCourses({
       q: searchQuery,
       // instructorId: this.props.form.instructorId,
       // notAssigned: 1
@@ -55,10 +55,10 @@ class AssignInstructorsForm extends React.Component {
     // 	{
     // 		setPopularCourse('', number )
     // 	} else {
-    this.props.searchCourseBatches({ 
-      q: searchQuery, 
+    this.props.searchCourseBatches({
+      q: searchQuery,
       authorId: this.props.form.authorId,
-      courseId: this.props.form.courseId 
+      courseId: this.props.form.courseId
     }).then(({ data }) => {
       // setRemoteOptions(data.data.filter((option) => !Object.values(popularCourses).includes(option.id)))
       // console.log(data)
@@ -164,8 +164,8 @@ AssignInstructorsForm.propTypes = {
   assignCourseToInstructor: PropTypes.func.isRequired,
 }
 
-const WrappedAssignInstructorsForm = Form.create({ 
-  name: 'assign instructors form' 
+const WrappedAssignInstructorsForm = Form.create({
+  name: 'assign instructors form'
 })(AssignInstructorsForm)
 
 export default WrappedAssignInstructorsForm

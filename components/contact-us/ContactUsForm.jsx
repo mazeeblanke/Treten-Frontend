@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import { Form, Input, Button } from 'antd'
 import * as actions from '../../store/actions'
-import notifier from 'simple-react-notifications'
+import notifier from 'simple-react-notifier'
 import PhoneInput from 'react-phone-number-input'
 import { isValidPhoneNumber } from '../../lib/helpers'
 
@@ -125,7 +125,7 @@ class ContactUsForm extends Component {
                 })(
                   <PhoneInput
                     placeholder="Enter phone number"
-                    onChange={ value => setFieldsValue({
+                    onChange={value => setFieldsValue({
                       phoneNumber: value,
                     })
                     }

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Form, Input, Button } from 'antd'
-import notifier from 'simple-react-notifications'
+import notifier from 'simple-react-notifier'
 
 class EnrollLoginForm extends React.Component {
   state = {

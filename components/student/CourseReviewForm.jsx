@@ -3,7 +3,7 @@ import { Form, Input, Button } from 'antd'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import StarRatings from 'react-star-ratings'
-import notifier from 'simple-react-notifications'
+import notifier from 'simple-react-notifier'
 import { isEqual } from 'lodash'
 
 const { TextArea } = Input
@@ -49,10 +49,10 @@ class CourseReviewForm extends Component {
       user,
       course
     } = this.props
-    const { 
+    const {
       getFieldValue,
-      getFieldDecorator, 
-      getFieldsValue 
+      getFieldDecorator,
+      getFieldsValue
     } = this.props.form
     const {
       createdAt,
@@ -96,7 +96,7 @@ class CourseReviewForm extends Component {
                 {getFieldDecorator('id', {
                   initialValue: review && review.id
                 })(
-                  <input hidden/>,
+                  <input hidden />,
                 )}
               </Form.Item>
             </div>
@@ -105,7 +105,7 @@ class CourseReviewForm extends Component {
                 {getFieldDecorator('courseId', {
                   initialValue: course.id
                 })(
-                  <input hidden/>,
+                  <input hidden />,
                 )}
               </Form.Item>
             </div>

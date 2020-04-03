@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions'
 import { getUserDetails, userIsStudent } from '../../store/reducers/user'
-import notifier from 'simple-react-notifications'
+import notifier from 'simple-react-notifier'
 import { isValidPhoneNumber } from '../../lib/helpers'
 import PhoneInput from 'react-phone-number-input'
 
@@ -157,7 +157,7 @@ class PersonalDetailsForm extends Component {
                     placeholder="Enter phone number"
                     error={
                       getFieldValue('phoneNumber') &&
-                      !isValidPhoneNumber(getFieldValue('phoneNumber')) && 
+                      !isValidPhoneNumber(getFieldValue('phoneNumber')) &&
                       'The provided phone number is invalid'
                     }
                   />

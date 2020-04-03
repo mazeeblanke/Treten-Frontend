@@ -71,7 +71,7 @@ const BatchList = (props) => {
 													}
 												/>
 											</div>
-											<Display if={!!batch.expanded && userIsInstructor(user)}>
+											<Display if={!!batch.expanded}>
 												<div className="col-md-1">
 													<Display if={!batch.isDeleting}>
 														<img 

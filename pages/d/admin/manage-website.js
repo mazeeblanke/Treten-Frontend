@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Icon, Button } from 'antd'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
-import notifier from 'simple-react-notifications'
+import notifier from 'simple-react-notifier'
 import * as actions from '../../../store/actions'
 import AdminLayout from '../../layouts/AdminLayout'
 import withRedirect from '../../layouts/withRedirect'
@@ -27,10 +27,10 @@ class ManageWebsite extends Component {
     this.props.fetchSettings().then((res) => {
       const { popularCourses } = res.data.data
       this.setState({
-        popularCourses: (popularCourses || {}).settingValue 
+        popularCourses: (popularCourses || {}).settingValue
           ? popularCourses.settingValue.ids
           : {},
-        coursesOptions: (popularCourses || {}).settingValue 
+        coursesOptions: (popularCourses || {}).settingValue
           ? popularCourses.settingValue.courses
           : []
       })
@@ -70,7 +70,7 @@ class ManageWebsite extends Component {
   }
 
   onSearch = (query) => {
-    return this.props.fetchCourses({ 
+    return this.props.fetchCourses({
       q: query,
       isPublished: 1,
       hasInstructor: 1
@@ -102,7 +102,7 @@ class ManageWebsite extends Component {
               <div className="col-md-12 col-lg-8">
                 <Display if={this.state.isInitializing}>
                   <div className="has-full-width align-items-center is-flex justify-content-center">
-                    <Icon style={{fontSize: 40}} type="loading"/>
+                    <Icon style={{ fontSize: 40 }} type="loading" />
                   </div>
                 </Display>
                 {!this.state.isInitializing &&

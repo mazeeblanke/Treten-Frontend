@@ -10,7 +10,7 @@ import RegisterForm from '../components/auth/EnrollRegisterForm'
 import LoginForm from '../components/auth/EnrollLoginForm'
 import Link from 'next/link'
 import { userIsAdmin, userIsInstructor } from '../store/reducers/user'
-import notifier from 'simple-react-notifications'
+import notifier from 'simple-react-notifier'
 
 const Cookies = require('js-cookie')
 
@@ -33,7 +33,7 @@ class Enroll extends Component {
     return {}
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       step: 1,
@@ -309,7 +309,7 @@ class Enroll extends Component {
                           </Display>
                         </div>
                       </div>
-                      { this.state.plan &&
+                      {this.state.plan &&
                         <>
                           <h6 className="fw-600 mt-4 pt-1">When would you like to start?</h6>
                           <p>Showing next available starting dates</p>
@@ -321,8 +321,8 @@ class Enroll extends Component {
                                     <div
                                       onClick={() => this.setAvailableDate(entry)}
                                       className={`avaliable-date ${
-                                      this.state.courseBatchId === entry.batchId ? 'selected' : ''
-                                    }`}
+                                        this.state.courseBatchId === entry.batchId ? 'selected' : ''
+                                        }`}
                                     >
                                       <p
                                         style={{ width: '120px' }}

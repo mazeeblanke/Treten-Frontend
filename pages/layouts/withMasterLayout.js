@@ -2,7 +2,7 @@
 import { DefaultSeo } from 'next-seo'
 import React, { Component } from 'react'
 import Navbar from '../../components/shared/Navbar'
-import 'simple-react-notifications/dist/index.css'
+import 'simple-react-notifier/dist/index.css'
 // const Cookies = require('js-cookie')
 /* eslint-disable */
 export default Page => {

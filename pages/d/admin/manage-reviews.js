@@ -8,25 +8,25 @@ import TextTruncate from 'react-text-truncate'
 import * as actions from '../../../store/actions'
 import AdminLayout from '../../layouts/AdminLayout'
 import withRedirect from '../../layouts/withRedirect'
-import { 
+import {
   Menu,
-  Table, 
-  Input, 
-  Button, 
+  Table,
+  Input,
+  Button,
   // Select, 
-  Tooltip, 
+  Tooltip,
   Modal,
-  Dropdown, 
+  Dropdown,
   Icon
 } from 'antd'
 import { parsedPaginationTotalText } from '../../../lib/helpers'
-import { 
+import {
   getCourseReviews,
   getCourseReviewsPagination,
   getCourseReviewsLoadingState,
   reviewIsApproved,
 } from '../../../store/reducers/courseReviews'
-import notifier from 'simple-react-notifications'
+import notifier from 'simple-react-notifier'
 import PaginationNav from '../../../components/shared/PaginationNav'
 import Display from '../../../components/shared/Display'
 // import { reviewIsApproved } from '../../../store/reducers/courseReviews'
@@ -43,7 +43,7 @@ class ManageReviews extends Component {
     return {}
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.csvDownloadRef = React.createRef()
   }
@@ -120,8 +120,8 @@ class ManageReviews extends Component {
       render: (approved) => {
         return (
           approved
-            ? <div style={{width: 130}} className="tag is-success">Approved</div>
-            : <div style={{width: 130}} className="tag is-grey">Not approved</div>
+            ? <div style={{ width: 130 }} className="tag is-success">Approved</div>
+            : <div style={{ width: 130 }} className="tag is-grey">Not approved</div>
         )
       }
     },
@@ -148,7 +148,7 @@ class ManageReviews extends Component {
         const menu = (
           <Menu>
             <Menu.Item disabled={reviewIsApproved(review)}>
-              <a 
+              <a
                 disabled={reviewIsApproved(review)}
                 onClick={() => this.handleApproval(true, review)}
               >
@@ -156,9 +156,9 @@ class ManageReviews extends Component {
               </a>
             </Menu.Item>
             <Menu.Item disabled={!reviewIsApproved(review)}>
-              <a 
+              <a
                 disabled={!reviewIsApproved(review)}
-                onClick={() => {reviewIsApproved(review) && this.handleApproval(false, review)}}
+                onClick={() => { reviewIsApproved(review) && this.handleApproval(false, review) }}
               >
                 Disapprove
               </a>
@@ -204,7 +204,7 @@ class ManageReviews extends Component {
     const action = approved ? 'approve' : 'disapprove'
     this.showConfirm(
       `Are you sure you want to ${action} this review ?`,
-      () => this.props.handleApproval({approved, review})
+      () => this.props.handleApproval({ approved, review })
         .then((res) => {
           notifier.success(res.message)
         }).catch((err) => {
@@ -330,9 +330,9 @@ class ManageReviews extends Component {
           <div className="container">
             <div className="row pl-6 pr-6">
               <div className="col-md-12">
-                <Table 
+                <Table
                   rowKey="id"
-                  columns={this.columns} 
+                  columns={this.columns}
                   scroll={{ x: 1000 }}
                   dataSource={courseReviews}
                   loading={courseReviewsIsLoading}

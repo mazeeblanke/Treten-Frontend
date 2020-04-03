@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import { Button, Select, Modal } from 'antd'
 import * as actions from '../../../store/actions'
-import notifier from 'simple-react-notifications'
+import notifier from 'simple-react-notifier'
 import AdminLayout from '../../layouts/AdminLayout'
 import { convertToFormData } from '../../../lib/helpers'
 import Display from '../../../components/shared/Display'
@@ -175,7 +175,7 @@ class Resources extends Component {
       <AdminLayout headerName="Resources" action={
         <Display if={
           user.role === 'instructor' ||
-            user.role === 'admin'
+          user.role === 'admin'
         }>
           <Button
             style={{ width: '102px', height: '42px' }}

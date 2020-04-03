@@ -7,7 +7,7 @@ import yupToObject from 'yup-to-object'
 import React, { Component } from 'react'
 import EducationForm from './EducationForm'
 import * as actions from '../../store/actions'
-import notifier from 'simple-react-notifications'
+import notifier from 'simple-react-notifier'
 import TutorProfileForm from './TutorProfileForm'
 import CertificationForm from './CertificationForm'
 import WorkExperienceForm from './WorkExperienceForm'
@@ -16,7 +16,7 @@ import tutorDetailsSchema from '../../lib/schemas/tutorDetails'
 const uuidv1 = require('uuid/v1')
 
 class TutorDetailsForm extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.certificationRef = React.createRef()
     this.educationRef = React.createRef()
