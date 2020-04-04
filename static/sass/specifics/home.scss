@@ -73,6 +73,18 @@
   /* PARTNERS */
   .partners {
     padding: 50px 0px 90px 0px;
+
+    .slick-slide {
+      width: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100px;
+    }
+  
+    .slick-list {
+      min-height: 100px;
+    }
   }
 
   .partners .partners__main-text {
