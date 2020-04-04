@@ -2,6 +2,7 @@ import { MANAGE_USERS_PAGE_SIZE } from '../../lib/constants'
 
 export const fetchInstructors = ({
   page = 1,
+  showActive = 0,
   pageSize = MANAGE_USERS_PAGE_SIZE,
   q = '',
   courseId = null
@@ -20,7 +21,8 @@ export const fetchInstructors = ({
       q,
       page,
       pageSize,
-      courseId
+      courseId,
+      showActive
     }
   }).then(res => {
     !courseId && dispatch({

@@ -5,10 +5,10 @@ import Instructor from '../instructor/Instructor'
 
 const sliderSettings = {
   dots: true,
-  infinite: true,
+  infinite: false,
   speed: 200,
   arrows: true,
-  autoplay: true,
+  autoplay: false,
   slidesToShow: 4.2,
   slidesToScroll: 1,
   responsive: [
@@ -77,7 +77,7 @@ const MeetTheInstructors = (props) => {
               <Instructor
                 key={instructor.id}
                 isLoading={isLoading}
-                width="100%"
+                width="300px"
                 name={instructor.name}
                 userable={instructor.userable}
                 profilePic={instructor.profilePic}

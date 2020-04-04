@@ -28,7 +28,7 @@ import NewsLetterSubscription from '../components/home/NewsLetterSubscription'
 class Home extends Component {
   static async getInitialProps ({ reduxStore }) {
     await Promise.all([
-      reduxStore.dispatch(actions.fetchInstructors({ pageSize: 8 })),
+      reduxStore.dispatch(actions.fetchInstructors({ pageSize: 8, showActive: 1 })),
       reduxStore.dispatch(actions.fetchLatestBlogPosts()),
       reduxStore.dispatch(actions.fetchPopularCourses()),
       reduxStore.dispatch(actions.fetchTestimonials()),

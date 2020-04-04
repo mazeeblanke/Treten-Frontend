@@ -204,6 +204,17 @@ class ManageUsers extends Component {
     })
   }
 
+  handleDelete = (user) => {
+    this.showConfirm(
+      `Are you sure you want to delete this user ?`,
+      () => this.props.handleDelete({ user }).then((res) => {
+        notifier.success(res.message)
+      }).catch((err) => {
+        notifier.error(`ERROR! ${err.response.data.message}`)
+      })
+    )
+  }
+
   handleDeactivation = (deactivate, user) => {
     const action = !deactivate ? 'activate' : 'deactivate'
     this.showConfirm(
@@ -272,6 +283,7 @@ class ManageUsers extends Component {
                   students={students}
                   activeTab={activeTab}
                   instructors={instructors}
+                  handleDelete={this.handleDelete}
                   handleTableChange={this.handleTableChange}
                   handleDeactivation={this.handleDeactivation}
                   toggleAssignInstructorForm={this.toggleAssignInstructorForm}
@@ -341,6 +353,7 @@ ManageUsers.propTypes = {
   downloadCSV: PropTypes.func.isRequired,
   inviteUsers: PropTypes.func.isRequired,
   fetchAdmins: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
   searchCourses: PropTypes.func.isRequired,
   instructors: PropTypes.object.isRequired,
   fetchStudents: PropTypes.func.isRequired,
@@ -382,6 +395,7 @@ export default connect(
     inviteUsers: actions.inviteUsers,
     fetchAdmins: actions.fetchAdmins,
     downloadCSV: actions.downloadCSV,
+    handleDelete: actions.handleDelete,
     searchCourses: actions.searchCourses,
     fetchStudents: actions.fetchStudents,
     addUserToInvite: actions.addUserToInvite,

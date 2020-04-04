@@ -108,6 +108,32 @@ export default function (state = INITIAL_STATE, { type, payload }) {
       }
     }
 
+    case 'SET_USER_DELETING_STATE': {
+      const manageUsers = { ...state.manageUsers }
+      const tab = pluralize(payload.user.role)
+      const userId = payload.user.id
+      manageUsers[tab].all[userId] = {
+        ...manageUsers[tab].all[userId],
+        isDeleting: true
+      }
+      return {
+        manageUsers
+      }
+    }
+
+    case 'DELETE_USER': {
+      const manageUsers = { ...state.manageUsers }
+      const tab = pluralize(payload.user.role)
+      const userId = payload.user.id
+      manageUsers[tab].byIds.splice(
+        manageUsers[tab].byIds.indexOf(userId),
+        1
+      )
+      return {
+        manageUsers
+      }
+    }
+
     case 'SET_ASSIGN_INSTRUCTOR_FORM': {
       const newState = { ...state }
       const activeTab = state.manageUsers.activeTab

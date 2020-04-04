@@ -20,6 +20,7 @@ const UsersList = (props) => {
     students,
     activeTab,
     instructors,
+    handleDelete,
     handleTableChange,
     handleDeactivation,
     toggleAssignInstructorForm
@@ -91,6 +92,13 @@ const UsersList = (props) => {
                 Activate account
               </a>
             </Menu.Item>
+            <Menu.Item>
+              <a
+                onClick={() => { handleDelete(user) }}
+              >
+                Delete account
+              </a>
+            </Menu.Item>
             <Menu.Item disabled={!userIsActive(user)}>
               <a
                 disabled={!userIsActive(user)}
@@ -103,10 +111,10 @@ const UsersList = (props) => {
         )
         return (
           <div>
-            <Display if={user.isEditing}>
+            <Display if={user.isEditing || user.isDeleting}>
               <Icon type="loading" />
             </Display>
-            <Display if={!user.isEditing}>
+            <Display if={!user.isEditing && !user.isDeleting}>
               <Dropdown overlay={menu} placement="bottomLeft">
                 <Button>
                   <div className="d-flex justify-content-between align-items-center">

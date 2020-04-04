@@ -181,6 +181,29 @@ export const handleDeactivation = ({ deactivate, user }) => (
     })
 }
 
+export const handleDelete = ({ user, type }) => (
+  dispatch,
+  getState,
+  api
+) => {
+  dispatch({
+    type: 'SET_USER_DELETING_STATE',
+    payload: {
+      user
+    }
+  })
+  return api.delete(`/api/users/${user.id}`)
+    .then(res => {
+      dispatch({
+        type: 'DELETE_USER',
+        payload: {
+          user
+        }
+      })
+      return res.data
+    })
+}
+
 export const fetchStudents = ({ page = 1, pageSize = 5, q = '' } = {}) => (
   dispatch,
   setState,
