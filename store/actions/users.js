@@ -206,9 +206,12 @@ export const handleDelete = ({ user, type }) => (
     .catch((err) => {
       dispatch({
         type: 'SET_USER_DELETING_STATE',
-        isDeleting: false
+        payload: {
+          user,
+          isDeleting: false
+        }
       })
-      return err.response.data
+      return err
     })
 }
 

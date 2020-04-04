@@ -210,7 +210,7 @@ class ManageUsers extends Component {
       () => this.props.handleDelete({ user }).then((res) => {
         notifier.success(res.message)
       }).catch((err) => {
-        notifier.error(`ERROR! ${err.response.data.message}`)
+        err.response && notifier.error(`ERROR! ${err.response.data.message}`)
       })
     )
   }
