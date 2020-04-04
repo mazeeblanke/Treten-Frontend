@@ -189,7 +189,8 @@ export const handleDelete = ({ user, type }) => (
   dispatch({
     type: 'SET_USER_DELETING_STATE',
     payload: {
-      user
+      user,
+      isDeleting: true
     }
   })
   return api.delete(`/api/users/${user.id}`)
@@ -201,6 +202,13 @@ export const handleDelete = ({ user, type }) => (
         }
       })
       return res.data
+    })
+    .catch((err) => {
+      dispatch({
+        type: 'SET_USER_DELETING_STATE',
+        isDeleting: false
+      })
+      return err.response.data
     })
 }
 

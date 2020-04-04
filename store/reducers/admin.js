@@ -114,7 +114,7 @@ export default function (state = INITIAL_STATE, { type, payload }) {
       const userId = payload.user.id
       manageUsers[tab].all[userId] = {
         ...manageUsers[tab].all[userId],
-        isDeleting: true
+        isDeleting: payload.isDeleting
       }
       return {
         manageUsers
