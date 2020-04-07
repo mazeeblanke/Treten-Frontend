@@ -296,6 +296,94 @@ class AdminLayout extends Component {
                 )
                 : null
             }
+            {
+              this.props.user.role === 'admin'
+                ? (
+                  <Menu.Item
+                    onClick={() =>
+                      this.props.router.push(ROUTES.ADMIN_DASHBOARD_TESTIMONIALS)}
+                    key={ROUTES.ADMIN_DASHBOARD_TESTIMONIALS}
+                  >
+                    <img
+                      className="mr-3"
+                      src={
+                        this.props.router.pathname ===
+                          ROUTES.ADMIN_DASHBOARD_TESTIMONIALS
+                          ? '/static/images/admin/manage-website.png'
+                          : '/static/images/admin/manage-website-white.png'
+                      }
+                    />
+                    <span className="is-white ml-4 ">Testimonials</span>
+                  </Menu.Item>
+                )
+                : null
+            }
+            {
+              this.props.user.role === 'admin'
+                ? (
+                  <Menu.Item
+                    onClick={() =>
+                      this.props.router.push(ROUTES.ADMIN_DASHBOARD_CERTIFICATIONS)}
+                    key={ROUTES.ADMIN_DASHBOARD_CERTIFICATIONS}
+                  >
+                    <img
+                      className="mr-3"
+                      src={
+                        this.props.router.pathname ===
+                          ROUTES.ADMIN_DASHBOARD_CERTIFICATIONS
+                          ? '/static/images/admin/manage-website.png'
+                          : '/static/images/admin/manage-website-white.png'
+                      }
+                    />
+                    <span className="is-white ml-4 ">Certifications</span>
+                  </Menu.Item>
+                )
+                : null
+            }
+            {
+              this.props.user.role === 'admin'
+                ? (
+                  <Menu.Item
+                    onClick={() =>
+                      this.props.router.push(ROUTES.ADMIN_DASHBOARD_COURSEPATHS)}
+                    key={ROUTES.ADMIN_DASHBOARD_COURSEPATHS}
+                  >
+                    <img
+                      className="mr-3"
+                      src={
+                        this.props.router.pathname ===
+                          ROUTES.ADMIN_DASHBOARD_COURSEPATHS
+                          ? '/static/images/admin/manage-website.png'
+                          : '/static/images/admin/manage-website-white.png'
+                      }
+                    />
+                    <span className="is-white ml-4 ">Course paths</span>
+                  </Menu.Item>
+                )
+                : null
+            }
+            {
+              this.props.user.role === 'admin'
+                ? (
+                  <Menu.Item
+                    onClick={() =>
+                      this.props.router.push(ROUTES.ADMIN_DASHBOARD_BLOGS)}
+                    key={ROUTES.ADMIN_DASHBOARD_BLOGS}
+                  >
+                    <img
+                      className="mr-3"
+                      src={
+                        this.props.router.pathname ===
+                          ROUTES.ADMIN_DASHBOARD_BLOGS
+                          ? '/static/images/admin/manage-website.png'
+                          : '/static/images/admin/manage-website-white.png'
+                      }
+                    />
+                    <span className="is-white ml-4 ">Manage blogs</span>
+                  </Menu.Item>
+                )
+                : null
+            }
 
             {
               this.props.user.role === 'student'
@@ -303,7 +391,7 @@ class AdminLayout extends Component {
                   <Menu.Item
                     onClick={() =>
                       this.props.router.push('/courses')}
-                    className="mt-15"
+                    className="mt-5"
                     key="6"
                   >
                     <img className="mr-3" src="/static/images/admin/catalog.svg" />
@@ -313,7 +401,7 @@ class AdminLayout extends Component {
                 : null
             }
             <Menu.Item
-              className={` ${this.props.router.pathname.includes('profile') ? 'ant-menu-item-selected' : ''} ${this.props.user.role !== 'student' ? 'mt-15' : ''}`}
+              className={` ${this.props.router.pathname.includes('profile') ? 'ant-menu-item-selected' : ''} ${this.props.user.role !== 'student' ? 'mt-5' : ''}`}
               onClick={() => this.props.router.push(ROUTES.STUDENT_DASHBOARD_PROFILEDETAILS)}
               key={ROUTES.STUDENT_DASHBOARD_PROFILEDETAILS}>
               <img

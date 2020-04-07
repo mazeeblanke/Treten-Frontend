@@ -3,32 +3,36 @@ import { combineReducers } from 'redux'
 // IMPORT REDUCERS HERE
 import userReducer from './user'
 import authReducer from './auth'
-import adminReducer from './admin'
-import instructorReducer from './instructor'
+import formReducer from './form'
 import chatReducer from './chat'
-import transactionsReducer from './transactions'
+import adminReducer from './admin'
+import courseReducer from './course'
+import coursesReducer from './courses'
 import blogPostsReducer from './blogPosts'
 import dashboardReducer from './dashboard'
-import adminCourseReducer from './adminCourses'
-import generalCourseReducer from './generalCourses'
-import instructorCourseReducer from './instructorCourses'
-import coursesReducer from './courses'
-import searchCourseReducer from './searchCourses'
-import courseReducer from './course'
+import listingReducer from './listing'
 import resourcesReducer from './resources'
-import enrolledCourseReducer from './enrolledCourses'
-import courseReviewsReducer from './courseReviews'
+import instructorReducer from './instructor'
 import coursePathsReducer from './coursePaths'
+import adminCourseReducer from './adminCourses'
+import transactionsReducer from './transactions'
 import testimonialsReducer from './testimonials'
+import searchCourseReducer from './searchCourses'
+import courseReviewsReducer from './courseReviews'
+import generalCourseReducer from './generalCourses'
+import enrolledCourseReducer from './enrolledCourses'
+import instructorCourseReducer from './instructorCourses'
 
 const rootReducer = combineReducers({
   user: userReducer,
+  form: formReducer,
   auth: authReducer,
   chat: chatReducer,
   admin: adminReducer,
   course: courseReducer,
   courses: coursesReducer,
   dashboard: dashboardReducer,
+  listings: listingReducer,
   resources: resourcesReducer,
   blogPosts: blogPostsReducer,
   instructor: instructorReducer,

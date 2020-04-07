@@ -81,6 +81,10 @@ app
       app.render(req, res, '/enroll', {})
     })
 
+    server.get("/d/admin/:entity/update/:id", (req, res) => {
+      return app.render(req, res, "/d/admin/" + req.params.entity + '/create', { id: req.params.id })
+    })
+
     server.get('/d/admin/courses/:courseSlug', (req, res) => {
       app.render(req, res, '/d/instructor/course', {})
     })

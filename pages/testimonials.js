@@ -7,6 +7,7 @@ import * as actions from '../store/actions'
 import Footer from '../components/shared/Footer'
 import withMasterLayout from './layouts/withMasterLayout'
 // import Testimonials from '../components/shared/Testimonials'
+import ReactHtmlParser from 'react-html-parser'
 import { getTestimonials } from '../store/reducers/testimonials'
 
 class Testimonials extends Component {
@@ -21,166 +22,6 @@ class Testimonials extends Component {
 
   constructor (props) {
     super(props)
-    this.state = {
-      testimonials: [
-        {
-          text: `Yeah, but John, if The Pirates of the
-          Caribbean breaks down, the pirates don’t eat the tourists.
-          Yes, Yes, without the oops! Is this my espresso machine?
-          Wh-what is-h-how did you get my espresso machine?
-          They're using our own satellites against us. Hey,
-          you know how I'm, like, always trying to save the planet?`,
-          student: {
-            profile_pic: '/static/images/instructors/instructor2.png',
-            fullname: 'Clarisa Ward',
-            profile_text: 'Network Engineer, Microsoft'
-          }
-        },
-        {
-          text: `Yeah, but John, if The Pirates of the
-          Caribbean breaks down, the pirates don’t eat the tourists.
-          Yes, Yes, without the oops! Is this my espresso machine?
-          Wh-what is-h-how did you get my espresso machine?
-          They're using our own satellites against us. Hey,
-          you know how I'm, like, always trying to save the planet?`,
-          student: {
-            profile_pic: '/static/images/instructors/instructor2.png',
-            fullname: 'Nnomthi Phillips',
-            profile_text: 'Cyber Security Ninja, CBN'
-          }
-        },
-        {
-          text: `Yeah, but John, if The Pirates of the
-          Caribbean breaks down, the pirates don’t eat the tourists.
-          Yes, Yes, without the oops! Is this my espresso machine?
-          Wh-what is-h-how did you get my espresso machine?
-          They're using our own satellites against us. Hey,
-          you know how I'm, like, always trying to save the planet?`,
-          student: {
-            profile_pic: '/static/images/instructors/instructor4.png',
-            fullname: 'Adewale McDavids',
-            profile_text: 'Network Engineer, Paystack'
-          }
-        },
-        {
-          text: `Yeah, but John, if The Pirates of the
-          Caribbean breaks down, the pirates don’t eat the tourists.
-          Yes, Yes, without the oops! Is this my espresso machine?
-          Wh-what is-h-how did you get my espresso machine?
-          They're using our own satellites against us. Hey,
-          you know how I'm, like, always trying to save the planet?`,
-          student: {
-            profile_pic: '/static/images/instructors/instructor2.png',
-            fullname: 'Adewale McDavids',
-            profile_text: 'Network Engineer, Paystack'
-          }
-        },
-        {
-          text: `Yeah, but John, if The Pirates of the
-          Caribbean breaks down, the pirates don’t eat the tourists.
-          Yes, Yes, without the oops! Is this my espresso machine?
-          Wh-what is-h-how did you get my espresso machine?
-          They're using our own satellites against us. Hey,
-          you know how I'm, like, always trying to save the planet?`,
-          student: {
-            profile_pic: '/static/images/instructors/instructor2.png',
-            fullname: 'Clarisa Ward',
-            profile_text: 'Network Engineer, Microsoft'
-          }
-        },
-        {
-          text: `Yeah, but John, if The Pirates of the
-          Caribbean breaks down, the pirates don’t eat the tourists.
-          Yes, Yes, without the oops! Is this my espresso machine?
-          Wh-what is-h-how did you get my espresso machine?
-          They're using our own satellites against us. Hey,
-          you know how I'm, like, always trying to save the planet?`,
-          student: {
-            profile_pic: '/static/images/instructors/instructor2.png',
-            fullname: 'Nnomthi Phillips',
-            profile_text: 'Cyber Security Ninja, CBN'
-          }
-        },
-        {
-          text: `Yeah, but John, if The Pirates of the
-          Caribbean breaks down, the pirates don’t eat the tourists.
-          Yes, Yes, without the oops! Is this my espresso machine?
-          Wh-what is-h-how did you get my espresso machine?
-          They're using our own satellites against us. Hey,
-          you know how I'm, like, always trying to save the planet?`,
-          student: {
-            profile_pic: '/static/images/instructors/instructor4.png',
-            fullname: 'Adewale McDavids',
-            profile_text: 'Network Engineer, Paystack'
-          }
-        },
-        {
-          text: `Yeah, but John, if The Pirates of the
-          Caribbean breaks down, the pirates don’t eat the tourists.
-          Yes, Yes, without the oops! Is this my espresso machine?
-          Wh-what is-h-how did you get my espresso machine?
-          They're using our own satellites against us. Hey,
-          you know how I'm, like, always trying to save the planet?`,
-          student: {
-            profile_pic: '/static/images/instructors/instructor2.png',
-            fullname: 'Adewale McDavids',
-            profile_text: 'Network Engineer, Paystack'
-          }
-        },
-        {
-          text: `Yeah, but John, if The Pirates of the
-          Caribbean breaks down, the pirates don’t eat the tourists.
-          Yes, Yes, without the oops! Is this my espresso machine?
-          Wh-what is-h-how did you get my espresso machine?
-          They're using our own satellites against us. Hey,
-          you know how I'm, like, always trying to save the planet?`,
-          student: {
-            profile_pic: '/static/images/instructors/instructor2.png',
-            fullname: 'Clarisa Ward',
-            profile_text: 'Network Engineer, Microsoft'
-          }
-        },
-        {
-          text: `Yeah, but John, if The Pirates of the
-          Caribbean breaks down, the pirates don’t eat the tourists.
-          Yes, Yes, without the oops! Is this my espresso machine?
-          Wh-what is-h-how did you get my espresso machine?
-          They're using our own satellites against us. Hey,
-          you know how I'm, like, always trying to save the planet?`,
-          student: {
-            profile_pic: '/static/images/instructors/instructor2.png',
-            fullname: 'Nnomthi Phillips',
-            profile_text: 'Cyber Security Ninja, CBN'
-          }
-        },
-        {
-          text: `Yeah, but John, if The Pirates of the
-          Caribbean breaks down, the pirates don’t eat the tourists.
-          Yes, Yes, without the oops! Is this my espresso machine?
-          Wh-what is-h-how did you get my espresso machine?
-          They're using our own satellites against us. Hey,
-          you know how I'm, like, always trying to save the planet?`,
-          student: {
-            profile_pic: '/static/images/instructors/instructor4.png',
-            fullname: 'Adewale McDavids',
-            profile_text: 'Network Engineer, Paystack'
-          }
-        },
-        {
-          text: `Yeah, but John, if The Pirates of the
-          Caribbean breaks down, the pirates don’t eat the tourists.
-          Yes, Yes, without the oops! Is this my espresso machine?
-          Wh-what is-h-how did you get my espresso machine?
-          They're using our own satellites against us. Hey,
-          you know how I'm, like, always trying to save the planet?`,
-          student: {
-            profile_pic: '/static/images/instructors/instructor2.png',
-            fullname: 'Adewale McDavids',
-            profile_text: 'Network Engineer, Paystack'
-          }
-        }
-      ]
-    }
   }
 
   render () {
@@ -216,7 +57,9 @@ class Testimonials extends Component {
                 >
                   <div className="card border-0">
                     <div className="card-body">
-                      <p className="card-title testimonial__text mb-0 pb-0">{testimonial.reviewText}</p>
+                      <p className="card-title testimonial__text mb-0 pb-0">
+                        {ReactHtmlParser(testimonial.reviewText)}
+                      </p>
                       <div className="d-flex align-items-center mt-3 pt-2 mb-3">
                         <img
                           alt="hh"

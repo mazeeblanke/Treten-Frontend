@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Slider from 'react-slick'
 import Display from './Display'
+import ReactHtmlParser from 'react-html-parser'
 
 const sliderSettings = {
   dots: true,
@@ -104,7 +105,9 @@ const Testimonials = (props) => {
               <div className="testimonial" key={testimonial.id}>
                 <div className="card border-0" style={{ width: '100%', height: 280 }}>
                   <div className="card-body">
-                    <p className="card-title testimonial__text mb-0 pb-0">{testimonial.reviewText}</p>
+                    <p className="card-title testimonial__text mb-0 pb-0">
+                      {ReactHtmlParser(testimonial.reviewText)}
+                    </p>
                     <div className="d-flex align-items-end mt-3 pt-2 mb-3">
                       <img className="mr-2 h45 rounded-circle" src={testimonial.enrollee ? testimonial.enrollee.profilePic : testimonial.profilePic} />
                       <div className="d-flex justify-content-center flex-column">
