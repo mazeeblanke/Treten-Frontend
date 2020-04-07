@@ -32,7 +32,10 @@ class Home extends Component {
       reduxStore.dispatch(actions.fetchLatestBlogPosts()),
       reduxStore.dispatch(actions.fetchPopularCourses()),
       reduxStore.dispatch(actions.fetchTestimonials()),
-      reduxStore.dispatch(actions.fetchCoursePaths())
+      reduxStore.dispatch(actions.fetchCoursePaths({
+        page: null,
+        pageSize: null
+      }))
     ])
     return {}
   }
