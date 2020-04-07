@@ -32,7 +32,7 @@ const CoursePopover = (props) => {
       </Display>
       <h5 className="mb-3 mt-2">{title}</h5>
       <p>
-        {description.substr(0, 250).replace(/<\/?[^>]+(>|$)/g, '')}
+        {description && description.substr(0, 250).replace(/<\/?[^>]+(>|$)/g, '')}
       </p>
       {/* <Display if={!!learnersCount}> */}
       <div className="mb-3">

@@ -44,7 +44,7 @@ class Listing extends Component {
         return (
 					<TextTruncate
 						line={3}
-						text={body.substr(0, 300).replace(/<\/?[^>]+(>|$)/g, '')}
+						text={body && body.substr(0, 300).replace(/<\/?[^>]+(>|$)/g, '')}
 					/>
         )
       },
