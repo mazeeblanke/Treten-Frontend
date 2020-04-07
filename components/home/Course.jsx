@@ -64,13 +64,15 @@ const Course = (props) => {
           name='rating'
         />
         }
-        <div className="is-flex is-vcentered mt-2">
-          <img
-            className="mr-2 h28 rounded-circle"
-            src={profilePic}
-          />
-          <span>{instructorName}</span>
-        </div>
+        { !!profilePic && !!instructorName && (
+          <div className="is-flex is-vcentered mt-2">
+            <img
+              className="mr-2 h28 rounded-circle"
+              src={profilePic}
+            />
+            <span>{instructorName}</span>
+          </div>
+        )}
       </div>
     </div>
   )
