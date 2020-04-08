@@ -5,6 +5,8 @@ import dynamic from 'next/dynamic'
 import Display from '../shared/Display'
 import StarRatings from 'react-star-ratings'
 import Img from 'react-image'
+import { truncate } from '../../lib/helpers'
+import { Tooltip } from 'antd'
 // import { userIsAdmin } from '../../store/reducers/user'
 // import { Avatar } from 'antd'
 const Skeleton = dynamic(() => import('react-loading-skeleton'), {
@@ -41,9 +43,11 @@ const Course = (props) => {
               </div>
             </Display>
             <div className="card-body">
-              <h5 className="card-title">
+              <h5 className="card-title text-truncate">
                 <Display if={!isLoading}>
-                  <span>{course.title}</span>
+                  <Tooltip title={course.title}>
+                    <span>{course.title}</span>
+                  </Tooltip>  
                 </Display>
                 <Display if={isLoading}>
                   <Skeleton width={70} />

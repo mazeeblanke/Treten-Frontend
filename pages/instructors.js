@@ -9,7 +9,7 @@ import { getInstructors } from '../store/reducers/instructor'
 
 class MeetTheInstructor extends Component {
   static async getInitialProps ({ reduxStore }) {
-    await reduxStore.dispatch(actions.fetchInstructors({ pageSize: 8 }))
+    await reduxStore.dispatch(actions.fetchInstructors({ pageSize: 8, showActive: 1 }))
     return {}
   }
 

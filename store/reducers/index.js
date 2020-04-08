@@ -10,8 +10,9 @@ import courseReducer from './course'
 import coursesReducer from './courses'
 import blogPostsReducer from './blogPosts'
 import dashboardReducer from './dashboard'
-import listingReducer from './listing'
 import resourcesReducer from './resources'
+import listingReducer from './listing'
+import certificationReducer from './certifications'
 import instructorReducer from './instructor'
 import coursePathsReducer from './coursePaths'
 import adminCourseReducer from './adminCourses'
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
   instructor: instructorReducer,
   adminCourses: adminCourseReducer,
   searchCourses: searchCourseReducer,
+  certifications: certificationReducer,
   transactions: transactionsReducer,
   courseReviews: courseReviewsReducer,
   generalCourses: generalCourseReducer,

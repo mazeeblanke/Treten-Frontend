@@ -3,7 +3,8 @@ import Img from 'react-image'
 import PropTypes from 'prop-types'
 import { Tooltip, Popover } from 'antd'
 import StarRatings from 'react-star-ratings'
-import TextTruncate from 'react-text-truncate'
+// import TextTruncate from 'react-text-truncate'
+import { truncate } from '../../lib/helpers'
 
 const Course = (props) => {
   const {
@@ -38,23 +39,11 @@ const Course = (props) => {
         ]}
       />
       <div className="card-body">
-        <h5 className="card-title">
+        <h5 className="card-title text-truncate">
           <Tooltip title={title || name}>
-            <TextTruncate
-              line={1}
-              text={title || name}
-            />
+            {title || name}
           </Tooltip>
         </h5>
-        {/* {!title && <p>
-          <Tooltip title={description}>
-            <TextTruncate
-              line={1}
-              text={description}
-            />
-          </Tooltip>
-        </p>
-        } */}
         {!!avgRating && <StarRatings
           starDimension="15px"
           starSpacing="3px"

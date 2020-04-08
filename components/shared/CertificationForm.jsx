@@ -30,6 +30,8 @@ const CertificationForm = props => {
               certification={certification}
               setCertification={props.setCertification}
               certificationIndex={certificationIndex}
+              fetchCertifications={props.fetchCertifications}
+              certificationOptions={props.certificationOptions}
             />
           ))}
         </div>
@@ -58,7 +60,9 @@ CertificationForm.propTypes = {
   setCertification: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
   certifications: PropTypes.array.isRequired,
-  certificationRef: PropTypes.object
+  certificationRef: PropTypes.object,
+  fetchCertifications: PropTypes.func.isRequired,
+  certificationOptions: PropTypes.array,
 }
 
 export default CertificationForm

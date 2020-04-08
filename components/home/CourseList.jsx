@@ -14,93 +14,13 @@ import CoursePopover from './CoursePopover'
 const settings = {
   dots: true,
   variableWidth: true,
-  infinite: false,
+  infinite: true,
   speed: 800,
   arrows: true,
-  autoplay: false,
+  autoplay: true,
+  centerMode: true,
   // slidesToShow: 4.33,
-  slidesToScroll: 1,
-  // responsive: [
-  //   {
-  //     breakpoint: 1380,
-  //     settings: {
-  //       slidesToShow: 3.82,
-  //       slidesToScroll: 1,
-  //       dots: true
-  //     }
-  //   },
-  //   {
-  //     breakpoint: 1280,
-  //     settings: {
-  //       slidesToShow: 3.8,
-  //       slidesToScroll: 3,
-  //       dots: true
-  //     }
-  //   },
-  //   {
-  //     breakpoint: 1200,
-  //     settings: {
-  //       slidesToShow: 3.5,
-  //       slidesToScroll: 1,
-  //       dots: true
-  //     }
-  //   },
-  //   {
-  //     breakpoint: 1180,
-  //     settings: {
-  //       slidesToShow: 3.59,
-  //       slidesToScroll: 1,
-  //       dots: true
-  //     }
-  //   },
-  //   {
-  //     breakpoint: 1080,
-  //     settings: {
-  //       slidesToShow: 3.35,
-  //       slidesToScroll: 1,
-  //       dots: true
-  //     }
-  //   },
-  //   {
-  //     breakpoint: 980,
-  //     settings: {
-  //       slidesToShow: 2.7,
-  //       slidesToScroll: 1,
-  //       dots: true
-  //     }
-  //   },
-  //   {
-  //     breakpoint: 790,
-  //     settings: {
-  //       slidesToShow: 2.5,
-  //       slidesToScroll: 2,
-  //       // initialSlide: 2
-  //     }
-  //   },
-  //   {
-  //     breakpoint: 720,
-  //     settings: {
-  //       slidesToShow: 1.72,
-  //       slidesToScroll: 2,
-  //       // initialSlide: 2
-  //     }
-  //   },
-  //   {
-  //     breakpoint: 500,
-  //     settings: {
-  //       slidesToShow: 1.5,
-  //       slidesToScroll: 2,
-  //       // initialSlide: 2
-  //     }
-  //   },
-  //   {
-  //     breakpoint: 480,
-  //     settings: {
-  //       slidesToShow: 1,
-  //       slidesToScroll: 1
-  //     }
-  //   }
-  // ]
+  slidesToScroll: 4
 }
 
 class CourseList extends Component {
@@ -151,7 +71,7 @@ class CourseList extends Component {
                 <Slider {...settings}>
                   {
                     this.props.courses.map((course) => (
-                      <>
+                      <div key={course.id}>
                         <Display if={!course.courses}>
                           <Popover
                             placement="right"
@@ -171,14 +91,14 @@ class CourseList extends Component {
                             </div>
                           </Popover>
                         </Display>
-                        <Display if={course.courses}>
+                        <Display if={!!course.courses}>
                           <Course
                             cardWidth={this.props.cardWidth}
                             setPathCourses={this.setPathCourses}
                             course={course}
                           />
                         </Display>
-                      </>
+                      </div>
                     ))
                   }
                 </Slider>

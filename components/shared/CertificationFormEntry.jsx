@@ -1,36 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, Input, DatePicker, Select } from 'antd'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 const dateFormat = 'YYYY'
 
-const partners = [{
-  value: 'Microsoft',
-  label: 'partners/microsoft.png'
-}, {
-  value: 'Fortinet',
-  label: 'partners/Fortinet.png'
-}, {
-  value: 'Juniper Networks',
-  label: 'partners/Juniper_Networks.png'
-}, {
-  value: 'Paloalto Networks',
-  label: 'partners/paloaltonetworks.png'
-}, {
-  value: 'Cisco',
-  label: 'partners/cisco.png'
-}, {
-  value: 'F5 Networks',
-  label: 'partners/F5_Networks.png'
-}]
-
 const CertificationEntryForm = props => {
+
   const {
     certification,
     setCertification,
     certificationIndex,
+    fetchCertifications,
+    certificationOptions,
     errors: { certifications }
   } = props
+
+  const search = (searchQuery) => {
+    fetchCertifications({
+      q: searchQuery,
+    })
+  }
+
   return (
     <div className="col-md-12 mb-3">
       <h5 className="text-capitalize">
@@ -117,10 +107,10 @@ const CertificationEntryForm = props => {
               </label>
               <div>
                 <Select
-                  placeholder="Select certification provider"
-                  value={(certification.certificationBy || {}).value}
-                  className="has-full-width"
+                  showSearch
                   size="large"
+                  allowClear
+                  showArrow={false}
                   onChange={(e, proxyComp, g) => {
                     setCertification(
                       {
@@ -132,19 +122,26 @@ const CertificationEntryForm = props => {
                       certificationIndex
                     )
                   }}
+                  filterOption={false}
+                  notFoundContent="No matched certifications found"
+                  onSearch={search}
+                  className="has-full-width"
+                  defaultActiveFirstOption={false}
+                  placeholder='Select certification'
+                  value={(certification.certificationBy || {}).value}
                 >
                   {
-                    partners.map(el => (
-                      <Select.Option key={el.value} label={el.value} value={el.label}>
+                    certificationOptions.map(el => (
+                      <Select.Option key={el.id} label={el.company} value={el.company}>
                         <div>
                           <img
-                            style={{ float: 'left', height: '28px', marginTop: '7px' }}
-                            src={`/static/images/${el.label}`} >
+                            style={{ float: 'left', height: '28px', marginTop: '3px' }}
+                            src={el.bannerImage} >
                           </img>
                           <span
                             className="ml-3"
                             style={{ float: 'right', color: '#8492a6', fontSize: 13 }}>
-                            {el.value}
+                            {el.company}
                           </span>
                         </div>
                       </Select.Option>
@@ -176,6 +173,8 @@ CertificationEntryForm.propTypes = {
     certificationBy: PropTypes.object,
   }).isRequired,
   setCertification: PropTypes.func.isRequired,
+  fetchCertifications: PropTypes.func.isRequired,
+  certificationOptions: PropTypes.array,
   certificationIndex: PropTypes.number.isRequired,
   errors: PropTypes.shape({ certifications: PropTypes.object })
 }

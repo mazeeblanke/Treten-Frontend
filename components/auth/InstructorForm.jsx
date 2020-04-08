@@ -67,15 +67,8 @@ class InstructorForm extends React.Component {
             notifier.error('ERROR! The Form contains some errors')
             const errors = err.response.data.errors || {}
             this.setState({
+              errors,
               isLoading: false,
-            })
-
-            this.props.form.setFields({
-              email: {
-                errors: errors.email
-                  ? [new Error(errors.email[0])]
-                  : [],
-              },
             })
           })
       }
@@ -89,7 +82,8 @@ class InstructorForm extends React.Component {
       getFieldValue
     } = this.props.form
     const {
-      file
+      file,
+      errors
     } = this.state
     return (
       <Form
@@ -183,7 +177,7 @@ class InstructorForm extends React.Component {
             })(
               <TextArea
                 rows={4}
-                placeholder="Go into details about why you will like to be an instructor"
+                placeholder="Go into details about why you will like to be an instructor, also include what courses you would like to teach"
               />
             )
           }
@@ -229,20 +223,15 @@ class InstructorForm extends React.Component {
                   'The provided phone number is invalid'
                 }
               />
-              // <ReactPhoneInput
-              //   className="has-full-width"
-              //   style={{ width: '100%' }}
-              //   defaultCountry="ng"
-              // />
             )
           }
         </Form.Item>
-        <Form.Item>
+        <Form.Item className={errors['file'] && 'has-error'}>
           {!file ? (
             <Dropzone
               accept="application/pdf"
               onDropAccepted={e =>
-                this.setState({ file: e[0] })
+                this.setState({ file: e[0], errors: { ...this.state.errors, file: null } })
               }
             >
               {({ getRootProps, getInputProps }) => (
@@ -252,7 +241,7 @@ class InstructorForm extends React.Component {
                   <input accept=".pdf" {...getInputProps()} />
                   <img src="/static/images/cloud.png" />
                   <p className="text-center mt-2">
-                    Click to upload file or drag in from computer
+                    Click to upload CV or drag in from computer
                   </p>
                   <em>(Only *.pdf files will be accepted)</em>
                 </div>
@@ -280,12 +269,17 @@ class InstructorForm extends React.Component {
                 </div>
                 <small
                   onClick={e =>
-                    this.setState({ file: e[0] })
+                    this.setState({ file: e[0], errors: { ...this.state.errors, file: null } })
                   }
                   style={{ color: '#e12828' }}
                 >
                   remove file
               </small>
+              </div>
+            )}
+            {errors['file'] && (
+              <div className="ant-form-explain">
+                {errors['file'][0]}
               </div>
             )}
         </Form.Item>

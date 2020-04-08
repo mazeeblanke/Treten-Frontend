@@ -216,24 +216,47 @@ export default Page => {
 				})
 				const action = courseForm.get('id') ? saveCourse : createCourse
 				action(courseForm)
-					.then(() => {
+					.then((res) => {
 						notifier.success('The Course has been published!')
 						if (!courseForm.get('id')) {
 							this.setState({
 								courseForm: resetCourseForm(),
 								currentTab: 0
 							})
+						} else {
+							const savedData = res.data.data;
+							this.setState({
+								isPublishing: false,
+								courseForm: {
+									...this.state.courseForm,
+									id: savedData.id,
+									// title: savedData.title,
+									// coursePath: savedData.coursePath,
+									// coursePathPosition: savedData.coursePathPosition,
+									// bannerImage: savedData.bannerImage,
+									// description: savedData.description,
+									// duration: savedData.duration,
+									// price: savedData.price,
+									category: savedData.category.name,
+									// certificationBy: savedData.certificationBy.value,
+									// institution: savedData.institution,
+									// modules: savedData.modules,
+									// faqs: savedData.faqs
+								}
+							})
 						}
 					})
 					.catch((err) => {
-						notifier.error('ERROR! The course could not be published')
-					})
-					.finally(() => {
+						console.log(err)
 						if (this._isMounted) {
 							this.setState({
 								isPublishing: false
 							})
 						}
+						notifier.error('ERROR! The course could not be published')
+					})
+					.finally(() => {
+						
 					})
 			})
 		}

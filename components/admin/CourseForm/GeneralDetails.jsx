@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import dynamic from 'next/dynamic'
 import { Input, Form } from 'antd'
 import CreatableSelect from 'react-select/creatable'
+import { connect } from 'react-redux'
+import { fetchCourseCategories, searchCourseBatches } from '../../../store/actions'
 const ReactQuill = dynamic(() => import('react-quill'), {
   ssr: false
 })
@@ -15,6 +17,18 @@ const customStyles = {
 }
 
 const GeneralDetails = props => {
+
+  const [ courseCategoriesOptions, setCourseCatOptions ] = useState([])
+
+  const searchCourseCategories = () => {
+    props.fetchCourseCategories({ pageSize: 100 }).then((res) => {
+      const opts = res.data.map((c) => {
+        return { value: c.name, label: c.name }
+      })
+      setCourseCatOptions(opts)
+    })
+  }
+
   const { courseForm, setForm, errors } = props
   return (
     <div className="container mt-7">
@@ -29,14 +43,11 @@ const GeneralDetails = props => {
                 styles={customStyles}
                 placeholder="Select/Create course category"
                 isClearable
+                cacheOptions={true}
+                onInputChange={searchCourseCategories}
                 value={courseForm.category && { value: courseForm.category, label: courseForm.category }}
                 onChange={(e) => setForm(e && e.value, 'category')}
-                options={[
-                  { value: 'associate', label: 'associate' },
-                  { value: 'professional', label: 'professional' },
-                  { value: 'expert', label: 'expert' },
-                  { value: 'bootcamp', label: 'bootcamp' },
-                ]}
+                options={courseCategoriesOptions}
               />
             </div>
             {errors.category && (
@@ -95,8 +106,20 @@ const GeneralDetails = props => {
 
 GeneralDetails.propTypes = {
   setForm: PropTypes.func.isRequired,
+  fetchCourseCategories: PropTypes.func.isRequired,
   courseForm: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 }
 
-export default GeneralDetails
+const mapStateToProps = (state) => {
+  return {
+    // courseCategoriesOption: getCou
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  {
+    fetchCourseCategories: fetchCourseCategories
+  }
+)(GeneralDetails)

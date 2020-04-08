@@ -12,6 +12,7 @@ import TutorProfileForm from './TutorProfileForm'
 import CertificationForm from './CertificationForm'
 import WorkExperienceForm from './WorkExperienceForm'
 import { getUserDetails } from '../../store/reducers/user'
+import { getCertifications } from '../../store/reducers/certifications'
 import tutorDetailsSchema from '../../lib/schemas/tutorDetails'
 const uuidv1 = require('uuid/v1')
 
@@ -201,6 +202,10 @@ class TutorDetailsForm extends Component {
 
   render () {
     const {
+      fetchCertifications,
+      certificationOptions
+    } = this.props
+    const {
       certifications,
       education,
       workExperience
@@ -217,6 +222,8 @@ class TutorDetailsForm extends Component {
             errors={this.state.errors}
             certifications={certifications}
             addCertification={this.addCertification}
+            fetchCertifications={fetchCertifications}
+            certificationOptions={certificationOptions}
             setCertification={this.setPersonalTutorDetailsForm}
             certificationRef={this.certificationRef}
           />
@@ -264,11 +271,15 @@ const WrappedPersonalTutorDetailsForm = Form.create({
 
 const mapStateToProps = state => {
   return {
-    user: getUserDetails(state)
+    user: getUserDetails(state),
+    certificationOptions: getCertifications(state)
   }
 }
 
 export default connect(
   mapStateToProps,
-  { updateInstructor: actions.updateInstructor }
+  { 
+    updateInstructor: actions.updateInstructor,
+    fetchCertifications: actions.fetchCertifications,
+  }
 )(WrappedPersonalTutorDetailsForm)

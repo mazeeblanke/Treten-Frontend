@@ -4,30 +4,18 @@ import { Input, Select, Form } from 'antd'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { fetchCoursePaths } from "../../../store/actions";
-
-const partners = [{
-  value: 'Microsoft',
-  label: 'partners/microsoft.png'
-}, {
-  value: 'Fortinet',
-  label: 'partners/Fortinet.png'
-}, {
-  value: 'Juniper Networks',
-  label: 'partners/Juniper_Networks.png'
-}, {
-  value: 'Paloalto Networks',
-  label: 'partners/paloaltonetworks.png'
-}, {
-  value: 'Cisco',
-  label: 'partners/cisco.png'
-}, {
-  value: 'F5 Networks',
-  label: 'partners/F5_Networks.png'
-}]
+import { fetchCoursePaths, fetchCertifications } from "../../../store/actions";
+import { getCertifications } from '../../../store/reducers/certifications'
 
 const CourseDetails = props => {
-  const { courseForm, setForm, errors, fetchCoursePaths } = props
+  const { 
+    courseForm, 
+    setForm, 
+    errors, 
+    fetchCoursePaths, 
+    fetchCertifications,
+    certificationOptions 
+  } = props
 
   const [coursePathOptions, setCoursePathOptions] = useState([]);
 
@@ -52,6 +40,12 @@ const CourseDetails = props => {
     valueContainer: base => ({
       ...base,
       height: 39
+    })
+  }
+
+  const searchCertification = (searchQuery) => {
+    fetchCertifications({
+      q: searchQuery,
     })
   }
 
@@ -160,29 +154,36 @@ const CourseDetails = props => {
           </label>
           <div className="pt-3">
             <Select
-              placeholder="Select certification provider"
-              value={courseForm.certificationBy.value}
-              className="has-full-width"
+              showSearch
               size="large"
+              allowClear
+              showArrow={true}
               onChange={(e, proxyComp, g) => {
                 setForm({
                   value: proxyComp.props.value,
                   label: proxyComp.props.label
                 }, 'certificationBy')
               }}
+              filterOption={false}
+              notFoundContent="No matched certifications found"
+              onSearch={searchCertification}
+              className="has-full-width"
+              defaultActiveFirstOption={false}
+              placeholder='Select certification provider'
+              value={courseForm.certificationBy.value}
             >
               {
-                partners.map(el => (
-                  <Select.Option key={el.value} label={el.value} value={el.label}>
+                certificationOptions.map(el => (
+                  <Select.Option key={el.id} label={el.company} value={el.company}>
                     <div>
                       <img
                         style={{ float: 'left', height: '28px', marginTop: '7px' }}
-                        src={`/static/images/${el.label}`} >
+                        src={el.bannerImage} >
                       </img>
                       <span
                         className="ml-3"
                         style={{ float: 'right', color: '#8492a6', fontSize: 13 }}>
-                        {el.value}
+                        {el.company}
                       </span>
                     </div>
                   </Select.Option>
@@ -262,6 +263,17 @@ CourseDetails.propTypes = {
   courseForm: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   fetchCoursePaths: PropTypes.func.isRequired,
+  fetchCertifications: PropTypes.func.isRequired,
+  certificationOptions: PropTypes.array
 }
 
-export default connect(null, { fetchCoursePaths })(CourseDetails)
+const mapStateToProps = (state) => {
+  return {
+    certificationOptions: getCertifications(state)
+  }
+}
+
+export default connect(mapStateToProps, { 
+  fetchCoursePaths,
+  fetchCertifications,
+})(CourseDetails)

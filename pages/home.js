@@ -19,8 +19,9 @@ import Testimonials from '../components/shared/Testimonials'
 import { getInstructors } from '../store/reducers/instructor'
 import { getPopularCourses } from '../store/reducers/courses'
 import { getCoursePaths } from '../store/reducers/coursePaths'
-import { getTestimonials } from '../store/reducers/testimonials'
 import LatestBlogPosts from '../components/home/LatestBlogPosts'
+import { getTestimonials } from '../store/reducers/testimonials'
+import { getCertifications } from '../store/reducers/certifications'
 import { getLatestBlogPosts } from '../store/reducers/blogPosts'
 import MeetTheInstructors from '../components/home/MeetTheInstructors'
 import NewsLetterSubscription from '../components/home/NewsLetterSubscription'
@@ -35,7 +36,8 @@ class Home extends Component {
       reduxStore.dispatch(actions.fetchCoursePaths({
         page: null,
         pageSize: null
-      }))
+      })),
+      reduxStore.dispatch(actions.fetchCertifications())
     ])
     return {}
   }
@@ -68,7 +70,7 @@ class Home extends Component {
               We seek to empower professionals with the required skills and training to take 
               them from Zero to Hero
             `}
-          canonical="https://tretenacademy.com"
+          canonical="https://tretenacademy.comjjj"
           openGraph={{
             url: 'https://tretenacademy.com',
             title: 'Treten Academy - Africa largest virtual lab',
@@ -95,7 +97,7 @@ class Home extends Component {
           }}
         />
         <Banner />
-        <Partners />
+        <Partners certifications={this.props.certifications} />
         <Features />
         <CourseList
           className="zero-to-hero-courses pt-5 pb-5"
@@ -112,7 +114,7 @@ class Home extends Component {
           figures in coveralls and helmets are soflty dancing vanquish the impossible invent the universe."
           courses={this.props.popularCourses}
         />
-        <Display if={this.props.popularCourses.length}>
+        <Display if={!!this.props.popularCourses.length}>
           <div className="d-flex justify-content-center pt-4 pb-5 mb-5">
             <Link href="/courses">
               <Button size="large" type="danger">
@@ -162,7 +164,8 @@ const mapStateToProps = state => ({
   },
   popularCourses: getPopularCourses(state),
   testimonials: getTestimonials(state),
-  coursePaths: getCoursePaths(state)
+  coursePaths: getCoursePaths(state),
+  certifications: getCertifications(state)
 })
 
 Home.propTypes = {
@@ -175,13 +178,15 @@ Home.propTypes = {
   getTestimonials: PropTypes.func.isRequired,
   testimonials: PropTypes.array.isRequired,
   coursePaths: PropTypes.array.isRequired,
-  fetchCoursePaths: PropTypes.func.isRequired
+  fetchCoursePaths: PropTypes.func.isRequired,
+  fetchCertifications: PropTypes.func.isRequired
 }
 
 export default connect(
   mapStateToProps,
   {
     fetchInstructors: actions.fetchInstructors,
+    fetchCertifications: actions.fetchCertifications,
     fetchPopularCourses: actions.fetchPopularCourses,
     fetchLatestBlogPosts: actions.fetchLatestBlogPosts,
     getTestimonials,

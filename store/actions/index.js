@@ -20,6 +20,7 @@ export * from './adminCourses'
 export * from './testimonials'
 export * from './courseBatches'
 export * from './courseCategories'
+export * from './certifications'
 
 export const downloadCSV = payload => (
   dispatch,

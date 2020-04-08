@@ -27,7 +27,6 @@ class TretenForm extends Component {
 	}
 
 	handleRouteChange = url => {
-		console.log(url.includes('/create'), url)
 		if (url.includes('/create')) {
 			this.props.clearForm()
 		}

@@ -5,12 +5,13 @@ import Instructor from '../instructor/Instructor'
 
 const sliderSettings = {
   dots: true,
-  infinite: false,
+  infinite: true,
   speed: 200,
   arrows: true,
-  autoplay: false,
+  autoplay: true,
+  centerMode: true,
   slidesToShow: 4.2,
-  slidesToScroll: 1,
+  slidesToScroll: 4,
   responsive: [
     {
       breakpoint: 1200,

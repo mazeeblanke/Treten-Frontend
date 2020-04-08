@@ -10,10 +10,10 @@ const settings = {
   arrows: true,
   autoplay: true,
   // slidesToShow: 4.33,
-  slidesToScroll: 4
+  slidesToScroll: 2
 }
 
-const Partners = () => (
+const Partners = ({ certifications }) => (
   <section className="partners">
     <div className="container">
       <h3 className="text-center partners__main-text">
@@ -21,51 +21,15 @@ const Partners = () => (
       </h3>
       <div className="">
         <Slider {...settings}>
-          <div>
-            <div className="is-flex has-full-height is-vcentered is-hcentered">
-              <img src="/static/images/partners/cisco.png" />
-            </div>
-          </div>
-          <div>
-            <div className="is-flex has-full-height is-vcentered is-hcentered">
-              <img src="/static/images/partners/microsoft.png" />
-            </div>
-          </div>
-          <div>
-            <div className="is-flex has-full-height is-vcentered is-hcentered">
-              <img src="/static/images/partners/paloaltonetworks.png" />
-            </div>
-          </div>
-          <div>
-            <div className="is-flex has-full-height is-vcentered is-hcentered">
-              <img src="/static/images/partners/Aws.png" />
-            </div>
-          </div>
-          <div>
-            <div className="is-flex has-full-height is-vcentered is-hcentered">
-              <img src="/static/images/partners/Azure.png" />
-            </div>
-          </div>
-          <div>
-            <div className="is-flex has-full-height is-vcentered is-hcentered">
-              <img src="/static/images/partners/python.png" />
-            </div>
-          </div>
-          <div>
-            <div className="is-flex has-full-height is-vcentered is-hcentered">
-              <img src="/static/images/partners/Juniper_Networks.png" />
-            </div>
-          </div>
-          <div>
-            <div className="is-flex has-full-height is-vcentered is-hcentered">
-              <img src="/static/images/partners/Fortinet.png" />
-            </div>
-          </div>
-          <div>
-            <div className="is-flex has-full-height is-vcentered is-hcentered">
-              <img src="/static/images/partners/F5_Networks.png" />
-            </div>
-          </div>
+          {
+            certifications.map((certification) => (
+              <div key={certification.id}>
+                <div className="is-flex has-full-height is-vcentered is-hcentered">
+                  <img src={certification.bannerImage} alt={certification.company}/>
+                </div>
+              </div>
+            ))
+          }
         </Slider>
       </div>
     </div>

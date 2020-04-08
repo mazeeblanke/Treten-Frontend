@@ -52,6 +52,7 @@ class AddCourse extends Component {
         <CourseForm
           errors={this.props.errors}
           addFaq={this.props.addFaq}
+          addModule={this.props.addModule}
           setForm={this.props.setForm}
           prevStep={this.props.prevStep}
           nextStep={this.props.nextStep}
