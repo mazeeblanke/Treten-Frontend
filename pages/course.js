@@ -281,7 +281,7 @@ class Course extends Component {
                     {course.faqs && course.faqs.slice(0, 8).map((faq, index) => (
                       <ExpandableBlock
                         key={index}
-                        expanded={index === 0}
+                        expanded={false}
                         left={<span className="text-capitalize">{faq.question}</span>}
                         content={ReactHtmlParser(faq.answer)}
                       />
