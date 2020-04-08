@@ -5,7 +5,7 @@ import Instructor from '../instructor/Instructor'
 
 const sliderSettings = {
   dots: true,
-  infinite: true,
+  infinite: false,
   speed: 200,
   arrows: true,
   autoplay: true,
