@@ -96,7 +96,7 @@ class CourseDetail extends Component {
 					onClick={activeTab === '3' ? publish : showBatchForm}
 					style={{ width: '136px', height: '42px' }}
 				>
-					{ activeTab === '3' ? 'Pubish Course' : 'Add new batch' }
+					{ activeTab === '3' ? 'Publish Course' : 'Add new batch' }
 				</Button>
 			</div>	
 		)
