@@ -16,13 +16,15 @@ const Instructor = props => {
     name,
     profilePic,
     hasBorder,
+    width,
+    margin,
     wrapperBorder
   } = props
   hasBorder ? classes.push('has-border') : classes.push('has-box-shadow border-0')
   return (
     <div
       className={`instructor mb-5 ${wrapperBorder ? 'has-border' : ''}`}
-      style={{ height: '290px', maxHeight: '290px', background: 'white' }}
+      style={{ height: '290px', maxHeight: '290px', background: 'white', width, margin }}
     >
       <Link href={`/instructors/${userable.instructorSlug}`} >
         <div className={`${classes.join(' ')}`}>

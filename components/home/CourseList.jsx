@@ -1,27 +1,12 @@
-// import Link from 'next/link'
-// import Img from 'react-image'
 import Course from './Course'
+import { Popover } from 'antd'
 import Slider from 'react-slick'
 import PropTypes from 'prop-types'
 import Display from '../shared/Display'
-import { Popover } from 'antd'
 import React, { Component } from 'react'
-// import StarRatings from 'react-star-ratings'
-import { Animated } from 'react-animated-css'
 import CoursePopover from './CoursePopover'
+import { Animated } from 'react-animated-css'
 // import TextTruncate from 'react-text-truncate'
-
-const settings = {
-  dots: true,
-  variableWidth: true,
-  infinite: true,
-  speed: 800,
-  arrows: true,
-  autoplay: true,
-  centerMode: true,
-  // slidesToShow: 4.33,
-  slidesToScroll: 4
-}
 
 class CourseList extends Component {
   state = {
@@ -37,6 +22,35 @@ class CourseList extends Component {
       selectedPathCourses: courses,
       selectedPathName
     })
+  }
+
+  getSlickSettings = (courses, speedFactor) => {
+    const slidesToShow = (preferredSlides) => {
+      return courses.length < preferredSlides
+        ? courses.length
+        : preferredSlides
+    }
+
+    return {
+      dots: true,
+      variableWidth: true,
+      infinite: true,
+      speed: 900 * speedFactor,
+      arrows: true,
+      autoplay: false,
+      slidesToShow: slidesToShow(4),
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 850,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          }
+        },
+      ]
+    }
+
   }
 
   render () {
@@ -68,7 +82,7 @@ class CourseList extends Component {
                 animationOut="slideInUp"
                 isVisible={!this.state.selectedPathCourses.length}
               >
-                <Slider {...settings}>
+                <Slider {...this.getSlickSettings(this.props.courses, this.props.speedFactor)}>
                   {
                     this.props.courses.map((course) => (
                       <div key={course.id}>
@@ -82,13 +96,11 @@ class CourseList extends Component {
                               offset: [10, 10], 
                             }}
                           >
-                            <div>
                               <Course
                                 cardWidth={this.props.cardWidth}
                                 setPathCourses={this.setPathCourses}
                                 course={course}
                               />
-                            </div>
                           </Popover>
                         </Display>
                         <Display if={!!course.courses}>
@@ -136,10 +148,14 @@ class CourseList extends Component {
                   <p className="text-center courses__sub-text mb-3 pt-4 is-white">
                     {this.state.selectedPathName}
                   </p>
-                  <Slider {...{
-                    ...settings,
-                    infinite: false
-                  }}>
+                  <Slider {
+                    ...{ 
+                      ...this.getSlickSettings(this.state.selectedPathCourses), 
+                      infinite: false, 
+                      autoplay: false,
+                      // variableWidth: false,
+                      slidesToShow: 6 
+                    }}>
                     {
                       this.state.selectedPathCourses.map((course) => (
                         <Popover

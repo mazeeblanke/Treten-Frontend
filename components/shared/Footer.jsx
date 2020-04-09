@@ -135,7 +135,7 @@ const Footer = (props) => {
             </ul>
           </div>
         </div>
-        <p className="mt-4 is-smokewhite font-weight-light">2018 Treten Academy. All Rights Reserved</p>
+        <p className="mt-4 is-smokewhite font-weight-light">{(new Date()).getFullYear()} Treten Academy. All Rights Reserved</p>
       </div>
     </section>
   )

@@ -10,8 +10,8 @@ const subText = 'Consciousness extraordinary claims require extraordinary eviden
 const Banner = () => {
   return (
     <section className="banner">
-      <Slider>
-        <div className="">
+
+        <div className="banner__wrapper">
           <div className="banner__overlay">
             <div className="container has-full-height">
               <div className="row has-full-height">
@@ -35,7 +35,7 @@ const Banner = () => {
           </div>
           <img src="/static/images/bg1.png" alt="background 1" />
         </div>
-      </Slider>
+
     </section>
   )
 }

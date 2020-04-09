@@ -239,17 +239,21 @@ body, html {
     color: rgba(225, 40, 40, 0.67);
   }
 
-  .slick-list {
-    min-height: 300px;
-     .slick-track {    
-      margin-left: 0;
-    }
+  // .slick-list {
+  //   min-height: 300px;
+  //    .slick-track {    
+  //     margin-left: 0;
+  //   }
+  // }
+
+  .slick-track {
+    display: inline-flex;
   }
 
   .center {
     .slick-list {
        .slick-track {    
-        margin-left: auto !important;
+        margin: auto !important;
       }
     }
   }
@@ -581,4 +585,9 @@ body, html {
   html, body {
     font-size: 12px;
   }
+}
+
+.ant-menu.ant-menu-dark .ant-menu-item-selected, 
+.ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+  background-color: #e12828;
 }

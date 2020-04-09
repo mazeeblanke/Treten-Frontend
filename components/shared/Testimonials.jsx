@@ -4,84 +4,83 @@ import Slider from 'react-slick'
 import Display from './Display'
 import ReactHtmlParser from 'react-html-parser'
 
-const sliderSettings = {
-  dots: true,
-  infinite: false,
-  speed: 600,
-  arrows: true,
-  autoplay: true,
-  slidesToShow: 3.1,
-  slidesToScroll: 1,
-  // centerPadding: '100px'
-  responsive: [
-    {
-      breakpoint: 1440,
-      settings: {
-        slidesToShow: 3.9,
-        slidesToScroll: 3,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 1439,
-      settings: {
-        slidesToShow: 2.5,
-        slidesToScroll: 3,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 2.2,
-        slidesToScroll: 2,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 998,
-      settings: {
-        slidesToShow: 1.8,
-        slidesToScroll: 2,
-        // initialSlide: 2
-      }
-    },
-    {
-      breakpoint: 798,
-      settings: {
-        slidesToShow: 1.3,
-        slidesToScroll: 2,
-        // initialSlide: 2
-      }
-    },
-    {
-      breakpoint: 650,
-      settings: {
-        slidesToShow: 1.2,
-        slidesToScroll: 2,
-        // initialSlide: 2
-      }
-    },
-    {
-      breakpoint: 500,
-      settings: {
-        slidesToShow: 1.1,
-        slidesToScroll: 2,
-        // initialSlide: 2
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-  ]
-}
-
 const Testimonials = (props) => {
   const { mainText, subText, testimonials } = props
+
+  const slidesToShow = (preferredSlides) => {
+    return testimonials.length < preferredSlides
+      ? testimonials.length
+      : preferredSlides
+  }
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 700,
+    arrows: true,
+    autoplay: true,
+    slidesToShow: slidesToShow(3.1),
+    slidesToScroll: 3,
+    responsive: [
+      {
+        breakpoint: 1440,
+        settings: {
+          slidesToShow: slidesToShow(3.9),
+          slidesToScroll: 3
+        }
+      },
+      {
+        breakpoint: 1439,
+        settings: {
+          slidesToShow: slidesToShow(2.5),
+          slidesToScroll: 3
+        }
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: slidesToShow(2.2),
+          slidesToScroll: 2
+        }
+      },
+      {
+        breakpoint: 998,
+        settings: {
+          slidesToShow: slidesToShow(1.8),
+          slidesToScroll: 2,
+        }
+      },
+      {
+        breakpoint: 798,
+        settings: {
+          slidesToShow: slidesToShow(1.3),
+          slidesToScroll: 2,
+        }
+      },
+      {
+        breakpoint: 650,
+        settings: {
+          slidesToShow: slidesToShow(1.2),
+          slidesToScroll: 2,
+        }
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: slidesToShow(1.1),
+          slidesToScroll: 2,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: slidesToShow(1),
+          slidesToScroll: 1
+        }
+      }
+    ]
+  }
+
   return (
     <section className="testimonials mt-5 pb-5">
       <Display if={!!mainText}>

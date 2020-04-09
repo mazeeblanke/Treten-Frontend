@@ -10,7 +10,12 @@
     position: relative;
 
     .slick-slide {
-      width: 296px;
+      width: 296px !important;
+    }
+
+    .slick-track {
+      display: flex;
+      justify-content: center;
     }
   }
 

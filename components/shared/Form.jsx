@@ -29,6 +29,7 @@ class TretenForm extends Component {
 	handleRouteChange = url => {
 		if (url.includes('/create')) {
 			this.props.clearForm()
+			this.endpoint = this.endpoints.createUrl
 		}
 	}
 	
@@ -51,9 +52,8 @@ class TretenForm extends Component {
 			initializeForm 
 		} = this.props
 		initializeForm({ entity, id }).then((res) => {
-			this.endpoint = res.data.model.id 
-				? res.data.endpoints.updateUrl
-				: res.data.endpoints.createUrl
+			this.endpoints = res.data.endpoints
+			this.setEndpoint(this.endpoints)
 		})
 		.catch((err) => {
 			if (err.response.status = 404) {
@@ -62,6 +62,12 @@ class TretenForm extends Component {
 				})
 			}
 		})
+	}
+
+	setEndpoint = (endpoints) => {
+		this.endpoint = this.props.id 
+			? endpoints.updateUrl
+			: endpoints.createUrl
 	}
 
 	removeBannerImage = (formField) => {

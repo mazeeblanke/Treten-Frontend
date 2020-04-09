@@ -85,7 +85,7 @@ export default function (state = INITIAL_STATE, { type, payload }) {
       }
     }
 
-    case 'UPDATE_USER': {
+    case 'UPDATE_USER_ADMIN': {
       const manageUsers = { ...state.manageUsers }
       const tab = pluralize(payload.role)
       const userId = payload.id

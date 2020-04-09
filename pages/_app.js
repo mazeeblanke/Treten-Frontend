@@ -13,6 +13,7 @@ import '../static/slick-carousel/slick/slick.css'
 import '../static/slick-carousel/slick/slick-theme.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../static/sass/application.scss'
+import { PageTransition } from 'next-page-transitions'
 
 const Cookies = require('js-cookie')
 
@@ -41,7 +42,9 @@ class Treten extends App {
         </Head>
 
         <Provider store={reduxStore}>
-          <Component {...pageProps} />
+          <PageTransition timeout={300} classNames="page-transition">
+            <Component {...pageProps} />
+          </PageTransition>  
         </Provider>
         <CookieConsent
           location="bottom"
@@ -61,6 +64,22 @@ class Treten extends App {
           </p>
         </CookieConsent>
         <NextNProgress color="#E12828" startPosition={1} stopDelayMs={500} height={3} />
+        <style jsx global>{`
+          .page-transition-enter {
+            opacity: 0;
+          }
+          .page-transition-enter-active {
+            opacity: 1;
+            transition: opacity 300ms;
+          }
+          .page-transition-exit {
+            opacity: 1;
+          }
+          .page-transition-exit-active {
+            opacity: 0;
+            transition: opacity 300ms;
+          }
+        `}</style>
       </Container>
     )
   }

@@ -70,7 +70,7 @@ class Home extends Component {
               We seek to empower professionals with the required skills and training to take 
               them from Zero to Hero
             `}
-          canonical="https://tretenacademy.comjjj"
+          canonical="https://tretenacademy.com"
           openGraph={{
             url: 'https://tretenacademy.com',
             title: 'Treten Academy - Africa largest virtual lab',
@@ -100,6 +100,8 @@ class Home extends Component {
         <Partners certifications={this.props.certifications} />
         <Features />
         <CourseList
+          cardWidth='276px'
+          speedFactor={1.2}
           className="zero-to-hero-courses pt-5 pb-5"
           primaryHeading="Zero to Hero Courses"
           subHeading="Are you just getting started and feeling unsure about where
@@ -107,6 +109,8 @@ class Home extends Component {
           courses={this.props.coursePaths}
         />
         <CourseList
+          cardWidth='276px'
+          speedFactor={1.8}
           subHeadingCol="col-md-6"
           className="popular-courses pt-5 pb-7"
           primaryHeading="Our Popular Courses"

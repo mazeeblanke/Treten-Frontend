@@ -3,60 +3,85 @@ import PropTypes from 'prop-types'
 import Slider from 'react-slick'
 import Instructor from '../instructor/Instructor'
 
-const sliderSettings = {
-  dots: true,
-  infinite: false,
-  speed: 200,
-  arrows: true,
-  autoplay: true,
-  centerMode: true,
-  slidesToShow: 4.2,
-  slidesToScroll: 4,
-  responsive: [
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 3.5,
-        slidesToScroll: 3,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 2.5,
-        slidesToScroll: 2,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 750,
-      settings: {
-        slidesToShow: 1.9,
-        slidesToScroll: 2,
-        // initialSlide: 2
-      }
-    },
-    {
-      breakpoint: 500,
-      settings: {
-        slidesToShow: 1.5,
-        slidesToScroll: 2,
-        // initialSlide: 2
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-  ]
-}
 
 const MeetTheInstructors = (props) => {
   const { isLoading, instructors } = props
+
+  const slidesToShow = (preferredSlides) => {
+    return instructors.length < preferredSlides
+      ? instructors.length
+      : preferredSlides
+  }
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 200,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    slidesToShow: slidesToShow(4),
+    slidesToScroll: 3,
+    responsive: [
+      {
+        breakpoint: 1440,
+        settings: {
+          slidesToShow: slidesToShow(3.5),
+          slidesToScroll: 3,
+        }
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: slidesToShow(3.3),
+          slidesToScroll: 3,
+        }
+      },
+      {
+        breakpoint: 1090,
+        settings: {
+          slidesToShow: slidesToShow(3.2),
+          slidesToScroll: 3,
+        }
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: slidesToShow(2.5),
+          slidesToScroll: 2,
+        }
+      },
+      {
+        breakpoint: 980,
+        settings: {
+          slidesToShow: slidesToShow(2.3),
+          slidesToScroll: 2,
+        }
+      },
+      {
+        breakpoint: 750,
+        settings: {
+          slidesToShow: slidesToShow(1.5),
+          slidesToScroll: 2,
+        }
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: slidesToShow(1.5),
+          slidesToScroll: 2,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: slidesToShow(1),
+          slidesToScroll: 1
+        }
+      }
+    ]
+  }
+
   return (
     <section className="instructors mt-2 pb-5">
       <h3 className="text-center instructors__main-text pt-5">
@@ -72,20 +97,23 @@ const MeetTheInstructors = (props) => {
             </p>
           </div>
         </div>
-        <Slider {...sliderSettings}>
-          {
-            instructors.map((instructor) => (
-              <Instructor
-                key={instructor.id}
-                isLoading={isLoading}
-                width="300px"
-                name={instructor.name}
-                userable={instructor.userable}
-                profilePic={instructor.profilePic}
-              />
-            ))
-          }
-        </Slider>
+        <div className="">
+          <Slider {...sliderSettings}>
+            {
+              instructors.map((instructor) => (
+                <Instructor
+                  key={instructor.id}
+                  isLoading={isLoading}
+                  width="300px"
+                  margin="auto"
+                  name={instructor.name}
+                  userable={instructor.userable}
+                  profilePic={instructor.profilePic}
+                />
+              ))
+            }
+          </Slider>
+        </div>
       </div>
     </section>
   )

@@ -165,7 +165,7 @@ export const handleDeactivation = ({ deactivate, user }) => (
   return api.post(`/api/users-activation/${user.id}`, { userId: user.id, deactivate })
     .then(res => {
       dispatch({
-        type: 'UPDATE_USER',
+        type: 'UPDATE_USER_ADMIN',
         payload: res.data.data
       })
       return res.data

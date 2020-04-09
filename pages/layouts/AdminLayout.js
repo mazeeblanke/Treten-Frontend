@@ -11,6 +11,7 @@ import PropTypes from 'prop-types'
 import 'simple-react-notifier/dist/index.css'
 const { Header, Sider, Content } = Layout
 const Cookies = require('js-cookie')
+const { SubMenu } = Menu
 
 class AdminLayout extends Component {
   state = {
@@ -274,6 +275,19 @@ class AdminLayout extends Component {
                 )
                 : null
             }
+            <SubMenu
+              key="ManageWebsite"
+              className="mt-4"
+              title={
+                <span>
+                  <img
+                    className="mr-3"
+                    src='/static/images/admin/manage-website-white.png'
+                  />
+                  <span className="ml-4 pl-1">Manage</span>
+                </span>
+              }
+            >
             {
               this.props.user.role === 'admin'
                 ? (
@@ -282,16 +296,7 @@ class AdminLayout extends Component {
                       this.props.router.push(ROUTES.ADMIN_DASHBOARD_WEBSITE)}
                     key={ROUTES.ADMIN_DASHBOARD_WEBSITE}
                   >
-                    <img
-                      className="mr-3"
-                      src={
-                        this.props.router.pathname ===
-                          ROUTES.ADMIN_DASHBOARD_WEBSITE
-                          ? '/static/images/admin/manage-website.png'
-                          : '/static/images/admin/manage-website-white.png'
-                      }
-                    />
-                    <span className="is-white ml-4 ">Manage website</span>
+                    <span className="is-white ml-4 ">Popular Courses</span>
                   </Menu.Item>
                 )
                 : null
@@ -304,15 +309,6 @@ class AdminLayout extends Component {
                       this.props.router.push(ROUTES.ADMIN_DASHBOARD_TESTIMONIALS)}
                     key={ROUTES.ADMIN_DASHBOARD_TESTIMONIALS}
                   >
-                    <img
-                      className="mr-3"
-                      src={
-                        this.props.router.pathname ===
-                          ROUTES.ADMIN_DASHBOARD_TESTIMONIALS
-                          ? '/static/images/admin/manage-website.png'
-                          : '/static/images/admin/manage-website-white.png'
-                      }
-                    />
                     <span className="is-white ml-4 ">Testimonials</span>
                   </Menu.Item>
                 )
@@ -326,15 +322,6 @@ class AdminLayout extends Component {
                       this.props.router.push(ROUTES.ADMIN_DASHBOARD_CERTIFICATIONS)}
                     key={ROUTES.ADMIN_DASHBOARD_CERTIFICATIONS}
                   >
-                    <img
-                      className="mr-3"
-                      src={
-                        this.props.router.pathname ===
-                          ROUTES.ADMIN_DASHBOARD_CERTIFICATIONS
-                          ? '/static/images/admin/manage-website.png'
-                          : '/static/images/admin/manage-website-white.png'
-                      }
-                    />
                     <span className="is-white ml-4 ">Certifications</span>
                   </Menu.Item>
                 )
@@ -348,15 +335,6 @@ class AdminLayout extends Component {
                       this.props.router.push(ROUTES.ADMIN_DASHBOARD_COURSEPATHS)}
                     key={ROUTES.ADMIN_DASHBOARD_COURSEPATHS}
                   >
-                    <img
-                      className="mr-3"
-                      src={
-                        this.props.router.pathname ===
-                          ROUTES.ADMIN_DASHBOARD_COURSEPATHS
-                          ? '/static/images/admin/manage-website.png'
-                          : '/static/images/admin/manage-website-white.png'
-                      }
-                    />
                     <span className="is-white ml-4 ">Course paths</span>
                   </Menu.Item>
                 )
@@ -370,20 +348,12 @@ class AdminLayout extends Component {
                       this.props.router.push(ROUTES.ADMIN_DASHBOARD_BLOGS)}
                     key={ROUTES.ADMIN_DASHBOARD_BLOGS}
                   >
-                    <img
-                      className="mr-3"
-                      src={
-                        this.props.router.pathname ===
-                          ROUTES.ADMIN_DASHBOARD_BLOGS
-                          ? '/static/images/admin/manage-website.png'
-                          : '/static/images/admin/manage-website-white.png'
-                      }
-                    />
                     <span className="is-white ml-4 ">Manage blogs</span>
                   </Menu.Item>
                 )
                 : null
             }
+            </SubMenu>
 
             {
               this.props.user.role === 'student'
@@ -391,7 +361,7 @@ class AdminLayout extends Component {
                   <Menu.Item
                     onClick={() =>
                       this.props.router.push('/courses')}
-                    className="mt-5"
+                    className="mt-15"
                     key="6"
                   >
                     <img className="mr-3" src="/static/images/admin/catalog.svg" />
@@ -401,7 +371,7 @@ class AdminLayout extends Component {
                 : null
             }
             <Menu.Item
-              className={` ${this.props.router.pathname.includes('profile') ? 'ant-menu-item-selected' : ''} ${this.props.user.role !== 'student' ? 'mt-5' : ''}`}
+              className={` ${this.props.router.pathname.includes('profile') ? 'ant-menu-item-selected' : ''} ${this.props.user.role !== 'student' ? 'mt-15' : ''}`}
               onClick={() => this.props.router.push(ROUTES.STUDENT_DASHBOARD_PROFILEDETAILS)}
               key={ROUTES.STUDENT_DASHBOARD_PROFILEDETAILS}>
               <img

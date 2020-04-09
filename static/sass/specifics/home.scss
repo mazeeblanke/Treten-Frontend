@@ -5,12 +5,17 @@
   .banner {
     min-height: 500px;
     max-height: 600px;
-     background: black;
+    background: black;
   }
 
   .banner img {
     width: 100%;
     height: 600px;
+  }
+
+  .banner__wrapper {
+    height: 600px;
+    position: relative
   }
 
   /* .search .ant-input-search {
@@ -35,7 +40,8 @@
   .banner__overlay {
     /* background: Linear-Gradient(to right, rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.34)); */
     background: Linear-Gradient(to right,rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.41));
-    height: 99%;
+    height: 100%;
+    // height: 99%;
     width: 100%;
     position: absolute;
   }
@@ -330,9 +336,9 @@
 
 
 @media (min-width: 1600px) {
-  .banner img {
-    margin-top: -100px;
-  }
+  // .banner img {
+  //   margin-top: -100px;
+  // }
 }
 
 
