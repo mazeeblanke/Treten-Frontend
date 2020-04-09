@@ -114,8 +114,8 @@ const CertificationEntryForm = props => {
                   onChange={(e, proxyComp, g) => {
                     setCertification(
                       {
-                        value: proxyComp.props.value,
-                        label: proxyComp.props.label
+                        value: proxyComp && proxyComp.props.value,
+                        label: proxyComp && proxyComp.props.label
                       },
                       'certificationBy',
                       'certifications',
@@ -132,7 +132,7 @@ const CertificationEntryForm = props => {
                 >
                   {
                     certificationOptions.map(el => (
-                      <Select.Option key={el.id} label={el.company} value={el.company}>
+                      <Select.Option key={el.id} label={el.bannerImage} value={el.company}>
                         <div>
                           <img
                             style={{ float: 'left', height: '28px', marginTop: '3px' }}
