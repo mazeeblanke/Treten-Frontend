@@ -182,6 +182,10 @@
     background: #FAFAFA;
     min-height: 650px;
     padding-top: 50px;
+
+    .slick-track {
+      justify-content: center;
+    }
   }
 
   .instructors .instructors__main-text {
@@ -336,9 +340,7 @@
 
 
 @media (min-width: 1600px) {
-  // .banner img {
-  //   margin-top: -100px;
-  // }
+  // 
 }
 
 

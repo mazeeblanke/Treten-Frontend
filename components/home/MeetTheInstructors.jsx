@@ -19,6 +19,7 @@ const MeetTheInstructors = (props) => {
     speed: 200,
     arrows: true,
     autoplay: true,
+    variableWidth: true,
     autoplaySpeed: 2000,
     slidesToShow: slidesToShow(4),
     slidesToScroll: 3,
