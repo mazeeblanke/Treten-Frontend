@@ -160,8 +160,8 @@ const CourseDetails = props => {
               showArrow={true}
               onChange={(e, proxyComp, g) => {
                 setForm({
-                  value: proxyComp.props.value,
-                  label: proxyComp.props.label
+                  value: proxyComp && proxyComp.props.value,
+                  label: proxyComp && proxyComp.props.label
                 }, 'certificationBy')
               }}
               filterOption={false}
