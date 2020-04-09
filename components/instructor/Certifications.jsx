@@ -24,7 +24,7 @@ const Certifications = props => {
                 {certification.certificationBy && <img
                   className="ml-4"
                   style={{ height: '40px' }}
-                  src={`/static/images/${certification.certificationBy.value}`}
+                  src={certification.certificationBy.label}
                 />}
               </div>
             </div>
