@@ -96,11 +96,14 @@ class CourseList extends Component {
                               offset: [10, 10], 
                             }}
                           >
+                            <div>
                               <Course
                                 cardWidth={this.props.cardWidth}
                                 setPathCourses={this.setPathCourses}
                                 course={course}
                               />
+                            </div>
+                              
                           </Popover>
                         </Display>
                         <Display if={!!course.courses}>
