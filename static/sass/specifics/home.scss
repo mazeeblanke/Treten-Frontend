@@ -18,15 +18,18 @@
     position: relative
   }
 
-  /* .search .ant-input-search {
+  .search .ant-input-search {
     height: 60px !important;
     padding-right: 11px;
     background: white;
     border-radius: 4px;
   }
 
+  .search .ant-select-search__field,
   .search .ant-input-wrapper,
-  .search .ant-input-lg {
+  .search.ant-select-lg .ant-select-selection__rendered,
+  .search.ant-select-lg .ant-select-selection--single,
+  .search.ant-input-lg {
     height: 60px !important;
   }
 
@@ -35,7 +38,7 @@
     width: 90px;
     background: #E12828;
     border-color:  #E12828;
-  } */
+  }
 
   .banner__overlay {
     /* background: Linear-Gradient(to right, rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.34)); */
