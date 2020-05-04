@@ -102,7 +102,7 @@ class Navigation extends React.Component {
                             src={option.bannerImage} >
                           </img>
                           <span
-                            title={course.title}
+                            title={option.title}
                             className="ml-3"
                             style={{ float: 'right', color: '#8492a6', fontSize: 13 }}>
                             {option.title}
