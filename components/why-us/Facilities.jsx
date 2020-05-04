@@ -13,22 +13,22 @@ const Facilities = props => {
             <div className="row">
               <div className="col-sm-12 col-md-7">
                 <ul className="pl-4 lh-30">
-                  <li>Safe and conducive learning environments</li>
-                  <li>Uninterrupted power supply</li>
-                  <li>24/7 access to our cloud labs</li>
+                  <li>Conducive environment</li>
+                  <li>24/7 Lab Access.</li>
                   <li>On-demand classes</li>
-                  <li>Chat with instructors</li>
-                  <li>Live classes</li>
-                  <li>Student IDs</li>
-                  <li>Live online classes</li>
+                  <li>Dedicated Lab Technicians</li>
+                  <li>Classroom Trainings</li>
+                  <li>Virtual Classrooms</li>
+                  <li>Practice workbooks & questions</li>
+                  <li>Travel Visa Support</li>
                 </ul>
               </div>
               <div className="col-sm-12 col-md-5">
                 <ul className="pl-4 lh-30">
-                  <li>Practical workbooks</li>
-                  <li>Practice questions</li>
-                  <li>Parking space for cars</li>
-                  <li>Visa support for travels</li>
+                  <li>Networking Community</li>
+                  <li>Learning Management System</li>
+                  <li>Study rooms</li>
+                  <li>Career-driven curriculum</li>
                 </ul>
               </div>
             </div>

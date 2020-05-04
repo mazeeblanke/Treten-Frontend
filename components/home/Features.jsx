@@ -10,8 +10,7 @@ const Features = () => {
         <div className="row justify-content-center mb-5">
           <div className="col-md-7 pl-4 pr-4">
             <p className="lh-30 text-center">
-              The only home we have ever known vastness is bearable only through love
-              galaxies Rig Veda permanence of the stars extraordinary claims require extraordinary evidence.
+              Our features include:
             </p>
           </div>
         </div>
@@ -25,11 +24,9 @@ const Features = () => {
                 <div className="col-md-12 col-lg-6">
                   <div className="card-body">
                     <img src="/static/images/intensive_practical_classes.svg" />
-                    <h5 className="card-title pt-3">Intensive Practical Classes</h5>
+                    <h5 className="card-title pt-3">Career-driven Curriculum</h5>
                     <p className="card-text">
-                      Our courses are designed so you can master the best professional skills through
-                      intensive practical classes focused on helping you master the required skill
-                      for your new profession.
+                      Our courses are designed for you to learn high-impact professional skills which top companies need, so you can secure that dream job or position right away!
                     </p>
                   </div>
                 </div>
@@ -45,10 +42,9 @@ const Features = () => {
                 <div className="col-md-12 col-lg-6">
                   <div className="card-body">
                     <img src="/static/images/234_access_lab.svg" />
-                    <h5 className="card-title pt-3">24/7 Lab Access</h5>
+                    <h5 className="card-title pt-3">Innovative Environment</h5>
                     <p className="card-text">
-                      Our labs are well equiped with modern technology tools to help you master what your
-                      instructors teach you in class. As our student, you have full access to this lab 24/7.
+                      We utilize the latest technology in our conducive facility, to conduct intensive lab sessions that prepare our students for real-world projects in their careers. 
                     </p>
                   </div>
                 </div>
@@ -64,10 +60,9 @@ const Features = () => {
                 <div className="col-md-12 col-lg-6">
                   <div className="card-body">
                     <img src="/static/images/best_learning_environ.svg" />
-                    <h5 className="card-title pt-3">Best Learning Environment</h5>
+                    <h5 className="card-title pt-3">Corporate Training</h5>
                     <p className="card-text">
-                      We know learning should be a fun experience and so we have set up a very conducive
-                      environment for your learning at Treten Academy to be fun and enjoyable.
+                      We help organizations equip their workforce with the skills that will place them at the forefront of digital innovation in their industries. You recruit, we train! 
                     </p>
                   </div>
                 </div>
@@ -85,7 +80,7 @@ const Features = () => {
                     <img src="/static/images/certified_experts.svg" />
                     <h5 className="card-title pt-3">Certified Experts</h5>
                     <p className="card-text">
-                      Your satisfaction is our top priority and so we have bring together professional and well trained instructors to help you reach your goals.
+                      With a 100% success rate, we boast a team of leading experts dedicated to inspiring and guiding our students to succeed in their professional exams.
                     </p>
                   </div>
                 </div>

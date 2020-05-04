@@ -92,9 +92,7 @@ const MeetTheInstructors = (props) => {
         <div className="row justify-content-center">
           <div className="col-md-6">
             <p className="text-center instructors__sub-text pb-4">
-              Our facilitators are successful Industry experts who not only possess commendable
-              years of experience but are also amongst the top 60,000+ recognized CCIE
-              experts across the globe.
+              We boast the largest collection of CCIE professionals in Nigeria, and our instructors are experts who are committed to ensuring the success of our students
             </p>
           </div>
         </div>

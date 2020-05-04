@@ -30,17 +30,11 @@ class WhyUs extends Component {
                 <div className="row justify-content-center">
                   <div className="col-md-7">
                     <p className="is-smokewhite">
-                      We go far beyond a simple customization strategy. Our programs are not only
-                      customized to fulfill your requirements, but are also personalized to meet the
-                      developmental needs of each training participant. The detailed attention that
-                      we give to all our clients ensure that they receive a training program
-                      tailored perfectly to their specific position and job function needs. Our
-                      dynamic learning concept provides an integrated learning approach for you. It
-                      brings together key elements for effective learning such as self-learning,
-                      collaborative learning, and private/group learning. Combining the
-                      “personalization of your learning experience” and our “assessment tools” as
-                      well as our flexible learning platforms, our team will develop a training plan
-                      that suits your needs. One of such programs is our:
+                      Treten Academy trains individuals and organizations in the high demand ICT skills of today. We equip people with the competencies that accelerate their careers, and our corporate training places organizations at the forefront of digital innovation in their industry. 
+
+                      At Treten, we go beyond a general customization strategy by ensuring our training is tailored to the specific position and job requirements of our students. Our programs are designed to meet the career goals of every trainee. 
+                      
+                      We prioritize innovation and provide an unmatched learning experience that leverages emerging technologies of our industry. 
                     </p>
                   </div>
                 </div>
@@ -51,16 +45,16 @@ class WhyUs extends Component {
                 <div className="row justify-content-center">
                   <div className="col-md-7">
                     <p className="is-smokewhite">
-                      This is a program designed for novices; albeit, it requires that you at least
-                      know what a computer system is, and how to operate one. It is designed for
-                      participants who have interest but have little or no knowledge about ICT
-                      security. We will transform your interest into a profession and ensure you
-                      have fun alongside.
+                      Do you want to begin a lucrative IT career, but don’t know how to start? The Zero to Hero program is exactly what you need. 
                     </p>
                     <p className="is-smokewhite">
-                      Participants will begin with Entry Level Courses (Python, Bash Scripting,
-                      Juniper JNCIA, CCENT ICND1) all the way up to Expert Level Courses (CCIE
-                      Routing and Switching, CCIE Security and CCIE Service Provider).
+                      The courses for our Zero to Hero program have been carefully selected to position participants for careers in high-demand IT roles after completion. Students can go on to fill the following roles in an enterprise environment : DevOps Engineer, CyberSecurity Expert, Cloud Solutions Architects
+                    </p>
+                    <p className="is-smokewhite">
+                      Ideal candidates for this program are professionals looking to switch careers, and tech-savvy job seekers who desire to start a career in IT. The program covers intermediate level certifications like: Python, CCNA, CCENT, ICND1 to expert level courses like: CCIE, DevOps
+                    </p>
+                    <p className="is-smokewhite">
+                      Within a few weeks, our Zero to Hero Program will transform you from a novice to a certified IT expert with the high demand skills in today’s job market. 
                     </p>
                   </div>
                 </div>

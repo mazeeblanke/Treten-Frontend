@@ -5,7 +5,7 @@ import { Input } from 'antd'
 const { Search } = Input
 
 const mainText = 'Accelerate your career with industry-leading certifications'
-const subText = 'Consciousness extraordinary claims require extraordinary evidence permanence of the stars the only home we’ve known.'
+const subText = 'Globally recognized courses taught by industry experts focused on providing high-quality training to our students. '
 
 const Banner = () => {
   return (

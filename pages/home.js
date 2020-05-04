@@ -104,8 +104,7 @@ class Home extends Component {
           speedFactor={1.2}
           className="zero-to-hero-courses pt-5 pb-5"
           primaryHeading="Zero to Hero Courses"
-          subHeading="Are you just getting started and feeling unsure about where
-          to begin? Our Zero to Hero Courses give you a powerful headstart."
+          subHeading="Are you just getting started and feeling unsure about where to begin? Our hand-picked courses will set you on a lucrative career path!."
           courses={this.props.coursePaths}
         />
         <CourseList
@@ -114,8 +113,7 @@ class Home extends Component {
           subHeadingCol="col-md-6"
           className="popular-courses pt-5 pb-7"
           primaryHeading="Our Popular Courses"
-          subHeading="Flatland culture star stuff harvesting star light two ghostly white
-          figures in coveralls and helmets are soflty dancing vanquish the impossible invent the universe."
+          subHeading="The high demand certifications in our industry today"
           courses={this.props.popularCourses}
         />
         <Display if={!!this.props.popularCourses.length}>
@@ -133,9 +131,7 @@ class Home extends Component {
         />
         <Testimonials
           mainText=" What our students say"
-          subText="Flatland culture star stuff harvesting star light two ghostly
-          white figures in coveralls and helmets are soflty dancing vanquish
-          the impossible invent the universe.."
+          subText="What our students say about us"
           testimonials={this.props.testimonials}
         />
         <div className="d-flex justify-content-center pt-5 pb-5 mb-5">

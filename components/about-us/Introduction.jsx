@@ -11,10 +11,7 @@ const Introduction = props => {
               About us
             </h3>
             <p className="lh-30 mb-3 has-width-80">
-              We are Africa’s largest CISCO Laboratory focused on developing capacity, capability and competence especially
-              in the area of Information Technology. We place participants at better positions for employment globally, equip
-              them for improved service delivery and build workforces engineered to suit different organizational needs.
-              We are bound by four key values Honesty, Excellence, Achievement, Recognition and Team Spirit.
+              Treten Academy is a leading training institute focused on creating value and building capacity in the area of Information Technology. We position individuals for global employability, and equip work-forces with the skills required to meet organizational needs. At Treten, we are bound by 3ve core values: Trust, Innovation, Collaboration, Honesty & Excellence. 
             </p>
           </div>
         </div>

@@ -13,38 +13,23 @@ const Introduction = props => {
             <img src="/static/images/why-us.png" className="mb-3 has-full-width" />
             <ul className="pl-4 lh-30">
               <li>
-                We are Africa’s Largest CISCO Lab with our Institute being the first to fully
-                offer CCIE courses and certification locally in the whole of Africa.
+                We are the first institute to offer CCIE training and Practice Labs in West Africa. 
               </li>
               <li>
-                Our Learning interventions are designed to provide blended learning across all
-                learning tactics – Online Labs, Online training, Boot-Camps, Practicals, Simulated
-                Scenarios, Free Practice Questions and Lab Manuals
+                With a network of certified experts, we match the skills and experience required to give our students the expected learning outcome.
               </li>
             </ul>
           </div>
           <div className="col-sm-12 col-md-6">
             <ul className="pl-4 lh-30">
               <li>
-                Our network of recognized consultants allow us match the skills and experiences
-                of the facilitator with the required learning outcome.
+                We recognize the individuality of our students, and our programs are tailored to suit their career objectives, schedule &  preferred learning methods. 
               </li>
               <li>
-                We pride ourselves in our versatility and ability to tailor a program to suit our client’s
-                objectives- We take into cognizance the pace of the learning of our participant, diversity in
-                demographics, advancements in technology and delivery appeal to different generations – from the
-                younger generation to the more seasoned groups – to guide our design and delivery.
+                Our curriculum is designed to enable multidimensional learning through Online Labs, Scenario-based labs, Simulations, Lab Manuals and Practice Questions which  make learning easy. 
               </li>
               <li>
-                Our curriculums meet global standards and are also tailored to suit local needs. Our courses are
-                professionally presented and well-paced with materials that make the learning easier.
-              </li>
-              <li>
-                We have effective facilitators who are successful industry professionals, and possess the
-                required certifications. We do not give what we don’t have.
-              </li>
-              <li>
-                Beyond the skill, we teach the business behind the skill.
+                We adopt a range of methods in delivery; ranging from physical & virtual classes, bootcamps, one-on-one and on-demand learning that allows learning at your own pace. 
               </li>
             </ul>
           </div>
