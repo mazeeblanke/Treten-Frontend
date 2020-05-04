@@ -35,7 +35,7 @@ export default Comp => {
       const fileReader = new FileReader()
       const file = e.target.files[0]
       fileReader.onloadend = () => {
-        notifier.info('Saving profile image....', {
+        notifier.success('Saving profile image....', {
           autoClose: false
         })
         this.props
