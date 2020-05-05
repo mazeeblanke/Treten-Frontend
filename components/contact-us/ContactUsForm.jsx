@@ -7,11 +7,27 @@ import notifier from 'simple-react-notifier'
 import PhoneInput from 'react-phone-number-input'
 import { isValidPhoneNumber } from '../../lib/helpers'
 
+const Recaptcha = require('react-gcaptcha')
+const { captchaKey } = require('../../lib/config')
+
 const { TextArea } = Input
 /* eslint-diable */
 class ContactUsForm extends Component {
   state = {
-    isLoading: false
+    isLoading: false,
+    captchaToken: null
+  }
+
+  setRecaptcha = (token) => {
+    this.setState({
+      captchaToken: token
+    })
+  }
+
+  clearRecaptcha = () => {
+    this.setState({
+      captchaToken: null
+    })
   }
 
   handleSubmit = (e) => {
@@ -22,19 +38,26 @@ class ContactUsForm extends Component {
     })
 
     this.props.form.validateFields((err, form) => {
-      if (!err && isValidPhoneNumber(this.props.form.getFieldValue('phoneNumber'))) {
+      if (
+        !err && 
+        isValidPhoneNumber(this.props.form.getFieldValue('phoneNumber')) &&
+        this.state.captchaToken
+      ) {
         this.props.sendContactUsMsg({ ...form }).then((res) => {
           this.setState({
             isLoading: false
           })
           notifier.success(res.data.message)
           this.props.form.resetFields()
+          this.clearRecaptcha()
         }).catch(() => {
           notifier.error('ERROR! The Form contains some errors')
           this.setState({
-            isLoading: false,
+            isLoading: false
           })
+          this.clearRecaptcha()
         })
+        this.clearRecaptcha()
       } else {
         this.setState({
           isLoading: false
@@ -153,10 +176,17 @@ class ContactUsForm extends Component {
                 )}
               </Form.Item>
             </div>
+            <div className="text-center col-md-12 mb-4">
+              <Recaptcha
+                sitekey={captchaKey}
+                verifyCallback={this.setRecaptcha}
+                expiredCallback={this.clearRecaptcha}
+              />
+            </div>
             <div className="col-md-12">
               <Form.Item className="d-flex justify-content-center">
                 <Button
-                  disabled={this.state.isLoading}
+                  disabled={this.state.isLoading || !this.state.captchaToken}
                   loading={this.state.isLoading}
                   type="primary"
                   htmlType="submit"

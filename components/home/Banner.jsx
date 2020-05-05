@@ -50,7 +50,6 @@ class Banner extends React.Component {
                             courseOptions: []
                           })
                         }}
-                        style={{ width: 430 }}
                         filterOption={false}
                         notFoundContent="No match"
                         onSearch={this.search}

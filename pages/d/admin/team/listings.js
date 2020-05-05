@@ -3,10 +3,11 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import ListingTable from '../../../../components/shared/ListingTable'
 import withRedirect from '../../../layouts/withRedirect'
+// import TextTruncate from 'react-text-truncate'
 import AdminLayout from '../../../layouts/AdminLayout'
 import * as actions from '../../../../store/actions'
 
-const entity = 'team'
+const entity = 'certifications'
 
 class Listing extends Component {
   static async getInitialProps ({ reduxStore }) {
@@ -25,24 +26,18 @@ class Listing extends Component {
 
   columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
+      title: 'Company',
+      dataIndex: 'company',
       width: 160,
       key: 2,
       fixed: 'left'
     },
     {
-      title: 'Role',
-      dataIndex: 'role',
-      width: 160,
-      key: 2
-    },
-    {
-      title: 'Avatar',
+      title: 'Banner Image',
       dataIndex: 'bannerImage',
-      render: (avatar) => {
+      render: (bannerImage) => {
         return (
-					<img width={50} height={50} src={avatar}></img>
+					<img width={50} height={30} src={bannerImage}></img>
         )
       },
       key: 8,
@@ -56,7 +51,7 @@ class Listing extends Component {
         <AdminLayout headerName="Manage Certifications">
 					<ListingTable 
 						columns={this.columns}
-						createPage="/d/admin/team/create"
+						createPage="/d/admin/certifications/create"
 						entity={entity} 
 					/>
         </AdminLayout>

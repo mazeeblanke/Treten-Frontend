@@ -5,6 +5,8 @@ import Footer from '../components/shared/Footer'
 import ContactUsForm from '../components/contact-us/ContactUsForm'
 // import Navbar from '../components/shared/Navbar'
 import withMasterLayout from './layouts/withMasterLayout'
+import GoogleMapReact from 'google-map-react'
+const { googleMapsKey } = require('../lib/config')
 
 const ContactUs = () => (
   <div id="treten">
@@ -27,7 +29,7 @@ const ContactUs = () => (
                 </address>
                 <time className="mb-3 d-flex align-items-start">
                   <img src="/static/images/time.png" className="mr-2 pt-1" alt="time" />
-                  <span className="is-grey-dark">9:00 AM - 6:00 PM (Monday - Friday)</span>
+                  <span className="is-grey-dark">11am-1pm Saturday, 2pm to 6pm Sundays</span>
                 </time>
               </div>
               <div className="col-md-6">
@@ -38,27 +40,36 @@ const ContactUs = () => (
 
                 <p className="mb-3 d-flex align-items-start">
                   <img src="/static/images/mail.png" className="mr-2 pt-1" alt="mail" />
-                  <span className="is-grey-dark">info@tretennetworks.com</span>
+                  <span className="is-grey-dark">info@tretenacademy.com</span>
                 </p>
               </div>
             </div>
           </div>
         </div>
-        <div className="row justify-content-center">
+        <div className="row justify-content-center mb-8">
           <ContactUsForm />
+        </div>
+        <div style={{ height: '450px', width: '100%' }}>
+          <GoogleMapReact
+            bootstrapURLKeys={{ key: googleMapsKey }}
+            defaultZoom={11}
+            defaultCenter={{
+              lat: 59.95,
+              lng: 30.33
+            }}
+          >
+            <div
+              lat={6.4286}
+              lng={3.4822}
+              text="Treten"
+            />
+          </GoogleMapReact>
         </div>
       </div>
     </section>
     <Footer />
   </div>
 )
-
-// ContactUs.getInitialProps = (ctx) => {
-//   // console.log(ctx.req.url)
-//   return {
-//     url: ctx.req.url
-//   }
-// }
 
 // ContactUs.propTypes = {};
 
