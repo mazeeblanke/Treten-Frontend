@@ -2,25 +2,16 @@ import { List, Avatar, Button, Icon, Modal } from 'antd'
 import ContentEditable from 'react-contenteditable'
 import ReactHtmlParser from 'react-html-parser'
 import ChatMessageForm from './ChatMessageForm'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import EmptyState from './EmptyState'
 import PropTypes from 'prop-types'
 import dynamic from 'next/dynamic'
 import Display from './Display'
-import JSEMOJI from 'emoji-js'
 import Typing from './Typing'
 
 const EmojiPicker = dynamic(() => import('emoji-picker-react'), {
   ssr: false
 })
-
-const jsemoji = new JSEMOJI()
-jsemoji.img_set = 'emojione'
-jsemoji.img_sets.emojione.path =
-  'https://cdn.jsdelivr.net/emojione/assets/3.0/png/32/'
-jsemoji.supports_css = false
-jsemoji.allow_native = false
-jsemoji.replace_mode = 'unified'
 
 const Chat = props => {
   const {
@@ -33,6 +24,7 @@ const Chat = props => {
     windowWidth,
     user
   } = props
+
   const selectedChat = props.chat.selectedChat
 
   const getReceiverInfo = (chat = null) => {
@@ -51,10 +43,19 @@ const Chat = props => {
 
   const [isShowingEmojis, toggleShowingEmojis] = useState(false)
 
-  const typeEmoji = (code, emojiObj) => {
-    const emojiUrl = jsemoji.replace_colons(`:${emojiObj.name}:`)
-    const messageBeingTyped = props.chat.selectedChat.messageBeingTyped.trim('')
-    setMessageBeingTyped(messageBeingTyped + emojiUrl)
+  const [chosenEmoji, setChosenEmoji] = useState(null);
+
+  useEffect(() => {
+    if (chosenEmoji) {
+      const messageBeingTyped = props.chat.selectedChat.messageBeingTyped.trim('')
+      console.log(messageBeingTyped + chosenEmoji.emoji);
+      setMessageBeingTyped(messageBeingTyped + chosenEmoji.emoji)
+    }
+  }, [chosenEmoji])
+
+
+  const onEmojiClick = (event, emojiObject) => {
+    setChosenEmoji(emojiObject);
   }
 
   const handleKeyPressDown = () => {
@@ -80,12 +81,12 @@ const Chat = props => {
   }
 
   const sendChat = e => {
-    const newMsg = e.target.value
+    let newMsg = e.target.value
       .replace(/(<div>|<\/div>|<br>)/g, ' ')
       .replace(/\s\s+/g, ' ')
       // .replace(/\&nbsp;+/g, "")
       .trim('')
-
+    
     if (!e.key || e.key !== 'Enter') {
       return setMessageBeingTyped(newMsg)
     }
@@ -236,7 +237,7 @@ const Chat = props => {
                 right: '2%'
               }}
             >
-              {isShowingEmojis && <EmojiPicker onEmojiClick={typeEmoji} />}
+              {isShowingEmojis && <EmojiPicker onEmojiClick={onEmojiClick} preload={true} />}
             </div>
           </div>
           <div className="d-flex align-content-center extra">

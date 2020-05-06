@@ -6,7 +6,7 @@ import withRedirect from '../../../layouts/withRedirect'
 import AdminLayout from '../../../layouts/AdminLayout'
 import * as actions from '../../../../store/actions'
 
-const entity = 'team'
+const entity = 'certifications'
 
 class Listing extends Component {
   static async getInitialProps ({ reduxStore }) {
