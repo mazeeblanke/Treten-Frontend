@@ -8,6 +8,7 @@ const app = next({
 })
 const handler = app.getRequestHandler()
 
+
 process.env.PROXYURL =
   process.env.NODE_ENV === 'production'
     ? 'http://api.tretenacademy.com.ng'
