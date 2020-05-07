@@ -239,7 +239,7 @@ class Course extends Component {
                     {course.modules && course.modules.map((module, index) => (
                       <ExpandableBlock
                         key={index}
-                        expanded={index === 0}
+                        expanded={false}
                         left={<span className="text-capitalize">{module.name}</span>}
                         content={ReactHtmlParser(module.description)}
                       />
