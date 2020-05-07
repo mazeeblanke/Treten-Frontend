@@ -1,11 +1,12 @@
 import CreatableSelect from 'react-select/creatable'
 import Dropzone from 'react-dropzone'
-import { Input, Select, Form } from 'antd'
+import { Input, Select, Form, Modal } from 'antd'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { fetchCoursePaths, fetchCertifications } from "../../../store/actions";
 import { getCertifications } from '../../../store/reducers/certifications'
+import Cropper from '../../shared/Cropper'
 
 const CourseDetails = props => {
   const { 
@@ -18,6 +19,8 @@ const CourseDetails = props => {
   } = props
 
   const [coursePathOptions, setCoursePathOptions] = useState([]);
+  const [isCroppingCourseBanner, setIsCroppingCourseBanner] = useState(false);
+  const [orignalBase64, setOrignalBase64] = useState(null);
 
   const handleBannerImageChange = (e) => {
     const file = e[0]
@@ -26,6 +29,8 @@ const CourseDetails = props => {
       const fileReader = new FileReader()
       fileReader.onloadend = () => {
         setForm(fileReader.result, 'bannerImageBase64')
+        setOrignalBase64(fileReader.result)
+        setIsCroppingCourseBanner(true)
       }
       fileReader.readAsDataURL(file)
     }
@@ -41,6 +46,10 @@ const CourseDetails = props => {
       ...base,
       height: 39
     })
+  }
+
+  const closeModal = () => {
+    setIsCroppingCourseBanner(false)
   }
 
   const searchCertification = (searchQuery) => {
@@ -216,11 +225,37 @@ const CourseDetails = props => {
         </div>
         <div className="col-md-6 mb-3">
           {
+            isCroppingCourseBanner && 
+              <Modal
+                centered
+                footer={null}
+                width="464px"
+                height="514px"
+                onCancel={closeModal}
+                wrapClassName=""
+                visible={courseForm.bannerImageBase64 || courseForm.bannerImage}
+                title={
+                  <div className="d-flex align-items-center justify-content-between">
+                    <h5>Crop Course Banner</h5>
+                  </div>
+                }
+              >
+                <Cropper 
+                  src={courseForm.bannerImageBase64 || courseForm.bannerImage}
+                  onCroppedImageUrl={(img) => {setForm(img, 'bannerImageBase64')}}
+                  onBlobChange={(blob) => {setForm(blob, 'bannerImage')}}
+                ></Cropper>
+            </Modal>
+          }
+          {
             !courseForm.bannerImage
               ? (
                 <Dropzone onDropAccepted={handleBannerImageChange}>
                   {({ getRootProps, getInputProps }) => (
-                    <div {...getRootProps({ className: 'dropzone' })}>
+                    <div 
+                      style={{ height: '164px', width: '280px' }} 
+                      {...getRootProps({ className: 'dropzone' })}
+                    >
                       <input {...getInputProps()} />
                       <img className="mt-4" src="/static/images/cloud.png" />
                       <p
@@ -237,18 +272,28 @@ const CourseDetails = props => {
                 <div className="">
                   <div className="d-flex align-items-center">
                     <img
-                      style={{ height: '90px' }}
+                      style={{ height: '164px', width: '280px' }}
                       className="mr-3 has-full-width"
                       src={courseForm.bannerImageBase64 || courseForm.bannerImage}
                     />
                   </div>
                   <p className="m-0 pt-3">{courseForm.bannerImage.name}</p>
-                  <small
+                  <span
                     onClick={removeBannerImage}
                     style={{ color: '#e12828' }}
                   >
                     remove file
-                  </small>
+                  </span>
+                  <span
+                    onClick={() => {
+                      setIsCroppingCourseBanner(true)
+                      orignalBase64 && setForm(orignalBase64, 'bannerImageBase64')
+                    }}
+                    className="ml-4"
+                    style={{ color: '#e12828' }}
+                  >
+                    resize
+                  </span>
                 </div>
               )
           }
