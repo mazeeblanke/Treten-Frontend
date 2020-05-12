@@ -124,7 +124,7 @@ class Navigation extends React.Component {
                   <div className="row">
                     <div className="col-sm-6 mb-5">
                       <NavLink className="is-blue" disabled href="#">
-                        <b>Associate level</b>
+                        <b>Associate</b>
                       </NavLink>
                       {
                         (coursesByGroup.associate || []).map((course) => (
@@ -138,7 +138,7 @@ class Navigation extends React.Component {
                     </div>
                     <div className="col-sm-6 mb-5">
                       <NavLink className="is-blue" disabled href="#">
-                        <b>Professional level</b>
+                        <b>Professional</b>
                       </NavLink>
                       {
                         (coursesByGroup.professional || []).map((course) => (
@@ -152,7 +152,7 @@ class Navigation extends React.Component {
                     </div>
                     <div className="col-sm-6 mb-5">
                       <NavLink className="is-blue" disabled href="#">
-                        <b>Expert level</b>
+                        <b>Expert</b>
                       </NavLink>
                       {
                         (coursesByGroup.expert || []).map((course) => (

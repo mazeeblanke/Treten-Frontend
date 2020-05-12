@@ -29,7 +29,7 @@ class Course extends Component {
   state = {
     course: {
       title: 'Course title goes here, and it just keeps going',
-      level: 'Professional level',
+      level: 'Professional',
       type: 'remote',
       learners: '250',
       category: {

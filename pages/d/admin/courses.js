@@ -127,7 +127,7 @@ class Courses extends Component {
                       handlePageChange={this.handlePageChange}
                     />
                   </TabPane>
-                  <TabPane tab="Associate level" key="associate">
+                  <TabPane tab="Associate" key="associate">
                     <CourseList
                       user={user}
                       tab="associate"
@@ -137,7 +137,7 @@ class Courses extends Component {
                       handlePageChange={this.handlePageChange}
                     />
                   </TabPane>
-                  <TabPane tab="Professional level" key="professional">
+                  <TabPane tab="Professional" key="professional">
                     <CourseList
                       user={user}
                       tab="professional"
@@ -147,7 +147,7 @@ class Courses extends Component {
                       pagination={professionalCoursesPagination}
                     />
                   </TabPane>
-                  <TabPane tab="Expert level" key="expert">
+                  <TabPane tab="Expert" key="expert">
                     <CourseList
                       tab="expert"
                       user={user}

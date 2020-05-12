@@ -61,7 +61,7 @@ const Course = (props) => {
                 )}
                 {(!studentView && !!course.category) && (
                   <h6 className="mb-3 mt-1 font-weight-light text-capitalize">
-                    {(course.category || {}).name} level
+                    {(course.category || {}).name}
                   </h6>
                 )}
                 <Link href={url}>

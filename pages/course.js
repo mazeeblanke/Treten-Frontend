@@ -187,7 +187,7 @@ class Course extends Component {
                   alt="scholar"
                 />
                 <span className="text-capitalize">
-                  {course.category && `${course.category.name} Level`}
+                  {course.category && `${course.category.name}`}
                 </span>
               </div>
               <div>
