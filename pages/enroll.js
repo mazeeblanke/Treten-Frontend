@@ -224,12 +224,12 @@ class Enroll extends Component {
                   }}
                   className="col-md-8 col-lg-6"
                 >
-                  <div className={`step first has-full-width ${this.state.step >= 1 ? 'active' : ''} pb-5 pl-4`}>
+                  <div className={`step first ${this.state.step >= 1 ? 'active' : ''} pb-5 pl-4`}>
                     <div
                       className="wrapper pl-4 pr-4"
                       style={{ height: this.state.step === 1 ? '530px' : '60px', overflow: 'hidden' }}
                     >
-                      <div className="d-flex justify-content-sm-between align-items-center h60">
+                      <div className="d-flex has-full-width justify-content-sm-between align-items-center h60">
                         <h5
                           className="mr-4"
                           style={{
@@ -350,7 +350,7 @@ class Enroll extends Component {
                     </div>
                   </div>
                   <Display if={!this.props.isLoggedIn}>
-                    <div className={`step has-full-width ${this.state.step >= 2 ? 'active' : null} pb-5 pl-4`}>
+                    <div className={`step ${this.state.step >= 2 ? 'active' : null} pb-5 pl-4`}>
                       <div
                         className="wrapper pl-4 pr-4"
                         style={{
@@ -364,7 +364,7 @@ class Enroll extends Component {
                           overflow: 'hidden'
                         }}
                       >
-                        <div className="d-flex justify-content-between align-items-center h60">
+                        <div className="d-flex has-full-width justify-content-between align-items-center h60">
                           <h5
                             style={{
                               color: this.state.step < 2 ? '#D3D4D8' : null,
@@ -435,9 +435,9 @@ class Enroll extends Component {
                       </div>
                     </div>
                   </Display>
-                  <div className={`step has-full-width ${this.state.step >= 3 ? 'active' : null} pl-4`}>
+                  <div className={`step ${this.state.step >= 3 ? 'active' : null} pl-4`}>
                     <div className="wrapper pl-4 pr-4" style={{ height: '60px', overflow: 'hidden' }}>
-                      <div className="d-flex justify-content-between align-items-center h60">
+                      <div className="d-flex has-full-width justify-content-between align-items-center h60">
                         <h5 style={{ color: this.state.step < 3 ? '#D3D4D8' : null }}>Make payment</h5>
                         <div>
                           <Button
