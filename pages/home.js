@@ -96,7 +96,9 @@ class Home extends Component {
             cardType: 'summary_large_image'
           }}
         />
-        <Banner />
+        <Banner 
+          currentPath={this.props.currentPath}
+        />
         <Partners certifications={this.props.certifications} />
         <Features />
         <CourseList

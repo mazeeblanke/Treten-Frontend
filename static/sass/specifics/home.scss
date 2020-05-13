@@ -37,6 +37,16 @@
     width: 500px;
   }
 
+  @media screen and (min-width: 1024px) {
+    .red-gate {
+      background: #ad0000bd;
+      height: 100%;
+      width: 50%;
+      position: absolute;
+      left: 0
+    }
+  }
+
   @media screen and (max-width: 768px) {
     .search.ant-select-lg {
       width: 450px;
