@@ -26,6 +26,10 @@ app
       })
     )
 
+    server.get('/sitemap.xml',  proxy(process.env.PROXYURL, {
+      limit: '420mb'
+    }))
+
     server.get('/', (req, res) => {
       app.render(req, res, '/home', {})
     })

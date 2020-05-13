@@ -20,12 +20,12 @@ const About = props => {
             <Display if={!!(course.certificationBy || {}).value}>
               <div className="col-md-3">
                 <h6 className="fw-600">Certification by</h6>
-                <img src={(course.certificationBy || {}).label}></img>
+                <img className="mt-2" src={(course.certificationBy || {}).label}></img>
               </div>
             </Display>
             <div className="col-md-3">
               <h6 className="fw-600">Course syllabus</h6>
-              <button type="button" className="btn btn-outline-danger mb-3">
+              <button type="button" className="btn btn-outline-danger mt-2 mb-3">
                 <img className="mr-2" src="/static/images/download.png"></img>
                 <span>Download</span>
               </button>
