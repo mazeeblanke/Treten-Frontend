@@ -190,10 +190,6 @@ class Course extends Component {
                   {course.category && `${course.category.name}`}
                 </span>
               </div>
-              <div>
-                <img className="mr-1" src="/static/images/users.png" alt="users" />
-                <span>{course.learnersCount} learners</span>
-              </div>
             </div>
           </div>
         </section>
