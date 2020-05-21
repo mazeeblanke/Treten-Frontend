@@ -54,9 +54,9 @@ class AdminLayout extends Component {
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
           <div className="d-flex justify-content-sm-between align-items-center sidenav-top">
             <div className="logo m-4">
-              <Link href="/">
+              <a href="/">
                 <img className="has-pointer-cursor" src="/static/images/admin/logo.png" />
-              </Link>
+              </a>
             </div>
 
             <Display if={!this.state.collapsed}>
