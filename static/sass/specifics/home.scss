@@ -4,17 +4,17 @@
   /* BANNER */
   .banner {
     min-height: 500px;
-    max-height: 600px;
+    max-height: 550px;
     background: black;
   }
 
   .banner img {
     width: 100%;
-    height: 600px;
+    height: 550px;
   }
 
   .banner__wrapper {
-    height: 600px;
+    height: 550px;
     position: relative
   }
 
@@ -124,8 +124,8 @@
 
   .partners .partners__main-text {
     font-size: 16px;
-    margin-bottom: 30px;
     font-weight: 400;
+    margin-top: -15px;
   }
 
   /* .partners row {
@@ -368,7 +368,7 @@
 }
 
 
-@media (min-width: 1600px) {
+@media (min-width: 1550px) {
   // 
 }
 
