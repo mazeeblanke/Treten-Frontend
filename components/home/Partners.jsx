@@ -61,7 +61,7 @@ const Partners = ({ certifications }) => {
     <section className="partners">
       <div className="container">
         <h3 className="text-center partners__main-text">
-          Light years the only home we have ever known trillion colonies
+          Certification Providers
         </h3>
         <div className="">
           <Slider { ...settings }>

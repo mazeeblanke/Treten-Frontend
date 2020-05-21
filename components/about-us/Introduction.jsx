@@ -11,7 +11,7 @@ const Introduction = props => {
               About us
             </h3>
             <p className="lh-30 mb-3 has-width-80">
-              Treten Academy is a leading training institute focused on creating value and building capacity in the area of Information Technology. We position individuals for global employability, and equip work-forces with the skills required to meet organizational needs. At Treten, we are bound by 3ve core values: Trust, Innovation, Collaboration, Honesty & Excellence. 
+              Treten Academy is a leading training institute focused on creating value and building capacity in the area of Information Technology. We position individuals for global employability, and equip work-forces with the skills required to meet organizational needs. At Treten, we are bound by five core values: Trust, Innovation, Collaboration, Honesty & Excellence 
             </p>
           </div>
         </div>

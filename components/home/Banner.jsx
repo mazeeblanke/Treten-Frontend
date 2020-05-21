@@ -57,7 +57,7 @@ class Banner extends React.Component {
                               height: '56px'
                             }}
                           >
-                            Register/Log in
+                            Start Learning
                           </Button>
                         </a>
                       </Display>

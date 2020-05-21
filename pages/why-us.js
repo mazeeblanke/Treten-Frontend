@@ -20,7 +20,7 @@ class WhyUs extends Component {
         </Head>
         <Introduction />
         <Facilities />
-        <section className="whyus-extra mt-8">
+        <section className="whyus-extra mt-8 mb-8">
           <div className="container pt-4">
             <div className="row">
               <div className="col-sm-12 has-dark-bg has-border-radius-20 pb-5">
@@ -62,7 +62,7 @@ class WhyUs extends Component {
             </div>
           </div>
         </section>
-        <section className="whyus-extra-2 mt-8 mb-8">
+        {/* <section className="whyus-extra-2 mt-8 mb-8">
           <div className="container">
             <div className="row">
               <div className="col-sm-12 col-md-6 mb-4">
@@ -101,7 +101,7 @@ class WhyUs extends Component {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         <Footer />
       </>
     )

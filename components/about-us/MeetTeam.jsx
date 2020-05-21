@@ -67,13 +67,13 @@ const MeetTeam = props => {
       <div className="container pb-4">
         <div className="row justify-content-center">
           <div className="col-md-6 mt-9 align-items-center d-flex flex-column">
-            <h3 className="features__main-text">
+            <h3 className="features__main-text mb-3">
               Meet our Team
             </h3>
-            <p className="lh-30 mb-3 text-center pl-5 lr-5">
+            {/* <p className="lh-30 mb-3 text-center pl-5 lr-5">
               Flatland culture star stuff harvesting star light two ghostly white figures
               in coveralls and helmets are soflty dancing vanquish the impossible invent the universe.
-            </p>
+            </p> */}
           </div>
         </div>
       </div>

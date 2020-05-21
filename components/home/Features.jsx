@@ -4,16 +4,16 @@ const Features = () => {
   return (
     <section className="features mt-5 pb-5">
       <div className="container">
-        <h3 className="text-center features__main-text">
+        <h3 className="text-center features__main-text mb-5">
           Features
         </h3>
-        <div className="row justify-content-center mb-5">
+        {/* <div className="row justify-content-center mb-5">
           <div className="col-md-7 pl-4 pr-4">
             <p className="lh-30 text-center">
               Our features include:
             </p>
           </div>
-        </div>
+        </div> */}
         <div className="row is-hcentered">
           <div className="col-sm-12 col-md-6 pb-5">
             <div className="card mb-3" style={{ maxWidth: '615px' }}>

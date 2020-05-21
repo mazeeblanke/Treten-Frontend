@@ -18,8 +18,8 @@ const Goals = props => {
             <h3 className="aboutus-goals__main-text pt-3">
               Our mission
             </h3>
-            <div className="pl-4 lh-30">
-              To be recognized as a people-centric institution producing globally quali3ed professionals by leveraging innovative technology in o7ering the best learning experience to students who are part of our community. 
+            <div className="lh-30">
+              To be recognized as a people-centric institution producing globally qualifed professionals by leveraging innovative technology in offering the best learning experience to students who are part of our community. 
             </div>
 
           </div>

@@ -5,7 +5,7 @@ const Facilities = props => {
   return (
     <section className="whyus-facilities has-grey-bg pt-6 pb-5">
       <h3 className="whyus-facilities__main-text text-center mt-7 mb-6">
-        Our Facilities
+        The Treten Advantage
       </h3>
       <div className="container">
         <div className="row">

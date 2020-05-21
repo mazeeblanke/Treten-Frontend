@@ -132,7 +132,7 @@ class Home extends Component {
           isLoading={this.props.instructors.isLoading}
         />
         <Testimonials
-          mainText=" What our students say"
+          mainText="Testimonials"
           subText="What our students say about us"
           testimonials={this.props.testimonials}
         />
