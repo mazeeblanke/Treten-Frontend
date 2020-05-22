@@ -26,7 +26,7 @@ const About = props => {
             <div className="col-md-3">
               <h6 className="fw-600">Course syllabus</h6>
               <button type="button" className="btn btn-outline-danger mt-2 mb-3">
-                <img className="mr-2" src="/static/images/download.png"></img>
+                <img className="mr-2" src="/images/download.png"></img>
                 <span>Download</span>
               </button>
             </div>

@@ -17,7 +17,7 @@ class Banner extends React.Component {
     const { user, isLoggedIn } = this.props
     return (
       <Parallax
-        bgImage={'/static/images/bg1.jpg'}
+        bgImage={'/images/bg1.jpg'}
         blur={{ min: -15, max: 25 }}
         bgImageAlt="banner"
         strength={400}

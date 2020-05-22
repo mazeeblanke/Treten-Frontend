@@ -23,9 +23,9 @@ const Instructor = props => {
               <p>{title}</p>
               <p>{qualifications}</p>
               <div className="d-flex mt-3">
-                <img className="mr-3" src="/static/images/social/linkedin inverted.png" />
-                <img className="mr-3" src="/static/images/social/facebook inverted.png" />
-                <img className="mr-3" src="/static/images/social/twitter inverted.png" />
+                <img className="mr-3" src="/images/social/linkedin inverted.png" />
+                <img className="mr-3" src="/images/social/facebook inverted.png" />
+                <img className="mr-3" src="/images/social/twitter inverted.png" />
               </div>
               <Link href={`/instructors/${instructorSlug}`}>
                 <button type="button" className="btn btn-outline-danger mt-5">

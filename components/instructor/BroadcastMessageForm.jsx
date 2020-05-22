@@ -160,7 +160,7 @@ class BroadcastMessageForm extends React.Component {
                 {
                   !this.props.broadcastMessageForm.file
                     ? (
-                      <img src="/static/images/add-attachment-to-msg.png" />
+                      <img src="/images/add-attachment-to-msg.png" />
                     )
                     : (
                       <div className="text-center">

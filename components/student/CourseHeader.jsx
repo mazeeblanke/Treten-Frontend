@@ -119,7 +119,7 @@ const CourseHeader = props => {
               <div className="mr-3">
                 <img
                   className="mr-1 mt-1 h1"
-                  src="/static/images/scholar-grey.png"
+                  src="/images/scholar-grey.png"
                 />
                 <span className="text-capitalize">
                   {course.category.name}
@@ -128,7 +128,7 @@ const CourseHeader = props => {
               <div>
                 <img
                   className="mr-1 mt-0 h09"
-                  src="/static/images/users-grey.png"
+                  src="/images/users-grey.png"
                 />
                 <span>{course.learnersCount} learner(s)</span>
               </div>

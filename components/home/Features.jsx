@@ -19,11 +19,11 @@ const Features = () => {
             <div className="card mb-3" style={{ maxWidth: '615px' }}>
               <div className="row no-gutters align-items-center">
                 <div className="col-md-12 col-lg-6">
-                  <img src="/static/images/features/intensive_pratical_classes.png" className="card-img" alt="intensive pratical classes" />
+                  <img src="/images/features/intensive_pratical_classes.png" className="card-img" alt="intensive pratical classes" />
                 </div>
                 <div className="col-md-12 col-lg-6">
                   <div className="card-body">
-                    <img src="/static/images/intensive_practical_classes.svg" />
+                    <img src="/images/intensive_practical_classes.svg" />
                     <h5 className="card-title pt-3">Career-driven Curriculum</h5>
                     <p className="card-text">
                       Our courses are designed for you to learn high-impact professional skills which top companies need, so you can secure that dream job or position right away!
@@ -37,11 +37,11 @@ const Features = () => {
             <div className="card mb-3" style={{ maxWidth: '615px' }}>
               <div className="row no-gutters align-items-center">
                 <div className="col-md-12 col-lg-6">
-                  <img src="/static/images/features/247_access_lab.png" className="card-img" alt="247 access lab" />
+                  <img src="/images/features/247_access_lab.png" className="card-img" alt="247 access lab" />
                 </div>
                 <div className="col-md-12 col-lg-6">
                   <div className="card-body">
-                    <img src="/static/images/234_access_lab.svg" />
+                    <img src="/images/234_access_lab.svg" />
                     <h5 className="card-title pt-3">Innovative Environment</h5>
                     <p className="card-text">
                       We utilize the latest technology in our conducive facility, to conduct intensive lab sessions that prepare our students for real-world projects in their careers. 
@@ -55,11 +55,11 @@ const Features = () => {
             <div className="card mb-3" style={{ maxWidth: '615px' }}>
               <div className="row no-gutters align-items-center">
                 <div className="col-md-12 col-lg-6">
-                  <img src="/static/images/features/best_learning_environment.png" className="card-img" alt="Best learning environment" />
+                  <img src="/images/features/best_learning_environment.png" className="card-img" alt="Best learning environment" />
                 </div>
                 <div className="col-md-12 col-lg-6">
                   <div className="card-body">
-                    <img src="/static/images/best_learning_environ.svg" />
+                    <img src="/images/best_learning_environ.svg" />
                     <h5 className="card-title pt-3">Corporate Training</h5>
                     <p className="card-text">
                       We help organizations equip their workforce with the skills that will place them at the forefront of digital innovation in their industries. You recruit, we train! 
@@ -73,11 +73,11 @@ const Features = () => {
             <div className="card mb-3" style={{ maxWidth: '615px' }}>
               <div className="row no-gutters align-items-center">
                 <div className="col-md-12 col-lg-6">
-                  <img src="/static/images/features/certified_experts.png" className="card-img" alt="Certified experts" />
+                  <img src="/images/features/certified_experts.png" className="card-img" alt="Certified experts" />
                 </div>
                 <div className="col-md-12 col-lg-6">
                   <div className="card-body">
-                    <img src="/static/images/certified_experts.svg" />
+                    <img src="/images/certified_experts.svg" />
                     <h5 className="card-title pt-3">Certified Experts</h5>
                     <p className="card-text">
                       With a 100% success rate, we boast a team of leading experts dedicated to inspiring and guiding our students to succeed in their professional exams.

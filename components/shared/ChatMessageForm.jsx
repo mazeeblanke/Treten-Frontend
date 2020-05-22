@@ -97,7 +97,7 @@ class ChatMessageForm extends React.Component {
                       item && item.id === (this.props.chat.recipient || {}).id
                     }
                   >
-                    <img className="h15" src="/static/images/selected.png" />
+                    <img className="h15" src="/images/selected.png" />
                   </Display>
                 </List.Item>
               )}

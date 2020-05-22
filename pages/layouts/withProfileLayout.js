@@ -75,7 +75,7 @@ export default Comp => {
                       ></input>
                       <img
                         className="edit"
-                        src="/static/images/profile/edit-white.png"
+                        src="images/profile/edit-white.png"
                         onClick={() => this.fileInputRef.current.click()}
                       />
                       <img
@@ -103,7 +103,7 @@ export default Comp => {
                           >
                             <img
                               className="mr-3"
-                              src={`/static/images/profile/${
+                              src={`images/profile/${
                                 this.props.router.pathname ===
                                   ROUTES.STUDENT_DASHBOARD_PROFILEDETAILS
                                   ? 'user-white.png'
@@ -124,7 +124,7 @@ export default Comp => {
                           >
                             <img
                               className="mr-3"
-                              src={`/static/images/profile/${
+                              src={`images/profile/${
                                 this.props.router.pathname ===
                                   ROUTES.STUDENT_DASHBOARD_CHANGEPASSWORD
                                   ? 'padlock-white.png'
@@ -146,7 +146,7 @@ export default Comp => {
                             >
                               <img
                                 className="mr-3"
-                                src={`/static/images/profile/${
+                                src={`images/profile/${
                                   this.props.router.pathname ===
                                     ROUTES.INSTRUCTOR_DASHBOARD_TUTORDETAILS
                                     ? 'lock-white.png'
@@ -161,7 +161,7 @@ export default Comp => {
                           <a href="/t/logout">
                             <img
                               className="mr-3"
-                              src="/static/images/profile/logout.png"
+                              src="images/profile/logout.png"
                             />
                             <span className="is-red">Log out</span>
                           </a>

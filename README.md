@@ -4,7 +4,7 @@
 
 [![CircleCI](https://circleci.com/bb/mazeeukah/tretenfe.svg?style=svg)](https://circleci.com/bb/mazeeukah/tretenfe)
 
-[![Deploy to now](https://deploy.now.sh/static/button.svg)]
+[![Deploy to now](https://deploy.now.shbutton.svg)]
 
 Install it and run:
 

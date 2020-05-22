@@ -90,7 +90,7 @@ const BroadcastMessages = props => {
                             userIsStudent(user) ||
                             shouldDisplayAvatar(message, user)
                               ? message.sender.profilePic
-                              : '/static/images/users-red.png'
+                              : '/images/users-red.png'
                           } />}
                     />
                     <p>{message.title}</p>
@@ -133,7 +133,7 @@ const BroadcastMessages = props => {
               <img
                 className="mr-3"
                 onClick={clearSelectedMessage}
-                src="/static/images/back.png"
+                src="/images/back.png"
               />
             )}
             <Avatar
@@ -143,7 +143,7 @@ const BroadcastMessages = props => {
                 userIsStudent(user) ||
                 shouldDisplayAvatar(selectedMessage, user)
                   ? (selectedMessage.sender || {}).profilePic
-                  : '/static/images/users-red.png'
+                  : '/images/users-red.png'
               }
             />
             <h5 className="m-0">

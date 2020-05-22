@@ -44,7 +44,7 @@ const Resource = (props) => {
               className="mt-2 d-flex align-items-center"
             >
               <b className="mr-1">Download</b>
-              <img src="/static/images/arrow-right.png" />
+              <img src="/images/arrow-right.png" />
             </a>
           </Display>
           <Display if={isLoading}>

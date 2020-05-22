@@ -82,7 +82,7 @@ class Home extends Component {
               `,
             images: [
               {
-                url: 'https://tretenacademy.com/static/images/why-us.png',
+                url: 'https://tretenacademy.comimages/why-us.png',
                 width: 800,
                 height: 600,
                 alt: 'treten academy'

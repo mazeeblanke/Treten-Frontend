@@ -153,7 +153,7 @@ const CertificationEntryForm = props => {
           </div>
         </div>
         <div className="col-md-1">
-          <img src="/static/images/close.png"
+          <img src="/images/close.png"
             onClick={() =>
               setCertification(null, null, 'certifications', certificationIndex)
             }

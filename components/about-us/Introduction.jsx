@@ -16,7 +16,7 @@ const Introduction = props => {
           </div>
         </div>
       </div>
-      <img className="has-full-width" src="/static/images/aboutusbanner.png" />
+      <img className="has-full-width" src="/images/aboutusbanner.png" />
     </section>
   )
 }

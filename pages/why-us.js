@@ -68,7 +68,7 @@ class WhyUs extends Component {
               <div className="col-sm-12 col-md-6 mb-4">
                 <div className="card border-0">
                   <div className="card-body pl-4 pr-4 pt-4">
-                    <img src="/static/images/aim.png" alt="aim logo" />
+                    <img src="images/aim.png" alt="aim logo" />
                     <h5 className="card-title is-blue mt-3">Our Aim</h5>
                     <p className="card-text lh-30">
                       Our aim is to alleviate poverty, reduce the rate of unemployment in Africa and
@@ -87,7 +87,7 @@ class WhyUs extends Component {
               <div className="col-sm-12 col-md-6 mb-4">
                 <div className="card border-0">
                   <div className="card-body pl-4 pr-4 pt-4">
-                    <img src="/static/images/promise.png" alt="promise logo" />
+                    <img src="images/promise.png" alt="promise logo" />
                     <h5 className="card-title is-blue mt-3">Our Promise</h5>
                     <p className="card-text lh-30">
                       As part of our commitment to the largely unemployed youths of the country, you

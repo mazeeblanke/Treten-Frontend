@@ -34,7 +34,7 @@ const Course = (props) => {
               <Img
                 style={{ maxHeight: '164px', height: '164px', width: '280px' }}
                 decode={false}
-                src={[course.bannerImage, '/static/images/courses/noimageavailable.png']}
+                src={[course.bannerImage, '/images/courses/noimageavailable.png']}
               />
             </Display>
             <Display if={isLoading}>
@@ -69,7 +69,7 @@ const Course = (props) => {
                     <b>View Course</b>
                     <img
                       className="ml-2"
-                      src="/static/images/arrow-right.png"
+                      src="/images/arrow-right.png"
                     />
                   </h6>
                 </Link>

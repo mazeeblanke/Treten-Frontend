@@ -10,7 +10,7 @@ class CourseVideo extends Component {
   state = {
     video: {
       src: 'https://www.youtube.com/watch?v=5CnnXeQs99s',
-      poster: '/static/images/course/course-video.png'
+      poster: '/images/course/course-video.png'
     }
   }
 

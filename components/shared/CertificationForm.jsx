@@ -44,7 +44,7 @@ const CertificationForm = props => {
             }}
             className="d-flex align-items-center has-pointer-cursor"
           >
-            <img className="mr-2" src="/static/images/plus.png" />
+            <img className="mr-2" src="/images/plus.png" />
             <p className="m-0 ">
               <b>Add another certification</b>
             </p>

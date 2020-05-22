@@ -62,7 +62,7 @@ const Post = props => {
                   <b className="mr-3">
                     {!isLoadingBlogPosts ? 'Read more' : <Skeleton width={50} />}
                   </b>
-                  <img src="/static/images/arrow-right.png" />
+                  <img src="/images/arrow-right.png" />
                 </p>
               </div>
             </div>

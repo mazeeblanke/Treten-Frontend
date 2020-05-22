@@ -76,7 +76,7 @@ const MenuBar = (props) => {
                   style={{ width: '126px', height: '40px' }}
                 >
                   <span>Download</span>
-                  <img className="ml-2" src="/static/images/down.png" />
+                  <img className="ml-2" src="/images/down.png" />
                 </Button>
                 {
                   <CSVLink

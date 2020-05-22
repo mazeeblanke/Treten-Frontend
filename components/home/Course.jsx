@@ -35,7 +35,7 @@ const Course = (props) => {
         decode={false}
         src={[
           bannerImage,
-          '/static/images/courses/noimageavailable.png'
+          '/images/courses/noimageavailable.png'
         ]}
       />
       <div className="card-body">

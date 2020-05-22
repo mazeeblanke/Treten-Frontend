@@ -23,7 +23,7 @@ const CoursePopover = (props) => {
           <img
             alt="scholar"
             className="mr-1 text-capitalize"
-            src="/static/images/scholar.png"
+            src="/images/scholar.png"
           />
           <span className="text-capitalize">
             {name}
@@ -38,7 +38,7 @@ const CoursePopover = (props) => {
       <div className="mb-3">
         <img
           className="mr-1"
-          src="/static/images/users.png"
+          src="/images/users.png"
           alt="users"
         />
         <span>{learnersCount} learners</span>

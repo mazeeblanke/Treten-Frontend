@@ -210,7 +210,7 @@ const WorkExperienceForm = props => {
                     </div>
                   </div>
                   <div className="col-md-1">
-                    <img src="/static/images/close.png"
+                    <img src="/images/close.png"
                       onClick={() =>
                         setWorkExperience(null, null, 'workExperience', workExperienceIndex)
                       }
@@ -232,7 +232,7 @@ const WorkExperienceForm = props => {
             }}
             className="d-flex align-items-center has-pointer-cursor"
           >
-            <img className="mr-2" src="/static/images/plus.png" />
+            <img className="mr-2" src="/images/plus.png" />
             <p className="m-0 ">
               <b>Add another experience</b>
             </p>

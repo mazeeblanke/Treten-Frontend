@@ -26,7 +26,7 @@ DashboardCard.propTypes = {
 }
 
 DashboardCard.defaultProps = {
-  image: '/static/images/admin/prof_cap.png'
+  image: '/images/admin/prof_cap.png'
 }
 
 export default DashboardCard

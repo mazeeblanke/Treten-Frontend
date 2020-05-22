@@ -43,28 +43,28 @@ class Home extends Component {
                   <div className="col-md-6 col-xl-3 mb-4">
                     <DashboardCard
                       statCount={stats.studentsCount}
-                      image="/static/images/admin/prof_cap.png"
+                      image="images/admin/prof_cap.png"
                       title="Student count"
                     />
                   </div>
                   <div className="col-md-6 col-xl-3 mb-4">
                     <DashboardCard
                       statCount={stats.instructorsCount}
-                      image="/static/images/admin/instructor_count.png"
+                      image="images/admin/instructor_count.png"
                       title="Instructor count"
                     />
                   </div>
                   <div className="col-md-6 col-xl-3 mb-4">
                     <DashboardCard
                       statCount={stats.coursesCount}
-                      image="/static/images/admin/books.png"
+                      image="images/admin/books.png"
                       title="Course count"
                     />
                   </div>
                   <div className="col-md-6 col-xl-3 mb-4">
                     <DashboardCard
                       statCount={stats.activeClassesCount}
-                      image="/static/images/admin/active-classes.png"
+                      image="images/admin/active-classes.png"
                       title="Active classes"
                     />
                   </div>

@@ -19,22 +19,22 @@ class AboutUs extends Component {
       teamMembers: [
         {
           fullname: 'Team member name',
-          profile_pic: '/static/images/instructors/instructor1lg.png',
+          profile_pic: 'images/instructors/instructor1lg.png',
           role: 'Role on the team'
         },
         {
           fullname: 'Team member name',
-          profile_pic: '/static/images/instructors/instructor2lg.png',
+          profile_pic: 'images/instructors/instructor2lg.png',
           role: 'Role on the team'
         },
         {
           fullname: 'Team member name',
-          profile_pic: '/static/images/instructors/instructor3lg.png',
+          profile_pic: 'images/instructors/instructor3lg.png',
           role: 'Role on the team'
         },
         {
           fullname: 'Team member name',
-          profile_pic: '/static/images/instructors/instructor4lg.png',
+          profile_pic: 'images/instructors/instructor4lg.png',
           role: 'Role on the team'
         }
       ]

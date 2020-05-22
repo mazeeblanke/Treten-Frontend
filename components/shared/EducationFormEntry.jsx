@@ -176,7 +176,7 @@ const EducationFormEntry = props => {
             </div>
             <div className="col-md-1">
               <img
-                src="/static/images/close.png"
+                src="/images/close.png"
                 onClick={() =>
                   setEducation(null, null, 'education', educationIndex)
                 }

@@ -9,10 +9,10 @@ import 'react-phone-number-input/style.css'
 // import 'react-phone-input-2/dist/style.css'
 import 'react-quill/dist/quill.snow.css'
 import 'antd/dist/antd.css'
-import '../static/slick-carousel/slick/slick.css'
-import '../static/slick-carousel/slick/slick-theme.css'
+import '../public/slick-carousel/slick/slick.css'
+import '../public/slick-carousel/slick/slick-theme.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import '../static/sass/application.scss'
+import '../public/sass/application.scss'
 import { PageTransition } from 'next-page-transitions'
 
 const Cookies = require('js-cookie')
@@ -23,7 +23,7 @@ class Treten extends App {
     return (
       <Container>
         <Head>
-          <link rel="shortcut icon" type="image/png" href="/static/images/logo.png" />
+          <link rel="shortcut icon" type="image/png" href="images/logo.png" />
           <script src="https://www.google.com/recaptcha/api.js?onload=recaptchaLoaded&render=explicit" async defer></script>
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"></link>
           {/* <!-- Chrome, Firefox OS and Opera --> */}

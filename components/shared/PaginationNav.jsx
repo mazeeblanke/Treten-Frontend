@@ -5,7 +5,7 @@ const PaginationNav = (current, type, originalElement) => {
     return (
       <div className="ant-pagination-prev">
         <a className="ant-pagination-item-link">
-          <img src="/static/images/arrow-right-grey.png" alt="arrow left" />
+          <img src="/images/arrow-right-grey.png" alt="arrow left" />
         </a>
       </div>
     )
@@ -14,7 +14,7 @@ const PaginationNav = (current, type, originalElement) => {
     return (
       <div className="ant-pagination-next">
         <a className="ant-pagination-item-link">
-          <img src="/static/images/arrow-left-grey.png" alt="arrow right" />
+          <img src="/images/arrow-left-grey.png" alt="arrow right" />
         </a>
       </div>
     )

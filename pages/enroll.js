@@ -156,7 +156,7 @@ class Enroll extends Component {
               justify-content-center 
               align-items-center has-full-height`
             }>
-              <img src="/static/images/confirmation.png" />
+              <img src="images/confirmation.png" />
               <p className="lh-30 mt-3 mb-3 text-center">
                 You have enrolled for this course
               </p>
@@ -410,7 +410,7 @@ class Enroll extends Component {
                             href={`/t/auth/linkedin?redirect=${currentPath}`}
                             className="linkedin-btn mr-3"
                           >
-                            <img className="mr-2" src="/static/images/social/linkedin icon.png" />
+                            <img className="mr-2" src="images/social/linkedin icon.png" />
                             <span className="is-white">LinkedIn</span>
                           </Button>
 
@@ -420,7 +420,7 @@ class Enroll extends Component {
                             href={`/t/auth/facebook?redirect=${currentPath}`}
                             className="facebook-btn"
                           >
-                            <img className="mr-2" src="/static/images/social/facebook icon.png" />
+                            <img className="mr-2" src="images/social/facebook icon.png" />
                             <span className="is-white">Facbook</span>
                           </Button>
                         </div>

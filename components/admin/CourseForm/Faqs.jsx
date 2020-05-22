@@ -80,7 +80,7 @@ const Faqs = props => {
               </Form.Item>
             </div>
             <div className="col-md-1">
-              <img className="mt-9" src="/static/images/close.png"
+              <img className="mt-9" src="/images/close.png"
                 onClick={() =>
                   setFaq(null, null, 'faqs', faqIndex)
                 }
@@ -94,7 +94,7 @@ const Faqs = props => {
         onClick={() => addFaq()}
         className="d-flex align-items-center has-pointer-cursor mt-3"
       >
-        <img className="mr-2" src="/static/images/plus.png" />
+        <img className="mr-2" src="/images/plus.png" />
         <p className="m-0 ">
           <b>Add another FAQ</b>
         </p>

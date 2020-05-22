@@ -10,7 +10,7 @@ const Introduction = props => {
       <div className="container">
         <div className="row">
           <div className="col-sm-12 col-md-6">
-            <img src="/static/images/why-us.png" className="mb-3 has-full-width" />
+            <img src="/images/why-us.png" className="mb-3 has-full-width" />
             <ul className="pl-4 lh-30">
               <li>
                 We are the first institute to offer CCIE training and Practice Labs in West Africa. 

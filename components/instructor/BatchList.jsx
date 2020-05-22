@@ -44,7 +44,7 @@ const BatchList = (props) => {
 															: (
 																<img 
 																	className="has-pointer-cursor" 
-																	src="/static/images/close.png"
+																	src="/images/close.png"
 																	onClick={() =>
 																		setBatchToDelete(batch)
 																	}
@@ -76,7 +76,7 @@ const BatchList = (props) => {
 													<Display if={!batch.isDeleting}>
 														<img 
 															className="mt-5 has-pointer-cursor" 
-															src="/static/images/close.png"
+															src="/images/close.png"
 															onClick={() =>
 																setBatchToDelete(batch)
 															}

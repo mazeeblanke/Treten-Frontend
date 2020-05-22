@@ -11,7 +11,7 @@ class Resources extends Component {
             <div className="col-sm-12 col-md-4 mb-5">
               <div className="card border-0 text-center practice-questions">
                 <img
-                  src="/static/images/free practice question.png"
+                  src="/images/free practice question.png"
                   className="rounded-circle mt-4"
                   alt="practice questions icon"
                 />
@@ -30,7 +30,7 @@ class Resources extends Component {
                       <img
                         style={{ height: '15px', width: '28px' }}
                         className="pl-3"
-                        src="/static/images/arrow-right.png"
+                        src="/images/arrow-right.png"
                       />
                     </p>
                   </Link>
@@ -40,7 +40,7 @@ class Resources extends Component {
             <div className="col-sm-12 col-md-4 mb-5">
               <div className="card border-0 text-center interview-questions">
                 <img
-                  src="/static/images/free interview questions.png"
+                  src="/images/free interview questions.png"
                   className="rounded-circle mt-4"
                   alt="free interview questions"
                 />
@@ -58,7 +58,7 @@ class Resources extends Component {
                       <img
                         style={{ height: '15px', width: '28px' }}
                         className="pl-3"
-                        src="/static/images/arrow-right.png"
+                        src="/images/arrow-right.png"
                       />
                     </p>
                   </Link>

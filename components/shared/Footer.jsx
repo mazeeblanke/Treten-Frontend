@@ -25,11 +25,11 @@ const Footer = (props) => {
             <a className="is-smokewhite m-0" href="tel:(+234) 9060 0063 12">(+234) 9060 0063 12</a>
 
             <div className="mt-2">
-              <img className="mr-2" src="/static/images/social/linkedin icon.png" />
-              <img className="mr-2" src="/static/images/social/facebook icon.png" />
-              <img className="mr-2" src="/static/images/social/twitter icon.png" />
-              <img className="mr-2" src="/static/images/social/youtube icon.png" />
-              <img className="mr-2" src="/static/images/social/instagram icon.png" />
+              <img className="mr-2" src="/images/social/linkedin icon.png" />
+              <img className="mr-2" src="/images/social/facebook icon.png" />
+              <img className="mr-2" src="/images/social/twitter icon.png" />
+              <img className="mr-2" src="/images/social/youtube icon.png" />
+              <img className="mr-2" src="/images/social/instagram icon.png" />
             </div>
           </div>
           <div className="col-sm-12 col-md-3">

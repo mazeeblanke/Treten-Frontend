@@ -99,7 +99,7 @@ class PracticeQuestion extends Component {
                         </small>
                         <p className="mt-2">
                           <b className="mr-1">Download</b>
-                          <img src="/static/images/arrow-right.png" />
+                          <img src="images/arrow-right.png" />
                         </p>
                       </div>
                     </div>

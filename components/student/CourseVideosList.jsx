@@ -19,11 +19,11 @@ const CourseVideosList = props => {
                 <div className="d-flex mt-5">
                   <p className="mt-2 mr-4 d-flex align-items-center">
                     <b className="mr-1">Download</b>
-                    <img src="/static/images/arrow-left.png" />
+                    <img src="/images/arrow-left.png" />
                   </p>
                   <p className="mt-2 d-flex align-items-center">
                     <b className="mr-1">Watch</b>
-                    <img src="/static/images/play.png" />
+                    <img src="/images/play.png" />
                   </p>
                 </div>
               </div>

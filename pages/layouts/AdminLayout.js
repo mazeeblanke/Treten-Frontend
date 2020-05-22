@@ -55,13 +55,13 @@ class AdminLayout extends Component {
           <div className="d-flex justify-content-sm-between align-items-center sidenav-top">
             <div className="logo m-4">
               <a href="/">
-                <img className="has-pointer-cursor" src="/static/images/admin/logo.png" />
+                <img className="has-pointer-cursor" src="images/admin/logo.png" />
               </a>
             </div>
 
             <Display if={!this.state.collapsed}>
               <img
-                src="/static/images/menu.png"
+                src="images/menu.png"
                 className="trigger"
                 type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                 onClick={this.toggle}
@@ -88,8 +88,8 @@ class AdminLayout extends Component {
                       className={'mr-3'}
                       src={
                         this.props.router.pathname.includes('home')
-                          ? '/static/images/admin/home-red.png'
-                          : '/static/images/admin/home.png'
+                          ? 'images/admin/home-red.png'
+                          : 'images/admin/home.png'
                       }
                     />
                     <span className="is-white ml-4 pl-1">Home</span>
@@ -110,8 +110,8 @@ class AdminLayout extends Component {
                       className={'mr-3'}
                       src={
                         this.props.router.pathname.includes('course')
-                          ? '/static/images/admin/syllabus-red.svg'
-                          : '/static/images/admin/syllabus.svg'
+                          ? 'images/admin/syllabus-red.svg'
+                          : 'images/admin/syllabus.svg'
                       }
                     />
                     <span className="is-white ml-4 pl-1">My courses</span>
@@ -132,8 +132,8 @@ class AdminLayout extends Component {
                       className={'mr-3'}
                       src={
                         this.props.router.pathname.includes('course')
-                          ? '/static/images/admin/syllabus-red.svg'
-                          : '/static/images/admin/syllabus.svg'
+                          ? 'images/admin/syllabus-red.svg'
+                          : 'images/admin/syllabus.svg'
                       }
                     />
                     <span className="is-white ml-4">Courses</span>
@@ -154,8 +154,8 @@ class AdminLayout extends Component {
                       className={'mr-3'}
                       src={
                         this.props.router.pathname.includes('home') || this.props.router.pathname.includes('course')
-                          ? '/static/images/admin/home-red.png'
-                          : '/static/images/admin/home.png'
+                          ? 'images/admin/home-red.png'
+                          : 'images/admin/home.png'
                       }
                     />
                     <span className="is-white ml-4 pl-1">Home</span>
@@ -177,8 +177,8 @@ class AdminLayout extends Component {
                       src={
                         this.props.router.pathname ===
                           ROUTES.ADMIN_DASHBOARD_USERS
-                          ? '/static/images/admin/manage-users.png'
-                          : '/static/images/admin/manage-users-white.png'
+                          ? 'images/admin/manage-users.png'
+                          : 'images/admin/manage-users-white.png'
                       }
                     />
                     <span className="is-white ml-4 pl-1">Manage users</span>
@@ -197,8 +197,8 @@ class AdminLayout extends Component {
                 className="mr-3"
                 src={
                   this.props.router.pathname.includes('resources')
-                    ? '/static/images/admin/resources-red.svg'
-                    : '/static/images/admin/resources.svg'
+                    ? 'images/admin/resources-red.svg'
+                    : 'images/admin/resources.svg'
                 }
               />
               <span className="is-white ml-4 pl-2">Resources</span>
@@ -211,8 +211,8 @@ class AdminLayout extends Component {
                 className="mr-3"
                 src={
                   this.props.router.pathname.includes('notifications')
-                    ? '/static/images/admin/notifications-red.svg'
-                    : '/static/images/admin/notifications.svg'
+                    ? 'images/admin/notifications-red.svg'
+                    : 'images/admin/notifications.svg'
                 }
               />
               <span className="is-white ml-4 pl-2">Notifications</span>
@@ -225,8 +225,8 @@ class AdminLayout extends Component {
                 src={
                   this.props.router.pathname ===
                     ROUTES.STUDENT_DASHBOARD_MESSAGES
-                    ? '/static/images/admin/chat-red.svg'
-                    : '/static/images/admin/chat.svg'
+                    ? 'images/admin/chat-red.svg'
+                    : 'images/admin/chat.svg'
                 }
               />
               <span className="is-white ml-4 pl-1">Messages</span>
@@ -244,8 +244,8 @@ class AdminLayout extends Component {
                       src={
                         this.props.router.pathname ===
                           ROUTES.ADMIN_DASHBOARD_TRANSACTIONS
-                          ? '/static/images/admin/transactions.png'
-                          : '/static/images/admin/transactions-white.png'
+                          ? 'images/admin/transactions.png'
+                          : 'images/admin/transactions-white.png'
                       }
                     />
                     <span className="is-white ml-4 pl-1">Transactions</span>
@@ -266,8 +266,8 @@ class AdminLayout extends Component {
                       src={
                         this.props.router.pathname ===
                           ROUTES.ADMIN_DASHBOARD_REVIEWS
-                          ? '/static/images/admin/manage-reviews.png'
-                          : '/static/images/admin/manage-reviews-white.png'
+                          ? 'images/admin/manage-reviews.png'
+                          : 'images/admin/manage-reviews-white.png'
                       }
                     />
                     <span className="is-white ml-4 ">Manage reviews</span>
@@ -282,7 +282,7 @@ class AdminLayout extends Component {
                 <span>
                   <img
                     className="mr-3"
-                    src='/static/images/admin/manage-website-white.png'
+                    src='images/admin/manage-website-white.png'
                   />
                   <span className="ml-4 pl-1">Manage</span>
                 </span>
@@ -364,7 +364,7 @@ class AdminLayout extends Component {
                     className="mt-15"
                     key="6"
                   >
-                    <img className="mr-3" src="/static/images/admin/catalog.svg" />
+                    <img className="mr-3" src="images/admin/catalog.svg" />
                     <span className="is-white ml-4 pl-1">Course catalog</span>
                   </Menu.Item>
                 )
@@ -385,7 +385,7 @@ class AdminLayout extends Component {
               <img
                 className="mr-3"
                 style={{ marginLeft: '-9px' }}
-                src="/static/images/admin/forum.svg"
+                src="images/admin/forum.svg"
               />
               <span className="is-white ml-4 pl-1">Forum</span>
             </Menu.Item>
@@ -402,7 +402,7 @@ class AdminLayout extends Component {
                   <Display if={!!this.state.collapsed}>
                     <div>
                       <img
-                        src="/static/images/menu-black.png"
+                        src="images/menu-black.png"
                         className="trigger mr-3"
                         type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                         onClick={this.toggle}
@@ -420,7 +420,7 @@ class AdminLayout extends Component {
                     </Display>
                     <Display if={!this.props.headerName}>
                       <div>
-                        <img onClick={this.props.router.back} className="mr-3 has-cursor-pointer" src="/static/images/arrow-left.png" ></img>
+                        <img onClick={this.props.router.back} className="mr-3 has-cursor-pointer" src="images/arrow-left.png" ></img>
                         <span>{this.props.backText}</span>
                       </div>
                     </Display>

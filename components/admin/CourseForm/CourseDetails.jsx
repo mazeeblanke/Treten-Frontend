@@ -257,7 +257,7 @@ const CourseDetails = props => {
                       {...getRootProps({ className: 'dropzone' })}
                     >
                       <input {...getInputProps()} />
-                      <img className="mt-4" src="/static/images/cloud.png" />
+                      <img className="mt-4" src="/images/cloud.png" />
                       <p
                         className="mt-2 p-2 text-center"
                         style={{ fontSize: '1rem' }}

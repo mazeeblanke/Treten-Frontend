@@ -37,7 +37,7 @@ class Course extends Component {
       },
       startDate: 'Monday, 01 Aug 2019',
       instructor: {
-        profile_pic: '/static/images/instructors/instructor1lg.png',
+        profile_pic: 'images/instructors/instructor1lg.png',
         fullname: 'Instructor name here',
         title: 'Title of instructor goes here',
         qualifications: "Bio here. Eventually, you do plan to have dinosaurs on your dinosaur tour, right? God help us, we're in the hands of engineers.",
@@ -63,17 +63,17 @@ class Course extends Component {
         certifications: [
           {
             title: 'Certification title',
-            logo: '/static/images/certifications/cisco.png',
+            logo: 'images/certifications/cisco.png',
             datePeriod: 'Apr 2017 - present'
           },
           {
             title: 'Certification title',
-            logo: '/static/images/certifications/microsoft.png',
+            logo: 'images/certifications/microsoft.png',
             datePeriod: 'Apr 2017 - present'
           },
           {
             title: 'Certification title',
-            logo: '/static/images/certifications/microsoft.png',
+            logo: 'images/certifications/microsoft.png',
             datePeriod: 'Apr 2017 - present'
           }
         ],
@@ -107,7 +107,7 @@ class Course extends Component {
         videos: [
           {
             videoUrl: '',
-            poster: '/static/images/videos/video1.png',
+            poster: 'images/videos/video1.png',
             title: 'This is where the title of this course content goes, and if longer, extends this way. See?',
             description: `Tesseract cosmic ocean preserve and cherish that pale blue dot
             two ghostly white figures in coveralls and helmets are soflty dancing brain is
@@ -116,7 +116,7 @@ class Course extends Component {
           },
           {
             videoUrl: '',
-            poster: '/static/images/videos/video2.png',
+            poster: 'images/videos/video2.png',
             title: 'This is where the title of this course content goes, and if longer, extends this way. See?',
             description: `Tesseract cosmic ocean preserve and cherish that pale blue dot
             two ghostly white figures in coveralls and helmets are soflty dancing brain is
@@ -125,7 +125,7 @@ class Course extends Component {
           },
           {
             videoUrl: '',
-            poster: '/static/images/videos/video3.png',
+            poster: 'images/videos/video3.png',
             title: 'This is where the title of this course content goes, and if longer, extends this way. See?',
             description: `Tesseract cosmic ocean preserve and cherish that pale blue dot
             two ghostly white figures in coveralls and helmets are soflty dancing brain is
