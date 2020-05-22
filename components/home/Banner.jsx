@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 // import Slider from 'react-slick'
 import { Button } from 'antd'
+import { Parallax } from 'react-parallax';
 
 import * as actions from '../../store/actions'
 import { connect } from 'react-redux'
@@ -15,7 +16,13 @@ class Banner extends React.Component {
   render () {
     const { user, isLoggedIn } = this.props
     return (
-      <section className="banner">
+      <Parallax
+        bgImage={'/static/images/bg1.jpg'}
+        blur={{ min: -15, max: 25 }}
+        bgImageAlt="banner"
+        strength={400}
+        className="banner"
+      >
         <div className="banner__wrapper">
           <div className="banner__overlay">
             <div className="container has-full-height">
@@ -67,9 +74,8 @@ class Banner extends React.Component {
               </div>
             </div>
           </div>
-          <img src="/static/images/bg1.jpg" alt="background 1" />
         </div>
-      </section>
+      </Parallax>
     )
   }
 
