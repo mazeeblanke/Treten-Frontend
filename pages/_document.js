@@ -12,7 +12,7 @@ class TretenDocument extends Document {
 
   render () {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
           <script src="//localhost:6001/socket.io/socket.io.js" />
           <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js" />

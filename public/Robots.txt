@@ -1,0 +1,3 @@
+Sitemap: http://tretenacademy.com.ng/sitemap.xml
+User-agent: *
+Disallow: 
