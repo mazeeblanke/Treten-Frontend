@@ -104,6 +104,6 @@ Testimonials.propTypes = {
 export default connect(
   mapStateToProps,
   {
-    getTestimonials: actions.getTestimonials
+    getTestimonials: actions.fetchTestimonials
   }
 )(withMasterLayout(Testimonials))
