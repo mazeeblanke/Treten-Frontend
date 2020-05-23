@@ -28,6 +28,7 @@ class Resources extends Component {
                     <p className="has-pointer-cursor">
                       <b>Get now</b>
                       <img
+                        alt="get now"
                         style={{ height: '15px', width: '28px' }}
                         className="pl-3"
                         src="/images/arrow-right.png"
