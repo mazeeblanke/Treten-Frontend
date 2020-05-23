@@ -74,6 +74,7 @@ export default Comp => {
                         style={{ display: 'none' }}
                       ></input>
                       <img
+                        alt="edit"
                         className="edit"
                         src="images/profile/edit-white.png"
                         onClick={() => this.fileInputRef.current.click()}
@@ -102,6 +103,7 @@ export default Comp => {
                               }`}
                           >
                             <img
+                              alt="personal details"
                               className="mr-3"
                               src={`images/profile/${
                                 this.props.router.pathname ===
@@ -123,6 +125,7 @@ export default Comp => {
                               }`}
                           >
                             <img
+                              alt="change password"
                               className="mr-3"
                               src={`images/profile/${
                                 this.props.router.pathname ===
@@ -145,6 +148,7 @@ export default Comp => {
                                 }`}
                             >
                               <img
+                                alt="tutor details"
                                 className="mr-3"
                                 src={`images/profile/${
                                   this.props.router.pathname ===
@@ -160,6 +164,7 @@ export default Comp => {
                         <li className="list-group-item">
                           <a href="/t/logout">
                             <img
+                              alt="logout"
                               className="mr-3"
                               src="images/profile/logout.png"
                             />

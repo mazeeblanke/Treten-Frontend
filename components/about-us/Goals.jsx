@@ -24,7 +24,7 @@ const Goals = props => {
 
           </div>
           <div className="col-md-5 offset-md-1 p-6">
-            <img src="/images/aboutus-goals.png" />
+            <img alt="goals banner" src="/images/aboutus-goals.png" />
           </div>
         </div>
       </div>

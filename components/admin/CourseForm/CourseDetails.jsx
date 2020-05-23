@@ -186,6 +186,7 @@ const CourseDetails = props => {
                   <Select.Option key={el.id} label={el.bannerImage} value={el.company}>
                     <div>
                       <img
+                        alt={el.company}
                         style={{ float: 'left', height: '28px', marginTop: '7px' }}
                         src={el.bannerImage} >
                       </img>
@@ -257,7 +258,7 @@ const CourseDetails = props => {
                       {...getRootProps({ className: 'dropzone' })}
                     >
                       <input {...getInputProps()} />
-                      <img className="mt-4" src="/images/cloud.png" />
+                      <img alt="upload" className="mt-4" src="/images/cloud.png" />
                       <p
                         className="mt-2 p-2 text-center"
                         style={{ fontSize: '1rem' }}
@@ -272,6 +273,7 @@ const CourseDetails = props => {
                 <div className="">
                   <div className="d-flex align-items-center">
                     <img
+                      alt={courseForm.bannerImage.name}
                       style={{ height: '164px', width: '280px' }}
                       className="mr-3 has-full-width"
                       src={courseForm.bannerImageBase64 || courseForm.bannerImage}

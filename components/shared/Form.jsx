@@ -270,7 +270,7 @@ class TretenForm extends Component {
 																{({ getRootProps, getInputProps }) => (
 																	<div {...getRootProps({ className: 'dropzone' })}>
 																		<input {...getInputProps()} />
-																		<img className="mt-4" src="/images/cloud.png" />
+																		<img alt="upload" className="mt-4" src="/images/cloud.png" />
 																		<p
 																			className="mt-2 p-2 text-center"
 																			style={{ fontSize: '1rem' }}
@@ -285,6 +285,7 @@ class TretenForm extends Component {
 															<div className="">
 																<div className="d-flex align-items-center">
 																	<img
+																	    alt="image preview"
 																		style={{ maxHeight: '90px', maxWidth: '100%'  }}
 																		className="mr-3"
 																		src={data[getImagePreviewKey(key)] || data[key]}

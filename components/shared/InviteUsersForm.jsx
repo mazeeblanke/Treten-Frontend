@@ -52,7 +52,8 @@ class InviteUsersForm extends React.Component {
                         }}
                       />
                       <Display if={form.length > 1}>
-                        <img
+                        <img  
+                          alt="delete"
                           className="mt-2 ml-2 h20 has-pointer-cursor"
                           src="/images/close.png"
                           onClick={() => remove(entry)}
@@ -76,7 +77,7 @@ class InviteUsersForm extends React.Component {
           d-flex align-items-center 
           has-pointer-cursor mt-3 mb-4`
         }>
-          <img className="mr-2" src="/images/plus.png" />
+          <img alt="add another" className="mr-2" src="/images/plus.png" />
           <p className="m-0 ">
             <b>Add another {pluralize.singular(activeTab)}</b>
           </p>

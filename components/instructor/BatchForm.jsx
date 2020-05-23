@@ -162,7 +162,7 @@ class BatchForm extends React.Component {
                                     onChange={(e, end) => { setSession({ ...session, end }, dayIndex, sessionIndex) }} />
                                 </InputGroup>
                               </div>
-                              <img className="mt-2 ml-2 h20 has-pointer-cursor" src="/images/close.png"
+                              <img alt="close" className="mt-2 ml-2 h20 has-pointer-cursor" src="/images/close.png"
                                 onClick={() => { setSession({ ...session, remove: true }, dayIndex, sessionIndex) }}
                               ></img>
                             </div>
@@ -170,7 +170,7 @@ class BatchForm extends React.Component {
                         }
                       </div>
                       <div onClick={() => { addSession(dayIndex) }} className="d-flex align-items-center has-pointer-cursor mt-3">
-                        <img className="mr-2" src="/images/plus.png" />
+                        <img alt="add another" className="mr-2" src="/images/plus.png" />
                         <p className="m-0 ">
                           <b>Add another class</b>
                         </p>

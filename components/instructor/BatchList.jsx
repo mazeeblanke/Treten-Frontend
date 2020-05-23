@@ -43,6 +43,7 @@ const BatchList = (props) => {
 															? 'View schedule' 
 															: (
 																<img 
+																    alt="delete batch"
 																	className="has-pointer-cursor" 
 																	src="/images/close.png"
 																	onClick={() =>
@@ -75,6 +76,7 @@ const BatchList = (props) => {
 												<div className="col-md-1">
 													<Display if={!batch.isDeleting}>
 														<img 
+															alt="delete batch"
 															className="mt-5 has-pointer-cursor" 
 															src="/images/close.png"
 															onClick={() =>

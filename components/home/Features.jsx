@@ -23,7 +23,7 @@ const Features = () => {
                 </div>
                 <div className="col-md-12 col-lg-6">
                   <div className="card-body">
-                    <img src="/images/intensive_practical_classes.svg" />
+                    <img alt="curriculum logo" src="/images/intensive_practical_classes.svg" />
                     <h5 className="card-title pt-3">Career-driven Curriculum</h5>
                     <p className="card-text">
                       Our courses are designed for you to learn high-impact professional skills which top companies need, so you can secure that dream job or position right away!
@@ -41,7 +41,7 @@ const Features = () => {
                 </div>
                 <div className="col-md-12 col-lg-6">
                   <div className="card-body">
-                    <img src="/images/234_access_lab.svg" />
+                    <img alt="innovative environment" src="/images/234_access_lab.svg" />
                     <h5 className="card-title pt-3">Innovative Environment</h5>
                     <p className="card-text">
                       We utilize the latest technology in our conducive facility, to conduct intensive lab sessions that prepare our students for real-world projects in their careers. 
@@ -59,7 +59,7 @@ const Features = () => {
                 </div>
                 <div className="col-md-12 col-lg-6">
                   <div className="card-body">
-                    <img src="/images/best_learning_environ.svg" />
+                    <img alt="best learning environ" src="/images/best_learning_environ.svg" />
                     <h5 className="card-title pt-3">Corporate Training</h5>
                     <p className="card-text">
                       We help organizations equip their workforce with the skills that will place them at the forefront of digital innovation in their industries. You recruit, we train! 
@@ -77,7 +77,7 @@ const Features = () => {
                 </div>
                 <div className="col-md-12 col-lg-6">
                   <div className="card-body">
-                    <img src="/images/certified_experts.svg" />
+                    <img alt="certified experts" src="/images/certified_experts.svg" />
                     <h5 className="card-title pt-3">Certified Experts</h5>
                     <p className="card-text">
                       With a 100% success rate, we boast a team of leading experts dedicated to inspiring and guiding our students to succeed in their professional exams.

@@ -55,12 +55,13 @@ class AdminLayout extends Component {
           <div className="d-flex justify-content-sm-between align-items-center sidenav-top">
             <div className="logo m-4">
               <a href="/">
-                <img className="has-pointer-cursor" src="images/admin/logo.png" />
+                <img alt="admin logo" className="has-pointer-cursor" src="images/admin/logo.png" />
               </a>
             </div>
 
             <Display if={!this.state.collapsed}>
               <img
+                alt="menu"
                 src="images/menu.png"
                 className="trigger"
                 type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
@@ -85,6 +86,7 @@ class AdminLayout extends Component {
                     key={ROUTES.ADMIN_DASHBOARD_HOME}
                   >
                     <img
+                      alt="home"
                       className={'mr-3'}
                       src={
                         this.props.router.pathname.includes('home')
@@ -107,6 +109,7 @@ class AdminLayout extends Component {
                     key={ROUTES.STUDENT_DASHBOARD_COURSES}
                   >
                     <img
+                      alt="my courses"
                       className={'mr-3'}
                       src={
                         this.props.router.pathname.includes('course')
@@ -129,6 +132,7 @@ class AdminLayout extends Component {
                     key={ROUTES.ADMIN_DASHBOARD_COURSES}
                   >
                     <img
+                      alt="courses"
                       className={'mr-3'}
                       src={
                         this.props.router.pathname.includes('course')
@@ -151,6 +155,7 @@ class AdminLayout extends Component {
                     key={ROUTES.INSTRUCTOR_DASHBOARD_HOME}
                   >
                     <img
+                      alt="home"
                       className={'mr-3'}
                       src={
                         this.props.router.pathname.includes('home') || this.props.router.pathname.includes('course')
@@ -173,6 +178,7 @@ class AdminLayout extends Component {
                     key={ROUTES.ADMIN_DASHBOARD_USERS}
                   >
                     <img
+                      alt="manage users"
                       className="mr-3"
                       src={
                         this.props.router.pathname ===
@@ -194,6 +200,7 @@ class AdminLayout extends Component {
               key={`d/${this.props.user.role}/resources`}
             >
               <img
+                alt="resources"
                 className="mr-3"
                 src={
                   this.props.router.pathname.includes('resources')
@@ -208,6 +215,7 @@ class AdminLayout extends Component {
               onClick={() => this.props.router.push(`/d/${this.props.user.role}/notifications`)}
               key={`/d/${this.props.user.role}/notifications`}>
               <img
+                alt="notifications"
                 className="mr-3"
                 src={
                   this.props.router.pathname.includes('notifications')
@@ -221,6 +229,7 @@ class AdminLayout extends Component {
               onClick={() => this.props.router.push(ROUTES.STUDENT_DASHBOARD_MESSAGES)}
               key={ROUTES.STUDENT_DASHBOARD_MESSAGES}>
               <img
+                alt="messages"
                 className="mr-3"
                 src={
                   this.props.router.pathname ===
@@ -240,6 +249,7 @@ class AdminLayout extends Component {
                     key={ROUTES.ADMIN_DASHBOARD_TRANSACTIONS}
                   >
                     <img
+                      alt="transactions"
                       className="mr-3"
                       src={
                         this.props.router.pathname ===
@@ -262,6 +272,7 @@ class AdminLayout extends Component {
                     key={ROUTES.ADMIN_DASHBOARD_REVIEWS}
                   >
                     <img
+                      alt="manage reviews"
                       className="mr-3"
                       src={
                         this.props.router.pathname ===
@@ -281,6 +292,7 @@ class AdminLayout extends Component {
               title={
                 <span>
                   <img
+                    alt="manage website"
                     className="mr-3"
                     src='images/admin/manage-website-white.png'
                   />
@@ -364,7 +376,7 @@ class AdminLayout extends Component {
                     className="mt-15"
                     key="6"
                   >
-                    <img className="mr-3" src="images/admin/catalog.svg" />
+                    <img alt="course catalog" className="mr-3" src="images/admin/catalog.svg" />
                     <span className="is-white ml-4 pl-1">Course catalog</span>
                   </Menu.Item>
                 )
@@ -375,6 +387,7 @@ class AdminLayout extends Component {
               onClick={() => this.props.router.push(ROUTES.STUDENT_DASHBOARD_PROFILEDETAILS)}
               key={ROUTES.STUDENT_DASHBOARD_PROFILEDETAILS}>
               <img
+                alt="profile pic"
                 className="mr-2 rounded-circle"
                 style={{ marginLeft: '-10px', height: '40px', width: '40px' }}
                 src={`${this.props.user.profilePic}`}
@@ -383,6 +396,7 @@ class AdminLayout extends Component {
             </Menu.Item>
             <Menu.Item key="8">
               <img
+                alt="forum"
                 className="mr-3"
                 style={{ marginLeft: '-9px' }}
                 src="images/admin/forum.svg"
@@ -402,6 +416,7 @@ class AdminLayout extends Component {
                   <Display if={!!this.state.collapsed}>
                     <div>
                       <img
+                        alt="menu"
                         src="images/menu-black.png"
                         className="trigger mr-3"
                         type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
@@ -420,7 +435,7 @@ class AdminLayout extends Component {
                     </Display>
                     <Display if={!this.props.headerName}>
                       <div>
-                        <img onClick={this.props.router.back} className="mr-3 has-cursor-pointer" src="images/arrow-left.png" ></img>
+                        <img alt="arrow left" onClick={this.props.router.back} className="mr-3 has-cursor-pointer" src="images/arrow-left.png" ></img>
                         <span>{this.props.backText}</span>
                       </div>
                     </Display>

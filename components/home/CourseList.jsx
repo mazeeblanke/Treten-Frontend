@@ -138,6 +138,7 @@ class CourseList extends Component {
               }}>
                 <div className="has-full-width pr-3 pl-3 center">
                   <img
+                    alt="close"
                     src="/images/close.png"
                     className="has-pointer-cursor"
                     onClick={() => this.setPathCourses({ courses: [], name: null })}

@@ -56,6 +56,7 @@ const Course = (props) => {
         { !!profilePic && !!instructorName && (
           <div className="is-flex is-vcentered mt-2">
             <img
+              alt={instructorName}
               className="mr-2 h28 rounded-circle"
               src={profilePic}
             />

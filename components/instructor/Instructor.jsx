@@ -76,12 +76,14 @@ const Instructor = props => {
             <Display if={!!socialLinks}>
               <div className="container social-links">
                 <div className="d-flex justify-content-center">
-                  <img src="/images/social/linkedin inverted.png" />
+                  <img alt="linkedin inverted icon" src="/images/social/linkedin inverted.png" />
                   <img
+                    alt="facebook inverted icon"
                     className=""
                     src="/images/social/facebook inverted.png"
                   />
                   <img
+                    alt="twitter inverted icon"
                     className=""
                     src="/images/social/twitter inverted.png"
                   />

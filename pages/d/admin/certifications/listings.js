@@ -42,7 +42,7 @@ class Listing extends Component {
       dataIndex: 'bannerImage',
       render: (avatar) => {
         return (
-					<img width={50} height={50} src={avatar}></img>
+					<img alt="avatar" width={50} height={50} src={avatar}></img>
         )
       },
       key: 8,

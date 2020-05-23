@@ -34,6 +34,7 @@ const Course = (props) => {
               <Img
                 style={{ maxHeight: '164px', height: '164px', width: '280px' }}
                 decode={false}
+                alt={course.title}
                 src={[course.bannerImage, '/images/courses/noimageavailable.png']}
               />
             </Display>
@@ -68,6 +69,7 @@ const Course = (props) => {
                   <h6>
                     <b>View Course</b>
                     <img
+                      alt="view course arrow"
                       className="ml-2"
                       src="/images/arrow-right.png"
                     />

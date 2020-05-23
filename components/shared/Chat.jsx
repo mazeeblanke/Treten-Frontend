@@ -173,6 +173,7 @@ const Chat = props => {
                 className="mr-3"
                 onClick={clearSelectedChat}
                 src="/images/back.png"
+                alt="go back"
               />
             )}
             <Avatar
@@ -212,6 +213,7 @@ const Chat = props => {
                         {chat.time}
                       </small>
                       <img
+                        alt="sent"
                         className="pl-2"
                         src="/images/double_tick.svg"
                       ></img>
@@ -254,15 +256,18 @@ const Chat = props => {
                 onClick={() => alert('sd')}
                 className="actions"
                 src="/images/add-image-to-msg.png"
+                alt="attach image"
               />
               <img
                 className="actions"
                 src="/images/add-attachment-to-msg.png"
+                alt="attach files"
               />
               <img
                 onClick={() => toggleShowingEmojis(!isShowingEmojis)}
                 className="actions"
                 src="/images/add-emoji-to-msg.png"
+                alt="attach emoji"
               />
             </div>
           </div>
@@ -304,7 +309,7 @@ const Chat = props => {
         title={
           <div className="d-flex align-items-center justify-content-between">
             <h5>
-              <img className="mr-2" src="/images/arrow-left.png" />
+              <img alt="select recipent" className="mr-2" src="/images/arrow-left.png" />
               <span className="font-weight-normal">Select recipient</span>
             </h5>
             <Button

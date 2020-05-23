@@ -131,6 +131,7 @@ const BroadcastMessages = props => {
           <div className="message__top-bar d-flex align-items-center pl-6 pr-6">
             {isViewingSelectedMessage && windowWidth < 978 && (
               <img
+                alt="go back"
                 className="mr-3"
                 onClick={clearSelectedMessage}
                 src="/images/back.png"

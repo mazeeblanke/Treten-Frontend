@@ -41,6 +41,7 @@ const LatestEnrollments = props => {
                   <div className="d-flex align-items-center mt-3 pt-2 mb-4">
                     <Display if={!isRefreshingNewStudents}>
                       <img
+                        alt={student.name}
                         className="mr-2 h45 profilePic rounded-circle"
                         src={student.profilePic}
                       />

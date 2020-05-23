@@ -67,7 +67,7 @@ class EmailForm extends React.Component {
                 {
                   !emailForm.file
                     ? (
-                      <img src="/images/add-attachment-to-msg.png" />
+                      <img alt="attachment" src="/images/add-attachment-to-msg.png" />
                     )
                     : (
                       <div className="text-center">

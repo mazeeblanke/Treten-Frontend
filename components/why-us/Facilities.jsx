@@ -34,7 +34,7 @@ const Facilities = props => {
             </div>
           </div>
           <div className="col-sm-12 col-md-5">
-            <img src="/images/tech-meeting-flatlay.png" className="has-full-width" />
+            <img alt="meeting" src="/images/tech-meeting-flatlay.png" className="has-full-width" />
           </div>
         </div>
       </div>

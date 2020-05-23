@@ -7,7 +7,7 @@ const DashboardCard = (props) => {
       <div className="card-body">
         <div className="d-flex justify-content-around align-items-center has-full-height">
           <div>
-            <img src={props.image}></img>
+            <img alt="stats" src={props.image}></img>
           </div>
           <div>
             <p className="m-0">{props.title}</p>

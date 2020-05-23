@@ -27,8 +27,8 @@ const ExpandableBlock = props => {
           <div className='expandable-block__right has-pointer-cursor d-flex align-items-center has-full-height'>
             <span className="mr-3 m-0">{right}</span>
             <Display if={showExpandableIcon}>
-              {expanded && <img src="/images/minimize.png" />}
-              {!expanded && <img src="/images/maximize.png" />}
+              {expanded && <img alt="minimize" src="/images/minimize.png" />}
+              {!expanded && <img alt="maximize" src="/images/maximize.png" />}
             </Display>
           </div>
         </div>

@@ -56,7 +56,7 @@ class BecomeAnInstructor extends Component {
                           animationOut="slideInUp"
                           isVisible={submittedForm}
                         >
-                          <img className="mb-2" src="images/confirmation.png" />
+                          <img alt="confirmation" className="mb-2" src="images/confirmation.png" />
                         </Animated>
                         <Animated
                           animationIn="slideInUp"

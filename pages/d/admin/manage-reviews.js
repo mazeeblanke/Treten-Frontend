@@ -178,7 +178,7 @@ class ManageReviews extends Component {
                 <Button>
                   <div className="d-flex justify-content-between align-items-center">
                     <span className="mr-3">Action</span>
-                    <img src="images/select.png" />
+                    <img alt="select" src="images/select.png" />
                   </div>
                 </Button>
               </Dropdown>

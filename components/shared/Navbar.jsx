@@ -98,6 +98,7 @@ class Navigation extends React.Component {
                       <Option key={index} value={option.slug}>
                         <div className="is-flex align-items-center justify-content-between">
                           <img
+                            alt={option.title}
                             style={{ float: 'left', height: '28px' }}
                             src={option.bannerImage} >
                           </img>

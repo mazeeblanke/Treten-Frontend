@@ -135,6 +135,7 @@ const CertificationEntryForm = props => {
                       <Select.Option key={el.id} label={el.bannerImage} value={el.company}>
                         <div>
                           <img
+                            alt={el.company}
                             style={{ float: 'left', height: '28px', marginTop: '3px' }}
                             src={el.bannerImage} >
                           </img>
@@ -153,12 +154,11 @@ const CertificationEntryForm = props => {
           </div>
         </div>
         <div className="col-md-1">
-          <img src="/images/close.png"
+          <img alt="set certification" src="/images/close.png"
             onClick={() =>
               setCertification(null, null, 'certifications', certificationIndex)
             }
           >
-
           </img>
         </div>
       </div>

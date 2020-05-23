@@ -18,14 +18,14 @@ const Instructor = props => {
           <div className="col-sm-12 col-md-4 p-0">
             <div className="course-instructor p-5">
               <h5 className="fw-600 mb-4 mt-1">{heading || 'Instructor'}</h5>
-              <img className="rounded-circle" src={profilePic} style={{ height: '80px' }}/>
+              <img alt="profile pic" className="rounded-circle" src={profilePic} style={{ height: '80px' }}/>
               <h5 className="mt-3 mb-3">{name}</h5>
               <p>{title}</p>
               <p>{qualifications}</p>
               <div className="d-flex mt-3">
-                <img className="mr-3" src="/images/social/linkedin inverted.png" />
-                <img className="mr-3" src="/images/social/facebook inverted.png" />
-                <img className="mr-3" src="/images/social/twitter inverted.png" />
+                <img alt="linkedin logo" className="mr-3" src="/images/social/linkedin inverted.png" />
+                <img alt="facebook logo" className="mr-3" src="/images/social/facebook inverted.png" />
+                <img alt="twitter logo" className="mr-3" src="/images/social/twitter inverted.png" />
               </div>
               <Link href={`/instructors/${instructorSlug}`}>
                 <button type="button" className="btn btn-outline-danger mt-5">

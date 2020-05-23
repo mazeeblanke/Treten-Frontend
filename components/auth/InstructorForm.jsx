@@ -239,7 +239,7 @@ class InstructorForm extends React.Component {
                   height: '150px'
                 }} {...getRootProps({ className: 'dropzone' })}>
                   <input accept=".pdf" {...getInputProps()} />
-                  <img src="/images/cloud.png" />
+                  <img alt="upload" src="/images/cloud.png" />
                   <p className="text-center mt-2">
                     Click to upload CV or drag in from computer
                   </p>
@@ -252,12 +252,14 @@ class InstructorForm extends React.Component {
                 <div className="d-flex justify-content-center align-items-center">
                   {file.type === 'application/pdf' ? (
                     <img
+                      alt={file.name}
                       style={{ height: '75px' }}
                       className="mr-3"
                       src="/images/file_des.svg"
                     />
                   ) : (
                       <img
+                        alt={file.name}
                         style={{ height: '75px' }}
                         className="mr-3"
                         src="/images/file.svg"

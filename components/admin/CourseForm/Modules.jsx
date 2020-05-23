@@ -77,7 +77,7 @@ const Modules = props => {
 
             </div>
             <div className="col-md-1">
-              <img className="mt-5" src="/images/close.png"
+              <img alt="close" className="mt-5" src="/images/close.png"
                 onClick={() =>
                   setModule(null, null, 'modules', moduleIndex)
                 }
@@ -91,7 +91,7 @@ const Modules = props => {
         onClick={() => addModule()}
         className="d-flex align-items-center has-pointer-cursor mt-3"
       >
-        <img className="mr-2" src="/images/plus.png" />
+        <img alt="add another" className="mr-2" src="/images/plus.png" />
         <p className="m-0 ">
           <b>Add another module</b>
         </p>

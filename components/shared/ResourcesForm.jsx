@@ -86,7 +86,7 @@ class ResourcesForm extends React.Component {
                 {({ getRootProps, getInputProps }) => (
                   <div {...getRootProps({ className: 'dropzone' })}>
                     <input accept=".pdf" {...getInputProps()} />
-                    <img src="/images/cloud.png" />
+                    <img alt="upload" src="/images/cloud.png" />
                     <p className="text-center mt-2">
                       Click to upload file or drag in from computer
                     </p>
@@ -99,12 +99,14 @@ class ResourcesForm extends React.Component {
                 <div className="d-flex justify-content-center align-items-center">
                   {resourcesForm.file.type === 'application/pdf' ? (
                     <img
+                      alt={resourcesForm.file.name}
                       style={{ height: '75px' }}
                       className="mr-3"
                       src="/images/file_des.svg"
                     />
                   ) : (
                     <img
+                      alt={resourcesForm.file.name}
                       style={{ height: '75px' }}
                       className="mr-3"
                       src="/images/file.svg"

@@ -11,21 +11,21 @@ const HowItWorks = () => {
               <h5 className="fw-600">How it works</h5>
               <div className="row">
                 <div className="col-sm-12 col-md-6">
-                  <img src="/images/coursework.png"></img>
+                  <img alt="coursework" src="/images/coursework.png"></img>
                   <h6 className="fw-600 mt-3">Coursework</h6>
                   <p className="lh-30">
                     Each course is like an interactive textbook, featuring pre-recorded videos, quizzes and projects.
                   </p>
                 </div>
                 <div className="col-sm-12 col-md-6">
-                  <img src="/images/peers.png" />
+                  <img alt="peers" src="/images/peers.png" />
                   <h6 className="fw-600 mt-3">Help from your peers</h6>
                   <p className="lh-30">
                     Connect with thousands of other learners and debate ideas, discuss course material, and get help mastering concepts.
                   </p>
                 </div>
                 <div className="col-sm-12 col-md-6">
-                  <img src="/images/certificates.png" />
+                  <img alt="certificates" src="/images/certificates.png" />
                   <h6 className="fw-600 mt-3">Certificates</h6>
                   <p className="lh-30">
                     Earn official recognition for your work, and share your success with friends, colleagues, and employers.
