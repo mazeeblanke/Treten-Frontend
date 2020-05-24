@@ -1,4 +1,3 @@
-import 'element-theme-default'
 import Router from 'next/router'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'

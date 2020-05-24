@@ -2,7 +2,7 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic'
-import 'element-theme-default'
+// import 'element-theme-default'
 // const ElSelect = dynamic(() => import('element-react').then(mod => mod.Select), {
 //   ssr: false
 // })

@@ -8,7 +8,7 @@ import { Layout, Menu } from 'antd'
 import Link from 'next/link'
 import Head from 'next/head'
 import PropTypes from 'prop-types'
-import 'simple-react-notifier/dist/index.css'
+// import 'simple-react-notifier/dist/index.css'
 const { Header, Sider, Content } = Layout
 const Cookies = require('js-cookie')
 const { SubMenu } = Menu

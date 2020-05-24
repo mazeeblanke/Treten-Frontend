@@ -1,5 +1,5 @@
 // import moment from 'moment'
-import 'element-theme-default'
+// import 'element-theme-default'
 import PropTypes from 'prop-types'
 import { Form, Button } from 'antd'
 import { connect } from 'react-redux'

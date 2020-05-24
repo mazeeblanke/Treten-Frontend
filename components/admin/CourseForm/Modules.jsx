@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Input, Form } from 'antd'
-import 'react-quill/dist/quill.snow.css'
 import dynamic from 'next/dynamic'
 import Display from '../../shared/Display'
 import EmptyState from '../../shared/EmptyState'

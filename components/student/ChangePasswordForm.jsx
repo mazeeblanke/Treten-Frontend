@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { getUserDetails } from '../../store/reducers/user'
 import * as actions from '../../store/actions'
 import notifier from 'simple-react-notifier'
-import 'simple-react-notifier/dist/index.css'
+// import 'simple-react-notifier/dist/index.css'
 
 class ChangePasswordForm extends Component {
   state = {

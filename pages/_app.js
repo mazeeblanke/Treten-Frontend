@@ -6,13 +6,14 @@ import { Provider } from 'react-redux'
 import NextNProgress from '../components/shared/NextNProgress'
 import withReduxStore from '../lib/with-redux-store'
 import 'react-phone-number-input/style.css'
-// import 'react-phone-input-2/dist/style.css'
 import 'react-quill/dist/quill.snow.css'
 import 'antd/dist/antd.css'
 import '../public/slick-carousel/slick/slick.css'
 import '../public/slick-carousel/slick/slick-theme.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../public/sass/application.scss'
+import 'react-image-crop/dist/ReactCrop.css';
+import 'element-theme-default'
 import { PageTransition } from 'next-page-transitions'
 
 const Cookies = require('js-cookie')

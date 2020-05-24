@@ -13,10 +13,10 @@ const columns = [
     fixed: 'left',
     render: (title) => {
       return (
-        <Tooltip title={title}>
+        <Tooltip title={title || '-'}>
           <TextTruncate
             line={1}
-            text={title}
+            text={title || '-'}
           />
         </Tooltip>
       )

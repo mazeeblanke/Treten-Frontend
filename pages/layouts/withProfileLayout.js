@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 import { ROUTES } from '../../lib/constants'
 import withAdminLayout from './withAdminLayout'
 import notifier from 'simple-react-notifier'
-import 'simple-react-notifier/dist/index.css'
+// import 'simple-react-notifier/dist/index.css'
 const Cookies = require('js-cookie')
 
 export default Comp => {

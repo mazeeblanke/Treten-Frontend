@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import ReactCrop from 'react-image-crop';
-import 'react-image-crop/dist/ReactCrop.css';
 import { convertToDataURL } from '../../lib/helpers'
 
 class Cropper extends PureComponent {
