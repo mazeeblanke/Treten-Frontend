@@ -61,7 +61,7 @@ class Home extends Component {
                       <div className="card-body">
                         <div className="d-flex justify-content-around align-items-center has-full-height">
                           <div>
-                            <img alt="prof cap" src="images/admin/prof_cap.png"></img>
+                            <img alt="prof cap" src="/images/admin/prof_cap.png"></img>
                           </div>
                           <div>
                             <p className="m-0">My students</p>
@@ -76,7 +76,7 @@ class Home extends Component {
                       <div className="card-body">
                         <div className="d-flex justify-content-around align-items-center has-full-height">
                           <div>
-                            <img alt="books" src="images/admin/books.png"></img>
+                            <img alt="books" src="/images/admin/books.png"></img>
                           </div>
                           <div>
                             <p className="m-0">My courses</p>

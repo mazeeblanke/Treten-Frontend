@@ -14,14 +14,14 @@ class TretenDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <script src="//localhost:6001/socket.io/socket.io.js" />
-          <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js" />
+          <script async defer src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js" />
         </Head>
         <body>
           <Main />
           <NextScript />
-          <script
+          {/* <script
             async
+            defer
             type="text/javascript"
             dangerouslySetInnerHTML={{
               __html: `
@@ -36,7 +36,7 @@ class TretenDocument extends Document {
                     })();  
                 `
             }}
-          />
+          /> */}
         </body>
       </Html>
     )

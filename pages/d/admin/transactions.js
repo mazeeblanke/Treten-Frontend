@@ -97,7 +97,7 @@ class Transactions extends Component {
                         style={{ width: '126px', height: '40px' }}
                       >
                         <span>Download</span>
-                        <img className="ml-2" src="images/down.png" alt="arrow down" />
+                        <img className="ml-2" src="/images/down.png" alt="arrow down" />
                       </Button>
                       {
                         <CSVLink

@@ -3,12 +3,12 @@ import React from 'react'
 import Link from 'next/link'
 import Display from './Display'
 import { connect } from 'react-redux'
-import { Icon, Button, Input, Select } from 'antd'
+import { Icon, Button, Select } from 'antd'
 import PropTypes from 'prop-types'
 import Brand from './Brand'
 const Option = Select.Option
 import * as actions from '../../store/actions'
-import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/dist/css/bootstrap.min.css'
 
 import {
   Collapse,
@@ -22,7 +22,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap'
-const { Search } = Input
+// const { Search } = Input
 
 class Navigation extends React.Component {
   constructor (props) {

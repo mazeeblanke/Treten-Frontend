@@ -23,13 +23,13 @@ class InstructorProfile extends Component {
       instructor: {
         certifications: [
           {
-            logo: 'images/certifications/cisco.png'
+            logo: '/images/certifications/cisco.png'
           },
           {
-            logo: 'images/certifications/microsoft.png'
+            logo: '/images/certifications/microsoft.png'
           },
           {
-            logo: 'images/certifications/microsoft.png'
+            logo: '/images/certifications/microsoft.png'
           }
         ],
         courses: [

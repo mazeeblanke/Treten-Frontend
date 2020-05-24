@@ -76,7 +76,7 @@ export default Comp => {
                       <img
                         alt="edit"
                         className="edit"
-                        src="images/profile/edit-white.png"
+                        src="/images/profile/edit-white.png"
                         onClick={() => this.fileInputRef.current.click()}
                       />
                       <img
@@ -105,7 +105,7 @@ export default Comp => {
                             <img
                               alt="personal details"
                               className="mr-3"
-                              src={`images/profile/${
+                              src={`/images/profile/${
                                 this.props.router.pathname ===
                                   ROUTES.STUDENT_DASHBOARD_PROFILEDETAILS
                                   ? 'user-white.png'
@@ -127,7 +127,7 @@ export default Comp => {
                             <img
                               alt="change password"
                               className="mr-3"
-                              src={`images/profile/${
+                              src={`/images/profile/${
                                 this.props.router.pathname ===
                                   ROUTES.STUDENT_DASHBOARD_CHANGEPASSWORD
                                   ? 'padlock-white.png'
@@ -150,7 +150,7 @@ export default Comp => {
                               <img
                                 alt="tutor details"
                                 className="mr-3"
-                                src={`images/profile/${
+                                src={`/images/profile/${
                                   this.props.router.pathname ===
                                     ROUTES.INSTRUCTOR_DASHBOARD_TUTORDETAILS
                                     ? 'lock-white.png'
@@ -166,7 +166,7 @@ export default Comp => {
                             <img
                               alt="logout"
                               className="mr-3"
-                              src="images/profile/logout.png"
+                              src="/images/profile/logout.png"
                             />
                             <span className="is-red">Log out</span>
                           </a>

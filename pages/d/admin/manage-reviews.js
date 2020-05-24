@@ -178,7 +178,7 @@ class ManageReviews extends Component {
                 <Button>
                   <div className="d-flex justify-content-between align-items-center">
                     <span className="mr-3">Action</span>
-                    <img alt="select" src="images/select.png" />
+                    <img alt="select" src="/images/select.png" />
                   </div>
                 </Button>
               </Dropdown>
@@ -307,7 +307,7 @@ class ManageReviews extends Component {
                         style={{ width: '126px', height: '40px' }}
                       >
                         <span>Download</span>
-                        <img className="ml-2" src="images/down.png" alt="arrow down" />
+                        <img className="ml-2" src="/images/down.png" alt="arrow down" />
                       </Button>
                       {
                         <CSVLink

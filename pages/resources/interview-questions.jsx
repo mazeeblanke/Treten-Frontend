@@ -99,7 +99,7 @@ class InterviewQuestions extends Component {
                         </small>
                         <p className="mt-2">
                           <b className="mr-1">Download</b>
-                          <img alt="download" src="images/arrow-right.png" />
+                          <img alt="download" src="/images/arrow-right.png" />
                         </p>
                       </div>
                     </div>

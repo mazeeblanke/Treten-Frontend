@@ -106,9 +106,7 @@ class Courses extends Component {
             <div className="row justify-content-center mb-5">
               <div className="col-md-7 pl-4 pr-4">
                 <p className="lh-30 fs-16 text-center">
-                  Flatland culture star stuff harvesting star light two ghostly white figures in
-                  coveralls and helmets are soflty dancing vanquish the impossible invent the
-                  universe.
+                  Learn the tech skills of your choice from our wide range of courses on Cloud Technology, Networking & Programming
                 </p>
               </div>
             </div>

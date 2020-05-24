@@ -11,7 +11,7 @@ class TutorDetails extends Component {
           <h5>Update your tutor profile</h5>
           <div className="d-flex align-items-center">
             <p className="m-0 mr-3">View profile</p>
-            <img alt="view profile" src="images/arrow-right.png"></img>
+            <img alt="view profile" src="/images/arrow-right.png"></img>
           </div>
         </div>
         <TutorDetailsForm />
