@@ -61,7 +61,6 @@ class NewsLetterSubscription extends Component {
                   disabled={
                     this.state.isLoading
                   }
-                  loading={this.state.isLoading}
                   value={this.state.email}
                   onChange={this.setEmail}
                   className="search"

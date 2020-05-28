@@ -41,7 +41,7 @@ const CoursePopover = (props) => {
           src="/images/users.png"
           alt="users"
         />
-        <span>{learnersCount} learners</span>
+        {/* <span>{learnersCount} learners</span> */}
       </div>
       {/* </Display> */}
       <Link href={`/courses/${slug}`}>

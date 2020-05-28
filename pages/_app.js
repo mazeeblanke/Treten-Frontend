@@ -16,7 +16,7 @@ import 'react-image-crop/dist/ReactCrop.css';
 import 'element-theme-default'
 import { PageTransition } from 'next-page-transitions'
 
-const Cookies = require('js-cookie')
+// const Cookies = require('js-cookie')
 
 class Treten extends App {
   render () {
@@ -40,7 +40,7 @@ class Treten extends App {
             defer
           />
           {/* <Head> */}
-          <meta name="csrf-token" content={Cookies.get('XSRF-TOKEN')} />
+          {/* <meta name="csrf-token" content={Cookies.get('XSRF-TOKEN')} /> */}
           {/* </Head> */}
         </Head>
 

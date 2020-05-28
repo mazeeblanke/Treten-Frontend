@@ -1,8 +1,7 @@
-// import Router from 'next/router'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
-import * as actions from '../../../store/actions'
+import { fetchDashboardStats, refreshNewStudents } from '../../../store/actions'
 import AdminLayout from '../../layouts/AdminLayout'
 import withRedirect from '../../layouts/withRedirect'
 import NewStudents from '../../../components/admin/NewStudents'
@@ -13,8 +12,8 @@ import { getNewStudents, getIsRefreshingNewStudents } from '../../../store/reduc
 class Home extends Component {
   static async getInitialProps ({ reduxStore, res }) {
     await Promise.all([
-      reduxStore.dispatch(actions.fetchDashboardStats()),
-      reduxStore.dispatch(actions.refreshNewStudents())
+      reduxStore.dispatch(fetchDashboardStats()),
+      reduxStore.dispatch(refreshNewStudents())
     ])
     return {}
   }
@@ -97,7 +96,7 @@ Home.propTypes = {
     coursesCount: PropTypes.number,
     studentsCount: PropTypes.number,
     instructorsCount: PropTypes.number,
-    activeClassesCount: PropTypes.string
+    activeClassesCount: PropTypes.number
   }).isRequired,
   user: PropTypes.object.isRequired,
   newStudents: PropTypes.array.isRequired,
@@ -117,6 +116,6 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
-    refreshNewStudents: actions.refreshNewStudents
+    refreshNewStudents,
   }
 )(withRedirect(Home))

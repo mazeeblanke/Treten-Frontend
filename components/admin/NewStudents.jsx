@@ -61,17 +61,18 @@ const LatestEnrollments = props => {
                           <Skeleton />
                         </Display>
                       </h6>
-                      <p className="mb-0">
+                      <div className="mb-0">
                         <Display if={!isRefreshingNewStudents}>
                           <TextTruncate
                             line={1}
+                            element="span"
                             text={student.email}
                           />
                         </Display>
                         <Display if={isRefreshingNewStudents}>
                           <Skeleton height={8} width={140} />
                         </Display>
-                      </p>
+                      </div>
                     </div>
                   </div>
                 </div>

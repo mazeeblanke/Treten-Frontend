@@ -1,11 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Link from 'next/link'
 
 const Courses = props => {
   return (
     <div className="card instructor-experience mb-9  pb-1">
       <div className="card-body pb-4">
         <h5 className="card-title mb-3 p-2">Courses</h5>
+        {!props.courses.length ? <EmptyState emptyText="No courses!" /> : null}
         {
           props.courses.map((course) => (
             <div key={course.title} className="course mb-2 p-2">
@@ -13,11 +15,13 @@ const Courses = props => {
                 <h6 className="fw-600">
                   {course.title}
                 </h6>
-                <span className="is-red">
-                  view
-                </span>
+                <Link className="is-red" href={`/courses/${course.slug}`}>
+                  <a className="is-red has-pointer-cursor">
+                    view
+                  </a>
+                </Link>
               </div>
-              <p>{course.level}</p>
+              <p className="is-red">{course.category.name}</p>
               <div>
                 <p className="mb-1 is-grey-dark">{course.excerpt}</p>
               </div>

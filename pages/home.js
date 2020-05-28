@@ -6,7 +6,14 @@ import { NextSeo } from 'next-seo'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
-import * as actions from '../store/actions'
+import { 
+  fetchInstructors,
+  fetchCoursePaths, 
+  fetchTestimonials, 
+  fetchPopularCourses, 
+  fetchCertifications,
+  fetchLatestBlogPosts,
+} from '../store/actions'
 import Banner from '../components/home/Banner'
 import Footer from '../components/shared/Footer'
 import Display from '../components/shared/Display'
@@ -29,31 +36,17 @@ import NewsLetterSubscription from '../components/home/NewsLetterSubscription'
 class Home extends Component {
   static async getInitialProps ({ reduxStore }) {
     await Promise.all([
-      reduxStore.dispatch(actions.fetchInstructors({ pageSize: 8, showActive: 1 })),
-      reduxStore.dispatch(actions.fetchLatestBlogPosts()),
-      reduxStore.dispatch(actions.fetchPopularCourses()),
-      reduxStore.dispatch(actions.fetchTestimonials()),
-      reduxStore.dispatch(actions.fetchCoursePaths({
+      reduxStore.dispatch(fetchInstructors({ pageSize: 8, showActive: 1 })),
+      reduxStore.dispatch(fetchLatestBlogPosts()),
+      reduxStore.dispatch(fetchPopularCourses()),
+      reduxStore.dispatch(fetchTestimonials()),
+      reduxStore.dispatch(fetchCoursePaths({
         page: null,
         pageSize: null
       })),
-      reduxStore.dispatch(actions.fetchCertifications())
+      reduxStore.dispatch(fetchCertifications())
     ])
     return {}
-  }
-
-  componentDidMount () {
-    window.tretenEcho = new Echo({
-      broadcaster: 'socket.io',
-      host: `${window.location.hostname}:6001`,
-      encrypted: true
-      // key: 'your-pusher-channels-key'
-    })
-
-    // var socketId = Echo.socketId();
-    window.tretenEcho.channel('treten_database_doneChannel').listen('done', () => {
-      // console.log(e)
-    })
   }
 
   render () {
@@ -187,11 +180,11 @@ Home.propTypes = {
 export default connect(
   mapStateToProps,
   {
-    fetchInstructors: actions.fetchInstructors,
-    fetchCertifications: actions.fetchCertifications,
-    fetchPopularCourses: actions.fetchPopularCourses,
-    fetchLatestBlogPosts: actions.fetchLatestBlogPosts,
     getTestimonials,
-    fetchCoursePaths: actions.fetchCoursePaths
+    fetchInstructors,
+    fetchCoursePaths,
+    fetchCertifications,
+    fetchPopularCourses,
+    fetchLatestBlogPosts,
   }
 )(withMasterLayout(Home))

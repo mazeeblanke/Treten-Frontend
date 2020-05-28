@@ -62,7 +62,7 @@ class Course extends Component {
         display: 'flex',
         alignItems: 'center'
       }}>
-        <img src="images/bookmark.png" className="mr-4" alt="bookmark" />
+        <img src="/images/bookmark.png" className="mr-4" alt="bookmark" />
         <Display if={(course.transaction || {}).status === 'success' &&
           !!(course.enrollment || {}).active && userIsStudent(this.props.user)
         }>
@@ -77,7 +77,7 @@ class Course extends Component {
           !userIsAdmin(user) && !userIsInstructor(user)
         }>
           <Link href={`${this.props.course.slug}/enroll`}>
-            <Button size="large" type="secondary">
+            <Button size="large" type="danger" style={{ width: 120, height: 50 }}>
               Enroll now
             </Button>
           </Link>
@@ -170,7 +170,7 @@ class Course extends Component {
           style={{
             backgroundImage:
               `linear-gradient(to left, rgba(34, 40, 41, 1), rgba(34, 40, 41, 0.7)), 
-              url('images/course/course-bg.png')`,
+              url('/images/course/course-bg.png')`,
             height: '220px'
           }}
           className="has-grey-bg has-full-height"
@@ -183,7 +183,7 @@ class Course extends Component {
               <div className="mr-3">
                 <img
                   className="mr-1 text-capitalize"
-                  src="images/scholar.png"
+                  src="/images/scholar.png"
                   alt="scholar"
                 />
                 <span className="text-capitalize">

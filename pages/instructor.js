@@ -17,33 +17,6 @@ class InstructorProfile extends Component {
     return {}
   }
 
-  constructor (props) {
-    super(props)
-    this.state = {
-      instructor: {
-        certifications: [
-          {
-            logo: '/images/certifications/cisco.png'
-          },
-          {
-            logo: '/images/certifications/microsoft.png'
-          },
-          {
-            logo: '/images/certifications/microsoft.png'
-          }
-        ],
-        courses: [
-          {
-            title: 'CCNA R&S',
-            level: 'Expert',
-            excerpt:
-              'Brief course description goes here. Did he just throw my cat out of the window? You really think you can fly that thing? Jaguar shark! '
-          }
-        ]
-      }
-    }
-  }
-
   render () {
     return (
       <>
@@ -67,7 +40,7 @@ class InstructorProfile extends Component {
                     <Education education={this.props.instructor.userable.education} />
                   </div>
                   <div className="col-sm-12 col-md-6">
-                    <Courses courses={this.state.instructor.courses} />
+                    <Courses courses={this.props.instructor.courses} />
                   </div>
                 </div>
               </div>

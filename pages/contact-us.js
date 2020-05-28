@@ -8,6 +8,16 @@ import withMasterLayout from './layouts/withMasterLayout'
 import GoogleMapReact from 'google-map-react'
 const { googleMapsKey } = require('../lib/config')
 
+const AnyReactComponent = ({ text }) => <div
+  style={{
+    backgroundImage: "url('/images/marker.png')",
+    height: "25px",
+    width: "25px",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "contain"
+  }}
+></div>;
+
 const ContactUs = () => (
   <div id="treten">
     {/* <Navbar noBoxShadow /> */}
@@ -22,24 +32,24 @@ const ContactUs = () => (
             <div className="row">
               <div className="col-md-6">
                 <address className="mb-3 d-flex align-items-start">
-                  <img src="images/address.png" className="mr-2 pt-1" alt="address" />
+                  <img src="/images/address.png" className="mr-2 pt-1" alt="address" />
                   <span className="is-grey-dark">
                     Oak Place Plot 14, Nike Art Gallery Road, Ikate, Lekki Phase 1 Lagos, Nigeria
                   </span>
                 </address>
                 <time className="mb-3 d-flex align-items-start">
-                  <img src="images/time.png" className="mr-2 pt-1" alt="time" />
+                  <img src="/images/time.png" className="mr-2 pt-1" alt="time" />
                   <span className="is-grey-dark">11am-1pm Saturday, 2pm to 6pm Sundays</span>
                 </time>
               </div>
               <div className="col-md-6">
                 <a className="mb-3 d-flex align-items-start" href="tel:(+234) 9060 0063 12">
-                  <img src="images/phone.png" className="mr-2 pt-1" alt="phone" />
+                  <img src="/images/phone.png" className="mr-2 pt-1" alt="phone" />
                   <span className="is-grey-dark">(+234) 9060 0063 12</span>
                 </a>
 
                 <p className="mb-3 d-flex align-items-start">
-                  <img src="images/mail.png" className="mr-2 pt-1" alt="mail" />
+                  <img src="/images/mail.png" className="mr-2 pt-1" alt="mail" />
                   <span className="is-grey-dark">info@tretenacademy.com</span>
                 </p>
               </div>
@@ -52,13 +62,13 @@ const ContactUs = () => (
         <div style={{ height: '450px', width: '100%' }}>
           <GoogleMapReact
             bootstrapURLKeys={{ key: googleMapsKey }}
-            defaultZoom={11}
+            defaultZoom={14}
             defaultCenter={{
-              lat: 59.95,
-              lng: 30.33
+              lat: 6.4286,
+              lng: 3.4822
             }}
           >
-            <div
+            <AnyReactComponent
               lat={6.4286}
               lng={3.4822}
               text="Treten"
@@ -70,7 +80,5 @@ const ContactUs = () => (
     <Footer />
   </div>
 )
-
-// ContactUs.propTypes = {};
 
 export default withMasterLayout(ContactUs)

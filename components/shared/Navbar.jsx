@@ -129,7 +129,7 @@ class Navigation extends React.Component {
                       </NavLink>
                       {
                         (coursesByGroup.associate || []).map((course) => (
-                          <DropdownItem key={course.id}>
+                          <DropdownItem key={course.slug}>
                             <Link href={`/courses/${course.slug}`}>
                               <span title={course.title}>{course.title}</span>
                             </Link>
@@ -143,7 +143,7 @@ class Navigation extends React.Component {
                       </NavLink>
                       {
                         (coursesByGroup.professional || []).map((course) => (
-                          <DropdownItem key={course.id}>
+                          <DropdownItem key={course.slug}>
                             <Link href={`/courses/${course.slug}`}>
                               <span title={course.title}>{course.title}</span>
                             </Link>
@@ -157,7 +157,7 @@ class Navigation extends React.Component {
                       </NavLink>
                       {
                         (coursesByGroup.expert || []).map((course) => (
-                          <DropdownItem key={course.id}>
+                          <DropdownItem key={course.slug}>
                             <Link href={`/courses/${course.slug}`}>
                               <span title={course.title}>{course.title}</span>
                             </Link>
@@ -201,12 +201,16 @@ class Navigation extends React.Component {
                 </DropdownMenu>
               </UncontrolledDropdown>
               <NavItem>
-                <Link href="/about-us">About us</Link>
+                <Link href="/about-us">
+                  <a>About us</a>
+                </Link>
               </NavItem>
               <NavItem>
-                <Link href="/why-us">Why us</Link>
+                <Link href="/why-us">
+                  <a>Why us</a>
+                </Link>
               </NavItem>
-              <UncontrolledDropdown nav inNavbar>
+              {/* <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav>
                   Resources
                   <Icon type="down" />
@@ -223,7 +227,7 @@ class Navigation extends React.Component {
                     </Link>
                   </DropdownItem>
                 </DropdownMenu>
-              </UncontrolledDropdown>
+              </UncontrolledDropdown> */}
               <NavItem>
                 <Link href="/blog">
                   <a>Blog</a>
@@ -245,7 +249,6 @@ class Navigation extends React.Component {
                   }>
                     {/* <a> */}
                     <Button
-                      className="mr-2"
                       size="large"
                       type="danger"
                     >
@@ -256,9 +259,9 @@ class Navigation extends React.Component {
                 </NavItem>
               </Display>
               <Display if={isLoggedIn} >
-                <NavItem>
+                {/* <NavItem>
                   <img src={user.gravatar} alt={user.name} className="rounded-circle" />
-                </NavItem>
+                </NavItem> */}
                 <NavItem>
                   <a href={`/t/logout?redirect=${this.props.currentPath}`}>
                     <Icon className="is-red" style={{ fontSize: 25 }} type="logout" />
