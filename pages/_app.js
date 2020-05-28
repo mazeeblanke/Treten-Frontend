@@ -26,22 +26,13 @@ class Treten extends App {
         <Head>
           <link rel="shortcut icon" type="image/png" href="images/logo.png" />
           <script src="https://www.google.com/recaptcha/api.js?onload=recaptchaLoaded&render=explicit" async defer></script>
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"></link>
+          {/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"></link> */}
           {/* <!-- Chrome, Firefox OS and Opera --> */}
           <meta name="theme-color" content="#E12828" />
           {/* <!-- Windows Phone --> */}
           <meta name="msapplication-navbutton-color" content="#E12828" />
           {/* <!-- iOS Safari --> */}
           <meta name="apple-mobile-web-app-status-bar-style" content="#E12828" />
-          <link
-            href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i&display=swap"
-            rel="stylesheet"
-            async 
-            defer
-          />
-          {/* <Head> */}
-          {/* <meta name="csrf-token" content={Cookies.get('XSRF-TOKEN')} /> */}
-          {/* </Head> */}
         </Head>
 
         <Provider store={reduxStore}>
@@ -67,7 +58,7 @@ class Treten extends App {
           </p>
         </CookieConsent>
         <NextNProgress color="#E12828" startPosition={1} stopDelayMs={500} height={3} />
-        <style jsx global>{`
+        {/* <style jsx global>{`
           .page-transition-enter {
             opacity: 0;
           }
@@ -82,7 +73,7 @@ class Treten extends App {
             opacity: 0;
             transition: opacity 300ms;
           }
-        `}</style>
+        `}</style> */}
       </Container>
     )
   }
