@@ -8,6 +8,7 @@ import { Layout, Menu } from 'antd'
 import Link from 'next/link'
 import Head from 'next/head'
 import PropTypes from 'prop-types'
+import NextNProgress from '../../components/shared/NextNProgress'
 // import 'simple-react-notifier/dist/index.css'
 const { Header, Sider, Content } = Layout
 const Cookies = require('js-cookie')
@@ -460,6 +461,7 @@ class AdminLayout extends Component {
             </div>
           </Content>
         </Layout>
+        <NextNProgress color="#E12828" startPosition={1} stopDelayMs={500} height={3} />
       </Layout>
     )
   }

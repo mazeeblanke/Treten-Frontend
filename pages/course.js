@@ -145,16 +145,16 @@ class Course extends Component {
         <NextSeo
           title={`Treten Academy course - ${course.title}`}
           description={course.description.substr(0, 200).replace(/<\/?[^>]+(>|$)/g, '')}
-          canonical="https://tretenacademy.com"
+          canonical="http://tretenacademy.com.ng"
           openGraph={{
-            url: 'https://tretenacademy.com',
-            title: 'Treten Academy - Africa largest virtual lab',
+            url: 'http://tretenacademy.com.ng',
+            title: 'Learn Tech Skills - CCNA, CCNP, CCIE, AWS, Python | Treten Academy',
             description: course.description.substr(0, 200).replace(/<\/?[^>]+(>|$)/g, ''),
             images: [
               {
                 url: course.bannerImage,
-                width: 800,
-                height: 600,
+                width: 296,
+                height: 164,
                 alt: course.title
               }
             ],

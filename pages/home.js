@@ -53,31 +53,27 @@ class Home extends Component {
     return (
       <>
         <Head>
-          <title key="title">Treten Academy - Africa largest virtual lab</title>
+          <title key="title">Learn Tech Skills - CCNA, CCNP, CCIE, AWS, Python | Treten Academy</title>
         </Head>
         <NextSeo
-          title="Treten Academy - Africa largest virtual lab"
+          title="Learn Tech Skills - CCNA, CCNP, CCIE, AWS, Python | Treten Academy"
           description={
-              `We Are Africa’s Largest Virtual Lab Focused On Developing Capacity, 
-              Capability And Competence Especially In The Area of Information Technology. 
-              We seek to empower professionals with the required skills and training to take 
+              `We seek to empower professionals with the required skills and training to take 
               them from Zero to Hero
             `}
-          canonical="https://tretenacademy.com"
+          canonical="http://tretenacademy.com.ng"
           openGraph={{
-            url: 'https://tretenacademy.com',
-            title: 'Treten Academy - Africa largest virtual lab',
+            url: 'http://tretenacademy.com.ng',
+            title: 'Learn Tech Skills - CCNA, CCNP, CCIE, AWS, Python | Treten Academy',
             description: `
-                We Are Africa's Largest Virtual Lab Focused On Developing Capacity, 
-                Capability And Competence Especially In The Area of Information Technology. 
                 We seek to empower professionals with the required skills and training to take 
                 them from Zero to Hero
               `,
             images: [
               {
-                url: 'https://tretenacademy.comimages/why-us.png',
-                width: 800,
-                height: 600,
+                url: 'http://tretenacademy.com.ng/images/features/intensive_pratical_classes.png',
+                width: 310,
+                height: 328,
                 alt: 'treten academy'
               }
             ],

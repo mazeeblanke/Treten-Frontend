@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Head from 'next/head'
 import AlternateNavbar from '../../components/shared/AlternateNavbar'
-
-const Cookies = require('js-cookie')
+import NextNProgress from '../../components/shared/NextNProgress'
+// const Cookies = require('js-cookie')
 
 export default (Page) => {
   return class extends Component {
@@ -11,7 +11,6 @@ export default (Page) => {
       if (Page.getInitialProps) {
         pageProps = await Page.getInitialProps(ctx)
       }
-      // console.log(ctx)
       return { ...pageProps, currentPath: ctx.asPath }
     }
 
@@ -19,10 +18,11 @@ export default (Page) => {
       return (
         <div id="treten" style={{ margin: '0' }}>
           <Head>
-            <meta name="csrf-token" content={Cookies.get('XSRF-TOKEN')} />
+            {/* <meta name="csrf-token" content={Cookies.get('XSRF-TOKEN')} /> */}
           </Head>
           <AlternateNavbar />
           <Page {...this.props} />
+          <NextNProgress color="#E12828" startPosition={1} stopDelayMs={500} height={3} />
         </div>
       )
     }

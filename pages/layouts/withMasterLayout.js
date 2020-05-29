@@ -1,9 +1,9 @@
-// import Head from 'next/head'
 import { DefaultSeo } from 'next-seo'
 import React, { Component } from 'react'
+import CookieConsent from 'react-cookie-consent'
 import Navbar from '../../components/shared/Navbar'
-// import 'simple-react-notifier/dist/index.css'
-// const Cookies = require('js-cookie')
+import NextNProgress from '../../components/shared/NextNProgress'
+
 /* eslint-disable */
 export default Page => {
   return class extends Component {
@@ -18,14 +18,11 @@ export default Page => {
     render () {
       return (
         <div id="treten">
-          {/* <Head>
-            <meta name="csrf-token" content={Cookies.get('XSRF-TOKEN')} />
-          </Head> */}
           <DefaultSeo
             openGraph={{
               type: 'website',
               locale: 'en_IE',
-              url: 'https://tretenacademy.com',
+              url: 'http://tretenacademy.com.ng',
               site_name: 'Treten Academy',
             }}
             twitter={{
@@ -36,7 +33,24 @@ export default Page => {
           />
           <Navbar currentPath={this.props.currentPath} noBoxShadow {...this.props} />
           <Page className="mt-5" {...this.props} />
-          {/* <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer> */}
+          <NextNProgress color="#E12828" startPosition={1} stopDelayMs={500} height={3} />
+          <CookieConsent
+            location="bottom"
+            buttonText="Accept"
+            cookieName="treten"
+            style={{ background: '#2B373B' }}
+            buttonStyle={{ color: '#4e503b', fontSize: '12px', padding: '15px 35px' }}
+            expires={150}
+          >
+            <p className="text-center m-0 p-0">
+              By using our site, you acknowledge that you have read and understand our
+              <a href="/cookie"> Cookie Policy </a>
+              <span>{",  "}</span>
+              <a href="/policies"> Privacy Policy </a>
+              <span>{"  , and our   "}</span>
+              <a href="/termsandconditions"> Terms of Service </a>
+            </p>
+          </CookieConsent>
         </div>
       )
     }

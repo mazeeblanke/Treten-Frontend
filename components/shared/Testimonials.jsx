@@ -127,8 +127,8 @@ const Testimonials = (props) => {
 
 Testimonials.propTypes = {
   testimonials: PropTypes.array,
-  mainText: PropTypes.string.isRequired,
-  subText: PropTypes.string.isRequired,
+  mainText: PropTypes.string,
+  subText: PropTypes.string,
 }
 
 export default Testimonials

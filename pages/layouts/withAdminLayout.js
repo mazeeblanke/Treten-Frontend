@@ -5,6 +5,7 @@ import AdminLayout from './AdminLayout'
 import Head from 'next/head'
 import * as actions from '../../store/actions'
 import PropTypes from 'prop-types'
+import NextNProgress from '../../components/shared/NextNProgress'
 const Cookies = require('js-cookie')
 
 export default Page => {
@@ -23,6 +24,7 @@ export default Page => {
             <meta name="csrf-token" content={Cookies.get('XSRF-TOKEN')} />
           </Head>
           <Page className="mt-5" {...this.props} />
+          <NextNProgress color="#E12828" startPosition={1} stopDelayMs={500} height={3} />
         </AdminLayout>
       )
     }

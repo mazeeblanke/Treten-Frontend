@@ -245,10 +245,10 @@ class Search extends Component {
         <NextSeo
           title={`Treten Academy course search results - ${filters.q}`}
           description={`Search results for ${filters.q}`}
-          canonical="https://tretenacademy.com"
+          canonical="http://tretenacademy.com.ng"
           openGraph={{
-            url: 'https://tretenacademy.com',
-            title: 'Treten Academy - Africa largest virtual lab',
+            url: 'http://tretenacademy.com.ng',
+            title: 'Learn Tech Skills - CCNA, CCNP, CCIE, AWS, Python | Treten Academy',
             description: `Search results for ${filters.q}`,
             site_name: 'Treten Academy',
           }}
