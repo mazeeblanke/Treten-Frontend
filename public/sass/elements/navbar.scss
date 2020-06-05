@@ -72,6 +72,14 @@
     // margin-right: 4rem !important;
   }
 
+  .alt-nav .container {
+    justify-content: center;
+    .nav-back {
+      position: absolute;
+      left: 5%;
+    }
+  }
+
   .nav-item {
     display: flex;
   }

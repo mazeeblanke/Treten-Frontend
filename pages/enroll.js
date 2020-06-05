@@ -410,7 +410,7 @@ class Enroll extends Component {
                             href={`/t/auth/linkedin?redirect=${currentPath}`}
                             className="linkedin-btn mr-3"
                           >
-                            <img alt="linkedin icon" className="mr-2" src="images/social/linkedin icon.png" />
+                            <img alt="linkedin icon" className="mr-2" src="/images/social/linkedin icon.png" />
                             <span className="is-white">LinkedIn</span>
                           </Button>
 
@@ -420,7 +420,7 @@ class Enroll extends Component {
                             href={`/t/auth/facebook?redirect=${currentPath}`}
                             className="facebook-btn"
                           >
-                            <img alt="facebook icon" className="mr-2" src="images/social/facebook icon.png" />
+                            <img alt="facebook icon" className="mr-2" src="/images/social/facebook icon.png" />
                             <span className="is-white">Facbook</span>
                           </Button>
                         </div>

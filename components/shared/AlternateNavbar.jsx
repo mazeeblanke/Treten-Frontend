@@ -6,9 +6,9 @@ import {
 
 const AlternateNavbar = () => {
   return (
-    <Navbar className="no-box-shadow light-border-bottom" color="faded" light expand="md">
+    <Navbar className="no-box-shadow light-border-bottom alt-nav" color="faded" light expand="md">
       <div className="container d-flex">
-        <a href="/">Back</a>
+        <a className="nav-back" href="/">Back</a>
         <Brand />
       </div>
     </Navbar>
