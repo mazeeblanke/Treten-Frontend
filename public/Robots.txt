@@ -1,3 +1,3 @@
-Sitemap: http://tretenacademy.com.ng/sitemap.xml
+Sitemap: http://tretenacademy.com/sitemap.xml
 User-agent: *
 Disallow: 
