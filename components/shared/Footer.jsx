@@ -55,11 +55,11 @@ const Footer = (props) => {
                   <a className="is-smokewhite font-weight-light">Testimonials</a>
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/gallery">
                   <a className="is-smokewhite font-weight-light">Gallery</a>
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="/become-an-instructor">
                   <a className="is-smokewhite font-weight-light">Become an instructor</a>
@@ -106,32 +106,6 @@ const Footer = (props) => {
                   </li>
                 ))
               }
-
-              {/* <li>
-                <Link href="/ccna-cyber-ops">
-                  <a className="is-smokewhite font-weight-light">CCNA Cyber Ops</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/ccnp-security">
-                  <a className="is-smokewhite font-weight-light">CCNP Security</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/ccie-service-provider">
-                  <a className="is-smokewhite font-weight-light">CCIE Service Provider</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/ccnp-rs">
-                  <a className="is-smokewhite font-weight-light">CCNP R&S</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/ccie security">
-                  <a className="is-smokewhite font-weight-light">CCIE Security</a>
-                </Link>
-              </li> */}
             </ul>
           </div>
         </div>
