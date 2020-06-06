@@ -22,7 +22,7 @@ export default Page => {
             openGraph={{
               type: 'website',
               locale: 'en_IE',
-              url: 'http://tretenacademy.com.ng',
+              url: 'http://tretenacademy.com',
               site_name: 'Treten Academy',
             }}
             twitter={{
