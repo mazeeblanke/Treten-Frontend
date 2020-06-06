@@ -148,6 +148,9 @@ export default Page => {
 							this.state.courseForm,
 							['bannerImageBase64']
 						)
+						if (!this.state.courseForm.bannerImage) {
+							courseForm.append('deleteBannerImage', 1)
+						}
 						return resolve(courseForm)
 					})
 					.catch(yupError => {
