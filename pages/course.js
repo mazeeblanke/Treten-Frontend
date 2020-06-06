@@ -199,19 +199,19 @@ class Course extends Component {
                 <li>
                   <ScrollTo href="#about">About</ScrollTo>
                 </li>
-                <li>
+                <li className="d-none d-sm-block">
                   <ScrollTo href="#courseContent">Course content</ScrollTo>
                 </li>
                 <li>
                   <ScrollTo href="#instructor">Instructor</ScrollTo>
                 </li>
-                <li>
+                <li className="d-none d-sm-block">
                   <ScrollTo href="#howItWorks">How it works</ScrollTo>
                 </li>
-                <li>
+                <li className="d-none d-sm-block">
                   <ScrollTo href="#courseReview">Reviews</ScrollTo>
                 </li>
-                <li>
+                <li className="d-none d-sm-block">
                   <ScrollTo href="#faqs">FAQS</ScrollTo>
                 </li>
               </ul>
