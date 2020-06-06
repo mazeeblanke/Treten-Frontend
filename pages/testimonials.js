@@ -61,11 +61,6 @@ class Testimonials extends Component {
                         {ReactHtmlParser(testimonial.reviewText)}
                       </p>
                       <div className="d-flex align-items-center mt-3 pt-2 mb-3">
-                        <img
-                          alt="hh"
-                          className="mr-2 h45 rounded-circle"
-                          src={testimonial.profilePic}
-                        />
                         <div className="d-flex justify-content-center flex-column">
                           <h6 className="testimonial__title mb-0 pb-0">
                             {testimonial.name}

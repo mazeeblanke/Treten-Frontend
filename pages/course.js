@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Head from 'next/head'
 import { NextSeo } from 'next-seo'
 import PropTypes from 'prop-types'
-import { Tabs, Button } from 'antd'
+import { Tooltip, Button } from 'antd'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import * as actions from '../store/actions'
@@ -307,12 +307,16 @@ class Course extends Component {
             }
             <div className="row mt-4">
               {course.relatedCourses.map(_course => (
-                <div className="col-sm-12 col-md-3 mb-5" key={_course.title}>
+                <div style={{ width: '276px', height: '164px' }} className="col-sm-12 col-md-3 mb-5" key={_course.title}>
                   <Link href={`/courses/${_course.slug}`}>
                     <div className="card border-0">
                       <img src={_course.banner_image} className="card-img-top" alt={_course.title} />
                       <div className="card-body">
-                        <h5 className="card-title">{_course.title}</h5>
+                        <h5 className="card-title">
+                        <Tooltip title={_course.title}>
+                          {_course.title}
+                        </Tooltip>
+                        </h5>
                         <StarRatings
                           starDimension="15px"
                           starSpacing="3px"

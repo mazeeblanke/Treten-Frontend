@@ -34,7 +34,7 @@ class TretenDocument extends Document {
                 "@context": "http://schema.org",
                 "@type" : "Organization",
                 "name" : "Treten",
-                "url" : "http://tretenacademy.com.ng",
+                "url" : "http://tretenacademy.com",
                 "sameAs" : [
                   "https://twitter.com/tretenacademy",
                   "https://www.facebook.com/tretenacademy", 
@@ -42,7 +42,7 @@ class TretenDocument extends Document {
                   "https://www.instagram.com/treten.academy/?hl=en",
                 ],
                 "image": [
-                  "http://tretenacademy.com.ng/images/logo.png",
+                  "http://tretenacademy.com/images/logo.png",
                 ],
                 "description": "We seek to empower professionals with the required skills and training to take them from Zero to Hero"
               }

@@ -3,7 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import Display from './Display'
 import { connect } from 'react-redux'
-import { Icon, Button, Select } from 'antd'
+import { Icon, Button, Select, Cascader } from 'antd'
 import PropTypes from 'prop-types'
 import Brand from './Brand'
 const Option = Select.Option
@@ -40,6 +40,14 @@ class Navigation extends React.Component {
     })
   }
 
+  onChange = (value, selectedOptions) => {
+    // console.log(value, selectedOptions)
+    window.location = value[1]
+    // this.setState({
+    //   text: selectedOptions.map(o => o.label).join(', '),
+    // });
+  };
+
   search = (searchQuery) => {
     this.props.searchCourses({ 
       q: searchQuery,
@@ -69,7 +77,6 @@ class Navigation extends React.Component {
       >
         <div className="container">
           <Brand />
-
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="mr-auto">
@@ -116,90 +123,14 @@ class Navigation extends React.Component {
               </div>
             </Nav>
             <Nav className="ml-auto" navbar>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav>
-                  Courses
-                  <Icon type="down" />
-                </DropdownToggle>
-                <DropdownMenu className="courses" right>
-                  <div className="row">
-                    <div className="col-sm-6 mb-5">
-                      <NavLink className="is-blue" disabled href="#">
-                        <b>Associate</b>
-                      </NavLink>
-                      {
-                        (coursesByGroup.associate || []).map((course) => (
-                          <DropdownItem key={course.slug}>
-                            <Link href={`/courses/${course.slug}`}>
-                              <span title={course.title}>{course.title}</span>
-                            </Link>
-                          </DropdownItem>
-                        ))
-                      }
+                <NavItem>
+                  <Cascader options={Object.values(coursesByGroup)} onChange={this.onChange}>
+                    <div className="d-flex is-vcentered">
+                      <a className="is-blue" href="#">Courses</a>
+                      <Icon type="down" />
                     </div>
-                    <div className="col-sm-6 mb-5">
-                      <NavLink className="is-blue" disabled href="#">
-                        <b>Professional</b>
-                      </NavLink>
-                      {
-                        (coursesByGroup.professional || []).map((course) => (
-                          <DropdownItem key={course.slug}>
-                            <Link href={`/courses/${course.slug}`}>
-                              <span title={course.title}>{course.title}</span>
-                            </Link>
-                          </DropdownItem>
-                        ))
-                      }
-                    </div>
-                    <div className="col-sm-6 mb-5">
-                      <NavLink className="is-blue" disabled href="#">
-                        <b>Expert</b>
-                      </NavLink>
-                      {
-                        (coursesByGroup.expert || []).map((course) => (
-                          <DropdownItem key={course.slug}>
-                            <Link href={`/courses/${course.slug}`}>
-                              <span title={course.title}>{course.title}</span>
-                            </Link>
-                          </DropdownItem>
-                        ))
-                      }
-                    </div>
-                    <div className="col-sm-6 mb-5">
-                      <NavLink className="is-blue" disabled href="#">
-                        <b>Bootcamp</b>
-                      </NavLink>
-                      <DropdownItem>
-                        <Link href="/resources/interview-questions">
-                          <span title="Zero to Hero Cisco R&S">
-                            Zero to Hero Cisco R&S
-                          </span>
-                        </Link>
-                      </DropdownItem>
-                      <DropdownItem>
-                        <Link href="/resources/interview-questions">
-                          <span title="Zero to Hero Cisco Security">
-                            Zero to Hero Cisco Security
-                          </span>
-                        </Link>
-                      </DropdownItem>
-                      <DropdownItem>
-                        <Link href="/resources/interview-questions">
-                          <span title="Zero to Hero Firewall Expert">
-                            Zero to Hero Firewall Expert
-                          </span>
-                        </Link>
-                      </DropdownItem>
-                    </div>
-                  </div>
-
-                  <Link href="/courses">
-                    <b className="is-blue mb-2 ml-2 has-pointer-cursor">
-                      View course catalog
-                    </b>
-                  </Link>
-                </DropdownMenu>
-              </UncontrolledDropdown>
+                  </Cascader>
+                </NavItem>
               <NavItem>
                 <Link href="/about-us">
                   <a>About us</a>
@@ -210,24 +141,6 @@ class Navigation extends React.Component {
                   <a>Why us</a>
                 </Link>
               </NavItem>
-              {/* <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav>
-                  Resources
-                  <Icon type="down" />
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem className="mb-4 mt-3">
-                    <Link href="/resources/interview-questions">
-                      <span>Interview questions</span>
-                    </Link>
-                  </DropdownItem>
-                  <DropdownItem className="mb-4">
-                    <Link href="/resources/practice-questions">
-                      <span>Practice questions</span>
-                    </Link>
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown> */}
               <NavItem>
                 <Link href="/blog">
                   <a>Blog</a>
@@ -259,9 +172,6 @@ class Navigation extends React.Component {
                 </NavItem>
               </Display>
               <Display if={isLoggedIn} >
-                {/* <NavItem>
-                  <img src={user.gravatar} alt={user.name} className="rounded-circle" />
-                </NavItem> */}
                 <NavItem>
                   <a href={`/t/logout?redirect=${this.props.currentPath}`}>
                     <Icon className="is-red" style={{ fontSize: 25 }} type="logout" />

@@ -1,10 +1,10 @@
 import React from 'react'
 import Img from 'react-image'
 import PropTypes from 'prop-types'
-import { Tooltip, Popover } from 'antd'
+import { Tooltip } from 'antd'
 import StarRatings from 'react-star-ratings'
 // import TextTruncate from 'react-text-truncate'
-import { truncate } from '../../lib/helpers'
+// import { truncate } from '../../lib/helpers'
 
 const Course = (props) => {
   const {

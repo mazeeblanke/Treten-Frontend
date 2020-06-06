@@ -168,6 +168,12 @@ body, html {
     border: none !important
   }
 
+  .card-title {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
   .card-img {
     height: 28.5vw;
     object-fit: cover;
@@ -590,4 +596,12 @@ body, html {
 .ant-menu.ant-menu-dark .ant-menu-item-selected, 
 .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
   background-color: #e12828;
+}
+
+.ant-cascader-menu-item {
+  text-transform: capitalize !important;
+}
+
+div {
+  outline: none !important;
 }

@@ -108,7 +108,7 @@ const Testimonials = (props) => {
                       {ReactHtmlParser(testimonial.reviewText)}
                     </p>
                     <div className="d-flex align-items-end mt-3 pt-2 mb-3">
-                      <img alt="enrollee" className="mr-2 h45 rounded-circle" src={testimonial.enrollee ? testimonial.enrollee.profilePic : testimonial.profilePic} />
+                      {/* <img alt="enrollee" className="mr-2 h45 rounded-circle" src={testimonial.enrollee ? testimonial.enrollee.profilePic : testimonial.profilePic} /> */}
                       <div className="d-flex justify-content-center flex-column">
                         <h6 className="testimonial__title mb-0 pb-0">{testimonial.enrollee ? testimonial.enrollee.name : testimonial.name}</h6>
                         <p className="mb-0">{testimonial.enrollee ? testimonial.enrollee.title : testimonial.role}</p>
