@@ -6,13 +6,13 @@ import { NextSeo } from 'next-seo'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
-import { 
+import {
   fetchInstructors,
-  fetchCoursePaths, 
-  fetchTestimonials, 
-  fetchPopularCourses, 
+  fetchCoursePaths,
+  fetchTestimonials,
+  fetchPopularCourses,
   fetchCertifications,
-  fetchLatestBlogPosts,
+  fetchLatestBlogPosts
 } from '../store/actions'
 import Banner from '../components/home/Banner'
 import Footer from '../components/shared/Footer'
@@ -85,7 +85,7 @@ class Home extends Component {
             cardType: 'summary_large_image'
           }}
         />
-        <Banner 
+        <Banner
           currentPath={this.props.currentPath}
         />
         <Partners certifications={this.props.certifications} />
@@ -181,6 +181,6 @@ export default connect(
     fetchCoursePaths,
     fetchCertifications,
     fetchPopularCourses,
-    fetchLatestBlogPosts,
+    fetchLatestBlogPosts
   }
 )(withMasterLayout(Home))

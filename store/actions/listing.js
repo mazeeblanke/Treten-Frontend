@@ -21,8 +21,8 @@ export const fetchListings = ({ page = 1, pageSize = 6, q = '', entity } = {}) =
       payload: {
         data: res.data,
         page,
-				pageSize,
-				endpoints: res.data.endpoints
+        pageSize,
+        endpoints: res.data.endpoints
       }
     })
   })
@@ -46,7 +46,7 @@ export const deleteListing = ({ listing, entity }) => (
       isEditing: true
     }
   })
-  const listings = getState()['listings']
+  const listings = getState().listings
   return api.delete(`/api/${entity}/${listing.id}`)
     .then(res => {
       dispatch({

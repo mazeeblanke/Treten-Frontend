@@ -9,7 +9,7 @@ import '../public/slick-carousel/slick/slick.css'
 import '../public/slick-carousel/slick/slick-theme.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../public/sass/application.scss'
-import 'react-image-crop/dist/ReactCrop.css';
+import 'react-image-crop/dist/ReactCrop.css'
 import 'element-theme-default'
 // import { PageTransition } from 'next-page-transitions'
 
@@ -19,7 +19,7 @@ class Treten extends App {
     return (
       <Provider store={reduxStore}>
         {/* <PageTransition timeout={300} classNames="page-transition"> */}
-          <Component {...pageProps} />
+        <Component {...pageProps} />
         {/* </PageTransition>   */}
       </Provider>
     )

@@ -30,11 +30,11 @@ class WhyUs extends Component {
                 <div className="row justify-content-center">
                   <div className="col-md-7">
                     <p className="is-smokewhite">
-                      Treten Academy trains individuals and organizations in the high demand ICT skills of today. We equip people with the competencies that accelerate their careers, and our corporate training places organizations at the forefront of digital innovation in their industry. 
+                      Treten Academy trains individuals and organizations in the high demand ICT skills of today. We equip people with the competencies that accelerate their careers, and our corporate training places organizations at the forefront of digital innovation in their industry.
 
-                      At Treten, we go beyond a general customization strategy by ensuring our training is tailored to the specific position and job requirements of our students. Our programs are designed to meet the career goals of every trainee. 
-                      
-                      We prioritize innovation and provide an unmatched learning experience that leverages emerging technologies of our industry. 
+                      At Treten, we go beyond a general customization strategy by ensuring our training is tailored to the specific position and job requirements of our students. Our programs are designed to meet the career goals of every trainee.
+
+                      We prioritize innovation and provide an unmatched learning experience that leverages emerging technologies of our industry.
                     </p>
                   </div>
                 </div>
@@ -45,7 +45,7 @@ class WhyUs extends Component {
                 <div className="row justify-content-center">
                   <div className="col-md-7">
                     <p className="is-smokewhite">
-                      Do you want to begin a lucrative IT career, but don’t know how to start? The Zero to Hero program is exactly what you need. 
+                      Do you want to begin a lucrative IT career, but don’t know how to start? The Zero to Hero program is exactly what you need.
                     </p>
                     <p className="is-smokewhite">
                       The courses for our Zero to Hero program have been carefully selected to position participants for careers in high-demand IT roles after completion. Students can go on to fill the following roles in an enterprise environment : DevOps Engineer, CyberSecurity Expert, Cloud Solutions Architects
@@ -54,7 +54,7 @@ class WhyUs extends Component {
                       Ideal candidates for this program are professionals looking to switch careers, and tech-savvy job seekers who desire to start a career in IT. The program covers intermediate level certifications like: Python, CCNA, CCENT, ICND1 to expert level courses like: CCIE, DevOps
                     </p>
                     <p className="is-smokewhite">
-                      Within a few weeks, our Zero to Hero Program will transform you from a novice to a certified IT expert with the high demand skills in today’s job market. 
+                      Within a few weeks, our Zero to Hero Program will transform you from a novice to a certified IT expert with the high demand skills in today’s job market.
                     </p>
                   </div>
                 </div>

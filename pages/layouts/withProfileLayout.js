@@ -10,7 +10,7 @@ const Cookies = require('js-cookie')
 
 export default Comp => {
   class Profile extends Component {
-    constructor(props) {
+    constructor (props) {
       super(props)
       this.fileInputRef = React.createRef()
     }

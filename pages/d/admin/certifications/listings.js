@@ -12,53 +12,47 @@ class Listing extends Component {
   static async getInitialProps ({ reduxStore }) {
     await Promise.all([
       reduxStore.dispatch(actions.fetchListings({
-				entity
-			}))
+        entity
+      }))
     ])
     return {}
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.entity = entity
   }
 
   columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
+      title: 'Company',
+      dataIndex: 'company',
       width: 160,
       key: 2,
       fixed: 'left'
-    },
-    {
-      title: 'Role',
-      dataIndex: 'role',
-      width: 160,
-      key: 2
     },
     {
       title: 'Avatar',
       dataIndex: 'bannerImage',
       render: (avatar) => {
         return (
-					<img alt="avatar" width={50} height={50} src={avatar}></img>
+          <img alt="avatar" width={50} height={50} src={avatar}></img>
         )
       },
       key: 8,
       width: 130
-		}
+    }
   ]
 
   render () {
     return (
       <section className="listings">
         <AdminLayout headerName="Manage Certifications">
-					<ListingTable 
-						columns={this.columns}
-						createPage="/d/admin/team/create"
-						entity={entity} 
-					/>
+          <ListingTable
+            columns={this.columns}
+            createPage="/d/admin/certifications/create"
+            entity={entity}
+          />
         </AdminLayout>
       </section>
     )
@@ -68,5 +62,5 @@ class Listing extends Component {
 Listing.propTypes = {}
 
 export default withRedirect(connect(null, {
-	fetchListings: actions.fetchListings,
+  fetchListings: actions.fetchListings
 })(Listing))

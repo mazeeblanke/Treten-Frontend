@@ -8,11 +8,10 @@ const app = next({
 })
 const handler = app.getRequestHandler()
 
-
 process.env.PROXYURL =
   process.env.NODE_ENV === 'production'
     ? 'http://api.tretenacademy.com'
-    : 'http://tretenweb';
+    : 'http://tretenweb'
 
 const proxy = require('express-http-proxy')
 
@@ -26,7 +25,7 @@ app
       })
     )
 
-    server.get('/sitemap.xml',  proxy(process.env.PROXYURL, {
+    server.get('/sitemap.xml', proxy(process.env.PROXYURL, {
       limit: '420mb'
     }))
 
@@ -86,8 +85,8 @@ app
       app.render(req, res, '/enroll', {})
     })
 
-    server.get("/d/admin/:entity/update/:id", (req, res) => {
-      return app.render(req, res, "/d/admin/" + req.params.entity + '/create', { id: req.params.id })
+    server.get('/d/admin/:entity/update/:id', (req, res) => {
+      return app.render(req, res, '/d/admin/' + req.params.entity + '/create', { id: req.params.id })
     })
 
     server.get('/d/admin/courses/:courseSlug', (req, res) => {

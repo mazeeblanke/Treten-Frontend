@@ -1,29 +1,32 @@
 import PropTypes from 'prop-types'
 import dynamic from 'next/dynamic'
-import { Input, Button, Icon, Form, Checkbox } from 'antd'
+import { Input, Button, Icon, Form, Checkbox, Modal } from 'antd'
 import Dropzone from 'react-dropzone'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import notifier from 'simple-react-notifier'
-import { 
-	getForm, 
-	getModel, 
-	getMatrix, 
-	getEndpoints, 
-	getImagePreviewKey, 
+import {
+	getForm,
+	getModel,
+	getMatrix,
+	getEndpoints,
+	getImagePreviewKey,
 } from '../../store/reducers/form'
 import * as actions from '../../store/actions'
 import Display from './Display'
 const ReactQuill = dynamic(() => import('react-quill'), {
-  ssr: false
+	ssr: false
 })
+import Cropper from '../shared/Cropper'
 
 import Router from 'next/router'
 
 
 class TretenForm extends Component {
-  state = {
-		notFound: false
+	state = {
+		notFound: false,
+		isCroppingCourseBanner: false,
+		orignalBase64: null
 	}
 
 	handleRouteChange = url => {
@@ -32,40 +35,40 @@ class TretenForm extends Component {
 			this.endpoint = this.endpoints.createUrl
 		}
 	}
-	
 
-	componentWillMount () {
+
+	componentWillMount() {
 		Router.events.on('routeChangeStart', this.handleRouteChange)
 		this.props.resetForm()
 	}
 
-	componentWillUnmount () {
+	componentWillUnmount() {
 		Router.events.off('routeChangeStart', this.handleRouteChange)
 	}
 
-	componentDidMount () {
-		const { 
+	componentDidMount() {
+		const {
 			id,
-			entity, 
-			model, 
-			endpoints, 
-			initializeForm 
+			entity,
+			model,
+			endpoints,
+			initializeForm
 		} = this.props
 		initializeForm({ entity, id }).then((res) => {
 			this.endpoints = res.data.endpoints
 			this.setEndpoint(this.endpoints)
 		})
-		.catch((err) => {
-			if (err.response.status = 404) {
-				this.setState({
-					notFound: true
-				})
-			}
-		})
+			.catch((err) => {
+				if (err.response.status = 404) {
+					this.setState({
+						notFound: true
+					})
+				}
+			})
 	}
 
 	setEndpoint = (endpoints) => {
-		this.endpoint = this.props.id 
+		this.endpoint = this.props.id
 			? endpoints.updateUrl
 			: endpoints.createUrl
 	}
@@ -88,22 +91,26 @@ class TretenForm extends Component {
 		const {
 			setFormField
 		} = this.props
-    const file = e[0]
-    if (file) {
-      setFormField({
+		const file = e[0]
+		if (file) {
+			setFormField({
 				formField,
 				formValue: file
 			})
-      const fileReader = new FileReader()
-      fileReader.onloadend = () => {
+			const fileReader = new FileReader()
+			fileReader.onloadend = () => {
 				setFormField({
 					formField: getImagePreviewKey(formField),
 					formValue: fileReader.result
 				})
-      }
-      fileReader.readAsDataURL(file)
-    }
-  }
+				this.setState({
+					isCroppingCourseBanner: true,
+					originalBase64: fileReader.result
+				})
+			}
+			fileReader.readAsDataURL(file)
+		}
+	}
 
 	handleSubmit = (e) => {
 		const {
@@ -122,6 +129,12 @@ class TretenForm extends Component {
 		})
 	}
 
+  closeModal = () => {
+    this.setState({
+			isCroppingCourseBanner: false
+		})
+  }
+
 	render() {
 		const {
 			matrix,
@@ -129,10 +142,12 @@ class TretenForm extends Component {
 			errors,
 			loading,
 			submitting,
+			imageAspect,
 			setFormField
 		} = this.props
 		const {
-			notFound
+			notFound,
+			isCroppingCourseBanner
 		} = this.state
 		return (
 			<div className="row pl-6 pr-6 mt-5">
@@ -180,7 +195,7 @@ class TretenForm extends Component {
 															{errors[key][0]}
 														</div>
 													)}
-												</Form.Item>	
+												</Form.Item>
 											</div>
 										)
 									}
@@ -209,7 +224,7 @@ class TretenForm extends Component {
 														{errors[key][0]}
 													</div>
 												)}
-											</Form.Item>	
+											</Form.Item>
 										</div>
 									}
 									if (matrix[key].type === 'checkbox') {
@@ -218,8 +233,8 @@ class TretenForm extends Component {
 												<label htmlFor={key} className="mb-3">
 													<b className="text-capitalize">{key}</b>
 												</label>
-												<Checkbox 
-												  checked={!!data[key]}
+												<Checkbox
+													checked={!!data[key]}
 													onChange={(e) => setFormField({
 														formField: key,
 														formValue: e.target.checked
@@ -230,7 +245,7 @@ class TretenForm extends Component {
 														{errors[key][0]}
 													</div>
 												)}
-											</Form.Item>	
+											</Form.Item>
 										</div>
 									}
 									if (matrix[key].type === 'textarea') {
@@ -254,7 +269,7 @@ class TretenForm extends Component {
 														{errors[key][0]}
 													</div>
 												)}
-											</Form.Item>	
+											</Form.Item>
 										</div>
 									}
 									if (matrix[key].type === 'image') {
@@ -263,6 +278,36 @@ class TretenForm extends Component {
 												<label htmlFor={key} className="pb-3">
 													<b className="text-capitalize">{key}</b>
 												</label>
+												{
+													isCroppingCourseBanner && 
+														<Modal
+															centered
+															footer={null}
+															width="464px"
+															height="514px"
+															onCancel={this.closeModal}
+															wrapClassName=""
+															visible={!!data[getImagePreviewKey(key)] || !!data[key]}
+															title={
+																<div className="d-flex align-items-center justify-content-between">
+																	<h5>Crop Course Banner</h5>
+																</div>
+															}
+														>
+															<Cropper 
+															  aspect={imageAspect}
+																src={data[getImagePreviewKey(key)] || data[key]}
+																onCroppedImageUrl={(img) => {setFormField({
+																	formField: getImagePreviewKey(key),
+																	formValue: img
+																})}}
+																onBlobChange={(blob) => {setFormField({
+																	formField: key,
+																	formValue: blob
+																})}}
+															></Cropper>
+													</Modal>
+												}
 												{
 													!data[key]
 														? (
@@ -276,7 +321,7 @@ class TretenForm extends Component {
 																			style={{ fontSize: '1rem' }}
 																		>
 																			Click to upload file or drag in from computer
-																		</p>
+                                                                        </p>
 																	</div>
 																)}
 															</Dropzone>
@@ -285,19 +330,19 @@ class TretenForm extends Component {
 															<div className="">
 																<div className="d-flex align-items-center">
 																	<img
-																	    alt="image preview"
-																		style={{ maxHeight: '90px', maxWidth: '100%'  }}
+																		alt="image preview"
+																		style={{ maxHeight: '90px', maxWidth: '100%' }}
 																		className="mr-3"
 																		src={data[getImagePreviewKey(key)] || data[key]}
 																	/>
 																</div>
-																
+
 																<small
 																	onClick={() => this.removeBannerImage(key)}
 																	style={{ color: '#e12828' }}
 																>
 																	remove file
-																</small>
+                                                                </small>
 															</div>
 														)
 												}
@@ -320,7 +365,7 @@ class TretenForm extends Component {
 									type="danger"
 								>
 									Submit Form
-								</Button>
+                                </Button>
 							</div>
 						</form>
 					)

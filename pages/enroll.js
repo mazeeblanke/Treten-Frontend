@@ -33,7 +33,7 @@ class Enroll extends Component {
     return {}
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       step: 1,

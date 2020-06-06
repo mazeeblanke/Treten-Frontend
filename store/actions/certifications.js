@@ -1,4 +1,4 @@
-export const fetchCertifications = ({ page = 1, pageSize = 100, q = ''} = {}) => (
+export const fetchCertifications = ({ page = 1, pageSize = 100, q = '' } = {}) => (
   dispatch,
   setState,
   api
@@ -8,7 +8,7 @@ export const fetchCertifications = ({ page = 1, pageSize = 100, q = ''} = {}) =>
     payload: true
   })
 
-  return api.get(`/api/certifications`, {
+  return api.get('/api/certifications', {
     params: {
       page,
       pageSize,
@@ -20,10 +20,10 @@ export const fetchCertifications = ({ page = 1, pageSize = 100, q = ''} = {}) =>
       payload: {
         data: res.data,
         page,
-				pageSize
+        pageSize
       }
-		})
-		return res
+    })
+    return res
   })
     .finally(() => {
       dispatch({

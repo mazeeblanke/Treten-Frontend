@@ -7,53 +7,59 @@ import withRedirect from '../../../layouts/withRedirect'
 import AdminLayout from '../../../layouts/AdminLayout'
 import * as actions from '../../../../store/actions'
 
-const entity = 'certifications'
+const entity = 'team'
 
 class Listing extends Component {
   static async getInitialProps ({ reduxStore }) {
     await Promise.all([
       reduxStore.dispatch(actions.fetchListings({
-				entity
-			}))
+        entity
+      }))
     ])
     return {}
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.entity = entity
   }
 
   columns = [
     {
-      title: 'Company',
-      dataIndex: 'company',
+      title: 'Name',
+      dataIndex: 'name',
       width: 160,
       key: 2,
       fixed: 'left'
     },
     {
-      title: 'Banner Image',
-      dataIndex: 'bannerImage',
-      render: (bannerImage) => {
+      title: 'Role',
+      dataIndex: 'role',
+      width: 160,
+      key: 3
+    },
+    {
+      title: 'Avatar',
+      dataIndex: 'avatar',
+      render: (avatar) => {
         return (
-					<img alt="banner image" width={50} height={30} src={bannerImage}></img>
+          <img alt="avatar" width={50} height={30} src={avatar}></img>
         )
       },
       key: 8,
       width: 130
-		}
+    }
   ]
 
   render () {
     return (
       <section className="listings">
-        <AdminLayout headerName="Manage Certifications">
-					<ListingTable 
-						columns={this.columns}
-						createPage="/d/admin/certifications/create"
-						entity={entity} 
-					/>
+        <AdminLayout headerName="Manage Team">
+          <ListingTable
+            columns={this.columns}
+            createPage="/d/admin/team/create"
+            entity={entity}
+          />
         </AdminLayout>
       </section>
     )
@@ -63,5 +69,5 @@ class Listing extends Component {
 Listing.propTypes = {}
 
 export default withRedirect(connect(null, {
-	fetchListings: actions.fetchListings,
+  fetchListings: actions.fetchListings
 })(Listing))

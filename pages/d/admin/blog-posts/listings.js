@@ -13,13 +13,13 @@ class Listing extends Component {
   static async getInitialProps ({ reduxStore }) {
     await Promise.all([
       reduxStore.dispatch(actions.fetchListings({
-				entity
-			}))
+        entity
+      }))
     ])
     return {}
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.entity = 'blog-posts'
   }
@@ -29,7 +29,7 @@ class Listing extends Component {
       title: 'Title',
       dataIndex: 'title',
       width: 130,
-      key: 2,
+      key: 2
     },
     {
       title: 'Author',
@@ -42,20 +42,20 @@ class Listing extends Component {
       dataIndex: 'body',
       render: (body) => {
         return (
-					<TextTruncate
-						line={3}
-						text={body && body.substr(0, 300).replace(/<\/?[^>]+(>|$)/g, '')}
-					/>
+          <TextTruncate
+            line={3}
+            text={body && body.substr(0, 300).replace(/<\/?[^>]+(>|$)/g, '')}
+          />
         )
       },
       key: 8,
       width: 230
-		},
-		{
+    },
+    {
       title: 'Date',
       dataIndex: 'friendlyPublishedAt',
       width: 90,
-      key: 5,
+      key: 5
     }
   ]
 
@@ -63,11 +63,11 @@ class Listing extends Component {
     return (
       <section className="listings">
         <AdminLayout headerName="Manage Blogposts">
-					<ListingTable 
-						columns={this.columns}
-						createPage="/d/admin/blog-posts/create"
-						entity={entity} 
-					/>
+          <ListingTable
+            columns={this.columns}
+            createPage="/d/admin/blog-posts/create"
+            entity={entity}
+          />
         </AdminLayout>
       </section>
     )
@@ -77,5 +77,5 @@ class Listing extends Component {
 Listing.propTypes = {}
 
 export default withRedirect(connect(null, {
-	fetchListings: actions.fetchListings,
+  fetchListings: actions.fetchListings
 })(Listing))

@@ -10,6 +10,13 @@
   font-size: 1.142rem;
 }
 
+.aboutus-meetteam {
+  .slick-track {
+    justify-content: center;
+    display: flex !important;
+  }
+}
+
 .aboutus-meetteam img {
   width: 130px;
 }

@@ -91,4 +91,3 @@ export const getListingsPagination = state => state.listings.pagination
 export const getListingsLoadingState = state => state.listings.isLoading
 
 export const getListingEndpoints = state => state.listings.endpoints
-

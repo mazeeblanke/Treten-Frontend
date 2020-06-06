@@ -196,7 +196,6 @@ export const searchCourses = ({
   })
 }
 
-
 export const deleteCourse = ({
   id = null
 } = {}) => (

@@ -70,21 +70,12 @@ const MeetTeam = props => {
             <h3 className="features__main-text mb-3">
               Meet our Team
             </h3>
-            {/* <p className="lh-30 mb-3 text-center pl-5 lr-5">
-              Flatland culture star stuff harvesting star light two ghostly white figures
-              in coveralls and helmets are soflty dancing vanquish the impossible invent the universe.
-            </p> */}
           </div>
         </div>
       </div>
       <div className="container">
         <Slider
-          dots={dots}
-          speed={speed}
-          arrows={arrows}
-          infinite={infinite}
-          slidesToShow={slidesToShow}
-          slidesToScroll={slidesToScroll}
+          {...settings}
         >
           {
             teamMembers.map((teamMember) => (
@@ -92,9 +83,9 @@ const MeetTeam = props => {
                 <div className="card border-0">
                   <div className="card-body">
                     <div className="d-flex justify-content-center">
-                      <img className="rounded-circle mt-3" src={teamMember.profile_pic} alt={teamMember.fullname} />
+                      <img className="rounded-circle mt-3" src={teamMember.avatar} alt={teamMember.name} />
                     </div>
-                    <h6 className="card-title mb-0 mt-4">{teamMember.fullname}</h6>
+                    <h6 className="card-title mb-0 mt-4">{teamMember.name}</h6>
                     <p className="text-center mt-2 mb-6">{teamMember.role}</p>
                   </div>
                 </div>

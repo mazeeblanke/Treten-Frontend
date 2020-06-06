@@ -116,6 +116,6 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
-    refreshNewStudents,
+    refreshNewStudents
   }
 )(withRedirect(Home))

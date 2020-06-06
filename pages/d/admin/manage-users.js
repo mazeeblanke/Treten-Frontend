@@ -33,7 +33,7 @@ class ManageUsers extends Component {
     return {}
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.csvDownloadRef = React.createRef()
     this.inviteUserFormRef = React.createRef()
@@ -206,7 +206,7 @@ class ManageUsers extends Component {
 
   handleDelete = (user) => {
     this.showConfirm(
-      `Are you sure you want to delete this user ?`,
+      'Are you sure you want to delete this user ?',
       () => this.props.handleDelete({ user }).then((res) => {
         notifier.success(res.message)
       }).catch((err) => {

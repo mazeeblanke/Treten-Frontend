@@ -19,14 +19,14 @@ const INITIAL_STATE = {
 
 export default function (state = INITIAL_STATE, { type, payload }) {
   switch (type) {
-    case 'SET_CERTIFICATION_LOADING': {
+    case 'SET_TEAM_LOADING': {
       return {
         ...state,
         isLoading: payload
       }
     }
 
-    case 'SET_CERTIFICATIONS': {
+    case 'SET_TEAM': {
       return {
         ...state,
         ...transformArray(payload.data.data),
@@ -43,12 +43,12 @@ export default function (state = INITIAL_STATE, { type, payload }) {
   }
 }
 
-export const getCertifications = (state) => {
-  return state.certifications.byIds.map(i => {
-    return state.certifications.all[i]
+export const getTeam = (state) => {
+  return state.team.byIds.map(i => {
+    return state.team.all[i]
   })
 }
 
-export const getCertificationsPagination = state => state.certifications.pagination
+export const getTeamPagination = state => state.team.pagination
 
-export const getCertificationsLoadingState = state => state.certifications.isLoading
+export const getTeamLoadingState = state => state.team.isLoading

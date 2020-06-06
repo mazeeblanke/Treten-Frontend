@@ -301,71 +301,84 @@ class AdminLayout extends Component {
                 </span>
               }
             >
-            {
-              this.props.user.role === 'admin'
-                ? (
-                  <Menu.Item
-                    onClick={() =>
-                      this.props.router.push(ROUTES.ADMIN_DASHBOARD_WEBSITE)}
-                    key={ROUTES.ADMIN_DASHBOARD_WEBSITE}
-                  >
-                    <span className="is-white ml-4 ">Popular Courses</span>
-                  </Menu.Item>
-                )
-                : null
-            }
-            {
-              this.props.user.role === 'admin'
-                ? (
-                  <Menu.Item
-                    onClick={() =>
-                      this.props.router.push(ROUTES.ADMIN_DASHBOARD_TESTIMONIALS)}
-                    key={ROUTES.ADMIN_DASHBOARD_TESTIMONIALS}
-                  >
-                    <span className="is-white ml-4 ">Testimonials</span>
-                  </Menu.Item>
-                )
-                : null
-            }
-            {
-              this.props.user.role === 'admin'
-                ? (
-                  <Menu.Item
-                    onClick={() =>
-                      this.props.router.push(ROUTES.ADMIN_DASHBOARD_CERTIFICATIONS)}
-                    key={ROUTES.ADMIN_DASHBOARD_CERTIFICATIONS}
-                  >
-                    <span className="is-white ml-4 ">Certifications</span>
-                  </Menu.Item>
-                )
-                : null
-            }
-            {
-              this.props.user.role === 'admin'
-                ? (
-                  <Menu.Item
-                    onClick={() =>
-                      this.props.router.push(ROUTES.ADMIN_DASHBOARD_COURSEPATHS)}
-                    key={ROUTES.ADMIN_DASHBOARD_COURSEPATHS}
-                  >
-                    <span className="is-white ml-4 ">Course paths</span>
-                  </Menu.Item>
-                )
-                : null
-            }
-            {
-              this.props.user.role === 'admin'
-                ? (
-                  <Menu.Item
-                    onClick={() =>
-                      this.props.router.push(ROUTES.ADMIN_DASHBOARD_BLOGS)}
-                    key={ROUTES.ADMIN_DASHBOARD_BLOGS}
-                  >
-                    <span className="is-white ml-4 ">Manage blogs</span>
-                  </Menu.Item>
-                )
-                : null
-            }
+              {
+                this.props.user.role === 'admin'
+                  ? (
+                    <Menu.Item
+                      onClick={() =>
+                        this.props.router.push(ROUTES.ADMIN_DASHBOARD_WEBSITE)}
+                      key={ROUTES.ADMIN_DASHBOARD_WEBSITE}
+                    >
+                      <span className="is-white ml-4 ">Popular Courses</span>
+                    </Menu.Item>
+                  )
+                  : null
+              }
+              {
+                this.props.user.role === 'admin'
+                  ? (
+                    <Menu.Item
+                      onClick={() =>
+                        this.props.router.push(ROUTES.ADMIN_DASHBOARD_TESTIMONIALS)}
+                      key={ROUTES.ADMIN_DASHBOARD_TESTIMONIALS}
+                    >
+                      <span className="is-white ml-4 ">Testimonials</span>
+                    </Menu.Item>
+                  )
+                  : null
+              }
+              {
+                this.props.user.role === 'admin'
+                  ? (
+                    <Menu.Item
+                      onClick={() =>
+                        this.props.router.push(ROUTES.ADMIN_DASHBOARD_CERTIFICATIONS)}
+                      key={ROUTES.ADMIN_DASHBOARD_CERTIFICATIONS}
+                    >
+                      <span className="is-white ml-4 ">Certifications</span>
+                    </Menu.Item>
+                  )
+                  : null
+              }
+              {
+                this.props.user.role === 'admin'
+                  ? (
+                    <Menu.Item
+                      onClick={() =>
+                        this.props.router.push(ROUTES.ADMIN_DASHBOARD_COURSEPATHS)}
+                      key={ROUTES.ADMIN_DASHBOARD_COURSEPATHS}
+                    >
+                      <span className="is-white ml-4 ">Course paths</span>
+                    </Menu.Item>
+                  )
+                  : null
+              }
+              {
+                this.props.user.role === 'admin'
+                  ? (
+                    <Menu.Item
+                      onClick={() =>
+                        this.props.router.push(ROUTES.ADMIN_DASHBOARD_TEAM)}
+                      key={ROUTES.ADMIN_DASHBOARD_TEAM}
+                    >
+                      <span className="is-white ml-4 ">Team</span>
+                    </Menu.Item>
+                  )
+                  : null
+              }
+              {
+                this.props.user.role === 'admin'
+                  ? (
+                    <Menu.Item
+                      onClick={() =>
+                        this.props.router.push(ROUTES.ADMIN_DASHBOARD_BLOGS)}
+                      key={ROUTES.ADMIN_DASHBOARD_BLOGS}
+                    >
+                      <span className="is-white ml-4 ">Manage blogs</span>
+                    </Menu.Item>
+                  )
+                  : null
+              }
             </SubMenu>
 
             {

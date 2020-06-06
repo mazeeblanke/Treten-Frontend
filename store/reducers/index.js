@@ -15,6 +15,7 @@ import listingReducer from './listing'
 import certificationReducer from './certifications'
 import instructorReducer from './instructor'
 import coursePathsReducer from './coursePaths'
+import teamReducer from './team'
 import adminCourseReducer from './adminCourses'
 import transactionsReducer from './transactions'
 import testimonialsReducer from './testimonials'
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   form: formReducer,
   auth: authReducer,
   chat: chatReducer,
+  team: teamReducer,
   admin: adminReducer,
   course: courseReducer,
   courses: coursesReducer,

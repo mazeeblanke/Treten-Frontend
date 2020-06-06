@@ -5,7 +5,7 @@ import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 // import { PageTransition } from 'next-page-transitions'
 
-const viewport = "width=device-width, initial-scale=1.0"
+const viewport = 'width=device-width, initial-scale=1.0'
 
 class TretenDocument extends Document {
   static async getInitialProps (ctx) {

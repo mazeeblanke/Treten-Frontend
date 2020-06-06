@@ -3,103 +3,103 @@
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 (function () {
-  let _WINDOW = {};
-  let _DOCUMENT = {};
+  let _WINDOW = {}
+  let _DOCUMENT = {}
 
   try {
-    if (typeof window !== 'undefined') _WINDOW = window;
-    if (typeof document !== 'undefined') _DOCUMENT = document;
+    if (typeof window !== 'undefined') _WINDOW = window
+    if (typeof document !== 'undefined') _DOCUMENT = document
   } catch (e) {}
 
-  const _ref = _WINDOW.navigator || {};
-  const _ref$userAgent = _ref.userAgent;
-  const userAgent = _ref$userAgent === void 0 ? '' : _ref$userAgent;
+  const _ref = _WINDOW.navigator || {}
+  const _ref$userAgent = _ref.userAgent
+  const userAgent = _ref$userAgent === void 0 ? '' : _ref$userAgent
 
-  const WINDOW = _WINDOW;
-  const DOCUMENT = _DOCUMENT;
-  const IS_BROWSER = !!WINDOW.document;
-  const IS_DOM = !!DOCUMENT.documentElement && !!DOCUMENT.head && typeof DOCUMENT.addEventListener === 'function' && typeof DOCUMENT.createElement === 'function';
-  const IS_IE = ~userAgent.indexOf('MSIE') || ~userAgent.indexOf('Trident/');
+  const WINDOW = _WINDOW
+  const DOCUMENT = _DOCUMENT
+  const IS_BROWSER = !!WINDOW.document
+  const IS_DOM = !!DOCUMENT.documentElement && !!DOCUMENT.head && typeof DOCUMENT.addEventListener === 'function' && typeof DOCUMENT.createElement === 'function'
+  const IS_IE = ~userAgent.indexOf('MSIE') || ~userAgent.indexOf('Trident/')
 
-  const NAMESPACE_IDENTIFIER = '___FONT_AWESOME___';
+  const NAMESPACE_IDENTIFIER = '___FONT_AWESOME___'
   const PRODUCTION = (function () {
     try {
-      return 'production' === 'production';
+      return 'production' === 'production'
     } catch (e) {
-      return false;
+      return false
     }
-  }());
+  }())
 
-  function bunker(fn) {
+  function bunker (fn) {
     try {
-      fn();
+      fn()
     } catch (e) {
       if (!PRODUCTION) {
-        throw e;
+        throw e
       }
     }
   }
 
-  function _defineProperty(obj, key, value) {
+  function _defineProperty (obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, {
         value,
         enumerable: true,
         configurable: true,
-        writable: true,
-      });
+        writable: true
+      })
     } else {
-      obj[key] = value;
+      obj[key] = value
     }
 
-    return obj;
+    return obj
   }
 
-  function _objectSpread(target) {
+  function _objectSpread (target) {
     for (let i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
-      let ownKeys = Object.keys(source);
+      var source = arguments[i] != null ? arguments[i] : {}
+      let ownKeys = Object.keys(source)
 
       if (typeof Object.getOwnPropertySymbols === 'function') {
-        ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter((sym) => Object.getOwnPropertyDescriptor(source, sym).enumerable));
+        ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter((sym) => Object.getOwnPropertyDescriptor(source, sym).enumerable))
       }
 
       ownKeys.forEach((key) => {
-        _defineProperty(target, key, source[key]);
-      });
+        _defineProperty(target, key, source[key])
+      })
     }
 
-    return target;
+    return target
   }
 
-  const w = WINDOW || {};
-  if (!w[NAMESPACE_IDENTIFIER]) w[NAMESPACE_IDENTIFIER] = {};
-  if (!w[NAMESPACE_IDENTIFIER].styles) w[NAMESPACE_IDENTIFIER].styles = {};
-  if (!w[NAMESPACE_IDENTIFIER].hooks) w[NAMESPACE_IDENTIFIER].hooks = {};
-  if (!w[NAMESPACE_IDENTIFIER].shims) w[NAMESPACE_IDENTIFIER].shims = [];
-  const namespace = w[NAMESPACE_IDENTIFIER];
+  const w = WINDOW || {}
+  if (!w[NAMESPACE_IDENTIFIER]) w[NAMESPACE_IDENTIFIER] = {}
+  if (!w[NAMESPACE_IDENTIFIER].styles) w[NAMESPACE_IDENTIFIER].styles = {}
+  if (!w[NAMESPACE_IDENTIFIER].hooks) w[NAMESPACE_IDENTIFIER].hooks = {}
+  if (!w[NAMESPACE_IDENTIFIER].shims) w[NAMESPACE_IDENTIFIER].shims = []
+  const namespace = w[NAMESPACE_IDENTIFIER]
 
-  function defineIcons(prefix, icons) {
-    const params = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-    const _params$skipHooks = params.skipHooks;
-    const skipHooks = _params$skipHooks === void 0 ? false : _params$skipHooks;
+  function defineIcons (prefix, icons) {
+    const params = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {}
+    const _params$skipHooks = params.skipHooks
+    const skipHooks = _params$skipHooks === void 0 ? false : _params$skipHooks
     const normalized = Object.keys(icons).reduce((acc, iconName) => {
-      const icon = icons[iconName];
-      const expanded = !!icon.icon;
+      const icon = icons[iconName]
+      const expanded = !!icon.icon
 
       if (expanded) {
-        acc[icon.iconName] = icon.icon;
+        acc[icon.iconName] = icon.icon
       } else {
-        acc[iconName] = icon;
+        acc[iconName] = icon
       }
 
-      return acc;
-    }, {});
+      return acc
+    }, {})
 
     if (typeof namespace.hooks.addPack === 'function' && !skipHooks) {
-      namespace.hooks.addPack(prefix, normalized);
+      namespace.hooks.addPack(prefix, normalized)
     } else {
-      namespace.styles[prefix] = _objectSpread({}, namespace.styles[prefix] || {}, normalized);
+      namespace.styles[prefix] = _objectSpread({}, namespace.styles[prefix] || {}, normalized)
     }
     /**
      * Font Awesome 4 used the prefix of `fa` for all icons. With the introduction
@@ -108,9 +108,8 @@
      * this as well.
      */
 
-
     if (prefix === 'fas') {
-      defineIcons('fa', icons);
+      defineIcons('fa', icons)
     }
   }
 
@@ -266,10 +265,10 @@
     'window-close': [512, 512, [], 'f410', 'M464 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm0 394c0 3.3-2.7 6-6 6H54c-3.3 0-6-2.7-6-6V86c0-3.3 2.7-6 6-6h404c3.3 0 6 2.7 6 6v340zM356.5 194.6L295.1 256l61.4 61.4c4.6 4.6 4.6 12.1 0 16.8l-22.3 22.3c-4.6 4.6-12.1 4.6-16.8 0L256 295.1l-61.4 61.4c-4.6 4.6-12.1 4.6-16.8 0l-22.3-22.3c-4.6-4.6-4.6-12.1 0-16.8l61.4-61.4-61.4-61.4c-4.6-4.6-4.6-12.1 0-16.8l22.3-22.3c4.6-4.6 12.1-4.6 16.8 0l61.4 61.4 61.4-61.4c4.6-4.6 12.1-4.6 16.8 0l22.3 22.3c4.7 4.6 4.7 12.1 0 16.8z'],
     'window-maximize': [512, 512, [], 'f2d0', 'M464 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm0 394c0 3.3-2.7 6-6 6H54c-3.3 0-6-2.7-6-6V192h416v234z'],
     'window-minimize': [512, 512, [], 'f2d1', 'M480 480H32c-17.7 0-32-14.3-32-32s14.3-32 32-32h448c17.7 0 32 14.3 32 32s-14.3 32-32 32z'],
-    'window-restore': [512, 512, [], 'f2d2', 'M464 0H144c-26.5 0-48 21.5-48 48v48H48c-26.5 0-48 21.5-48 48v320c0 26.5 21.5 48 48 48h320c26.5 0 48-21.5 48-48v-48h48c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-96 464H48V256h320v208zm96-96h-48V144c0-26.5-21.5-48-48-48H144V48h320v320z'],
-  };
+    'window-restore': [512, 512, [], 'f2d2', 'M464 0H144c-26.5 0-48 21.5-48 48v48H48c-26.5 0-48 21.5-48 48v320c0 26.5 21.5 48 48 48h320c26.5 0 48-21.5 48-48v-48h48c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-96 464H48V256h320v208zm96-96h-48V144c0-26.5-21.5-48-48-48H144V48h320v320z']
+  }
 
   bunker(() => {
-    defineIcons('far', icons);
-  });
-}());
+    defineIcons('far', icons)
+  })
+}())

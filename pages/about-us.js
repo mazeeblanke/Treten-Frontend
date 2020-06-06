@@ -7,41 +7,18 @@ import Goals from '../components/about-us/Goals'
 import Footer from '../components/shared/Footer'
 import * as actions from '../store/actions'
 import MeetTeam from '../components/about-us/MeetTeam'
+import { getTeam } from '../store/reducers/team'
+import {
+  fetchTeam
+} from '../store/actions'
 
 class AboutUs extends Component {
-  static async getInitialProps () {
+  static async getInitialProps ({ reduxStore }) {
+    await Promise.all([
+      reduxStore.dispatch(fetchTeam())
+    ])
     return {}
   }
-
-  constructor (props) {
-    super(props)
-    this.state = {
-      teamMembers: [
-        {
-          fullname: 'Team member name',
-          profile_pic: '/images/instructors/instructor1lg.png',
-          role: 'Role on the team'
-        },
-        {
-          fullname: 'Team member name',
-          profile_pic: '/images/instructors/instructor2lg.png',
-          role: 'Role on the team'
-        },
-        {
-          fullname: 'Team member name',
-          profile_pic: '/images/instructors/instructor3lg.png',
-          role: 'Role on the team'
-        },
-        {
-          fullname: 'Team member name',
-          profile_pic: '/images/instructors/instructor4lg.png',
-          role: 'Role on the team'
-        }
-      ]
-    }
-  }
-
-  componentDidMount () {}
 
   render () {
     return (
@@ -51,15 +28,19 @@ class AboutUs extends Component {
         </Head>
         <Introduction />
         <Goals />
-        <MeetTeam teamMembers={this.state.teamMembers} />
+        {
+          this.props.teamMembers.length &&
+          <MeetTeam teamMembers={this.props.teamMembers} />
+        }
         <Footer />
       </>
     )
   }
 }
 
-const mapStateToProps = () => ({
+const mapStateToProps = (state) => ({
   // user: getUser(state),
+  teamMembers: getTeam(state)
 })
 
 export default connect(

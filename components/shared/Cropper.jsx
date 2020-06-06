@@ -109,6 +109,10 @@ class Cropper extends PureComponent {
   render() {
     const { crop, src } = this.state;
 
+    if (this.props.aspect) {
+      crop.aspect = this.props.aspect
+    }
+
     return (
       <div className="App">
         {src && (

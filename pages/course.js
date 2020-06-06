@@ -27,7 +27,6 @@ import EmptyState from '../components/shared/EmptyState'
 import { debounce } from '../lib/helpers'
 import ScrollTo from '../components/shared/ScrollTo'
 
-
 class Course extends Component {
   static async getInitialProps ({ reduxStore, req }) {
     await Promise.all([
@@ -87,7 +86,7 @@ class Course extends Component {
   }
 
   setMenuClasses = () => {
-    let classes = this.state.menuClasses.split(' ')
+    const classes = this.state.menuClasses.split(' ')
     if (scrollY >= 219) {
       if (classes.includes('s-fixed')) return
       this.setState({
@@ -132,7 +131,7 @@ class Course extends Component {
 
   render () {
     const {
-      menuClasses,
+      menuClasses
     } = this.state
     const {
       course
@@ -313,9 +312,9 @@ class Course extends Component {
                       <img src={_course.banner_image} className="card-img-top" alt={_course.title} />
                       <div className="card-body">
                         <h5 className="card-title">
-                        <Tooltip title={_course.title}>
-                          {_course.title}
-                        </Tooltip>
+                          <Tooltip title={_course.title}>
+                            {_course.title}
+                          </Tooltip>
                         </h5>
                         <StarRatings
                           starDimension="15px"

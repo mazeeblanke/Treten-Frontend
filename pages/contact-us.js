@@ -11,12 +11,12 @@ const { googleMapsKey } = require('../lib/config')
 const AnyReactComponent = ({ text }) => <div
   style={{
     backgroundImage: "url('/images/marker.png')",
-    height: "25px",
-    width: "25px",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "contain"
+    height: '25px',
+    width: '25px',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'contain'
   }}
-></div>;
+></div>
 
 const ContactUs = () => (
   <div id="treten">
