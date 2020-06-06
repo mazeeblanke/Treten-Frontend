@@ -26,6 +26,7 @@ class TretenDocument extends Document {
           <meta name="msapplication-navbutton-color" content="#E12828" />
           {/* <!-- iOS Safari --> */}
           <meta name="apple-mobile-web-app-status-bar-style" content="#E12828" />
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js" defer async></script>
         </Head>
         <body>
           <script type="application/ld+json" dangerouslySetInnerHTML={{
@@ -35,16 +36,7 @@ class TretenDocument extends Document {
                 "@type" : "Organization",
                 "name" : "Treten",
                 "url" : "http://tretenacademy.com",
-                "sameAs" : [
-                  "https://twitter.com/tretenacademy",
-                  "https://www.facebook.com/tretenacademy", 
-                  "https://www.linkedin.com/company/treten-academy", 
-                  "https://www.instagram.com/treten.academy/?hl=en",
-                ],
-                "image": [
-                  "http://tretenacademy.com/images/logo.png",
-                ],
-                "description": "We seek to empower professionals with the required skills and training to take them from Zero to Hero"
+                "description": "and training to take them from Zero to Hero"
               }
             `
           }} />
