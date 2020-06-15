@@ -47,13 +47,13 @@ class TretenDocument extends Document {
             `
           }} />
           {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
-          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-168223452-1"></script>
-          <script dangerouslySetInnerHTML={{
+          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169409471-1"></script>
+          <script dangerouslySetInnerHTML={{ 
             __html: `
               window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments)}
+              function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'UA-168223452-1');
+              gtag('config', 'UA-169409471-1');
             `
           }} />
           <script dangerouslySetInnerHTML={{
