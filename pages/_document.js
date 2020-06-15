@@ -26,6 +26,11 @@ class TretenDocument extends Document {
           <meta name="msapplication-navbutton-color" content="#E12828" />
           {/* <!-- iOS Safari --> */}
           <meta name="apple-mobile-web-app-status-bar-style" content="#E12828" />
+          {/* <!-- Twitter globals --> */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:site" content="@treatenacademy" />
+          <meta name="twitter:domain" content="tretenacademy.com" />
+          <meta name="twitter:creator" content="@tretenacademy" />
           <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js" defer async></script>
         </Head>
         <body>

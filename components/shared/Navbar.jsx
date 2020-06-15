@@ -16,13 +16,7 @@ import {
   NavbarToggler,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
 } from 'reactstrap'
-// const { Search } = Input
 
 class Navigation extends React.Component {
   constructor (props) {
@@ -124,7 +118,11 @@ class Navigation extends React.Component {
             </Nav>
             <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <Cascader options={Object.values(coursesByGroup)} onChange={this.onChange}>
+                  <Cascader 
+                    className="cascader-menu"
+                    options={Object.values(coursesByGroup)} 
+                    onChange={this.onChange}
+                  >
                     <div className="d-flex is-vcentered">
                       <a className="is-blue" href="#">Courses</a>
                       <Icon type="down" />
