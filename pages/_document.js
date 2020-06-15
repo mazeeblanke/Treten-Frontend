@@ -19,6 +19,7 @@ class TretenDocument extends Document {
         <Head>
           <meta name="viewport" content={`${viewport}`} />
           <link rel="shortcut icon" type="image/png" href="/images/logo.png" />
+          <link rel="canonical" href="https://www.tretenacademy.com" />
           <script src="https://www.google.com/recaptcha/api.js?onload=recaptchaLoaded&render=explicit" async defer></script>
           {/* <!-- Chrome, Firefox OS and Opera --> */}
           <meta name="theme-color" content="#E12828" />
@@ -55,6 +56,15 @@ class TretenDocument extends Document {
               gtag('config', 'UA-168223452-1');
             `
           }} />
+          <script dangerouslySetInnerHTML={{
+            __html: `
+              window.$crisp=[];window.CRISP_WEBSITE_ID="90328ad7-db33-472c-8528-a5d8c39c82fe";
+              (function(){d=document;s=d.createElement("script");
+              s.src="https://client.crisp.chat/l.js";
+              s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
+            `
+          }} />
+            
           <Main />
           <NextScript />
         </body>
