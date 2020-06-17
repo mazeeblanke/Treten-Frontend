@@ -10,7 +10,7 @@ const handler = app.getRequestHandler()
 
 process.env.PROXYURL =
   process.env.NODE_ENV === 'production'
-    ? 'http://api.tretenacademy.com'
+    ? 'https://api.tretenacademy.com'
     : 'http://tretenweb'
 
 const proxy = require('express-http-proxy')
