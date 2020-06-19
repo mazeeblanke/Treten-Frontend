@@ -61,7 +61,6 @@ class Home extends Component {
               `We seek to empower professionals with the required skills and training to take 
               them from Zero to Hero
             `}
-          canonical="http://tretenacademy.com"
           openGraph={{
             url: 'http://tretenacademy.com',
             title: 'Learn Tech Skills - CCNA, CCNP, CCIE, AWS, Python | Treten Academy',

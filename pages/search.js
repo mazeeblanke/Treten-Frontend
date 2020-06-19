@@ -244,8 +244,7 @@ class Search extends Component {
         </Head>
         <NextSeo
           title={`Treten Academy course search results - ${filters.q}`}
-          description={`Search results for ${filters.q}`}
-          canonical="http://tretenacademy.com"
+          description={`Search results for ${filters.q}`}   
           openGraph={{
             url: 'http://tretenacademy.com',
             title: 'Learn Tech Skills - CCNA, CCNP, CCIE, AWS, Python | Treten Academy',
