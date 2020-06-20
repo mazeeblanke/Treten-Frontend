@@ -245,7 +245,7 @@ export default Page => {
 									// description: savedData.description,
 									// duration: savedData.duration,
 									// price: savedData.price,
-									category: savedData.category.name,
+									category: (savedData.category || {}).name,
 									// certificationBy: savedData.certificationBy.value,
 									// institution: savedData.institution,
 									// modules: savedData.modules,
