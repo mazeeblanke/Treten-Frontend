@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import courseSchema from '../../lib/schemas/course'
-import notifier from 'simple-react-notifier'
+import notifier from 'simple-react-notifications'
 import yupToObject from 'yup-to-object'
 import { convertToFormData } from '../../lib/helpers'
 const uuidv1 = require('uuid/v1')
@@ -15,6 +15,7 @@ const resetCourseForm = () => ({
 	bannerImageBase64: '',
 	videoId: '',
 	description: '',
+	enrollUrl: null,
 	duration: null,
 	price: null,
 	category: '',
@@ -127,6 +128,7 @@ export default Page => {
 				})
 				.catch(yupError => {
 					let errors = yupToObject(yupError)
+					console.log(errors)
 					if (field) {
 						errors = {
 							...this.state.errors,
@@ -181,6 +183,7 @@ export default Page => {
 							courseForm: {
 								...this.state.courseForm,
 								id: savedData.id,
+								enrollUrl: savedData.enrollUrl
 								// title: savedData.title,
 								// coursePath: savedData.coursePath,
 								// coursePathPosition: savedData.coursePathPosition,
@@ -220,6 +223,7 @@ export default Page => {
 				const action = courseForm.get('id') ? saveCourse : createCourse
 				action(courseForm)
 					.then((res) => {
+						console.log(notifier.success)
 						notifier.success('The Course has been published!')
 						if (!courseForm.get('id')) {
 							this.setState({
@@ -233,6 +237,7 @@ export default Page => {
 								courseForm: {
 									...this.state.courseForm,
 									id: savedData.id,
+									enrollUrl: savedData.enrollUrl,
 									// title: savedData.title,
 									// coursePath: savedData.coursePath,
 									// coursePathPosition: savedData.coursePathPosition,

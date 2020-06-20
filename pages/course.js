@@ -27,6 +27,8 @@ import EmptyState from '../components/shared/EmptyState'
 import { debounce } from '../lib/helpers'
 import ScrollTo from '../components/shared/ScrollTo'
 
+const urlRegex = /^((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/
+
 class Course extends Component {
   static async getInitialProps ({ reduxStore, req }) {
     await Promise.all([
@@ -75,11 +77,19 @@ class Course extends Component {
           !(course.enrollment || {}).active &&
           !userIsAdmin(user) && !userIsInstructor(user)
         }>
-          <Link href={`${this.props.course.slug}/enroll`}>
-            <Button size="large" type="danger" style={{ width: 120, height: 50 }}>
-              Enroll now
-            </Button>
-          </Link>
+          { course.enrollUrl && urlRegex.test(course.enrollUrl) && <a href={course.enrollUrl}>
+              <Button size="large" type="danger" style={{ width: 120, height: 50 }}>
+                Enroll now
+              </Button>
+            </a> 
+          }
+          {
+            (!course.enrollUrl || !urlRegex.test(course.enrollUrl)) && <Link href={`${this.props.course.slug}/enroll`}>
+              <Button size="large" type="danger" style={{ width: 120, height: 50 }}>
+                Enroll now
+              </Button>
+            </Link>
+          }
         </Display>
       </div>
     )

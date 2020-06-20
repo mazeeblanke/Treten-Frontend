@@ -158,6 +158,21 @@ const CourseDetails = props => {
           </Form.Item>
         </div>
         <div className="col-md-6 mb-5">
+          <Form.Item>
+            <label htmlFor="course path">
+              <b>Enroll url</b>
+            </label>
+            <Input
+              size="large"
+              allowClear
+              value={courseForm.enrollUrl}
+              placeholder="Enter enroll url"
+              className="has-full-width mt-3 is-transparent-bg"
+              onChange={(e) => setForm(e.target.value, 'enrollUrl')}
+            />
+          </Form.Item>
+        </div>
+        <div className="col-md-6 mb-5">
           <label htmlFor="certification-by">
             <b>Certification by</b>
           </label>
