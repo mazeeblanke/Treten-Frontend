@@ -11,7 +11,9 @@ import PaginationNav from '../components/shared/PaginationNav'
 
 class Blog extends Component {
   static async getInitialProps ({ reduxStore }) {
-    await reduxStore.dispatch(actions.fetchBlogPosts())
+    await reduxStore.dispatch(actions.fetchBlogPosts({
+      isPublished: 1
+    }))
     return {}
   }
 

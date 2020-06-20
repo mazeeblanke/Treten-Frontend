@@ -40,7 +40,8 @@ export const setBlogPost = (res) => ({
 
 export const fetchBlogPosts = ({
   page = 1,
-  pageSize = BLOGS_PAGE_SIZE
+  pageSize = BLOGS_PAGE_SIZE,
+  isPublished = 0
 } = {}) => (
   dispatch,
   getState,
@@ -51,7 +52,8 @@ export const fetchBlogPosts = ({
     .get('/api/blog-posts', {
       params: {
         page,
-        pageSize
+        pageSize,
+        isPublished
       }
     })
     .then(res => {
