@@ -32,7 +32,7 @@ class TretenDocument extends Document {
           <meta name="twitter:site" content="@treatenacademy" />
           <meta name="twitter:domain" content="tretenacademy.com" />
           <meta name="twitter:creator" content="@tretenacademy" />
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js" defer async></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
         </Head>
         <body>
           <script type="application/ld+json" dangerouslySetInnerHTML={{
