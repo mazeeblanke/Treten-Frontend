@@ -57,7 +57,7 @@ class Messages extends Component {
   registerEcho () {
     window.tretenEcho = new Echo({
       broadcaster: 'socket.io',
-      host: 'http://tretenacademy.com' + ':6001'
+      host: 'http://159.89.234.185/' + ':6001'
     })
 
     window.currentUserChannel = window.tretenEcho.channel(
