@@ -45,9 +45,6 @@ export default Page => {
             <p className="text-center m-0 p-0">
               By using our site, you acknowledge that you have read and understand our
               {/* <a href="/cookie"> Cookie Policy </a> */}
-              <span>{",  "}</span>
-              <a href="/policies"> Privacy Policy </a>
-              <span>{"  , and our   "}</span>
               <a href="/termsandconditions"> Terms of Service </a>
             </p>
           </CookieConsent>
