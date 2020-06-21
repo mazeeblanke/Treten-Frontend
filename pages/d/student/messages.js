@@ -40,7 +40,7 @@ class Messages extends Component {
 
   componentDidMount () {
     this.handleResize()
-    this.registerEcho()
+    // this.registerEcho()
   }
 
   componentWillUnmount () {
