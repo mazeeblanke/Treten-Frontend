@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import courseSchema from '../../lib/schemas/course'
-import notifier from 'simple-react-notifications'
+import notifier from 'simple-react-notifier'
 import yupToObject from 'yup-to-object'
 import { convertToFormData } from '../../lib/helpers'
 const uuidv1 = require('uuid/v1')
