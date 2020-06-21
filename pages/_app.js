@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '../public/sass/application.scss'
 import 'react-image-crop/dist/ReactCrop.css'
 import 'element-theme-default'
-import "simple-react-notifications/dist/index.css"
+import "simple-react-notifier/dist/index.css"
 
 class Treten extends App {
   render () {
