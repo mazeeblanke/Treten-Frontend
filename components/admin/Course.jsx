@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import Display from '../shared/Display'
 import StarRatings from 'react-star-ratings'
 import Img from 'react-image'
-import { truncate } from '../../lib/helpers'
+// import { truncate } from '../../lib/helpers'
 import { Tooltip } from 'antd'
 // import { userIsAdmin } from '../../store/reducers/user'
 // import { Avatar } from 'antd'
@@ -78,14 +78,14 @@ const Course = (props) => {
               </Display>
               {(!isLoading && generalView) && (
                 <>
-                  <StarRatings
+                  {/* <StarRatings
                     starDimension="15px"
                     starSpacing="3px"
                     rating={course.avgRating}
                     starRatedColor="#E12828"
                     numberOfStars={5}
                     name="rating"
-                  />
+                  /> */}
                   <div className="is-flex is-vcentered mt-3">
                     <img
                       className="mr-2 h28 rounded-circle"
