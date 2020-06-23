@@ -119,9 +119,10 @@ class Navigation extends React.Component {
             <Nav className="ml-auto" navbar>
                 <NavItem>
                   <Cascader 
+                    expandTrigger="hover"
+                    onChange={this.onChange}
                     className="cascader-menu"
                     options={Object.values(coursesByGroup)} 
-                    onChange={this.onChange}
                   >
                     <div className="d-flex is-vcentered">
                       <a className="is-blue" href="#">Courses</a>
