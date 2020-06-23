@@ -231,7 +231,7 @@ class Course extends Component {
               </div>
             </div>
           </div>
-          <div className="container ql-editor">
+          <div className="container ql-editor has-no-overflow">
             <About course={course}/>
             <div className="container mb-4" id="courseContent">
               <h5 className="mb-6 mt-6">
