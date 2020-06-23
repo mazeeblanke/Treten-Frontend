@@ -42,7 +42,7 @@ class Blog extends Component {
               <div className="col-md-8 col-sm-12">
                 <p>{blogPost.friendlyPublishedAt}</p>
                 {ReactHtmlParser(blogPost.body)}
-                <p className="mt-4">Related posts</p>
+                {/* <p className="mt-4">Related posts</p>
                 <a href="/" className="related-link mb-4 pb-1">
                   My dad once told me, laugh and the world laughs with you
                 </a>
@@ -50,7 +50,7 @@ class Blog extends Component {
                 <br />
                 <a href="/" className="related-link pb-1">
                   My dad once told me, laugh and the world laughs with you
-                </a>
+                </a> */}
                 {/* <a className"related-link">Checkmate... This thing comes fully loaded.</a> */}
               </div>
             </div>
