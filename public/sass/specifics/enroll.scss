@@ -1,16 +1,89 @@
 #treten .enroll {
     /* ENROLL */
 
+  .enroll__button {
+    border: 1px solid #E12829 !important;
+    background: transparent !important;
+    color: #E12829 !important;
+    border-radius: 50px !important;
+    width: 150px !important;
+  }  
+
   .step {
     position: relative;
   }
 
-  .step .wrapper {
-    background: #FFFFFF;
-    border: 1px solid #F0F1F3;
-    box-sizing: border-box;
-    border-radius: 4px;
+  .step {
+
+    .wrapper {
+      background: #FFFFFF;
+      border: 1px solid #F0F1F3;
+      box-sizing: border-box;
+      overflow: hidden;
+      border-radius: 4px;
+      transition: all .2s cubic-bezier(0.1, 0.7, 1.0, 0.1);
+    }
+
+    &:after {
+      background:#D3D4D8;
+      width: 6px;
+      height: 6px;
+      display: block;
+      content: '';
+      border-radius: 100%;
+      position: absolute;
+      left: -19px;
+      top: 27px;
+    }
+  
+    &.active:after {
+      background: red;
+      /* top: 8px; */
+    }
+
+    // .step.first::after {
+    //   top: 8px;
+    // }
+  
+    &::before {
+      content: '';
+      width: 20px;
+      height: 20px;
+      background: #ffffff;
+      display: block;
+      position: absolute;
+      left: -26px;
+      border-radius: 100%;
+      top: 20px;
+      /* top: 0px; */
+      border: 4px solid #F0F1F3;
+    }
+
+    @media (max-width: 575px) {
+      &::before {
+       left: -9px;
+      }
+
+      &:after {
+        left: -2px;
+      }
+    }
+
+     
+    &:nth-child(1) .wrapper {
+      @media (max-width: 767px) {
+        // & {
+        //   min-height: 362px;
+        // }
+      }
+      @media (min-width: 768px) {
+        & {
+          height: 362px;
+        }
+      }
+    }
   }
+
 
   .step h5 {
     font-size: 1.14rem;
@@ -21,7 +94,9 @@
   }
 
   .step p {
-    font-size: 1rem
+    font-size: 1rem;
+    color: #662D91;
+    font-weight: bold;
   }
 
   .step .plan h6 {
@@ -41,12 +116,14 @@
   }
 
   .avaliable-date {
-    border: 1px solid #F0F1F3;
+    // border: 1px solid #F0F1F3;
+    border: 1px solid rgba(175, 45, 255, 0.3);
     box-sizing: border-box;
     border-radius: 4px;
     cursor: pointer;
-    width: 120px;
+    // width: 120px;
     text-align: center;
+    box-shadow: -1px 1px 14px 1px #e6e6e6;
   }
 
   .step .plan {
@@ -66,13 +143,20 @@
   }
 
   .step .plan.selected {
-    background: #222829;
+    // background: #222829;
+    background: linear-gradient(131.33deg, #1C6CFF -5.65%, #4E57FF 25.93%, #AF2DFF 82.42%);
+    border: 0.75px solid #0071BC;
     color: whitesmoke
   }
 
   .step .avaliable-date.selected {
-    background: #222829;
-    color: whitesmoke
+    // background: #222829;
+    background: linear-gradient(131.33deg, #1C6CFF -5.65%, #4E57FF 25.93%, #AF2DFF 82.42%);
+    box-shadow: 0px 0px 10px 6px whitesmoke;
+    border: 0.75px solid #0071BC;
+    p {
+      color: whitesmoke
+    }
   }
 
   .step .plan.selected h3{
@@ -91,43 +175,11 @@
     border: none
   }
 
-  .step:after {
-    background:#D3D4D8;
-    width: 4px;
-    height: 4px;
-    display: block;
-    content: '';
-    border-radius: 100%;
-    position: absolute;
-    left: -18px;
-    top: 28px;
-  }
+  
 
-  .step.active:after {
-    background: red;
-    /* top: 8px; */
-  }
-  .step.first::after {
-    top: 8px;
-  }
-
-  .step::before {
-    content: '';
-    width: 20px;
-    height: 20px;
-    background: #ffffff;
-    display: block;
-    position: absolute;
-    left: -26px;
-    border-radius: 100%;
-    top: 20px;
-    /* top: 0px; */
-    border: 4px solid #F0F1F3;
-  }
-
-  .step.first::before{
-    top: 0px;
-  }
+  // .step.first::before{
+  //   top: 0px;
+  // }
 
   .slick-dots {
     bottom: -25px !important;

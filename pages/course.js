@@ -84,7 +84,7 @@ class Course extends Component {
             </a> 
           }
           {
-            (!course.enrollUrl || !urlRegex.test(course.enrollUrl)) && <Link href={`${this.props.course.slug}/enroll`}>
+            (!course.enrollUrl || !urlRegex.test(course.enrollUrl)) && <Link href={`/courses/${this.props.course.slug}/enroll`}>
               <Button size="large" type="danger" style={{ width: 120, height: 50 }}>
                 Enroll now
               </Button>

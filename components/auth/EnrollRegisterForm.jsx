@@ -1,9 +1,11 @@
 import React from 'react'
-import { Form, Input, Button } from 'antd'
-// import ReactPhoneInput from 'react-phone-input-2'
-// import 'react-phone-input-2/dist/style.css'
+import Link from 'next/link'
+import Router from 'next/router'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { Form, Input, Button } from 'antd'
 import notifier from 'simple-react-notifier'
+import * as actions from '../../store/actions'
 import PhoneInput from 'react-phone-number-input'
 import { isValidPhoneNumber } from '../../lib/helpers'
 
@@ -33,8 +35,8 @@ class EnrollRegisterForm extends React.Component {
           ...values,
           as: 'student'
         }).then((res) => {
-          this.props.proceed()
-          notifier.success(res.message)
+          Router.push(this.props.returnUrl)
+          notifier.success('Registration successful')
         }).catch((err) => {
           notifier.error('ERROR! Unable to authenticate!')
           const errors = err.response.data.errors || {}
@@ -55,7 +57,7 @@ class EnrollRegisterForm extends React.Component {
         })
       }
     })
-  };
+  }
 
   componentDidMount () {
     this.setState({
@@ -79,10 +81,10 @@ class EnrollRegisterForm extends React.Component {
     return (
       <Form
         onSubmit={this.handleSubmit}
-        className="enroll-register-form"
+        className="enroll-register-form mt-3"
       >
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-12">
             <Form.Item>
               <label htmlFor="first_name">First name</label>
               {getFieldDecorator('first_name', {
@@ -99,7 +101,7 @@ class EnrollRegisterForm extends React.Component {
               )}
             </Form.Item>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-12">
             <Form.Item>
               <label htmlFor="last_name">Last name</label>
               {getFieldDecorator('last_name', {
@@ -116,24 +118,7 @@ class EnrollRegisterForm extends React.Component {
               )}
             </Form.Item>
           </div>
-          <div className="col-md-6">
-            <Form.Item>
-              <label htmlFor="other_name">Other name (optional)</label>
-              {getFieldDecorator('other_name', {
-                rules: [{
-                  required: false,
-                  message: 'Please input your other name!'
-                }],
-              })(
-                <Input
-                  size="large"
-                  type="text"
-                  placeholder="Adamu"
-                />
-              )}
-            </Form.Item>
-          </div>
-          <div className="col-md-6">
+          <div className="col-md-12">
             <Form.Item>
               <label htmlFor="email">Email address</label>
               {getFieldDecorator('email', {
@@ -156,7 +141,7 @@ class EnrollRegisterForm extends React.Component {
               )}
             </Form.Item>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-12">
             <Form.Item>
               <label htmlFor="phone_number">Phone number</label>
               {getFieldDecorator('phone_number', {
@@ -184,7 +169,7 @@ class EnrollRegisterForm extends React.Component {
               )}
             </Form.Item>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-12">
             <Form.Item>
               <label htmlFor="password">
                 Password
@@ -202,25 +187,35 @@ class EnrollRegisterForm extends React.Component {
               )}
             </Form.Item>
           </div>
+          <div className="col-md-12">
+            <Form.Item className="is-full-width mb-0">
+              <Button
+                disabled={this.state.isRegistering}
+                loading={this.state.isRegistering}
+                htmlType="submit"
+                size="large"
+                type="danger"
+                style={{ float: 'right', width: '141px' }}
+              >
+                Sign up
+              </Button>
+            </Form.Item>
+            <div>
+              <p>
+                <span>Already have an account ? </span>
+                <Link href={"/enroll/login?return=" + this.props.returnUrl}>
+                  <a className="is-blue">Login</a>
+                </Link>
+              </p>
+            </div>
+          </div>
         </div>
-        <Form.Item className="is-full-width">
-          <Button
-            disabled={this.state.isRegistering}
-            loading={this.state.isRegistering}
-            htmlType="submit"
-            size="large"
-            type="danger"
-          >
-            Proceed
-          </Button>
-        </Form.Item>
       </Form>
     )
   }
 }
 
 EnrollRegisterForm.propTypes = {
-  proceed: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
   form: PropTypes.object.isRequired,
 }
@@ -229,4 +224,6 @@ const WrappedEnrollRegisterForm = Form.create({
   name: 'enroll register form'
 })(EnrollRegisterForm)
 
-export default WrappedEnrollRegisterForm
+export default connect(null, {
+  register: actions.register,
+})(WrappedEnrollRegisterForm)

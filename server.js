@@ -90,6 +90,14 @@ app
       app.render(req, res, '/enroll', {})
     })
 
+    // server.get('/enroll/register', (req, res) => {
+    //   app.render(req, res, '/enroll/register', {})
+    // })
+
+    // server.get('/enroll/login', (req, res) => {
+    //   app.render(req, res, '/enroll/login', {})
+    // })
+
     server.get('/d/admin/:entity/update/:id', (req, res) => {
       return app.render(req, res, '/d/admin/' + req.params.entity + '/create', { id: req.params.id })
     })
