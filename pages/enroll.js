@@ -199,12 +199,12 @@ class Enroll extends Component {
       transactionId
     } = this.state
 
+    if (this.shouldNotEnroll()) {
+      return <p>Not permitted to enroll!</p>
+    }
+    
     return (
       <section className="auth has-white-bg has-min-full-vh pb-5 enroll">
-
-        <Display if={this.shouldNotEnroll()}>
-          <p>Not permitted to enroll!</p>
-        </Display>
 
         <Display if={this.hasEnrolled()}>
           {this.showAdminCourseLink(course)}
