@@ -76,17 +76,8 @@ class TretenDocument extends Document {
             `
           }} />
 
-          {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
-          {/* <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169409471-1"></script> */}
-          <script dangerouslySetInnerHTML={{
-            __html: `
-              window.$crisp=[];window.CRISP_WEBSITE_ID="90328ad7-db33-472c-8528-a5d8c39c82fe";
-              (function(){d=document;s=d.createElement("script");
-              s.src="https://client.crisp.chat/l.js";
-              s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
-            `
-          }} />
-            
+          {/* <!-- Treten Academy hub spot--> */}
+          <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/5370391.js"></script>
           <Main />
           <NextScript />
         </body>
